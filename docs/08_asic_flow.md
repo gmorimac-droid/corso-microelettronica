@@ -131,3 +131,7 @@ Verifiche finali:
 ## 🚀 Collegamento al prossimo modulo
 
 👉 Nel prossimo capitolo: **Progetti completi**
+
+## 💻 Codice di riferimento
+
+- [SDC Example](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/constraints/counter_example.sdc)

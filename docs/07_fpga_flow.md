@@ -134,3 +134,9 @@ create_clock -period 10 [get_ports clk]
 ## 🚀 Collegamento al prossimo modulo
 
 👉 Nel prossimo capitolo vedremo **ASIC Flow**
+
+## 💻 Codice di riferimento
+
+- [Constraints XDC](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/constraints/counter_example.xdc)
+- [Constraints SDC](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/constraints/counter_example.sdc)
+- [Timing minimale](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/constraints/timing_only.sdc)

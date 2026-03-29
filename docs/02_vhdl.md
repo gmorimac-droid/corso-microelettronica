@@ -168,3 +168,8 @@ use IEEE.NUMERIC_STD.ALL;
 ## 🚀 Collegamento al prossimo modulo
 
 👉 Nel prossimo capitolo vedremo **Verilog**
+
+## 💻 Codice di riferimento
+
+- [Counter RTL (VHDL)](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/vhdl/project_counter/counter.vhd)
+- [Testbench VHDL](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/vhdl/project_counter/tb_counter.vhd)

@@ -162,3 +162,8 @@ always @(posedge clk)
 ## 🚀 Collegamento al prossimo modulo
 
 👉 Nel prossimo capitolo vedremo **SystemVerilog**
+
+## 💻 Codice di riferimento
+
+- [Counter RTL (Verilog)](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/project_counter/counter.v)
+- [Testbench Verilog](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/project_counter/tb_counter.v)

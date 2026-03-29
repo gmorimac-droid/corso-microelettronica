@@ -154,3 +154,8 @@ endmodule
 ## 🚀 Collegamento al prossimo modulo
 
 👉 Nel prossimo capitolo vedremo la **Verification Base**
+
+## 💻 Codice di riferimento
+
+- [Counter RTL (SystemVerilog)](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/systemverilog/project_counter/counter.sv)
+- [Testbench SystemVerilog](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/systemverilog/project_counter/tb_counter.sv)

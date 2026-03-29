@@ -165,3 +165,11 @@ endclass
 ## 🚀 Collegamento al prossimo modulo
 
 👉 Nel prossimo capitolo vedremo il **FPGA Flow**
+
+
+## 💻 Codice di riferimento
+
+- [Top Testbench UVM](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/project_counter/tb_top.sv)
+- [Driver](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/project_counter/counter_driver.sv)
+- [Monitor](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/project_counter/counter_monitor.sv)
+- [Scoreboard](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/project_counter/counter_scoreboard.sv)
