@@ -1,0 +1,1656 @@
+
+<!doctype html>
+<html lang="it" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corso completo su HDL, verification e tool FPGA/ASIC">
+      
+      
+      
+        <link rel="canonical" href="https://example.github.io/corso-microelettronica/01_fondamenti/">
+      
+      
+        <link rel="prev" href="../00_introduzione/">
+      
+      
+        <link rel="next" href="../02_vhdl/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>01 Fondamenti - Corso di Microelettronica Digitale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#01-fondamenti-di-logica-digitale" class="md-skip">
+          Vai al contenuto
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Intestazione">
+    <a href=".." title="Corso di Microelettronica Digitale" class="md-header__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corso di Microelettronica Digitale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              01 Fondamenti
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Cancella" aria-label="Cancella" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../00_introduzione/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  00 Introduzione
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  01 Fondamenti
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../02_vhdl/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  02 VHDL
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../03_verilog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  03 Verilog
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../04_systemverilog_design/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  04 SystemVerilog Design
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../05_verification_base/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  05 Verification Base
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../06_uvm/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  06 UVM
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../07_fpga_flow/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  07 FPGA Flow
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../08_asic_flow/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  08 ASIC Flow
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../09_progetti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  09 Progetti
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../10_tool_e_tcl/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  10 Tool e TCL
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../11_appendici/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  11 Appendici
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigazione" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Corso di Microelettronica Digitale" class="md-nav__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Corso di Microelettronica Digitale
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00_introduzione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    00 Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Fondamenti
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Fondamenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#obiettivi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Obiettivi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-sistemi-digitali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔢 1. Sistemi digitali
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔢 1. Sistemi digitali">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esempi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esempi:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-logica-combinatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔌 2. Logica combinatoria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔌 2. Logica combinatoria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esempio-porta-and" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esempio: porta AND
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-logica-sequenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⏱️ 3. Logica sequenziale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-flip-flop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔁 4. Flip-Flop
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔁 4. Flip-Flop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipi:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comportamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comportamento:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-clock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⏰ 5. Clock
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⏰ 5. Clock">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parametri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parametri:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-registri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔄 6. Registri
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-finite-state-machine-fsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔀 7. Finite State Machine (FSM)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔀 7. Finite State Machine (FSM)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#componenti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Componenti:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-esempio-contatore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧪 8. Esempio: contatore
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-concetti-fondamentali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ 9. Concetti fondamentali
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚠️ 9. Concetti fondamentali">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup time
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hold-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hold time
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#propagation-delay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Propagation delay
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-combinatorio-vs-sequenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧠 10. Combinatorio vs Sequenziale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧪 Esercizi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collegamento-al-prossimo-modulo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Collegamento al prossimo modulo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_vhdl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 VHDL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 Verilog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_systemverilog_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 SystemVerilog Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_verification_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 Verification Base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_uvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 UVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_fpga_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 FPGA Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_asic_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 ASIC Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 Progetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_tool_e_tcl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 Tool e TCL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_appendici/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11 Appendici
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#obiettivi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Obiettivi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-sistemi-digitali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔢 1. Sistemi digitali
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔢 1. Sistemi digitali">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esempi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esempi:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-logica-combinatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔌 2. Logica combinatoria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔌 2. Logica combinatoria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esempio-porta-and" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esempio: porta AND
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-logica-sequenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⏱️ 3. Logica sequenziale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-flip-flop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔁 4. Flip-Flop
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔁 4. Flip-Flop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipi:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comportamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comportamento:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-clock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⏰ 5. Clock
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⏰ 5. Clock">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parametri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parametri:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-registri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔄 6. Registri
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-finite-state-machine-fsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔀 7. Finite State Machine (FSM)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔀 7. Finite State Machine (FSM)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#componenti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Componenti:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-esempio-contatore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧪 8. Esempio: contatore
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-concetti-fondamentali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ 9. Concetti fondamentali
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚠️ 9. Concetti fondamentali">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup time
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hold-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hold time
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#propagation-delay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Propagation delay
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-combinatorio-vs-sequenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧠 10. Combinatorio vs Sequenziale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esercizi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧪 Esercizi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collegamento-al-prossimo-modulo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Collegamento al prossimo modulo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="01-fondamenti-di-logica-digitale">01 — Fondamenti di Logica Digitale<a class="headerlink" href="#01-fondamenti-di-logica-digitale" title="Permanent link">&para;</a></h1>
+<h2 id="obiettivi">🎯 Obiettivi<a class="headerlink" href="#obiettivi" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Comprendere la logica combinatoria e sequenziale</li>
+<li>Capire il concetto di tempo nei circuiti digitali</li>
+<li>Prepararsi alla scrittura di HDL</li>
+</ul>
+<hr />
+<h2 id="1-sistemi-digitali">🔢 1. Sistemi digitali<a class="headerlink" href="#1-sistemi-digitali" title="Permanent link">&para;</a></h2>
+<p>Un sistema digitale elabora informazioni usando <strong>valori discreti</strong> (tipicamente 0 e 1).</p>
+<h3 id="esempi">Esempi:<a class="headerlink" href="#esempi" title="Permanent link">&para;</a></h3>
+<ul>
+<li>CPU</li>
+<li>FPGA</li>
+<li>ASIC</li>
+</ul>
+<hr />
+<h2 id="2-logica-combinatoria">🔌 2. Logica combinatoria<a class="headerlink" href="#2-logica-combinatoria" title="Permanent link">&para;</a></h2>
+<p>La logica combinatoria è un sistema in cui:</p>
+<p>👉 l’uscita dipende SOLO dagli ingressi attuali</p>
+<h3 id="esempio-porta-and">Esempio: porta AND<a class="headerlink" href="#esempio-porta-and" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>Y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-logica-sequenziale">⏱️ 3. Logica sequenziale<a class="headerlink" href="#3-logica-sequenziale" title="Permanent link">&para;</a></h2>
+<p>Qui entra il tempo:</p>
+<p>👉 l’uscita dipende da:</p>
+<ul>
+<li>ingressi attuali</li>
+<li>stato precedente</li>
+</ul>
+<hr />
+<h2 id="4-flip-flop">🔁 4. Flip-Flop<a class="headerlink" href="#4-flip-flop" title="Permanent link">&para;</a></h2>
+<p>Elemento base della memoria digitale.</p>
+<h3 id="tipi">Tipi:<a class="headerlink" href="#tipi" title="Permanent link">&para;</a></h3>
+<ul>
+<li>D Flip-Flop</li>
+<li>JK</li>
+<li>T</li>
+</ul>
+<h3 id="comportamento">Comportamento:<a class="headerlink" href="#comportamento" title="Permanent link">&para;</a></h3>
+<ul>
+<li>aggiorna stato al fronte di clock</li>
+</ul>
+<hr />
+<h2 id="5-clock">⏰ 5. Clock<a class="headerlink" href="#5-clock" title="Permanent link">&para;</a></h2>
+<p>Segnale fondamentale nei sistemi digitali.</p>
+<p>👉 sincronizza tutto</p>
+<h3 id="parametri">Parametri:<a class="headerlink" href="#parametri" title="Permanent link">&para;</a></h3>
+<ul>
+<li>frequenza</li>
+<li>periodo</li>
+<li>duty cycle</li>
+</ul>
+<hr />
+<h2 id="6-registri">🔄 6. Registri<a class="headerlink" href="#6-registri" title="Permanent link">&para;</a></h2>
+<p>Gruppi di flip-flop.</p>
+<p>👉 usati per:</p>
+<ul>
+<li>memorizzare dati</li>
+<li>pipeline</li>
+<li>stato</li>
+</ul>
+<hr />
+<h2 id="7-finite-state-machine-fsm">🔀 7. Finite State Machine (FSM)<a class="headerlink" href="#7-finite-state-machine-fsm" title="Permanent link">&para;</a></h2>
+<p>Sistema con stati discreti.</p>
+<h3 id="componenti">Componenti:<a class="headerlink" href="#componenti" title="Permanent link">&para;</a></h3>
+<ul>
+<li>stati</li>
+<li>transizioni</li>
+<li>ingressi</li>
+<li>uscite</li>
+</ul>
+<hr />
+<h2 id="8-esempio-contatore">🧪 8. Esempio: contatore<a class="headerlink" href="#8-esempio-contatore" title="Permanent link">&para;</a></h2>
+<p>Un contatore è un esempio di sistema sequenziale:</p>
+<ul>
+<li>stato = valore corrente</li>
+<li>aggiorna a ogni clock</li>
+</ul>
+<hr />
+<h2 id="9-concetti-fondamentali">⚠️ 9. Concetti fondamentali<a class="headerlink" href="#9-concetti-fondamentali" title="Permanent link">&para;</a></h2>
+<h3 id="setup-time">Setup time<a class="headerlink" href="#setup-time" title="Permanent link">&para;</a></h3>
+<p>Tempo minimo prima del clock</p>
+<h3 id="hold-time">Hold time<a class="headerlink" href="#hold-time" title="Permanent link">&para;</a></h3>
+<p>Tempo minimo dopo il clock</p>
+<h3 id="propagation-delay">Propagation delay<a class="headerlink" href="#propagation-delay" title="Permanent link">&para;</a></h3>
+<p>Tempo di propagazione del segnale</p>
+<hr />
+<h2 id="10-combinatorio-vs-sequenziale">🧠 10. Combinatorio vs Sequenziale<a class="headerlink" href="#10-combinatorio-vs-sequenziale" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Dipendenza</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Combinatorio</td>
+<td>ingressi</td>
+</tr>
+<tr>
+<td>Sequenziale</td>
+<td>ingressi + stato</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="esercizi">🧪 Esercizi<a class="headerlink" href="#esercizi" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Disegna una tabella di verità per XOR</li>
+<li>Progetta un contatore modulo 4</li>
+<li>Descrivi una FSM per un semaforo</li>
+</ol>
+<hr />
+<h2 id="collegamento-al-prossimo-modulo">🚀 Collegamento al prossimo modulo<a class="headerlink" href="#collegamento-al-prossimo-modulo" title="Permanent link">&para;</a></h2>
+<p>👉 Nel prossimo modulo useremo questi concetti in <strong>VHDL</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
