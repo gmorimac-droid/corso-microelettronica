@@ -1,0 +1,46 @@
+site_name: Corso di Microelettronica Digitale
+site_description: Corso completo su HDL, verification e tool FPGA/ASIC
+site_url: https://example.github.io/corso-microelettronica/
+
+theme:
+  name: material
+  language: it
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.details
+  - pymdownx.snippets:
+      base_path:
+        - .
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.arithmatex:
+      generic: true
+
+nav:
+  - Home: index.md
+  - 00 Introduzione: 00_introduzione.md
+  - 01 Fondamenti: 01_fondamenti.md
+  - 02 VHDL: 02_vhdl.md
+  - 03 Verilog: 03_verilog.md
+  - 04 SystemVerilog Design: 04_systemverilog_design.md
+  - 05 Verification Base: 05_verification_base.md
+  - 06 UVM: 06_uvm.md
+  - 07 FPGA Flow: 07_fpga_flow.md
+  - 08 ASIC Flow: 08_asic_flow.md
+  - 09 Progetti: 09_progetti.md
+  - 10 Tool e TCL: 10_tool_e_tcl.md
+  - 11 Appendici: 11_appendici.md
