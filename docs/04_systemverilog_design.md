@@ -159,3 +159,4 @@ endmodule
 
 - [Counter RTL (SystemVerilog)](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/systemverilog/project_counter/counter.sv)
 - [Testbench SystemVerilog](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/systemverilog/project_counter/tb_counter.sv)
+- [Testbench SystemVerilog 2](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/systemverilog/project_counter/tb_counter2.sv)
