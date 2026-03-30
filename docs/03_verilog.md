@@ -167,3 +167,10 @@ always @(posedge clk)
 
 - [Counter RTL (Verilog)](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/project_counter/counter.v)
 - [Testbench Verilog](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/project_counter/tb_counter.v)
+
+
+## 📄 LIBRO DI RIFERIMENTO
+
+👉 Vai al foglio di lavoro con immagini e appunti:
+
+[Apri foglio Verilog](Libro_Verilog/index.md)

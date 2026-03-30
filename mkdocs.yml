@@ -19,7 +19,11 @@ markdown_extensions:
   - toc:
       permalink: true
   - pymdownx.highlight
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.inlinehilite
   - pymdownx.details
   - pymdownx.snippets:
@@ -29,13 +33,26 @@ markdown_extensions:
       alternate_style: true
   - pymdownx.arithmatex:
       generic: true
-
+      
 nav:
   - Home: index.md
   - 00 Introduzione: 00_introduzione.md
   - 01 Fondamenti: 01_fondamenti.md
   - 02 VHDL: 02_vhdl.md
-  - 03 Verilog: 03_verilog.md
+  - 03 Verilog:
+      - Teoria: 03_verilog.md
+      - Foglio di lavoro:
+          - Introduzione: Libro_Verilog/index.md
+          - The Tool Flow: Libro_Verilog/tool_flow.md
+          - In and Out: Libro_Verilog/in_out.md
+          - Clocks and Registers: Libro_Verilog/clocks_registers.md
+          - State Machines: Libro_Verilog/state_machines.md
+          - Modular Design: Libro_Verilog/modular_design.md
+          - Memories: Libro_Verilog/memories.md
+          - Managing Clocks: Libro_Verilog/managing_clocks.md
+          - I/O Flavors: Libro_Verilog/io_flavors.md
+          - A Taste of Simulation: Libro_Verilog/simulation.md
+          - The Rest for Reference: Libro_Verilog/reference.md
   - 04 SystemVerilog Design: 04_systemverilog_design.md
   - 05 Verification Base: 05_verification_base.md
   - 06 UVM: 06_uvm.md
