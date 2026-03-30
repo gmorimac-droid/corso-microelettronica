@@ -1,0 +1,1901 @@
+
+<!doctype html>
+<html lang="it" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corso completo su HDL, verification e tool FPGA/ASIC">
+      
+      
+      
+        <link rel="canonical" href="https://example.github.io/corso-microelettronica/Libro_Verilog/io_flavors/">
+      
+      
+        <link rel="prev" href="../managing_clocks/">
+      
+      
+        <link rel="next" href="../simulation/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>I/O Flavors - Corso di Microelettronica Digitale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#descrizione" class="md-skip">
+          Vai al contenuto
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Intestazione">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-header__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corso di Microelettronica Digitale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              I/O Flavors
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Cancella" aria-label="Cancella" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../00_introduzione/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  00 Introduzione
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../01_fondamenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  01 Fondamenti
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../02_vhdl/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  02 VHDL
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../03_verilog/" class="md-tabs__link">
+          
+  
+  
+  03 Verilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../04_systemverilog_design/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  04 SystemVerilog Design
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../05_verification_base/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  05 Verification Base
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../06_uvm/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  06 UVM
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../07_fpga_flow/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  07 FPGA Flow
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../08_asic_flow/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  08 ASIC Flow
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../09_progetti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  09 Progetti
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../10_tool_e_tcl/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  10 Tool e TCL
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../11_appendici/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  11 Appendici
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigazione" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-nav__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Corso di Microelettronica Digitale
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00_introduzione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    00 Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01_fondamenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 Fondamenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 VHDL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 Verilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    03 Verilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teoria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foglio di lavoro
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foglio di lavoro
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Tool Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../in_out/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    In and Out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clocks_registers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocks and Registers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../state_machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modular_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modular Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../memories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../managing_clocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Managing Clocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O Flavors
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O Flavors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#descrizione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DESCRIZIONE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esempi-utili-e-reali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ESEMPI UTILI E REALI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#io-flavors-practical-fpga-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔌 I/O Flavors – Practical FPGA Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔌 I/O Flavors – Practical FPGA Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#led-output-lvcmos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 LED Output (LVCMOS)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#button-input-pull-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔘 Button Input (Pull-up)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bidirectional-bus-tri-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔁 Bidirectional Bus (Tri-state)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ddr-interface-inserted-delay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⏱️ DDR Interface (Inserted Delay)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#differential-signaling-lvds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚡ Differential Signaling (LVDS)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-termination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔌 Internal Termination
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slew-rate-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌊 Slew Rate Control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drive-strength" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔋 Drive Strength
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clock-generation-pll" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⏱️ Clock Generation (PLL)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-design-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Common Design Error
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧠 Summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A Taste of Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Rest for Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_systemverilog_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 SystemVerilog Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05_verification_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 Verification Base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 UVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_fpga_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 FPGA Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_asic_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 ASIC Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 Progetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_e_tcl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 Tool e TCL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11_appendici/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11 Appendici
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#descrizione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DESCRIZIONE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esempi-utili-e-reali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ESEMPI UTILI E REALI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#io-flavors-practical-fpga-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔌 I/O Flavors – Practical FPGA Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔌 I/O Flavors – Practical FPGA Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#led-output-lvcmos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 LED Output (LVCMOS)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#button-input-pull-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔘 Button Input (Pull-up)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bidirectional-bus-tri-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔁 Bidirectional Bus (Tri-state)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ddr-interface-inserted-delay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⏱️ DDR Interface (Inserted Delay)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#differential-signaling-lvds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚡ Differential Signaling (LVDS)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-termination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔌 Internal Termination
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slew-rate-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌊 Slew Rate Control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drive-strength" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔋 Drive Strength
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clock-generation-pll" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⏱️ Clock Generation (PLL)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-design-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Common Design Error
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧠 Summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h2 id="descrizione">DESCRIZIONE<a class="headerlink" href="#descrizione" title="Permanent link">&para;</a></h2>
+<p>Questo è un altro capitolo con poco codice Verilog vero e proprio, ma è anche un capitolo difficile da ignorare quando si inizia a sviluppare un progetto reale.</p>
+<p>Sono finiti i tempi in cui i circuiti digitali erano completamente TTL e l’unico problema di interfacciamento era scegliere tra chip DIP “AS” o “ALS”.
+Oggi, con l’enfasi sulle alte velocità, una grande parte del design della scheda elettronica consiste nel coordinare con attenzione segnali di interfaccia specializzati, assicurandosi che i segnali di I/O dei circuiti integrati siano compatibili.</p>
+<p>Le FPGA hanno un grande vantaggio:</p>
+<p>supportano molti standard di interfaccia
+sono configurabili quasi pin per pin</p>
+<p>In questo capitolo vengono analizzate le principali categorie di interfacce.</p>
+<p>Interfacce di segnale</p>
+<p>Le interfacce oggi sono numerosissime:
+LVCMOS, LVDS, HSTL, LVPECL, SSTL, ecc.</p>
+<p>Ogni standard definisce parametri come:</p>
+<p>livelli di tensione
+slew rate
+soglie di commutazione
+differenziale vs single-ended
+terminazione
+impedenza di pilotaggio</p>
+<p>Le FPGA moderne permettono di controllare molti di questi parametri.</p>
+<p>Parametri aggiuntivi configurabili
+delay inserito
+drive strength
+pull-up / pull-down / keeper
+tri-state
+Come si configurano?</p>
+<p>Tramite tre metodi:</p>
+<p>primitive I/O nel codice Verilog
+tensioni esterne sui pin dedicati
+constraint di progetto
+Constraint</p>
+<p>Ogni progetto FPGA ha due parti:</p>
+<p>codice (Verilog/VHDL)
+constraint (file di configurazione)</p>
+<p>I constraint definiscono:</p>
+<p>assegnazione pin
+timing
+configurazione I/O</p>
+<p>Sono specifici per vendor e dispositivo.</p>
+<p>Output voltage levels</p>
+<p>I livelli di tensione vanno da 3.3V a meno di 1V.
+I pin sono organizzati in banchi (banks):</p>
+<p>👉 tutti i pin nello stesso bank condividono la tensione</p>
+<p>⚠️ Questo crea vincoli progettuali importanti.</p>
+<p>Slew rate</p>
+<p>Velocità di salita/discesa del segnale:</p>
+<p>slow
+fast</p>
+<p>Configurato per pin.</p>
+<p>Switching thresholds</p>
+<p>Definiti via constraint.
+Alcuni standard richiedono tensione di riferimento esterna.</p>
+<p>Differenziale vs single-ended</p>
+<p>Differenziale:</p>
+<p>usa coppie di pin
+richiede primitive specifiche nel codice
+attenzione alla polarità</p>
+<p>Single-ended:</p>
+<p>default
+Impedenza e terminazione</p>
+<p>Le FPGA possono emulare resistenze interne:</p>
+<p>serie
+parallelo</p>
+<p>Vantaggi:</p>
+<p>meno componenti esterni
+migliori prestazioni ad alta velocità</p>
+<p>Configurazione tramite:</p>
+<p>resistenze esterne di riferimento
+primitive I/O
+Delay inserito</p>
+<p>Delay programmabile:</p>
+<p>aggiusta setup/hold
+può essere dinamico
+utile per alte velocità
+Drive strength</p>
+<p>Corrente di uscita configurabile (es. 2mA, 4mA…)</p>
+<p>Serve per:</p>
+<p>controllare riflessioni
+migliorare integrità del segnale</p>
+<p>Trade-off:</p>
+<p>troppo basso → lento
+troppo alto → rumore
+Tri-state</p>
+<p>Uscite ad alta impedenza:</p>
+<p>via Verilog
+via primitive
+Pull-up / Pull-down / Keeper
+Pull-up/down → tengono il segnale a 1 o 0
+Keeper → mantiene l’ultimo valore</p>
+<p>Usati per:</p>
+<p>evitare segnali flottanti
+stabilizzare bus tri-state</p>
+<h2 id="esempi-utili-e-reali">ESEMPI UTILI E REALI<a class="headerlink" href="#esempi-utili-e-reali" title="Permanent link">&para;</a></h2>
+<h1 id="io-flavors-practical-fpga-examples">🔌 I/O Flavors – Practical FPGA Examples<a class="headerlink" href="#io-flavors-practical-fpga-examples" title="Permanent link">&para;</a></h1>
+<p>In real FPGA designs, configuring I/O is a fundamental task that goes far beyond simply writing Verilog code. Every signal that enters or leaves the FPGA must be carefully defined in terms of electrical behavior, timing, and compatibility with external hardware.</p>
+<p>This section presents practical examples of how I/O features are used in real designs.</p>
+<hr />
+<h2 id="led-output-lvcmos">💡 LED Output (LVCMOS)<a class="headerlink" href="#led-output-lvcmos" title="Permanent link">&para;</a></h2>
+<p>A basic example is driving an LED. The FPGA output pin must use the correct voltage standard and drive strength.</p>
+<div class="highlight"><pre><span></span><code><span class="k">assign</span><span class="w"> </span><span class="n">led</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nv">set_property</span><span class="w"> </span>PACKAGE_PIN<span class="w"> </span>W5<span class="w"> </span><span class="k">[</span><span class="nv">get_ports</span><span class="w"> </span>led<span class="k">]</span>
+<span class="nv">set_property</span><span class="w"> </span>IOSTANDARD<span class="w"> </span>LVCMOS33<span class="w"> </span><span class="k">[</span><span class="nv">get_ports</span><span class="w"> </span>led<span class="k">]</span>
+<span class="nv">set_property</span><span class="w"> </span>DRIVE<span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="k">[</span><span class="nv">get_ports</span><span class="w"> </span>led<span class="k">]</span>
+</code></pre></div>
+<hr />
+<h2 id="button-input-pull-up">🔘 Button Input (Pull-up)<a class="headerlink" href="#button-input-pull-up" title="Permanent link">&para;</a></h2>
+<p>Inputs must never be left floating. A pull-up resistor ensures a defined logic level.</p>
+<div class="highlight"><pre><span></span><code><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
+<span class="w">        </span><span class="n">led</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nv">set_property</span><span class="w"> </span>PACKAGE_PIN<span class="w"> </span>V10<span class="w"> </span><span class="k">[</span><span class="nv">get_ports</span><span class="w"> </span>button<span class="k">]</span>
+<span class="nv">set_property</span><span class="w"> </span>IOSTANDARD<span class="w"> </span>LVCMOS33<span class="w"> </span><span class="k">[</span><span class="nv">get_ports</span><span class="w"> </span>button<span class="k">]</span>
+<span class="nv">set_property</span><span class="w"> </span>PULLUP<span class="w"> </span>true<span class="w"> </span><span class="k">[</span><span class="nv">get_ports</span><span class="w"> </span>button<span class="k">]</span>
+</code></pre></div>
+<hr />
+<h2 id="bidirectional-bus-tri-state">🔁 Bidirectional Bus (Tri-state)<a class="headerlink" href="#bidirectional-bus-tri-state" title="Permanent link">&para;</a></h2>
+<p>Tri-state logic allows multiple devices to share a bus.</p>
+<div class="highlight"><pre><span></span><code><span class="k">assign</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">wr_en</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">data_out</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mh">16</span><span class="p">&#39;</span><span class="n">bz</span><span class="p">;</span>
+<span class="k">assign</span><span class="w"> </span><span class="n">data_in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nv">set_property</span><span class="w"> </span>IOSTANDARD<span class="w"> </span>LVCMOS33<span class="w"> </span><span class="k">[</span><span class="nv">get_ports</span><span class="w"> </span>data<span class="k">]</span>
+</code></pre></div>
+<hr />
+<h2 id="ddr-interface-inserted-delay">⏱️ DDR Interface (Inserted Delay)<a class="headerlink" href="#ddr-interface-inserted-delay" title="Permanent link">&para;</a></h2>
+<p>High-speed interfaces require precise timing alignment.</p>
+<div class="highlight"><pre><span></span><code><span class="n">IDELAYE2</span><span class="w"> </span><span class="p">#(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">DELAY_VALUE</span><span class="p">(</span><span class="mh">10</span><span class="p">)</span>
+<span class="p">)</span><span class="w"> </span><span class="n">idelay_inst</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">IDATAIN</span><span class="p">(</span><span class="n">data_in</span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">DATAOUT</span><span class="p">(</span><span class="n">data_delayed</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>Inserted delays help satisfy setup and hold constraints.</p>
+<hr />
+<h2 id="differential-signaling-lvds">⚡ Differential Signaling (LVDS)<a class="headerlink" href="#differential-signaling-lvds" title="Permanent link">&para;</a></h2>
+<p>Differential signals improve noise immunity at high speed.</p>
+<div class="highlight"><pre><span></span><code><span class="n">IBUFDS</span><span class="w"> </span><span class="n">ibufds_inst</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">I</span><span class="p">(</span><span class="n">clk_p</span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">IB</span><span class="p">(</span><span class="n">clk_n</span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">O</span><span class="p">(</span><span class="n">clk</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nv">set_property</span><span class="w"> </span>IOSTANDARD<span class="w"> </span>LVDS<span class="w"> </span><span class="k">[</span><span class="nv">get_ports</span><span class="w"> </span><span class="k">{</span><span class="nv">clk_p</span><span class="w"> </span>clk_n<span class="k">}]</span>
+</code></pre></div>
+<hr />
+<h2 id="internal-termination">🔌 Internal Termination<a class="headerlink" href="#internal-termination" title="Permanent link">&para;</a></h2>
+<p>FPGA devices can emulate termination resistors internally.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">set_property</span><span class="w"> </span>IN_TERM<span class="w"> </span>UNTUNED_SPLIT_50<span class="w"> </span><span class="k">[</span><span class="nv">get_ports</span><span class="w"> </span>data_in<span class="k">]</span>
+</code></pre></div>
+<p>This reduces the need for external resistors and improves signal integrity.</p>
+<hr />
+<h2 id="slew-rate-control">🌊 Slew Rate Control<a class="headerlink" href="#slew-rate-control" title="Permanent link">&para;</a></h2>
+<p>Controlling signal transitions helps reduce noise.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">set_property</span><span class="w"> </span>SLEW<span class="w"> </span>SLOW<span class="w"> </span><span class="k">[</span><span class="nv">get_ports</span><span class="w"> </span>led<span class="k">]</span>
+</code></pre></div>
+<hr />
+<h2 id="drive-strength">🔋 Drive Strength<a class="headerlink" href="#drive-strength" title="Permanent link">&para;</a></h2>
+<p>Output current can be tuned depending on the load.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">set_property</span><span class="w"> </span>DRIVE<span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="k">[</span><span class="nv">get_ports</span><span class="w"> </span>data<span class="k">]</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nv">set_property</span><span class="w"> </span>DRIVE<span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="k">[</span><span class="nv">get_ports</span><span class="w"> </span>data<span class="k">]</span>
+</code></pre></div>
+<p>Higher drive increases speed but also noise.</p>
+<hr />
+<h2 id="clock-generation-pll">⏱️ Clock Generation (PLL)<a class="headerlink" href="#clock-generation-pll" title="Permanent link">&para;</a></h2>
+<p>PLLs are used to generate new clock frequencies.</p>
+<div class="highlight"><pre><span></span><code><span class="n">clk_wiz_0</span><span class="w"> </span><span class="n">clk_gen</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">.</span><span class="n">clk_in1</span><span class="p">(</span><span class="n">clk_in</span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">clk_out1</span><span class="p">(</span><span class="n">clk_200MHz</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+<hr />
+<h2 id="common-design-error">⚠️ Common Design Error<a class="headerlink" href="#common-design-error" title="Permanent link">&para;</a></h2>
+<p>A very common mistake is mixing different voltage standards within the same I/O bank.</p>
+<p>Example (WRONG):
+- 3.3V signal
+- 1.8V signal</p>
+<p>Since all pins in a bank share the same supply voltage, this will cause design failure or hardware damage.</p>
+<hr />
+<h2 id="summary">🧠 Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>FPGA I/O configuration combines Verilog code and constraint definitions. Key features used in real designs include:</p>
+<ul>
+<li>Voltage standards (LVCMOS, LVDS, etc.)</li>
+<li>Pull-up and pull-down resistors</li>
+<li>Tri-state buses</li>
+<li>Inserted delays for timing</li>
+<li>Differential signaling</li>
+<li>Internal termination</li>
+<li>Slew rate control</li>
+<li>Drive strength tuning</li>
+<li>Clock management (PLL)</li>
+</ul>
+<p>Mastering these concepts is essential for building reliable and high-performance FPGA systems.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

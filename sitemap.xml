@@ -2,54 +2,98 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://example.github.io/corso-microelettronica/</loc>
-         <lastmod>2026-03-29</lastmod>
+         <lastmod>2026-03-30</lastmod>
     </url>
     <url>
          <loc>https://example.github.io/corso-microelettronica/00_introduzione/</loc>
-         <lastmod>2026-03-29</lastmod>
+         <lastmod>2026-03-30</lastmod>
     </url>
     <url>
          <loc>https://example.github.io/corso-microelettronica/01_fondamenti/</loc>
-         <lastmod>2026-03-29</lastmod>
+         <lastmod>2026-03-30</lastmod>
     </url>
     <url>
          <loc>https://example.github.io/corso-microelettronica/02_vhdl/</loc>
-         <lastmod>2026-03-29</lastmod>
+         <lastmod>2026-03-30</lastmod>
     </url>
     <url>
          <loc>https://example.github.io/corso-microelettronica/03_verilog/</loc>
-         <lastmod>2026-03-29</lastmod>
+         <lastmod>2026-03-30</lastmod>
     </url>
     <url>
          <loc>https://example.github.io/corso-microelettronica/04_systemverilog_design/</loc>
-         <lastmod>2026-03-29</lastmod>
+         <lastmod>2026-03-30</lastmod>
     </url>
     <url>
          <loc>https://example.github.io/corso-microelettronica/05_verification_base/</loc>
-         <lastmod>2026-03-29</lastmod>
+         <lastmod>2026-03-30</lastmod>
     </url>
     <url>
          <loc>https://example.github.io/corso-microelettronica/06_uvm/</loc>
-         <lastmod>2026-03-29</lastmod>
+         <lastmod>2026-03-30</lastmod>
     </url>
     <url>
          <loc>https://example.github.io/corso-microelettronica/07_fpga_flow/</loc>
-         <lastmod>2026-03-29</lastmod>
+         <lastmod>2026-03-30</lastmod>
     </url>
     <url>
          <loc>https://example.github.io/corso-microelettronica/08_asic_flow/</loc>
-         <lastmod>2026-03-29</lastmod>
+         <lastmod>2026-03-30</lastmod>
     </url>
     <url>
          <loc>https://example.github.io/corso-microelettronica/09_progetti/</loc>
-         <lastmod>2026-03-29</lastmod>
+         <lastmod>2026-03-30</lastmod>
     </url>
     <url>
          <loc>https://example.github.io/corso-microelettronica/10_tool_e_tcl/</loc>
-         <lastmod>2026-03-29</lastmod>
+         <lastmod>2026-03-30</lastmod>
     </url>
     <url>
          <loc>https://example.github.io/corso-microelettronica/11_appendici/</loc>
-         <lastmod>2026-03-29</lastmod>
+         <lastmod>2026-03-30</lastmod>
+    </url>
+    <url>
+         <loc>https://example.github.io/corso-microelettronica/Libro_Verilog/</loc>
+         <lastmod>2026-03-30</lastmod>
+    </url>
+    <url>
+         <loc>https://example.github.io/corso-microelettronica/Libro_Verilog/clocks_registers/</loc>
+         <lastmod>2026-03-30</lastmod>
+    </url>
+    <url>
+         <loc>https://example.github.io/corso-microelettronica/Libro_Verilog/in_out/</loc>
+         <lastmod>2026-03-30</lastmod>
+    </url>
+    <url>
+         <loc>https://example.github.io/corso-microelettronica/Libro_Verilog/io_flavors/</loc>
+         <lastmod>2026-03-30</lastmod>
+    </url>
+    <url>
+         <loc>https://example.github.io/corso-microelettronica/Libro_Verilog/managing_clocks/</loc>
+         <lastmod>2026-03-30</lastmod>
+    </url>
+    <url>
+         <loc>https://example.github.io/corso-microelettronica/Libro_Verilog/memories/</loc>
+         <lastmod>2026-03-30</lastmod>
+    </url>
+    <url>
+         <loc>https://example.github.io/corso-microelettronica/Libro_Verilog/modular_design/</loc>
+         <lastmod>2026-03-30</lastmod>
+    </url>
+    <url>
+         <loc>https://example.github.io/corso-microelettronica/Libro_Verilog/reference/</loc>
+         <lastmod>2026-03-30</lastmod>
+    </url>
+    <url>
+         <loc>https://example.github.io/corso-microelettronica/Libro_Verilog/simulation/</loc>
+         <lastmod>2026-03-30</lastmod>
+    </url>
+    <url>
+         <loc>https://example.github.io/corso-microelettronica/Libro_Verilog/state_machines/</loc>
+         <lastmod>2026-03-30</lastmod>
+    </url>
+    <url>
+         <loc>https://example.github.io/corso-microelettronica/Libro_Verilog/tool_flow/</loc>
+         <lastmod>2026-03-30</lastmod>
     </url>
 </urlset>
