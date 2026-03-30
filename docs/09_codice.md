@@ -75,8 +75,8 @@ flowchart LR
     E --> F[R Channel]
     B --> G[B Channel]
 ```
-- [AXI LITE SLAVE BASE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/CPU/AXI_Lite_slave_base.v)
-- [Testbench AXI LITE SLAVE BASE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/CPU/TB_AXI_Lite_slave_base.v)
+- [AXI LITE SLAVE BASE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/AXI_Lite_slave_base.v)
+- [Testbench AXI LITE SLAVE BASE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/TB_AXI_Lite_slave_base.v)
 
 ## Scehma a blocchi AXI Lite Slave
 
@@ -88,8 +88,8 @@ flowchart LR
     D --> E[Status/Data]
     E --> B
 ```
-- [AXI LITE SLAVE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/CPU/AXI_Lite_slave.v)
-- [Testbench AXI LITE SLAVE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/CPU/TB_AXI_Lite_slave.v)
+- [AXI LITE SLAVE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/AXI_Lite_slave.v)
+- [Testbench AXI LITE SLAVE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/TB_AXI_Lite_slave.v)
 
 ## Scehma a blocchi AXI Lite Master Base
 
@@ -101,8 +101,8 @@ flowchart LR
     D --> E[Read Data]
     C --> F[Write Complete]
 ```
-- [AXI LITE MASTER BASE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/CPU/AXI_Lite_master_base.v)
-- [Testbench AXI LITE MASTER BASE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/CPU/TB_AXI_Lite_master_base.v)
+- [AXI LITE MASTER BASE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/AXI_Lite_master_base.v)
+- [Testbench AXI LITE MASTER BASE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/TB_AXI_Lite_master_base.v)
 
 ## Scehma a blocchi AXI Lite Master-Slave
 
@@ -114,8 +114,8 @@ flowchart LR
     D --> E[User Logic Mock]
     E --> D
 ```
-- [AXI MASTER SLAVE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/CPU/AXI_master_slave_top.v)
-- [Testbench AXI MASTER SLAVE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/CPU/TB_AXI_master_slave_top.v)
+- [AXI MASTER SLAVE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/AXI_master_slave_top.v)
+- [Testbench AXI MASTER SLAVE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/TB_AXI_master_slave_top.v)
 
 ## Scehma a blocchi AXI Lite Master-FSM
 
@@ -128,6 +128,6 @@ flowchart LR
     C --> B
     B --> E[init_done]
 ```
-- [AXI MASTER FSM](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/CPU/AXI_master_FSM.v)
-- [AXI MASTER TOP](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/CPU/AXI_master_FSM_top.v)
-- [Testbench AXI MASTER FSM](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/CPU/TB_AXI_master_FSM.v)
+- [AXI MASTER FSM](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/AXI_master_FSM.v)
+- [AXI MASTER TOP](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/AXI_master_FSM_top.v)
+- [Testbench AXI MASTER FSM](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/TB_AXI_master_FSM.v)

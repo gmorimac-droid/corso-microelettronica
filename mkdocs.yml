@@ -70,7 +70,9 @@ nav:
   - 08 ASIC Flow: 
     - Teoria: 08_asic_flow.md
     - Flowchart: 08_asic_flow_chart.md
-  - 09 Progetti: 09_progetti.md
+  - 09 Progetti: 
+    - Teoria: 09_progetti.md
+    - Sorgenti: 09_codice.md
   - 10 Tool e TCL: 
     - Teoria: 10_tool_e_tcl.md
     - Flowchart: 10_tcl_flow_chart.md
