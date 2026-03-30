@@ -78,7 +78,7 @@ flowchart LR
 - [AXI LITE SLAVE BASE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/AXI_Lite_slave_base.v)
 - [Testbench AXI LITE SLAVE BASE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/TB_AXI_Lite_slave_base.v)
 
-## Scehma a blocchi AXI Lite Slave
+## Schema a blocchi AXI Lite Slave
 
 ```mermaid
 flowchart LR
@@ -91,7 +91,7 @@ flowchart LR
 - [AXI LITE SLAVE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/AXI_Lite_slave.v)
 - [Testbench AXI LITE SLAVE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/TB_AXI_Lite_slave.v)
 
-## Scehma a blocchi AXI Lite Master Base
+## Schema a blocchi AXI Lite Master Base
 
 ```mermaid
 flowchart LR
@@ -104,7 +104,7 @@ flowchart LR
 - [AXI LITE MASTER BASE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/AXI_Lite_master_base.v)
 - [Testbench AXI LITE MASTER BASE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/TB_AXI_Lite_master_base.v)
 
-## Scehma a blocchi AXI Lite Master-Slave
+## Schema a blocchi AXI Lite Master-Slave
 
 ```mermaid
 flowchart LR
@@ -117,7 +117,7 @@ flowchart LR
 - [AXI MASTER SLAVE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/AXI_master_slave_top.v)
 - [Testbench AXI MASTER SLAVE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/TB_AXI_master_slave_top.v)
 
-## Scehma a blocchi AXI Lite Master-FSM
+## Schema a blocchi AXI Lite Master-FSM
 
 ```mermaid
 flowchart LR
