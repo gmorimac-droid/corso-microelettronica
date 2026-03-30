@@ -135,3 +135,4 @@ Verifiche finali:
 ## 💻 Codice di riferimento
 
 - [SDC Example](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/constraints/counter_example.sdc)
+

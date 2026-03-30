@@ -140,3 +140,4 @@ create_clock -period 10 [get_ports clk]
 - [Constraints XDC](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/constraints/counter_example.xdc)
 - [Constraints SDC](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/constraints/counter_example.sdc)
 - [Timing minimale](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/constraints/timing_only.sdc)
+

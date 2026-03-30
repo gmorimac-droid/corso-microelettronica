@@ -33,14 +33,18 @@ markdown_extensions:
       alternate_style: true
   - pymdownx.arithmatex:
       generic: true
+  - attr_list      
       
 nav:
   - Home: index.md
   - 00 Introduzione: 00_introduzione.md
   - 01 Fondamenti: 01_fondamenti.md
-  - 02 VHDL: 02_vhdl.md
+  - 02 VHDL: 
+    - Teoria: 02_vhdl.md
+    - Flusso di progettazione: 02_vhdl_progettazione.md
   - 03 Verilog:
       - Teoria: 03_verilog.md
+      - Flowchart: 03_verilog_flow_chart.md
       - Foglio di lavoro:
           - Introduzione: Libro_Verilog/index.md
           - The Tool Flow: Libro_Verilog/tool_flow.md
@@ -53,11 +57,21 @@ nav:
           - I/O Flavors: Libro_Verilog/io_flavors.md
           - A Taste of Simulation: Libro_Verilog/simulation.md
           - The Rest for Reference: Libro_Verilog/reference.md
-  - 04 SystemVerilog Design: 04_systemverilog_design.md
+  - 04 SystemVerilog Design: 
+    - Teoria: 04_systemverilog_design.md
+    - Flowchart: 04_SV_flow_chart.md
   - 05 Verification Base: 05_verification_base.md
-  - 06 UVM: 06_uvm.md
-  - 07 FPGA Flow: 07_fpga_flow.md
-  - 08 ASIC Flow: 08_asic_flow.md
+  - 06 UVM: 
+    - Teoria: 06_uvm.md
+    - Flowchart: 06_uvm_flow_chart.md    
+  - 07 FPGA Flow: 
+    - Teoria: 07_fpga_flow.md
+    - Flowchart: 07_fpga_flow_chart.md
+  - 08 ASIC Flow: 
+    - Teoria: 08_asic_flow.md
+    - Flowchart: 08_asic_flow_chart.md
   - 09 Progetti: 09_progetti.md
-  - 10 Tool e TCL: 10_tool_e_tcl.md
+  - 10 Tool e TCL: 
+    - Teoria: 10_tool_e_tcl.md
+    - Flowchart: 10_tcl_flow_chart.md
   - 11 Appendici: 11_appendici.md

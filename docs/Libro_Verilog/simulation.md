@@ -18,6 +18,6 @@
 
 ## 🔄 Testbench Using Embedded Automatic Vectors
 
-![](img/Testbench_using_embedded_automatic_vectors_code.png)
+![](img/Testbench_using_embedded_automatic_vectors_code.png){ width="500" }
 
 ---
