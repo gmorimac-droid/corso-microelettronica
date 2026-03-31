@@ -23,6 +23,29 @@ Un FPGA (Field Programmable Gate Array) è un dispositivo programmabile.
 RTL → Simulation → Synthesis → Implementation → Bitstream → FPGA
 ```
 
+```mermaid
+flowchart TD
+    A["RTL design\n(Verilog / VHDL)"]
+    B["Simulazione"]
+    C["Sintesi"]
+    D["Implementazione\n(Mapping / Placement / Routing)"]
+    E["Timing analysis"]
+    F["Generazione bitstream"]
+    G["Programmazione FPGA"]
+    H["Debug / test su hardware"]
+
+    A --> B
+    B -->|OK| C
+    B -->|Bug| A
+    C --> D
+    D --> E
+    E -->|OK| F
+    E -->|Timing fail| C
+    F --> G
+    G --> H
+    H -->|Fix| A
+```
+
 ---
 
 ## 🔍 3. Fasi del flusso

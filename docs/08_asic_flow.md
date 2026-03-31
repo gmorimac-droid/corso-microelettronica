@@ -37,6 +37,24 @@ Un ASIC (Application-Specific Integrated Circuit) è un circuito progettato per 
 RTL → Simulation → Synthesis → STA → Physical Design → Signoff → Tape-out
 ```
 
+```mermaid
+flowchart TD
+    A["RTL design - Verilog / VHDL"]
+    B["Simulazione"]
+    C["Sintesi - Logic Synthesis"]
+    D["Place and Route"]
+    E["Timing Analysis - STA"]
+    F["Tape out - Produzione chip"]
+
+    A --> B
+    B -->|OK| C
+    B -->|Bug| A
+    C --> D
+    D --> E
+    E -->|OK| F
+    E -->|Timing fail| C
+```
+
 ---
 
 ## 🔍 4. Fasi del flusso
