@@ -70,7 +70,9 @@ nav:
   - 06 UVM: 
     - Overview: 06_uvm.md
     - Flowchart: 06_uvm_flow_chart.md
-    - Progetto mini CPU: 06_mini_CPU.md
+    - Progetto mini CPU: 
+            - Descrizione: 06_mini_CPU.md
+            - Waveform: 06_mini_CPU_waveform.md
   - 07 FPGA Flow: 
     - Overview: 07_fpga_flow.md
     - Flowchart: 07_fpga_flow_chart.md

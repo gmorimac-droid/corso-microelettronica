@@ -1,5 +1,7 @@
 #0. Obiettivo del progetto
 
+[Repository](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/ZYNQ/LED)
+
 Vogliamo ottenere questo:
 
 PS Zynq: esegue un programma C.

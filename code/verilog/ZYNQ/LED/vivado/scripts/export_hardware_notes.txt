@@ -1,0 +1,10 @@
+Dopo la generazione del bitstream:
+
+1. Apri Vivado
+2. File -> Export Hardware
+3. Spunta "Include bitstream"
+4. Salva il file .xsa
+5. Apri Vitis
+6. Crea una nuova platform dal file .xsa
+7. Crea una nuova application bare-metal
+8. Usa il main.c fornito in vitis/led_axi_app/src/main.c
