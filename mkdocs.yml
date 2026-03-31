@@ -76,5 +76,9 @@ nav:
     - Sorgenti: 09_codice.md
   - 10 Tool e TCL: 
     - Overview: 10_tool_e_tcl.md
+    - 📚 Risorse:
+          - GTKWave Docs: https://gtkwave.github.io/gtkwave/
+          - Verilator Docs: https://verilator.org/guide/latest/
     - Flowchart: 10_tcl_flow_chart.md
+    - Tool flow: 10_tool_flow.md
   - 11 Appendici: 11_appendici.md
