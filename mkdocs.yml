@@ -73,6 +73,7 @@ nav:
   - 07 FPGA Flow: 
     - Overview: 07_fpga_flow.md
     - Flowchart: 07_fpga_flow_chart.md
+    - Zynq: 07_zynq_ps_axi_led.md
     - Risorse: https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf
   - 08 ASIC Flow: 
     - Overview: 08_asic_flow.md
