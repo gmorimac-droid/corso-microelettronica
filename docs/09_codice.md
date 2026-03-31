@@ -14,6 +14,9 @@
 - [FIFO](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/vhdl/FIFO/FIFO.vhd)
 - [Testbench FIFO](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/vhdl/FIFO/TB_FIFO.vhd)
 
+- [Decimatore](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/vhdl/Decimatore/decimator.vhd)
+- [Testbench Decimatore](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/vhdl/Decimatore/tb_decimator.vhd)
+
 
 ## Verilog
 
@@ -34,6 +37,13 @@
 
 - [FIFO2](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/FIFO/FIFO2.v)
 - [Testbench FIFO2](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/FIFO/TB_FIFO2.v)
+
+- [Decimatore FIR](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/Decimatore_FIR/fir_decimator.v)
+- [Testbench Decimatore FIR](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/Decimatore_FIR/tb_fir_decimator.v)
+
+- [PWM](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/PWM/pwm.v)
+- [Testbench PWM](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/PWM/tb_pwm.v)
+
 
 ## CPU flowchart
 
@@ -131,3 +141,12 @@ flowchart LR
 - [AXI MASTER FSM](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/AXI_master_FSM.v)
 - [AXI MASTER TOP](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/AXI_master_FSM_top.v)
 - [Testbench AXI MASTER FSM](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/AXI_LITE/TB_AXI_master_FSM.v)
+
+## System Verilog
+
+- [PWM](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/systemverilog/PWM/pwm.sv)
+- [Testbench PWM](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/systemverilog/PWM/tb_pwm.sv)
+
+- [PWM AXI LITE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/systemverilog/PWM/pwm_axi_lite.sv)
+- [PWM CORE](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/systemverilog/PWM/pwm_core.sv)
+- [Testbench PWM AXI](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/systemverilog/PWM/program.c)
