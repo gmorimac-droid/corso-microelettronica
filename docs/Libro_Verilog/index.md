@@ -9,6 +9,8 @@ Questo modulo è organizzato come un libro strutturato per apprendere Verilog in
 ### ⚙️ Fondamenta
 - 👉 [The Tool Flow](tool_flow.md)
 - 👉 [In and Out](in_out.md)
+- 👉 [Utilities](utilities.md)
+
 
 ---
 
