@@ -4,7 +4,7 @@ Questa pagina raccoglie tutti i file del progetto:
 
 👉 Mini CPU + ambiente UVM completo
 
-📌 [Repository](https://github.com/gmorimac-droid/corso-microelettronica/tree/main/code/uvm/uvm_mini_CPU)
+📌 [Repository](https://github.com/gmorimac-droid/corso-microelettronica/tree/main/code/uvm/uvm_mini_cpu)
 
 ---
 
@@ -32,7 +32,7 @@ uvm_mini_CPU/
 
 ## 📄 mini_CPU.v
 
-- 🔗 [mini CPU](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/uvm_mini_CPU/rtl/mini_CPU.v)
+- 🔗 [mini CPU](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/uvm_mini_cpu/rtl/mini_CPU.v)
 
 ### 🧠 Descrizione
 
@@ -60,11 +60,11 @@ clk, rst_n
 # 🟡 Testbench — Infrastruttura UVM
 
 📁 Cartella:
-- 🔗 [Testbench](https://github.com/gmorimac-droid/corso-microelettronica/tree/main/code/uvm/uvm_mini_CPU/tb)
+- 🔗 [Testbench](https://github.com/gmorimac-droid/corso-microelettronica/tree/main/code/uvm/uvm_mini_cpu/tb)
 
 ---
 
-## 📄 [mini_cpu_if.sv](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/uvm_mini_CPU/tb/mini_cpu_if.sv)
+## 📄 [mini_cpu_if.sv](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/uvm_mini_cpu/tb/mini_cpu_if.sv)
 
 ### 🧠 Ruolo
 
@@ -78,7 +78,7 @@ Interface che espone lo stato interno:
 
 ---
 
-## 📄 [mini_cpu_bind.sv](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/uvm_mini_CPU/tb/mini_cpu_bind.sv)
+## 📄 [mini_cpu_bind.sv](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/uvm_mini_cpu/tb/mini_cpu_bind.sv)
 
 ### 🧠 Ruolo
 
@@ -90,7 +90,7 @@ Collega i segnali interni del DUT all’interfaccia UVM.
 
 ---
 
-## 📄 [mini_cpu_pkg.sv](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/uvm_mini_CPU/tb/mini_cpu_pkg.sv)
+## 📄 [mini_cpu_pkg.sv](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/uvm_mini_cpu/tb/mini_cpu_pkg.sv)
 
 ### 🧠 Contenuto
 
@@ -105,7 +105,7 @@ Collega i segnali interni del DUT all’interfaccia UVM.
 
 ---
 
-## 📄 [mini_cpu_top.sv](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/uvm_mini_CPU/tb/mini_cpu_top.sv)
+## 📄 [mini_cpu_top.sv](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/uvm_mini_cpu/tb/mini_cpu_top.sv)
 
 ### 🧠 Ruolo
 
@@ -122,11 +122,11 @@ Top di simulazione:
 # 🟢 Tests — Programmi di verifica
 
 📁 Cartella:
-- 🔗 [Tests](https://github.com/gmorimac-droid/corso-microelettronica/tree/main/code/uvm/uvm_mini_CPU/tb/tests)
+- 🔗 [Tests](https://github.com/gmorimac-droid/corso-microelettronica/tree/main/code/uvm/uvm_mini_cpu/tb/tests)
 
 ---
 
-## 📄 [base_test.sv](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/uvm_mini_CPU/tb/tests/base_test.sv)
+## 📄 [base_test.sv](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/uvm_mini_cpu/tb/tests/base_test.sv)
 
 ### 🧠 Ruolo
 
@@ -138,7 +138,7 @@ Test base che gestisce:
 
 ---
 
-## 📄 [smoke_test.sv](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/uvm_mini_CPU/tb/tests/smoke_test.sv)
+## 📄 [smoke_test.sv](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/uvm_mini_cpu/tb/tests/smoke_test.sv)
 
 ### 🧠 Obiettivo
 
@@ -155,7 +155,7 @@ Test base CPU:
 
 ---
 
-## 📄 [alu_test.sv](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/uvm_mini_CPU/tb/tests/alu_test.sv)
+## 📄 [alu_test.sv](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/uvm_mini_cpu/tb/tests/alu_test.sv)
 
 ### 🧠 Obiettivo
 
@@ -166,8 +166,7 @@ Test ALU:
 - XOR
 
 ---
-
-## 📄 [branch_test.sv](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/uvm_mini_CPU/tb/tests/branch_test.sv)
+## 📄 [branch_test.sv](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/uvm_mini_cpu/tb/tests/branch_test.sv)
 
 ### 🧠 Obiettivo
 
