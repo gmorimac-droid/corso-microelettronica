@@ -61,13 +61,12 @@ nav:
   - 04 SystemVerilog Design: 
     - Overview: 04_systemverilog_design.md
     - Flowchart: 04_SV_flow_chart.md
-    - Risorse: 
   - 05 Verification Base: 
     - Overview: 05_verification_base.md
     - Risorse: 
-        ChipVerify: https://www.chipverify.com/
-        VerificationGuide: https://verificationguide.com
-        Doulos: https://www.doulos.com/knowhow/
+        - ChipVerify: https://www.chipverify.com/
+        - VerificationGuide: https://verificationguide.com
+        - Doulos: https://www.doulos.com/knowhow/
   - 06 UVM: 
     - Overview: 06_uvm.md
     - Flowchart: 06_uvm_flow_chart.md
