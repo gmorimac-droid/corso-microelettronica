@@ -70,10 +70,17 @@ nav:
   - 06 UVM: 
     - Overview: 06_uvm.md
     - Flowchart: 06_uvm_flow_chart.md
+    - Progetto mini CPU: 06_mini_CPU.md
   - 07 FPGA Flow: 
     - Overview: 07_fpga_flow.md
     - Flowchart: 07_fpga_flow_chart.md
-    - Zynq: 07_zynq_ps_axi_led.md
+    - Zynq LED: 07_zynq_ps_axi_led.md
+    - Zynq FIR: 
+        - Descrizione: 07_zynq_fir_dma_8tap.md
+        - Codice: 07_zynq_fir_dma_files.md
+        - AXI Theory: 07_zynq_axi_stream_theory.md
+        - DMA Interrupt: 07_zynq_dma_interrupt_perf.md
+        - X Parameters: 07_zynq_xparameters_guide.md
     - Risorse: https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf
   - 08 ASIC Flow: 
     - Overview: 08_asic_flow.md
