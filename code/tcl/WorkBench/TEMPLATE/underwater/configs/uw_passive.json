@@ -1,0 +1,9 @@
+{
+  "domain": "underwater",
+  "case_name": "uw_passive",
+  "mode": "passive_detection",
+  "array": "linear_16",
+  "sample_rate_hz": 48000,
+  "window_s": 30,
+  "threshold": 0.74
+}

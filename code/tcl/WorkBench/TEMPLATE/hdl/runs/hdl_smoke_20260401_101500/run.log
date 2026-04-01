@@ -1,0 +1,5 @@
+INFO compile started
+INFO elaborate completed
+WARN waveform dump enabled
+ERROR checker reset_done mismatch at cycle 84
+INFO coverage exported

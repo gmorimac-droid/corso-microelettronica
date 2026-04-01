@@ -1,0 +1,5 @@
+det_id,time_s,bearing_deg,score,label
+1,5.2,33.1,0.82,contact_A
+2,12.8,35.7,0.77,contact_A
+3,21.4,118.3,0.69,noise_candidate
+4,28.0,34.2,0.85,contact_A

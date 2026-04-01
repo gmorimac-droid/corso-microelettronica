@@ -1,0 +1,1 @@
+set experiments {{id EXP001 name "Radar nominal" domain radar status ready configPath "configs/radar_nominal.json"}}

@@ -1,0 +1,5 @@
+# Satellite visibility workflow placeholder
+node1: scenario_init
+node2: orbit_propagation
+node3: visibility_windows
+node4: validation

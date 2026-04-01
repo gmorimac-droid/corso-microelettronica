@@ -1,0 +1,5 @@
+metric,value,min,max
+coverage,0.86,0.80,1.0
+revisit_time_min,13,0,20
+access_count,7,4,20
+availability,0.93,0.85,1.0

@@ -1,0 +1,6 @@
+start,end,category,label,status,details
+0,8,scenario,Scenario Init,ok,Setup LEO visibility nominal
+8,22,processing,Orbit Propagation,ok,Nominal propagation completed
+22,38,processing,Visibility Windows,ok,Computed access windows
+38,42,log,Low Elevation Warning,warn,One pass truncated below threshold
+42,48,validation,Validation,ok,Coverage and availability within bounds

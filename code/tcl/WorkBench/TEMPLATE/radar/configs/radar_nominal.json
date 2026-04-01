@@ -1,0 +1,6 @@
+{
+  "domain": "radar",
+  "case_name": "radar_nominal",
+  "input_data": "data/raw_input.bin",
+  "threshold": 0.82
+}

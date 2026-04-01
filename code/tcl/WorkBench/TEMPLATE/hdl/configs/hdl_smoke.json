@@ -1,0 +1,8 @@
+{
+  "domain": "hdl",
+  "case_name": "hdl_smoke",
+  "dut": "top_level_dut",
+  "testbench": "tb_reset_smoke",
+  "seed": 12345,
+  "waves": true
+}

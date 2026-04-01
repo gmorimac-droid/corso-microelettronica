@@ -1,0 +1,6 @@
+{
+  "status": "completed_with_errors",
+  "duration_sec": 37,
+  "dut": "top_level_dut",
+  "testbench": "tb_reset_smoke"
+}

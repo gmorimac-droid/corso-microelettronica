@@ -1,0 +1,11 @@
+$date
+  April 1, 2026
+$end
+$version
+  Example HDL template
+$end
+$timescale 1ns $end
+$scope module top $end
+$var wire 1 ! clk $end
+$upscope $end
+$enddefinitions $end

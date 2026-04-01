@@ -1,0 +1,7 @@
+start,end,category,label,status,details
+0,8,processing,Ingest,ok,Input stream loaded
+8,22,processing,Beamforming,ok,Linear 16 array beamforming completed
+22,30,log,Noise Burst,warn,Transient broadband noise detected
+30,42,processing,Detect,ok,Contact candidates extracted
+42,50,processing,Classify,ok,Classifier assigned contact_A
+50,55,validation,Validation,ok,Accuracy and latency within bounds

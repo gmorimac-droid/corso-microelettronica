@@ -1,0 +1,5 @@
+metric,value
+tests_passed,12
+tests_failed,0
+coverage,0.91
+latency_cycles,18

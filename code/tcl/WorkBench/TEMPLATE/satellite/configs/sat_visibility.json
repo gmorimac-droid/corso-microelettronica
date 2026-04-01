@@ -1,0 +1,9 @@
+{
+  "domain": "satellite",
+  "case_name": "sat_visibility",
+  "scenario": "LEO_visibility_nominal",
+  "ground_station": "Rome_GS",
+  "elevation_min_deg": 10,
+  "duration_s": 5400,
+  "time_step_s": 10
+}

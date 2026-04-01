@@ -1,0 +1,5 @@
+metric,value
+latency_ms,10
+snr_db,20
+tracks,40
+false_alarm_rate,0.5

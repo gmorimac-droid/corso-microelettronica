@@ -1,0 +1,6 @@
+start,end,category,label,status,details
+0,6,processing,Compile,ok,RTL compile completed
+6,10,processing,Elaborate,ok,Elaboration completed
+10,28,processing,Simulate,fail,Checker mismatch on reset_done
+28,33,report,Coverage Export,ok,Coverage XML generated
+33,37,validation,Validation,warn,One failure in smoke suite

@@ -1,0 +1,6 @@
+# HDL smoke workflow placeholder
+node1: compile
+node2: elaborate
+node3: simulate
+node4: coverage_export
+node5: validation

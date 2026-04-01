@@ -1,0 +1,5 @@
+metric,value
+classification_accuracy,0.88
+false_alarm_rate,0.06
+snr_gain_db,8.5
+latency_ms,140

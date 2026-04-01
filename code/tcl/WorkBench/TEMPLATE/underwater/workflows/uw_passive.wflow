@@ -1,0 +1,6 @@
+# Underwater passive detection workflow placeholder
+node1: ingest
+node2: beamforming
+node3: detect
+node4: classify
+node5: validation

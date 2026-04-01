@@ -1,0 +1,8 @@
+# Dummy workflow file
+nodes:
+  - id: N001
+    label: Prepare config
+  - id: N002
+    label: Execute run
+  - id: N003
+    label: Collect metrics

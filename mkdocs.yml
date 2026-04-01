@@ -92,6 +92,7 @@ nav:
     - Sorgenti: 09_codice.md
   - 10 Tool e Tcl/Tk: 
     - Overview: 10_tool_e_tcl.md
+    - Progetti: 10_tcl_progetti.md
     - 📚 Risorse:
           - Tutorial Tcl/Tk: https://www.tutorialspoint.com/tcl-tk/index.htm
           - Script Tcl in Vivado: https://docs.amd.com/r/en-US/ug894-vivado-tcl-scripting/Tcl-Scripting-in-Vivado
