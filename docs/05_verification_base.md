@@ -235,8 +235,4 @@ Focus:
 | Coverage | completeness metric |
 | Simulation | primary debug tool |
 
----
 
-## 📄 Source File
-
-fileciteturn3file0

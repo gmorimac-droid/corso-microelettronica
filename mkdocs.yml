@@ -37,12 +37,12 @@ markdown_extensions:
       
 nav:
   - Home: index.md
-  - 00 Introduzione: 00_introduzione.md
-  - 01 Fondamenti: 01_fondamenti.md
-  - 02 VHDL: 
+  - Intro: 00_introduzione.md
+  - Fondamenti: 01_fondamenti.md
+  - VHDL: 
     - Overview: 02_vhdl.md
     - Flusso di progettazione: 02_vhdl_progettazione.md
-  - 03 Verilog:
+  - Verilog:
       - Overview: 03_verilog.md
       - Flowchart: 03_verilog_flow_chart.md
       - Foglio di lavoro:
@@ -58,22 +58,22 @@ nav:
           - I/O Flavors: Libro_Verilog/io_flavors.md
           - A Taste of Simulation: Libro_Verilog/simulation.md
           - The Rest for Reference: Libro_Verilog/reference.md
-  - 04 SystemVerilog Design: 
+  - SystemVerilog: 
     - Overview: 04_systemverilog_design.md
     - Flowchart: 04_SV_flow_chart.md
-  - 05 Verification Base: 
+  - Verification: 
     - Overview: 05_verification_base.md
     - Risorse: 
         - ChipVerify: https://www.chipverify.com/
         - VerificationGuide: https://verificationguide.com
         - Doulos: https://www.doulos.com/knowhow/
-  - 06 UVM: 
+  - UVM: 
     - Overview: 06_uvm.md
     - Flowchart: 06_uvm_flow_chart.md
     - Progetto mini CPU: 
             - Descrizione: 06_mini_CPU.md
             - Waveform: 06_mini_CPU_waveform.md
-  - 07 FPGA Flow: 
+  - FPGA: 
     - Overview: 07_fpga_flow.md
     - Flowchart: 07_fpga_flow_chart.md
     - Zynq LED: 07_zynq_ps_axi_led.md
@@ -84,7 +84,7 @@ nav:
         - DMA Interrupt: 07_zynq_dma_interrupt_perf.md
         - X Parameters: 07_zynq_xparameters_guide.md
     - Risorse: https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf
-  - 08 ASIC Flow: 
+  - ASIC: 
     - Overview: 08_asic_flow.md
     - Flowchart: 08_asic_flow_chart.md
     - OpenAsic: 08_openasic.md
@@ -92,10 +92,10 @@ nav:
         - OpenLAN: https://openlane2.readthedocs.io/en/latest/
         - Tutorial: https://github.com/kunalg123/vsdflow
         - CMOS VLSI Design: https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908
-  - 09 Progetti: 
+  - Progetti: 
     - Overview: 09_progetti.md
     - Sorgenti: 09_codice.md
-  - 10 Tool e Tcl/Tk: 
+  - Tool e Tcl/Tk: 
     - Overview: 10_tool_e_tcl.md
     - Progetti: 10_tcl_progetti.md
     - 📚 Risorse:
@@ -113,5 +113,5 @@ nav:
           - ModelSim: https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/swdocs/modelsim/modelsim_user_2024_2.pdf
     - Flowchart: 10_tcl_flow_chart.md
     - Tool flow: 10_tool_flow.md
-  - 11 Appendici: 11_appendici.md
-  - 12 Riferimenti: 12_riferimenti.md
+  - Appendici: 11_appendici.md
+  - Riferimenti: 12_riferimenti.md
