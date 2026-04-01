@@ -88,6 +88,10 @@ nav:
     - Overview: 08_asic_flow.md
     - Flowchart: 08_asic_flow_chart.md
     - OpenAsic: 08_openasic.md
+    - Risorse: 
+        - OpenLAN: https://openlane2.readthedocs.io/en/latest/
+        - Tutorial: https://github.com/kunalg123/vsdflow
+        - CMOS VLSI Design: https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908
   - 09 Progetti: 
     - Overview: 09_progetti.md
     - Sorgenti: 09_codice.md
