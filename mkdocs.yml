@@ -1,6 +1,6 @@
 site_name: Corso di Microelettronica Digitale
 site_description: Corso completo su HDL, verification e tool FPGA/ASIC
-site_url: https://example.github.io/corso-microelettronica/
+site_url: https://gmorimac-droid.github.io/corso-microelettronica/
 
 theme:
   name: material
