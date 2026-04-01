@@ -87,6 +87,7 @@ nav:
   - 08 ASIC Flow: 
     - Overview: 08_asic_flow.md
     - Flowchart: 08_asic_flow_chart.md
+    - OpenAsic: 08_openasic.md
   - 09 Progetti: 
     - Overview: 09_progetti.md
     - Sorgenti: 09_codice.md

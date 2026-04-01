@@ -1,166 +1,214 @@
 # 07 — FPGA Flow
 
-## 🎯 Obiettivi
+## 🎯 Objectives
 
-* Comprendere il flusso completo FPGA
-* Passare da RTL a hardware reale
-* Introdurre tool industriali
-* Capire timing e vincoli
+This module introduces the **complete FPGA implementation flow** from RTL to hardware execution.
 
----
-
-## 🧠 1. Cos’è un FPGA
-
-Un FPGA (Field Programmable Gate Array) è un dispositivo programmabile.
-
-👉 permette di implementare circuiti digitali senza fabbricazione ASIC
+By the end, you will:
+- Understand the **end-to-end FPGA flow**
+- Map RTL into **physical hardware resources**
+- Interpret **timing analysis and constraints**
+- Use **industry-standard tools (Vivado / Quartus)**
 
 ---
 
-## 🔁 2. Flusso FPGA completo
+## 🧠 1. What is an FPGA
 
-```text
+An FPGA (Field Programmable Gate Array) is a **reconfigurable digital device**.
+
+### Key Characteristics
+
+- Programmable after manufacturing
+- Composed of:
+  - LUTs (logic)
+  - Flip-flops (storage)
+  - DSP blocks (arithmetic)
+  - BRAM (memory)
+
+👉 Enables rapid prototyping and deployment without ASIC fabrication
+
+---
+
+## 🔁 2. Complete FPGA Flow
+
+```
 RTL → Simulation → Synthesis → Implementation → Bitstream → FPGA
 ```
 
-```mermaid
-flowchart TD
-    A["RTL design\n(Verilog / VHDL)"]
-    B["Simulazione"]
-    C["Sintesi"]
-    D["Implementazione\n(Mapping / Placement / Routing)"]
-    E["Timing analysis"]
-    F["Generazione bitstream"]
-    G["Programmazione FPGA"]
-    H["Debug / test su hardware"]
+### Engineering View
 
-    A --> B
-    B -->|OK| C
-    B -->|Bug| A
-    C --> D
-    D --> E
-    E -->|OK| F
-    E -->|Timing fail| C
-    F --> G
-    G --> H
-    H -->|Fix| A
+```
+RTL Design
+   ↓
+Functional Verification
+   ↓
+Logic Synthesis
+   ↓
+Physical Implementation
+   ↓
+Timing Closure
+   ↓
+Bitstream Generation
+   ↓
+Hardware Debug
 ```
 
 ---
 
-## 🔍 3. Fasi del flusso
-
----
+## 🔍 3. Flow Breakdown
 
 ### 🧩 3.1 RTL Design
 
-* VHDL / Verilog / SystemVerilog
-* descrizione del circuito
+- VHDL / Verilog / SystemVerilog
+- Describes functionality
+
+👉 Output: abstract hardware model
 
 ---
 
 ### 🧪 3.2 Simulation
 
-* verifica funzionale
-* uso di testbench
+- Functional verification
+- Testbench-based validation
+
+👉 Goal: eliminate logical bugs before synthesis
 
 ---
 
 ### ⚙️ 3.3 Synthesis
 
-* traduce RTL in gate logici
+- Converts RTL → gate-level netlist
 
-👉 output:
+### Hardware Mapping
 
-* netlist
+- LUTs → combinational logic  
+- FFs → registers  
+- DSP → arithmetic  
 
 ---
 
 ### 🧱 3.4 Implementation
 
-Include:
+Includes:
 
-* placement (posizionamento)
-* routing (connessioni)
+- Placement → physical location of logic
+- Routing → interconnections
+
+👉 Determines real performance
 
 ---
 
 ### ⏱️ 3.5 Timing Analysis
 
-Verifica che il circuito rispetti i tempi:
+Ensures design meets clock constraints.
 
-* setup time
-* hold time
-* clock frequency
+### Critical Path
+
+```
+FF → Logic → Logic → FF
+```
+
+### Metrics
+
+- Setup time
+- Hold time
+- Max frequency (Fmax)
 
 ---
 
-### 📦 3.6 Bitstream
+### 📦 3.6 Bitstream Generation
 
-File finale da caricare su FPGA.
+- Final binary file
+- Programs FPGA configuration memory
 
 ---
 
-## 🧰 4. Tool principali
+### 🔌 3.7 Hardware Execution
+
+- Load bitstream
+- Run design on board
+- Perform validation
+
+---
+
+## 🧰 4. Industry Tools
 
 ### 🔷 Xilinx Vivado
-
-* per FPGA Xilinx
+- Design, synthesis, implementation
 
 ### 🔶 Intel Quartus
-
-* per FPGA Intel
+- Equivalent flow for Intel FPGAs
 
 ---
 
-## 🔧 5. Constraints (vincoli)
+## 🔧 5. Constraints (Timing & Physical)
 
-Definiscono:
+Constraints define how the tool interprets your design.
 
-* clock
-* pin
-* timing
-
-Esempio:
+### Example
 
 ```tcl
 create_clock -period 10 [get_ports clk]
 ```
 
----
+### Key Constraints
 
-## 🔌 6. Caricamento su FPGA
+- Clock definition
+- IO pin mapping
+- Timing exceptions
 
-* collegare board
-* programmare dispositivo
-* verificare comportamento
-
----
-
-## ⚠️ 7. Errori comuni
-
-❌ ignorare timing
-❌ constraints sbagliati
-❌ non simulare prima
-❌ clock non definito
+👉 Incorrect constraints = incorrect hardware behavior
 
 ---
 
-## 🧪 8. Esercizi
+## 📊 6. Timing Closure (Critical Topic)
 
-1. Sintetizzare un contatore
-2. Definire un clock constraint
-3. Caricare su FPGA
+### Goal
+
+Meet required clock frequency
+
+### Techniques
+
+- Pipeline insertion
+- Reduce combinational depth
+- Use DSP blocks
+- Optimize fanout
 
 ---
 
-## 🚀 Collegamento al prossimo modulo
+## ⚠️ 7. Common Pitfalls
 
-👉 Nel prossimo capitolo vedremo **ASIC Flow**
+❌ Ignoring timing reports  
+❌ Incorrect constraints  
+❌ Skipping simulation  
+❌ Undefined clock domains  
+
+---
+
+## 🧪 8. Exercises (Design-Oriented)
+
+1. Synthesize a counter  
+2. Define clock constraint  
+3. Achieve timing closure  
+4. Deploy on FPGA  
+
+---
+
+## 🚀 Next Module
+
+👉 ASIC Flow
+
+Focus:
+- physical design
+- silicon implementation
+- advanced timing constraints
+
+---
 
 ## 💻 Codice di riferimento
 
 - [Constraints XDC](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/constraints/counter_example.xdc)
 - [Constraints SDC](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/constraints/counter_example.sdc)
 - [Timing minimale](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/constraints/timing_only.sdc)
+
 

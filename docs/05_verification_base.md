@@ -1,53 +1,52 @@
 # 05 — Verification Base
 
-## 🎯 Obiettivi
+## 🎯 Objectives
 
-* Comprendere il ruolo della verifica
-* Scrivere un testbench base
-* Introdurre assertions e coverage
-* Capire il flusso di simulazione
+This module introduces **digital verification fundamentals** from an FPGA/ASIC perspective.
 
----
-
-## 🧠 1. Perché la verifica è fondamentale
-
-👉 Scrivere codice corretto NON basta
-
-Un circuito deve essere:
-
-* verificato
-* testato
-* validato
-
-👉 nella pratica:
-
-* il 70–80% del tempo è verifica
+By the end, you will:
+- Understand the **role of verification in hardware design**
+- Build a **structured testbench**
+- Apply **assertions and basic checking**
+- Interpret simulation results in a **timing-aware context**
 
 ---
 
-## 🧩 2. Cos’è un testbench
+## 🧠 1. Role of Verification in Hardware Design
 
-Un testbench è un modulo che:
+In modern digital design:
 
-* genera stimoli
-* osserva le uscite
-* verifica il comportamento
+👉 RTL correctness is NOT sufficient
+
+A design must be:
+- verified
+- validated
+- stress-tested
+
+### 📊 Industry Reality
+
+- ~70–80% of project time is spent in **verification**
+- Bugs are cheaper to fix in simulation than in silicon
 
 ---
 
-## 🔧 3. Struttura di un testbench
+## 🧩 2. Testbench Architecture
 
-```text
+A testbench is a **non-synthesizable environment** used to validate RTL.
+
+### Structure
+
+```
 Testbench
- ├── DUT (design under test)
- ├── Stimulus
+ ├── DUT (Design Under Test)
+ ├── Stimulus Generator
  ├── Monitor
- └── Checker
+ └── Checker / Scoreboard
 ```
 
 ---
 
-## 🔁 4. Esempio base (SystemVerilog)
+## 🔧 3. Basic Testbench Example
 
 ```systemverilog
 module tb_counter;
@@ -80,11 +79,15 @@ module tb_counter;
 endmodule
 ```
 
+### 🔍 Design Insight
+
+- Clock defines **time reference**
+- Stimulus drives DUT inputs
+- Simulation observes behavior cycle-by-cycle
+
 ---
 
-## 🔍 5. Monitor
-
-Serve per osservare i segnali:
+## 🔁 4. Monitor (Observation Layer)
 
 ```systemverilog
 initial begin
@@ -92,70 +95,148 @@ initial begin
 end
 ```
 
+### Purpose
+
+- Real-time signal tracking
+- Debug support
+- Waveform correlation
+
 ---
 
-## ✔️ 6. Checker
-
-Verifica automaticamente il comportamento:
+## ✔️ 5. Checker (Self-Checking Logic)
 
 ```systemverilog
 always @(posedge clk) begin
   if (!reset && q == 4'd10) begin
-    $display("Errore!");
+    $error("Unexpected value detected");
   end
 end
 ```
 
+### ✔ Best Practice
+
+- Always prefer **self-checking testbenches**
+- Avoid manual waveform inspection
+
 ---
 
-## ⚠️ 7. Assertions
-
-Controlli automatici nel codice:
+## ⚠️ 6. Assertions (Formalized Checks)
 
 ```systemverilog
 assert (q < 10)
-  else $error("Overflow!");
+  else $error("Overflow detected");
+```
+
+### Types
+
+- Immediate assertions
+- Concurrent assertions (advanced)
+
+### ✔ Benefits
+
+- Automatic bug detection
+- Cleaner verification intent
+- Reusable checks
+
+---
+
+## 📊 7. Coverage (Test Quality Metric)
+
+Coverage measures how thoroughly the design is exercised.
+
+### Types
+
+- Code coverage (lines, branches)
+- Functional coverage (design intent)
+
+### 📌 Goal
+
+Ensure:
+- all states are reached
+- all transitions are tested
+- corner cases are covered
+
+---
+
+## 🔄 8. Simulation Flow
+
+```
+RTL Design
+   ↓
+Testbench Development
+   ↓
+Simulation Run
+   ↓
+Waveform + Logs Analysis
+   ↓
+Bug Fix / Iteration
 ```
 
 ---
 
-## 📊 8. Coverage
+## 📊 9. Timing Awareness in Verification
 
-Misura quanto il test è completo.
+Even in simulation:
 
-👉 tipi:
+- Respect clock cycles
+- Validate latency
+- Check pipeline alignment
 
-* code coverage
-* functional coverage
+### Example
 
----
+```
+Input → [Pipeline Stage] → Output (after N cycles)
+```
 
-## 🔁 9. Flusso di simulazione
-
-1. scrivere RTL
-2. scrivere testbench
-3. simulare
-4. analizzare risultati
-
----
-
-## ⚠️ 10. Errori comuni
-
-❌ test incompleti
-❌ niente assertions
-❌ verifiche manuali
-❌ non considerare corner case
+Verification must account for:
+- latency
+- valid signals
+- protocol timing
 
 ---
 
-## 🧪 11. Esercizi
+## ⚠️ 10. Common Pitfalls
 
-1. Scrivere testbench per un contatore
-2. Aggiungere assertion
-3. Verificare overflow
+❌ Incomplete test coverage  
+❌ Lack of assertions  
+❌ Manual-only verification  
+❌ Ignoring corner cases  
+❌ Not checking latency/pipeline behavior  
 
 ---
 
-## 🚀 Collegamento al prossimo modulo
+## 🧪 11. Exercises (Design-Oriented)
 
-👉 Nel prossimo capitolo vedremo **UVM (verification avanzata)**
+1. Write a self-checking testbench for a counter  
+2. Add assertions for overflow  
+3. Verify reset behavior  
+4. Validate pipeline latency  
+
+---
+
+## 🚀 Next Module
+
+👉 UVM (Universal Verification Methodology)
+
+Focus:
+- scalable verification
+- reusable components
+- constrained random testing
+
+---
+
+## 🧾 Summary
+
+| Topic | Key Insight |
+|------|------------|
+| Testbench | non-synthesizable verification env |
+| Checker | automated validation |
+| Assertions | formal correctness |
+| Coverage | completeness metric |
+| Simulation | primary debug tool |
+
+---
+
+## 📄 Source File
+
+fileciteturn3file0

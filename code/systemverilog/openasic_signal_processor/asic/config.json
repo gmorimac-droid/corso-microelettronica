@@ -1,0 +1,19 @@
+{
+  "DESIGN_NAME": "top",
+  "VERILOG_FILES": [
+    "dir::../rtl/top.sv",
+    "dir::../rtl/spi_slave.sv",
+    "dir::../rtl/reg_bank.sv",
+    "dir::../rtl/control_fsm.sv",
+    "dir::../rtl/fifo_sync.sv",
+    "dir::../rtl/fir8_core.sv",
+    "dir::../rtl/decimator.sv",
+    "dir::../rtl/output_stage.sv",
+    "dir::../rtl/status_flags.sv"
+  ],
+  "CLOCK_PORT": "clk",
+  "CLOCK_PERIOD": 100.0,
+  "FP_PIN_ORDER_CFG": "dir::pin_order.cfg",
+  "PNR_SDC_FILE": "dir::constraints.sdc",
+  "SIGNOFF_SDC_FILE": "dir::constraints.sdc"
+}

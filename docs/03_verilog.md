@@ -1,80 +1,46 @@
 # 03 — Verilog
 
-## 🎯 Obiettivi
+## 🎯 Objectives
 
-* Comprendere la struttura di un modulo Verilog
-* Scrivere logica combinatoria e sequenziale
-* Capire differenza tra `wire` e `reg`
-* Introdurre lo stile RTL
+This module introduces Verilog from an **FPGA/ASIC design perspective**, focusing on synthesizable RTL and hardware implications.
 
----
-
-## 🧠 1. Cos’è Verilog
-
-Verilog è un linguaggio per descrivere hardware.
-
-👉 più compatto di VHDL
-👉 più vicino al mondo C
+By the end, you will:
+- Understand **RTL modeling in Verilog**
+- Correctly describe **combinational and sequential logic**
+- Distinguish between **wire and reg semantics**
+- Apply **timing-aware design practices**
 
 ---
 
-## 🧩 2. Struttura base
+## 🧠 1. Verilog in Hardware Design
 
-Un modulo Verilog è definito con:
+Verilog is a **hardware description language (HDL)** widely used in industry.
 
-* `module`
-* porte di ingresso/uscita
-* logica interna
+### 🔄 Typical Design Flow
 
----
+RTL → Synthesis → Netlist → Place & Route → Bitstream
 
-## 🔧 Esempio minimo
-
-```verilog
-module and_gate (
-  input A,
-  input B,
-  output Y
-);
-
-assign Y = A & B;
-
-endmodule
-```
+👉 Each construct maps directly to **hardware structures**
 
 ---
 
-## 🔌 3. Tipi principali
-
-### wire
-
-* connessione combinatoria
-
-### reg
-
-* usato in blocchi sequenziali
-
-👉 attenzione: `reg` NON è sempre un registro fisico
-
----
-
-## 🔄 4. Logica combinatoria
+## 🔧 2. Combinational Logic
 
 ```verilog
 assign Y = A & B;
 ```
 
-Oppure:
+Hardware:
+A ----\
+       AND ----> Y
+B ----/
 
-```verilog
-always @(*) begin
-  Y = A & B;
-end
-```
+- No clock
+- Impacts **critical path**
 
 ---
 
-## 🔁 5. Logica sequenziale
+## 🔁 3. Sequential Logic
 
 ```verilog
 always @(posedge clk) begin
@@ -82,25 +48,32 @@ always @(posedge clk) begin
 end
 ```
 
-👉 uso di `<=` (non blocking) fondamentale
+- Generates flip-flops
+- Defines pipeline stages
 
 ---
 
-## ⚖️ 6. Blocking vs Non-blocking
+## 🔄 4. wire vs reg
 
-| Tipo         | Operatore |
-| ------------ | --------- |
-| Blocking     | =         |
-| Non-blocking | <=        |
+| Type | Meaning |
+|------|--------|
+| wire | connection |
+| reg  | procedural assignment |
 
-👉 regola:
-
-* combinatorio → `=`
-* sequenziale → `<=`
+👉 `reg` ≠ always register
 
 ---
 
-## 🔢 7. Contatore (esempio completo)
+## ⚖️ 5. Blocking vs Non-blocking
+
+- `=` → combinational  
+- `<=` → sequential  
+
+Wrong usage → simulation mismatch
+
+---
+
+## 🔢 6. Counter Example
 
 ```verilog
 module counter (
@@ -121,56 +94,25 @@ endmodule
 
 ---
 
-## 🔍 8. Sensitivity list
+## 📊 7. Timing Perspective
 
-```verilog
-always @(posedge clk)
-```
+Critical path:
+FF → Logic → FF
 
-👉 definisce quando il blocco viene eseguito
-
----
-
-## ⚠️ 9. Errori comuni
-
-❌ usare `=` nel sequenziale
-❌ dimenticare segnali nella sensitivity list
-❌ latch involontari
-❌ confondere `wire` e `reg`
+Optimization:
+- pipeline
+- reduce logic depth
 
 ---
 
-## 🔁 10. Confronto con VHDL
+## ⚠️ 8. Pitfalls
 
-| VHDL                | Verilog     |
-| ------------------- | ----------- |
-| entity/architecture | module      |
-| process             | always      |
-| signal              | wire/reg    |
-| rising_edge(clk)    | posedge clk |
+- wrong assignment operator
+- latch inference
+- sensitivity errors
 
 ---
 
-## 🧪 11. Esercizi
+## 🚀 Next Module
 
-1. Scrivere una porta XOR
-2. Implementare un registro a 8 bit
-3. Creare un contatore modulo 16
-
----
-
-## 🚀 Collegamento al prossimo modulo
-
-👉 Nel prossimo capitolo vedremo **SystemVerilog**
-
-## 💻 Codice di riferimento
-
-- [Counter RTL (Verilog)](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/project_counter/counter.v)
-- [Testbench Verilog](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/project_counter/tb_counter.v)
-
-
-## 📄 LIBRO DI RIFERIMENTO
-
-👉 Vai al foglio di lavoro con immagini e appunti:
-
-[Apri foglio Verilog](Libro_Verilog/index.md)
+SystemVerilog

@@ -1,0 +1,19 @@
+# Simulation artifacts
+sim/*.out
+sim/*.vcd
+sim/waves/*
+sim/logs/*
+
+# OpenLane / ASIC artifacts
+asic/runs/*
+asic/results/*
+asic/reports/*
+
+# Generic
+*.log
+*.jou
+*.str
+*.mag
+*.spice
+*.gds
+*.lef

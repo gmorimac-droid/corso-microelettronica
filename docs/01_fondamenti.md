@@ -1,150 +1,221 @@
 # 01 — Fondamenti di Logica Digitale
 
-## 🎯 Obiettivi
+## 🎯 Objectives
 
-* Comprendere la logica combinatoria e sequenziale
-* Capire il concetto di tempo nei circuiti digitali
-* Prepararsi alla scrittura di HDL
+This module introduces the **fundamental concepts of digital logic** from an FPGA/ASIC design perspective.
 
----
-
-## 🔢 1. Sistemi digitali
-
-Un sistema digitale elabora informazioni usando **valori discreti** (tipicamente 0 e 1).
-
-### Esempi:
-
-* CPU
-* FPGA
-* ASIC
+By the end, you will:
+- Understand **combinational vs sequential logic**
+- Interpret **time behavior in digital systems**
+- Learn the basis for **RTL design**
+- Prepare for **hardware description languages (HDL)**
 
 ---
 
-## 🔌 2. Logica combinatoria
+## 🧠 1. Digital Systems
 
-La logica combinatoria è un sistema in cui:
+A digital system processes information using **discrete values** (typically 0 and 1).
 
-👉 l’uscita dipende SOLO dagli ingressi attuali
+### Examples
 
-### Esempio: porta AND
+- CPU  
+- FPGA  
+- ASIC  
+
+### 🔍 Engineering View
+
+All digital systems are composed of:
+- combinational logic (LUTs / gates)
+- sequential elements (flip-flops)
+
+---
+
+## 🔌 2. Combinational Logic
+
+Output depends ONLY on current inputs.
+
+### Example: AND Gate
 
 | A | B | Y |
-| - | - | - |
+|---|---|---|
 | 0 | 0 | 0 |
 | 0 | 1 | 0 |
 | 1 | 0 | 0 |
 | 1 | 1 | 1 |
 
----
+### ⏱ Timing Model
 
-## ⏱️ 3. Logica sequenziale
+```
+Input → Logic → Output
+```
 
-Qui entra il tempo:
-
-👉 l’uscita dipende da:
-
-* ingressi attuali
-* stato precedente
+- No memory
+- Delay = propagation delay
 
 ---
 
-## 🔁 4. Flip-Flop
+## ⏱️ 3. Sequential Logic
 
-Elemento base della memoria digitale.
+Output depends on:
+- current inputs
+- previous state
 
-### Tipi:
+### Key Concept
 
-* D Flip-Flop
-* JK
-* T
+```
+Input + State → Next State
+```
 
-### Comportamento:
+---
 
-* aggiorna stato al fronte di clock
+## 🔁 4. Flip-Flops (Storage Elements)
+
+Basic memory elements.
+
+### Example (D Flip-Flop)
+
+```
+      ┌──────┐
+D --->│  FF  │----> Q
+      └──────┘
+         ↑
+        clk
+```
+
+### Properties
+
+- Stores 1 bit
+- Updates on clock edge
+- Fundamental for pipelines
 
 ---
 
 ## ⏰ 5. Clock
 
-Segnale fondamentale nei sistemi digitali.
+Global synchronization signal.
 
-👉 sincronizza tutto
+### Parameters
 
-### Parametri:
+- Frequency (f)
+- Period (T)
+- Duty cycle
 
-* frequenza
-* periodo
-* duty cycle
+### 📌 Design Impact
 
----
-
-## 🔄 6. Registri
-
-Gruppi di flip-flop.
-
-👉 usati per:
-
-* memorizzare dati
-* pipeline
-* stato
+Clock defines:
+- system speed
+- timing constraints
+- pipeline stages
 
 ---
 
-## 🔀 7. Finite State Machine (FSM)
+## 🔄 6. Registers
 
-Sistema con stati discreti.
+Group of flip-flops.
 
-### Componenti:
+### Usage
 
-* stati
-* transizioni
-* ingressi
-* uscite
-
----
-
-## 🧪 8. Esempio: contatore
-
-Un contatore è un esempio di sistema sequenziale:
-
-* stato = valore corrente
-* aggiorna a ogni clock
+- Data storage  
+- Pipeline stages  
+- State machines  
 
 ---
 
-## ⚠️ 9. Concetti fondamentali
+## 🔀 7. Finite State Machines (FSM)
 
-### Setup time
+Discrete-state systems.
 
-Tempo minimo prima del clock
+### Components
 
-### Hold time
+- States  
+- Transitions  
+- Inputs  
+- Outputs  
 
-Tempo minimo dopo il clock
+### Hardware Mapping
 
-### Propagation delay
-
-Tempo di propagazione del segnale
-
----
-
-## 🧠 10. Combinatorio vs Sequenziale
-
-| Tipo         | Dipendenza       |
-| ------------ | ---------------- |
-| Combinatorio | ingressi         |
-| Sequenziale  | ingressi + stato |
+- Registers → state storage  
+- Logic → transition function  
 
 ---
 
-## 🧪 Esercizi
+## 🔢 8. Example: Counter
 
-1. Disegna una tabella di verità per XOR
-2. Progetta un contatore modulo 4
-3. Descrivi una FSM per un semaforo
+Sequential system where:
+
+- state = current value  
+- updated every clock cycle  
+
+### Hardware
+
+- Flip-flops (state)
+- Adder logic
 
 ---
 
-## 🚀 Collegamento al prossimo modulo
+## 📊 9. Timing Fundamentals
 
-👉 Nel prossimo modulo useremo questi concetti in **VHDL**
+### Setup Time
+
+Minimum time before clock edge  
+input must be stable
+
+### Hold Time
+
+Minimum time after clock edge  
+input must remain stable
+
+### Propagation Delay
+
+Time for signal to propagate through logic
+
+---
+
+## 📊 10. Timing Diagram Concept
+
+```
+Clock:   ┌─┐ ┌─┐ ┌─┐
+         ┘ └─┘ └─┘ └─
+
+Data:    ────████────
+
+Valid Window:
+        <setup><hold>
+```
+
+---
+
+## 🧠 11. Combinational vs Sequential
+
+| Type | Dependency |
+|------|-----------|
+| Combinational | Inputs |
+| Sequential | Inputs + State |
+
+---
+
+## ⚠️ 12. Common Pitfalls
+
+❌ Ignoring timing constraints  
+❌ Misunderstanding clock behavior  
+❌ Not considering propagation delay  
+❌ Poor state design  
+
+---
+
+## 🧪 Exercises (Design-Oriented)
+
+1. Truth table for XOR  
+2. Design a mod-4 counter  
+3. FSM for traffic light  
+4. Identify critical path in a simple circuit  
+
+---
+
+## 🚀 Next Module
+
+👉 VHDL
+
+Focus:
+- translating these concepts into RTL
+- synthesizable design

@@ -1,69 +1,78 @@
 # 09 — Progetti
 
-## 🎯 Obiettivi
+## 🎯 Objectives
 
-* Applicare tutti i concetti appresi
-* Integrare design, verifica e tool
-* Costruire sistemi reali
-* Sviluppare competenze pratiche
+This module focuses on **end-to-end hardware design projects** combining RTL, verification, and implementation.
 
----
-
-## 🧠 1. Perché i progetti sono fondamentali
-
-👉 si impara facendo
-
-Un buon progetto deve includere:
-
-* design RTL
-* testbench
-* verifica
-* (opzionale) implementazione FPGA
+By the end, you will:
+- Apply **design + verification + flow**
+- Build **realistic hardware systems**
+- Develop **project-level engineering skills**
+- Prepare for **industry-level FPGA/ASIC work**
 
 ---
 
-## 🧩 2. Struttura di un progetto
+## 🧠 1. Role of Projects in Hardware Design
 
-```text
-Progetto
- ├── Specifica
+👉 Real learning happens through implementation
+
+A complete project should include:
+
+- RTL design  
+- Testbench  
+- Verification (assertions + checks)  
+- Optional FPGA implementation  
+
+### 📌 Engineering Perspective
+
+Projects simulate real workflows:
+- specification → design → verification → implementation
+
+---
+
+## 🧩 2. Project Structure
+
+```
+Project
+ ├── Specification
  ├── RTL
  ├── Testbench
  ├── Simulation
- ├── Sintesi (opzionale)
- └── Risultati
+ ├── Synthesis (optional)
+ └── Results / Reports
 ```
 
----
+### ✔ Best Practice
 
-## 🔧 3. Linee guida
-
-✔ iniziare semplice
-✔ verificare sempre
-✔ modularizzare
-✔ documentare
+- Keep design modular  
+- Separate concerns  
+- Track results  
 
 ---
 
-## 🔢 4. Progetto 1 — Contatore avanzato
+## 🔧 3. Design Guidelines
 
-### 📌 Obiettivo
-
-* contatore parametrico
-* reset
-* enable
-
----
-
-### 🧪 Feature
-
-* modulo N
-* overflow
-* testbench
+✔ Start simple, then scale  
+✔ Always verify before synthesis  
+✔ Use modular architecture  
+✔ Document design decisions  
 
 ---
 
-### 💻 Esempio (SystemVerilog)
+## 🔢 4. Project 1 — Advanced Counter
+
+### 📌 Objective
+
+- Parametric counter  
+- Reset + enable support  
+
+### 🧪 Features
+
+- Configurable width (N)  
+- Overflow behavior  
+- Self-checking testbench  
+
+### 💻 Example (SystemVerilog)
 
 ```systemverilog
 module counter #(
@@ -85,91 +94,136 @@ module counter #(
 endmodule
 ```
 
----
+### 🔍 Hardware Insight
 
-## 🔌 5. Progetto 2 — UART
-
-### 📌 Obiettivo
-
-* comunicazione seriale
-
-### 🔧 Componenti
-
-* TX
-* RX
-* baud generator
+- FFs → state  
+- Adder → combinational logic  
+- Enable → gating logic  
 
 ---
 
-## 🧮 6. Progetto 3 — ALU
+## 🔌 5. Project 2 — UART
 
-### 📌 Operazioni
+### 📌 Objective
 
-* add
-* sub
-* and
-* or
+Implement serial communication interface.
 
----
+### 🔧 Components
 
-## 📦 7. Progetto 4 — FIFO
+- Transmitter (TX)  
+- Receiver (RX)  
+- Baud rate generator  
 
-### 📌 Concetti
+### 📌 Design Challenges
 
-* buffer
-* read/write
-* gestione overflow
-
----
-
-## 🧠 8. Progetto 5 — CPU semplice
-
-### 📌 Componenti
-
-* ALU
-* registro
-* control unit
+- Timing accuracy  
+- Bit sampling  
+- Synchronization  
 
 ---
 
-## 🧪 9. Verification nei progetti
+## 🧮 6. Project 3 — ALU
 
-Ogni progetto deve avere:
+### 📌 Operations
 
-* testbench
-* assertions
-* coverage
+- Addition  
+- Subtraction  
+- Logical AND / OR  
+
+### 📊 Design Focus
+
+- Combinational logic optimization  
+- Latency vs area trade-off  
 
 ---
 
-## 🔁 10. Pipeline completa
+## 📦 7. Project 4 — FIFO
 
-```text
-Design → Testbench → Simulation → FPGA
+### 📌 Concepts
+
+- Circular buffer  
+- Read / write pointers  
+- Full / empty detection  
+
+### 📌 Advanced Topics
+
+- Dual-clock FIFO (CDC)  
+- Throughput optimization  
+
+---
+
+## 🧠 8. Project 5 — Simple CPU
+
+### 📌 Components
+
+- ALU  
+- Registers  
+- Control unit  
+
+### 📊 Design Complexity
+
+- Instruction decoding  
+- State machine control  
+- Pipeline (optional advanced)  
+
+---
+
+## 🧪 9. Verification in Projects
+
+Each project must include:
+
+- Testbench  
+- Assertions  
+- Coverage  
+
+### ✔ Best Practice
+
+- Use self-checking environments  
+- Validate edge cases  
+- Measure coverage  
+
+---
+
+## 🔁 10. Full Design Pipeline
+
+```
+Specification → RTL → Testbench → Simulation → FPGA
 ```
 
----
+### 📌 Key Insight
 
-## ⚠️ 11. Errori comuni
-
-❌ saltare la verifica
-❌ progetti troppo complessi subito
-❌ codice non modulare
-❌ niente documentazione
+Verification is continuous across all stages.
 
 ---
 
-## 🧪 12. Esercizi
+## ⚠️ 11. Common Pitfalls
 
-1. Estendere il contatore
-2. Aggiungere testbench
-3. Simulare progetto completo
+❌ Skipping verification  
+❌ Overcomplicating initial design  
+❌ Poor modularization  
+❌ Missing documentation  
 
 ---
 
-## 🚀 Collegamento al prossimo modulo
+## 🧪 12. Exercises (Design-Oriented)
 
-👉 Nel prossimo capitolo: **Tool e TCL**
+1. Extend the counter with new features  
+2. Add assertions to testbench  
+3. Simulate full system  
+4. Implement on FPGA  
+
+---
+
+## 🚀 Next Module
+
+👉 Tool & TCL
+
+Focus:
+- automation
+- scripting
+- workflow optimization
+
+---
 
 ## Codice RTL completo
 
@@ -182,3 +236,9 @@ Design → Testbench → Simulation → FPGA
 ```systemverilog
 --8<-- "code/systemverilog/project_counter/tb_counter.sv"
 ```
+
+---
+
+## 📄 Source File
+
+fileciteturn9file0

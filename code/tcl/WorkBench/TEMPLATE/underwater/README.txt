@@ -1,6 +1,6 @@
 Underwater Workbench Template
 
-Uso consigliato con workbench_full_integrated_v1.tcl
+Uso consigliato con workbench.tcl
 
 Launcher:
 - Adatta il profilo Underwater per usare Python se vuoi test rapido

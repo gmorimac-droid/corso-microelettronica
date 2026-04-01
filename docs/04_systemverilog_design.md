@@ -1,40 +1,43 @@
 # 04 — SystemVerilog (Design)
 
-## 🎯 Obiettivi
+## 🎯 Objectives
 
-* Comprendere le estensioni di Verilog
-* Scrivere codice RTL più sicuro e leggibile
-* Usare costrutti moderni (logic, always_ff, enum, struct)
-* Evitare errori tipici di Verilog
+This module introduces SystemVerilog as a **modern RTL design language** for FPGA and ASIC development.
 
----
-
-## 🧠 1. Cos’è SystemVerilog
-
-SystemVerilog è un’estensione di Verilog.
-
-👉 include:
-
-* miglioramenti per il design RTL
-* strumenti per la verifica
+By the end, you will:
+- Use **SystemVerilog constructs for safer RTL**
+- Improve **readability and maintainability**
+- Reduce common **Verilog design errors**
+- Write **synthesis-friendly and timing-aware code**
 
 ---
 
-## 🔧 2. Tipo `logic`
+## 🧠 1. SystemVerilog in Design Flow
 
-Sostituisce `wire` e `reg`.
+SystemVerilog extends Verilog with:
+- safer RTL constructs
+- better type system
+- advanced verification features
+
+RTL → Synthesis → Netlist → Place & Route → Bitstream
+
+👉 Stronger guarantees than Verilog for RTL correctness
+
+---
+
+## 🔧 2. `logic` Type
 
 ```systemverilog
 logic a;
 logic [3:0] data;
 ```
 
-✔ più semplice
-✔ meno errori
+✔ replaces wire/reg  
+✔ reduces ambiguity  
 
 ---
 
-## 🔁 3. always_ff (sequenziale)
+## 🔁 3. Sequential Logic — `always_ff`
 
 ```systemverilog
 always_ff @(posedge clk) begin
@@ -42,12 +45,12 @@ always_ff @(posedge clk) begin
 end
 ```
 
-✔ garantisce codice sequenziale corretto
-✔ evita errori di sintesi
+- Generates flip-flops  
+- Defines pipeline stage  
 
 ---
 
-## 🔄 4. always_comb (combinatorio)
+## 🔄 4. Combinational Logic — `always_comb`
 
 ```systemverilog
 always_comb begin
@@ -55,12 +58,12 @@ always_comb begin
 end
 ```
 
-✔ sensitivity list automatica
-✔ evita latch involontari
+✔ automatic sensitivity  
+✔ avoids latch  
 
 ---
 
-## 🔷 5. enum (fondamentale per FSM)
+## 🔷 5. FSM — `enum`
 
 ```systemverilog
 typedef enum logic [1:0] {
@@ -68,31 +71,25 @@ typedef enum logic [1:0] {
   RUN,
   STOP
 } state_t;
-
-state_t state;
 ```
 
-✔ leggibilità altissima
-✔ codice più sicuro
+✔ safer FSM  
+✔ better debug  
 
 ---
 
-## 🧩 6. struct
+## 🧩 6. Struct
 
 ```systemverilog
 typedef struct {
   logic [7:0] data;
   logic valid;
 } packet_t;
-
-packet_t pkt;
 ```
 
 ---
 
-## 🔗 7. interface
-
-Permette di raggruppare segnali.
+## 🔗 7. Interface
 
 ```systemverilog
 interface bus_if;
@@ -103,60 +100,43 @@ endinterface
 
 ---
 
-## 🔢 8. Contatore (esempio moderno)
+## 🔢 8. Counter
 
 ```systemverilog
 module counter (
-  input  logic       clk,
-  input  logic       reset,
+  input  logic clk,
+  input  logic reset,
   output logic [3:0] q
 );
 
-  always_ff @(posedge clk or posedge reset) begin
-    if (reset)
-      q <= 4'd0;
-    else
-      q <= q + 1;
-  end
+always_ff @(posedge clk or posedge reset) begin
+  if (reset)
+    q <= 0;
+  else
+    q <= q + 1;
+end
 
 endmodule
 ```
 
 ---
 
-## ⚖️ 9. Verilog vs SystemVerilog
+## 📊 9. Timing
 
-| Verilog     | SystemVerilog           |
-| ----------- | ----------------------- |
-| reg/wire    | logic                   |
-| always      | always_ff / always_comb |
-| meno sicuro | più robusto             |
+FF → Logic → FF
+
+✔ pipeline improves frequency  
 
 ---
 
-## ⚠️ 10. Errori comuni
+## ⚠️ 10. Pitfalls
 
-❌ usare `always` invece di `always_ff`
-❌ mescolare combinatorio e sequenziale
-❌ ignorare enum
-❌ codice poco leggibile
-
----
-
-## 🧪 11. Esercizi
-
-1. Scrivere un contatore usando `always_ff`
-2. Creare una FSM con `enum`
-3. Usare una `struct` per un pacchetto dati
+- using always instead of always_ff  
+- mixing logic types  
+- poor structuring  
 
 ---
 
-## 🚀 Collegamento al prossimo modulo
+## 🚀 Next
 
-👉 Nel prossimo capitolo vedremo la **Verification Base**
-
-## 💻 Codice di riferimento
-
-- [Counter RTL (SystemVerilog)](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/systemverilog/project_counter/counter.sv)
-- [Testbench SystemVerilog](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/systemverilog/project_counter/tb_counter.sv)
-- [Testbench SystemVerilog 2](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/systemverilog/project_counter/tb_counter2.sv)
+Verification Base

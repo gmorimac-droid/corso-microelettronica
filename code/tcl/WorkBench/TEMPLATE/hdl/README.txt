@@ -1,6 +1,6 @@
 HDL Workbench Template
 
-Uso consigliato con workbench_full_integrated_v1.tcl
+Uso consigliato con workbench.tcl
 
 Launcher:
 - Profile: HDL Regression Runner

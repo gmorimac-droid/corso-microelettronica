@@ -1,40 +1,50 @@
 # 06 — UVM (Universal Verification Methodology)
 
-## 🎯 Obiettivi
+## 🎯 Objectives
 
-* Comprendere l’architettura UVM
-* Strutturare un ambiente di verifica complesso
-* Separare generazione, guida e controllo
-* Introdurre test riutilizzabili e scalabili
+This module introduces UVM from an **industrial ASIC/FPGA verification perspective**.
 
----
-
-## 🧠 1. Cos’è UVM
-
-UVM è una metodologia standard per la verifica.
-
-👉 basata su SystemVerilog
-👉 usata nell’industria ASIC
+By the end, you will:
+- Understand **UVM architecture and layering**
+- Build a **scalable verification environment**
+- Separate **stimulus, driving, monitoring, and checking**
+- Design **reusable and modular testbenches**
 
 ---
 
-## 🧩 2. Perché UVM
+## 🧠 1. What is UVM
 
-Nei sistemi complessi:
+UVM (Universal Verification Methodology) is the **industry standard verification framework**.
 
-❌ testbench semplici non bastano
+- Built on SystemVerilog
+- Widely used in **ASIC design flows**
+- Increasingly adopted in **complex FPGA verification**
 
-Serve:
-
-* riusabilità
-* modularità
-* automazione
+👉 Enables **scalable and reusable verification environments**
 
 ---
 
-## 🏗️ 3. Architettura UVM
+## 🧩 2. Why UVM
 
-```text
+For simple designs:
+- basic testbenches are sufficient
+
+For complex systems:
+- need **modularity**
+- need **reuse**
+- need **automation**
+
+### 📌 Key Goals
+
+- Separation of concerns
+- Transaction-level modeling (TLM)
+- Reusable verification IP (VIP)
+
+---
+
+## 🏗️ 3. UVM Architecture
+
+```
 Test
  └── Environment
       ├── Agent
@@ -44,62 +54,101 @@ Test
       └── Scoreboard
 ```
 
+### 🔍 Design Insight
+
+- Hierarchical structure
+- Each component has a **well-defined role**
+- Enables scalable verification for large systems
+
 ---
 
-## 🔧 4. Componenti principali
+## 🔧 4. Core Components
 
 ### 🧪 Test
-
-* definisce cosa testare
-
----
+- Defines verification scenario
+- Configures environment
 
 ### 🌍 Environment
-
-* contiene tutto
-
----
+- Top-level container
+- Instantiates agents and scoreboard
 
 ### 🔌 Agent
-
-* interfaccia con DUT
-
----
+- Encapsulates interface logic
+- Can be active or passive
 
 ### 🚚 Driver
-
-* invia stimoli
-
----
+- Converts transactions → pin-level signals
+- Drives DUT interface
 
 ### 🎛️ Sequencer
-
-* genera sequenze
-
----
+- Generates transactions
+- Controls stimulus flow
 
 ### 🔍 Monitor
-
-* osserva segnali
-
----
+- Observes DUT signals
+- Converts signals → transactions
 
 ### 📊 Scoreboard
-
-* confronta risultati
-
----
-
-## 🔁 5. Flusso UVM
-
-1. sequencer genera transazioni
-2. driver le applica al DUT
-3. monitor osserva
-4. scoreboard verifica
+- Compares expected vs actual behavior
+- Implements checking logic
 
 ---
 
-## 🔧 6. Esempio minimale (struttura)
+## 🔁 5. UVM Data Flow
+
+```
+Sequence → Sequencer → Driver → DUT
+                             ↓
+                         Monitor
+                             ↓
+                         Scoreboard
+```
+
+### 📌 Key Concept
+
+- Stimulus is **transaction-based**
+- DUT interaction is **signal-level**
+- Verification is **data-driven**
+
+---
+
+## 📦 6. Transactions (Sequence Items)
+
+```systemverilog
+class packet extends uvm_sequence_item;
+  rand bit [7:0] data;
+endclass
+```
+
+### ✔ Role
+
+- Abstract representation of data
+- Enables reuse and randomization
+
+---
+
+## 🔄 7. Sequences (Stimulus Generation)
+
+```systemverilog
+class my_sequence extends uvm_sequence #(packet);
+  `uvm_object_utils(my_sequence)
+
+  task body();
+    packet pkt = packet::type_id::create("pkt");
+    start_item(pkt);
+    finish_item(pkt);
+  endtask
+endclass
+```
+
+### ✔ Function
+
+- Generates stimulus patterns
+- Can be random or constrained
+
+---
+
+## 🔧 8. Minimal Test Example
 
 ```systemverilog
 class my_test extends uvm_test;
@@ -115,57 +164,50 @@ endclass
 
 ---
 
-## 📦 7. Transazioni
+## 📊 9. Verification Strategy (Engineering View)
 
-In UVM si lavora con oggetti:
+### ✔ Recommended Approach
 
-```systemverilog
-class packet extends uvm_sequence_item;
-  rand bit [7:0] data;
-endclass
-```
+- Start with directed tests
+- Add constrained random sequences
+- Introduce coverage-driven verification
 
----
+### ✔ Metrics
 
-## 🔄 8. Sequenze
-
-Generano stimoli:
-
-```systemverilog
-class my_sequence extends uvm_sequence #(packet);
-  `uvm_object_utils(my_sequence)
-
-  task body();
-    packet pkt = packet::type_id::create("pkt");
-    start_item(pkt);
-    finish_item(pkt);
-  endtask
-endclass
-```
+- Functional coverage
+- Assertion coverage
+- Bug detection rate
 
 ---
 
-## ⚠️ 9. Errori comuni
+## ⚠️ 10. Common Pitfalls
 
-❌ non capire l’architettura
-❌ codice troppo complesso subito
-❌ non separare i componenti
-❌ ignorare il debug
-
----
-
-## 🧪 10. Esercizi
-
-1. Definire una transazione
-2. Creare una sequenza
-3. Costruire un environment minimale
+❌ Not understanding architecture  
+❌ Overcomplicating early design  
+❌ Poor component separation  
+❌ Weak debug strategy  
 
 ---
 
-## 🚀 Collegamento al prossimo modulo
+## 🧪 11. Exercises (Design-Oriented)
 
-👉 Nel prossimo capitolo vedremo il **FPGA Flow**
+1. Define a transaction class  
+2. Create a sequence  
+3. Build a minimal agent  
+4. Add a basic scoreboard  
 
+---
+
+## 🚀 Next Module
+
+👉 FPGA Flow
+
+Focus:
+- synthesis
+- implementation
+- timing closure
+
+---
 
 ## 💻 Codice di riferimento
 
@@ -173,3 +215,5 @@ endclass
 - [Driver](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/project_counter/counter_driver.sv)
 - [Monitor](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/project_counter/counter_monitor.sv)
 - [Scoreboard](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/uvm/project_counter/counter_scoreboard.sv)
+
+

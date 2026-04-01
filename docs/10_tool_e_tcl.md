@@ -1,71 +1,80 @@
 # 10 — Tool e TCL
 
-## 🎯 Obiettivi
+## 🎯 Objectives
 
-* Comprendere il ruolo dei tool nel flusso di progettazione
-* Automatizzare processi con TCL
-* Gestire simulation, synthesis e implementation
-* Introdurre scripting e workflow professionali
+This module introduces **EDA tools and TCL scripting** from an FPGA/ASIC engineering perspective.
 
----
-
-## 🧠 1. Perché i tool sono fondamentali
-
-👉 Senza tool non esiste progettazione hardware moderna
-
-I tool permettono:
-
-* simulazione
-* sintesi
-* analisi timing
-* implementazione
+By the end, you will:
+- Understand the role of **EDA tools in the design flow**
+- Automate **simulation, synthesis, and implementation**
+- Use **TCL scripting** for reproducible workflows
+- Build a **professional, version-controlled flow**
 
 ---
 
-## 🧰 2. Tipi di tool
+## 🧠 1. Role of EDA Tools
 
-### 🔷 Simulazione
+Modern hardware design is entirely tool-driven.
 
-* ModelSim
-* QuestaSim
-* XSIM
+EDA tools enable:
+- Functional simulation  
+- Logic synthesis  
+- Timing analysis  
+- Physical implementation  
+
+### 📌 Key Insight
+
+👉 No tool = no hardware design  
 
 ---
 
-### ⚙️ Sintesi
+## 🧰 2. Tool Categories
 
-* Vivado
-* Quartus
+### 🔷 Simulation
 
----
+- ModelSim  
+- QuestaSim  
+- XSIM  
+
+### ⚙️ Synthesis / FPGA
+
+- Xilinx Vivado  
+- Intel Quartus  
 
 ### 🏭 ASIC
 
-* Synopsys
-* Cadence
+- Synopsys (DC, PrimeTime)  
+- Cadence (Genus, Innovus)  
 
 ---
 
-## 🔁 3. Flusso automatizzato
+## 🔁 3. Automated Flow Concept
 
-```text
-Script → Tool → Output → Analisi
+```
+Script → Tool → Output → Analysis
 ```
 
-👉 invece di cliccare manualmente
-👉 si usano script
+### Engineering Advantage
+
+- Repeatability  
+- Scalability  
+- Debug traceability  
 
 ---
 
-## 💻 4. Cos’è TCL
+## 💻 4. TCL Overview
 
-TCL (Tool Command Language) è un linguaggio di scripting.
+TCL (Tool Command Language) is the **standard scripting language** used in EDA tools.
 
-👉 usato nei tool FPGA e ASIC
+### Usage
+
+- Control tool execution  
+- Automate flows  
+- Generate reports  
 
 ---
 
-## 🔧 5. Esempio base TCL
+## 🔧 5. Basic TCL Example
 
 ```tcl
 create_project my_project ./proj -part xc7a35tcpg236-1
@@ -74,21 +83,29 @@ synth_design -top counter
 report_timing_summary
 ```
 
----
+### 🔍 Flow Interpretation
 
-## 🔄 6. Automazione flow
-
-Con TCL puoi:
-
-* lanciare simulazioni
-* sintetizzare
-* generare report
-
-👉 tutto automaticamente
+- Project creation  
+- File import  
+- Synthesis  
+- Timing analysis  
 
 ---
 
-## 📦 7. Script tipici
+## 🔄 6. Flow Automation
+
+Using TCL, you can:
+
+- Run simulations  
+- Launch synthesis  
+- Execute implementation  
+- Generate reports  
+
+👉 Fully automated flow without GUI  
+
+---
+
+## 📦 7. Common Scripts
 
 ### Simulation
 
@@ -110,51 +127,79 @@ report_timing_summary
 
 ---
 
-## 🔌 8. Constraints
+## 🔌 8. Constraints Integration
 
-File fondamentali per:
+Constraints are critical in both FPGA and ASIC flows.
 
-* clock
-* pin
-* timing
-
-Esempio:
+### Example
 
 ```tcl
 create_clock -period 10 [get_ports clk]
 ```
 
+### Impact
+
+- Defines timing expectations  
+- Guides synthesis and implementation  
+- Essential for timing closure  
+
 ---
 
-## 🧠 9. Workflow professionale
+## 📊 9. Professional Workflow
 
-```text
-Git → Script → Tool → Report → Debug
+```
+Git → TCL Scripts → EDA Tools → Reports → Debug
 ```
 
-👉 tutto versionato
-👉 tutto ripetibile
+### ✔ Best Practices
+
+- Version control everything  
+- Keep scripts modular  
+- Automate repetitive tasks  
+- Track timing and logs  
 
 ---
 
-## ⚠️ 10. Errori comuni
+## ⚠️ 10. Common Pitfalls
 
-❌ lavorare solo da GUI
-❌ non versionare script
-❌ script non modulari
-❌ ignorare log e report
-
----
-
-## 🧪 11. Esercizi
-
-1. Scrivere uno script TCL base
-2. Automatizzare una sintesi
-3. Generare report timing
+❌ Working only via GUI  
+❌ Not versioning scripts  
+❌ Hardcoded, non-reusable scripts  
+❌ Ignoring logs and reports  
 
 ---
 
-## 🚀 Collegamento al prossimo modulo
+## 🧪 11. Exercises (Design-Oriented)
 
-👉 Fine del corso 🎉
-👉 oppure: progetti avanzati e approfondimenti
+1. Write a basic TCL script  
+2. Automate synthesis flow  
+3. Generate timing reports  
+4. Integrate constraints in script  
+
+---
+
+## 🚀 Course Completion
+
+🎉 You have completed the full FPGA/ASIC design path
+
+Next steps:
+- Build advanced projects  
+- Optimize for performance (PPA)  
+- Explore verification methodologies (UVM advanced)  
+
+---
+
+## 🧾 Summary
+
+| Topic | Key Insight |
+|------|------------|
+| Tools | core of hardware design |
+| TCL | automation backbone |
+| Flow | must be reproducible |
+| Constraints | timing-critical |
+| Scripts | enable scalability |
+
+---
+
+## 📄 Source File
+

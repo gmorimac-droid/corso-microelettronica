@@ -1,25 +1,33 @@
 # 11 — Appendici
 
-## 🎯 Obiettivi
+## 🎯 Objectives
 
-* Fornire riferimenti rapidi
-* Definire standard di progetto
-* Consolidare buone pratiche
-* Supportare il lavoro professionale
+This appendix provides **practical engineering guidelines** for FPGA/ASIC design.
 
----
-
-## 🧠 1. Coding Style
-
-### ✔ Regole generali
-
-* nomi chiari e consistenti
-* indentazione uniforme
-* commenti significativi
+It serves as a quick reference for:
+- coding standards
+- project organization
+- verification checklist
+- professional workflows
 
 ---
 
-### 🔧 Esempio (SystemVerilog)
+## 🧠 1. Coding Style (RTL Quality)
+
+### ✔ General Rules
+
+- Use clear and consistent naming  
+- Maintain uniform indentation  
+- Write meaningful comments  
+- Keep modules small and modular  
+
+### 📌 Engineering Insight
+
+Readable RTL = easier debug + faster verification + better collaboration
+
+---
+
+### 🔧 Example (SystemVerilog)
 
 ```systemverilog
 module counter (
@@ -29,25 +37,30 @@ module counter (
 );
 ```
 
-✔ nomi chiari
-✔ formattazione pulita
+✔ Clean interface  
+✔ Consistent naming  
 
 ---
 
 ## 🔤 2. Naming Convention
 
-| Tipo    | Esempio |
-| ------- | ------- |
-| clock   | clk     |
-| reset   | rst     |
-| segnali | data_in |
-| moduli  | uart_tx |
+| Type | Example |
+|------|--------|
+| clock | clk |
+| reset | rst |
+| signals | data_in |
+| modules | uart_tx |
+
+### ✔ Best Practice
+
+- Prefix signals logically (e.g. `i_`, `o_`, `r_`)
+- Use meaningful names over short names
 
 ---
 
-## 📦 3. Struttura progetto
+## 📦 3. Project Structure
 
-```text
+```
 project/
  ├── rtl/
  ├── tb/
@@ -56,87 +69,109 @@ project/
  └── docs/
 ```
 
+### 📌 Engineering Insight
+
+- Separation of concerns improves scalability  
+- Enables team collaboration  
+
 ---
 
-## 🔁 4. Workflow consigliato
+## 🔁 4. Recommended Workflow
 
-```text
+```
 Edit → Simulate → Debug → Fix → Repeat
 ```
 
-👉 iterativo
+### ✔ Key Concept
+
+- Hardware design is **iterative**
+- Verification must be continuous  
 
 ---
 
-## 🧪 5. Checklist di verifica
+## 🧪 5. Verification Checklist
 
-✔ codice sintetizzabile
-✔ testbench completo
-✔ assertions presenti
-✔ timing verificato
+Before moving forward:
 
----
-
-## 📊 6. Debug
-
-### Strategie:
-
-* usare monitor
-* analizzare waveform
-* isolare problemi
+✔ Synthesizable RTL  
+✔ Complete testbench  
+✔ Assertions included  
+✔ Timing constraints defined  
+✔ Simulation passed  
 
 ---
 
-## 📚 7. Riferimenti
+## 📊 6. Debug Strategy
 
-### Libri:
+### Techniques
 
-* Digital Design (Morris Mano)
-* CMOS VLSI Design
+- Use monitors and logs  
+- Analyze waveforms  
+- Isolate failing modules  
+- Reproduce issues deterministically  
 
----
+### 📌 Advanced Tip
 
-### Standard:
-
-* IEEE VHDL
-* IEEE SystemVerilog
-
----
-
-## 🔧 8. Tool utili
-
-* simulatori
-* editor (VS Code)
-* Git
+- Always debug at the **lowest failing abstraction level**
 
 ---
 
-## ⚠️ 9. Best Practices
+## 📚 7. References
 
-✔ verificare sempre
-✔ scrivere codice leggibile
-✔ modularizzare
-✔ usare version control
+### Books
 
----
+- Digital Design (Morris Mano)  
+- CMOS VLSI Design  
 
-## 🚀 10. Prossimi passi
+### Standards
 
-* progetti avanzati
-* UVM completo
-* design ASIC reale
+- IEEE VHDL  
+- IEEE SystemVerilog  
 
 ---
 
-## 🎉 Fine del corso
+## 🔧 8. Useful Tools
 
-Complimenti!
+- Simulators (ModelSim, QuestaSim, XSIM)  
+- Editors (VS Code)  
+- Version control (Git)  
 
-Hai completato un percorso completo di:
+---
 
-* design digitale
-* verifica
-* implementazione
-* tool professionali
+## ⚠️ 9. Best Practices (Industry-Oriented)
 
-👉 sei pronto per lavorare su progetti reali
+✔ Always verify before synthesis  
+✔ Write readable and maintainable RTL  
+✔ Keep design modular  
+✔ Use version control  
+✔ Track timing and constraints  
+
+---
+
+## 🚀 10. Next Steps
+
+- Advanced projects  
+- Full UVM environments  
+- ASIC-level design exploration  
+- Performance optimization (PPA)  
+
+---
+
+## 🎉 Course Completion
+
+Congratulations!
+
+You have completed a full path covering:
+
+- Digital design  
+- RTL development  
+- Verification  
+- FPGA and ASIC flows  
+- Tool-based workflows  
+
+👉 You are now ready to work on **real-world FPGA/ASIC projects**
+
+---
+
+## 📄 Source File
+

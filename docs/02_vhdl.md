@@ -1,92 +1,82 @@
 # 02 — VHDL (Hardware Description Language)
 
-## 🎯 Obiettivi
+## 🎯 Objectives
 
-* Comprendere la struttura di un modulo VHDL
-* Scrivere il primo codice sintetizzabile
-* Capire differenza tra segnali e variabili
-* Modellare logica combinatoria e sequenziale
+This module introduces VHDL from an **FPGA/ASIC design perspective**, focusing on synthesizable constructs and hardware implications.
 
----
-
-## 🧠 1. Cos’è VHDL
-
-VHDL è un linguaggio per descrivere hardware.
-
-👉 NON è un linguaggio software
-👉 descrive circuiti reali
+By the end, you will:
+- Understand **hardware-centric modeling**
+- Write **synthesizable RTL**
+- Design **clocked pipelines**
+- Avoid common **timing and synthesis pitfalls**
 
 ---
 
-## 🧩 2. Struttura base
+## 🧠 1. VHDL in a Hardware Design Flow
 
-Ogni modulo VHDL è composto da:
+VHDL is not a programming language: it is a **hardware modeling language**.
 
-* **entity** → interfaccia
-* **architecture** → comportamento
+### 🔄 Typical FPGA Flow
 
----
-
-## 🔧 Esempio minimo
-
-```vhdl
-entity and_gate is
-  Port (
-    A : in STD_LOGIC;
-    B : in STD_LOGIC;
-    Y : out STD_LOGIC
-  );
-end and_gate;
-
-architecture rtl of and_gate is
-begin
-  Y <= A and B;
-end rtl;
+```
+RTL (VHDL)
+   ↓
+Synthesis (Vivado / Quartus)
+   ↓
+Netlist (LUT, FF, DSP)
+   ↓
+Place & Route
+   ↓
+Bitstream
 ```
 
----
+### 📌 Key Concept
 
-## 🔌 3. Tipi principali
-
-### STD_LOGIC
-
-* 0, 1, Z, X
-
-### STD_LOGIC_VECTOR
-
-* array di bit
+Every construct maps to **physical hardware**:
+- assignment → combinational logic
+- process(clk) → flip-flops
+- loops → parallel hardware (NOT sequential execution)
 
 ---
 
-## 🔄 4. Segnali vs Variabili
+## 🧩 2. RTL Design Structure
 
-| Segnali                     | Variabili |
-| --------------------------- | --------- |
-| asincroni                   | locali    |
-| aggiornati dopo il processo | immediati |
+### Entity (Interface)
 
-👉 errore tipico: confonderli
+Defines:
+- I/O ports
+- bit-widths
+- module boundary
+
+### Architecture (Implementation)
+
+Defines:
+- combinational logic
+- sequential logic
+- pipeline structure
 
 ---
 
-## 🔁 5. Process
-
-Struttura fondamentale per descrivere logica sequenziale.
+## 🔧 3. Combinational Logic
 
 ```vhdl
-process(clk)
-begin
-  if rising_edge(clk) then
-    -- codice sequenziale
-  end if;
-end process;
+Y <= A and B;
 ```
+
+### ⏱ Timing
+
+```
+A ----       AND ----> Y
+B ----/
+```
+
+- No clock
+- Delay = LUT propagation delay
+- Critical path contributor
 
 ---
 
-## ⏱️ 6. Logica sequenziale
-
-Esempio: registro
+## 🔁 4. Sequential Logic (Registers)
 
 ```vhdl
 process(clk)
@@ -97,79 +87,187 @@ begin
 end process;
 ```
 
+### ⏱ Timing Model
+
+```
+      ┌──────┐
+D --->│  FF  │----> Q
+      └──────┘
+         ↑
+        clk
+```
+
+- Defines **pipeline stage**
+- Latency = 1 clock cycle
+- Breaks combinational critical paths
+
 ---
 
-## 🔢 7. Contatore (esempio completo)
+## 🔄 5. Pipeline Concept (Critical for FPGA)
+
+Example:
+
+```
+Stage 1        Stage 2        Stage 3
+[Logic] -> FF -> [Logic] -> FF -> [Logic]
+```
+
+### ✔ Benefits
+
+- Higher clock frequency
+- Improved timing closure
+- Better DSP utilization
+
+### ❗ Trade-off
+
+- Increased latency
+- More flip-flops
+
+---
+
+## 🔌 6. Data Types (Synthesis-Oriented)
+
+### Recommended
+
+- `std_logic`
+- `std_logic_vector`
+- `unsigned` / `signed` (numeric_std)
+
+### ❌ Avoid
+
+- `std_logic_arith` (non-standard)
+
+---
+
+## 🔄 7. Signals vs Variables (Hardware Impact)
+
+| Feature | Signal | Variable |
+|--------|--------|----------|
+| Scope | global | local |
+| Update | scheduled | immediate |
+| Hardware mapping | wires/registers | temp logic |
+
+### ⚠️ Design Note
+
+Misuse leads to:
+- simulation mismatch
+- unintended hardware
+
+---
+
+## 🔢 8. Counter — Synthesizable Example
 
 ```vhdl
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
-
-entity counter is
-  Port (
-    clk   : in  STD_LOGIC;
-    reset : in  STD_LOGIC;
-    q     : out STD_LOGIC_VECTOR(3 downto 0)
-  );
-end counter;
-
-architecture rtl of counter is
-  signal count : unsigned(3 downto 0) := (others => '0');
+process(clk)
 begin
-
-  process(clk)
-  begin
-    if rising_edge(clk) then
-      if reset = '1' then
-        count <= (others => '0');
-      else
-        count <= count + 1;
-      end if;
+  if rising_edge(clk) then
+    if reset = '1' then
+      count <= (others => '0');
+    else
+      count <= count + 1;
     end if;
-  end process;
-
-  q <= std_logic_vector(count);
-
-end rtl;
+  end if;
+end process;
 ```
 
+### Hardware Mapping
+
+- Flip-flops (state)
+- Adder (combinational)
+- Optional reset network
+
 ---
 
-## 🔍 8. Librerie
+## 📚 9. Clocking & Reset Strategy
 
-```vhdl
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
+### ✔ Best Practices
+
+- Prefer **synchronous reset**
+- Use **single clock domain** when possible
+- Avoid gated clocks
+
+### ❗ Advanced (ASIC/FPGA)
+
+- CDC handling required for multi-clock
+- Reset trees impact timing
+
+---
+
+## ⚠️ 10. Common Design Pitfalls
+
+### ❌ Latch Inference
+
+```
+if (cond) then
+  y <= a;
+end if;
 ```
 
-👉 sempre usare `numeric_std` (NON std_logic_arith)
+→ Missing else → latch
+
+### ❌ Long Combinational Paths
+
+→ timing violation
+
+### ❌ Mixing blocking logic mentally
+
+→ wrong hardware assumptions
 
 ---
 
-## ⚠️ 9. Errori comuni
+## 📊 11. Timing Closure Perspective
 
-❌ usare `std_logic_arith`
-❌ mix segnali/variabili
-❌ dimenticare clock
-❌ latch involontari
+### Critical Path
+
+```
+FF → Logic → Logic → Logic → FF
+```
+
+### Fix Strategies
+
+- Insert pipeline registers
+- Reduce logic depth
+- Use DSP blocks
+- Optimize bit-width
 
 ---
 
-## 🧪 10. Esercizi
+## 🧪 12. Exercises (Design-Oriented)
 
-1. Scrivere una porta OR
-2. Implementare un registro a 8 bit
-3. Creare un contatore modulo 10
+1. OR gate (baseline)
+2. 8-bit register with enable
+3. Mod-10 counter
+4. Pipelined adder (2-stage)
 
 ---
 
-## 🚀 Collegamento al prossimo modulo
+## 🚀 Next Module
 
-👉 Nel prossimo capitolo vedremo **Verilog**
+👉 Verilog / SystemVerilog
 
-## 💻 Codice di riferimento
+Focus:
+- industry usage
+- synthesis equivalence
+- mixed-language design
 
-- [Counter RTL (VHDL)](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/vhdl/project_counter/counter.vhd)
-- [Testbench VHDL](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/vhdl/project_counter/tb_counter.vhd)
+---
+
+## 🧾 Summary (Engineering View)
+
+| Topic | Key Insight |
+|------|-----------|
+| VHDL | hardware description |
+| Process | flip-flops |
+| Assignment | combinational logic |
+| Pipeline | performance tool |
+| Timing | primary design constraint |
+
+---
+
+## 📎 Notes
+
+This version is aligned with:
+- FPGA implementation (Xilinx/Intel)
+- ASIC design principles
+- timing-driven development
+

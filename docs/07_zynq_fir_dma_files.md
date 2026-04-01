@@ -9,7 +9,7 @@ Questa pagina contiene:
 
 ---
 
-# 📂 Struttura completa progetto
+# 📂 Struttura completa [progetto][Repository](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/systemverilog/zynq_fir_dma_project/)
 
 ```text
 zynq_fir_dma_project/

@@ -1,6 +1,6 @@
 Satellite Workbench Template
 
-Uso consigliato con workbench_full_integrated_v1.tcl
+Uso consigliato con workbench.tcl
 
 Launcher:
 - Profile: Satellite Matlab Visibility (oppure adatta il profilo per Python)

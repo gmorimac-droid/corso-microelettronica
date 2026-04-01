@@ -1,154 +1,207 @@
 # 08 — ASIC Flow
 
-## 🎯 Obiettivi
+## 🎯 Objectives
 
-* Comprendere il flusso completo ASIC
-* Capire la differenza con FPGA
-* Introdurre strumenti e metodologie industriali
-* Collegare design e physical design
+This module introduces the **complete ASIC design flow** from RTL to silicon fabrication.
 
----
-
-## 🧠 1. Cos’è un ASIC
-
-Un ASIC (Application-Specific Integrated Circuit) è un circuito progettato per uno scopo specifico.
-
-👉 a differenza dell’FPGA:
-
-* non è programmabile
-* è fisso dopo la fabbricazione
+By the end, you will:
+- Understand the **end-to-end ASIC flow**
+- Compare FPGA vs ASIC implementation strategies
+- Interpret **timing, power, and physical constraints**
+- Connect **RTL design with physical implementation**
 
 ---
 
-## ⚖️ 2. FPGA vs ASIC
+## 🧠 1. What is an ASIC
 
-| FPGA                  | ASIC                     |
-| --------------------- | ------------------------ |
-| programmabile         | fisso                    |
-| più lento             | più veloce               |
-| più costoso per unità | economico su larga scala |
-| sviluppo rapido       | sviluppo lungo           |
+An ASIC (Application-Specific Integrated Circuit) is a **custom-designed chip** optimized for a specific application.
+
+### Key Characteristics
+
+- Fixed functionality after fabrication
+- Optimized for:
+  - performance
+  - power
+  - area (PPA)
+
+👉 Unlike FPGA, no reconfiguration after tape-out
 
 ---
 
-## 🔁 3. Flusso ASIC completo
+## ⚖️ 2. FPGA vs ASIC (Engineering View)
 
-```text
+| FPGA | ASIC |
+|------|------|
+| programmable | fixed |
+| lower performance | higher performance |
+| higher unit cost | low cost at scale |
+| fast development | long development cycle |
+
+### 📌 Design Trade-off
+
+- FPGA → flexibility and fast iteration  
+- ASIC → efficiency and scalability  
+
+---
+
+## 🔁 3. Complete ASIC Flow
+
+```
 RTL → Simulation → Synthesis → STA → Physical Design → Signoff → Tape-out
 ```
 
-```mermaid
-flowchart TD
-    A["RTL design - Verilog / VHDL"]
-    B["Simulazione"]
-    C["Sintesi - Logic Synthesis"]
-    D["Place and Route"]
-    E["Timing Analysis - STA"]
-    F["Tape out - Produzione chip"]
+### Engineering Flow
 
-    A --> B
-    B -->|OK| C
-    B -->|Bug| A
-    C --> D
-    D --> E
-    E -->|OK| F
-    E -->|Timing fail| C
+```
+RTL Design
+   ↓
+Functional Verification
+   ↓
+Logic Synthesis
+   ↓
+Static Timing Analysis (STA)
+   ↓
+Physical Design (Place & Route)
+   ↓
+Signoff (Timing / Power / Integrity)
+   ↓
+Tape-out (Fabrication)
 ```
 
 ---
 
-## 🔍 4. Fasi del flusso
-
----
+## 🔍 4. Flow Breakdown
 
 ### 🧩 4.1 RTL Design
 
-* scritto in VHDL / Verilog / SystemVerilog
+- VHDL / Verilog / SystemVerilog
+- Functional description of hardware
 
 ---
 
 ### 🧪 4.2 Simulation
 
-* verifica funzionale
+- Functional verification using testbenches
+- Bug fixing before synthesis
 
 ---
 
 ### ⚙️ 4.3 Synthesis
 
-* conversione in gate-level netlist
+- RTL → gate-level netlist
 
-👉 strumenti:
+### Tools
 
-* Synopsys Design Compiler
-* Cadence Genus
+- Synopsys Design Compiler  
+- Cadence Genus  
+
+### Output
+
+- Standard cell netlist
 
 ---
 
-### ⏱️ 4.4 STA (Static Timing Analysis)
+### ⏱️ 4.4 Static Timing Analysis (STA)
 
-Verifica timing senza simulazione:
+Analyzes timing without simulation.
 
-* setup
-* hold
-* path critici
+### Key Checks
+
+- Setup time  
+- Hold time  
+- Clock skew  
+- Critical paths  
 
 ---
 
 ### 🧱 4.5 Physical Design
 
-Include:
+Includes:
 
-* floorplanning
-* placement
-* clock tree synthesis (CTS)
-* routing
+- Floorplanning  
+- Placement  
+- Clock Tree Synthesis (CTS)  
+- Routing  
+
+### 📌 Impact
+
+- Directly affects performance, power, and area
 
 ---
 
 ### 🔍 4.6 Signoff
 
-Verifiche finali:
+Final verification before fabrication:
 
-* timing
-* potenza
-* integrità
+- Timing closure  
+- Power analysis  
+- Signal integrity  
+- DRC / LVS checks  
 
 ---
 
 ### 📦 4.7 Tape-out
 
-👉 invio del design alla fabbrica
+- Final design sent to foundry
+- Silicon fabrication begins
+
+👉 Errors at this stage are extremely costly
 
 ---
 
-## 🧰 5. Tool principali
+## 📊 5. Timing & PPA Optimization
 
-* Synopsys
-* Cadence
-* Siemens (Mentor Graphics)
+### Critical Path
 
----
+```
+FF → Logic → Logic → FF
+```
 
-## ⚠️ 6. Errori comuni
+### Optimization Techniques
 
-❌ ignorare timing
-❌ progettare senza constraints
-❌ sottovalutare potenza
-❌ mancanza di verifica
-
----
-
-## 🧪 7. Esercizi
-
-1. Descrivere flusso completo
-2. Confrontare FPGA vs ASIC
-3. Identificare path critico
+- Pipeline insertion  
+- Gate sizing  
+- Buffer insertion  
+- Clock tree optimization  
 
 ---
 
-## 🚀 Collegamento al prossimo modulo
+## 🧰 6. Industry Toolchains
 
-👉 Nel prossimo capitolo: **Progetti completi**
+- Synopsys (DC, PrimeTime)  
+- Cadence (Genus, Innovus)  
+- Siemens EDA (Mentor Graphics)  
+
+---
+
+## ⚠️ 7. Common Pitfalls
+
+❌ Ignoring timing constraints  
+❌ Underestimating power consumption  
+❌ Poor floorplanning  
+❌ Insufficient verification  
+
+---
+
+## 🧪 8. Exercises (Design-Oriented)
+
+1. Describe full ASIC flow  
+2. Compare FPGA vs ASIC trade-offs  
+3. Identify a critical path  
+4. Propose timing optimizations  
+
+---
+
+## 🚀 Next Module
+
+👉 Complete Projects
+
+Focus:
+- end-to-end design
+- system integration
+- real-world applications
+
+---
 
 ## 💻 Codice di riferimento
 
