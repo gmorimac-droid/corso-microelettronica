@@ -91,7 +91,5 @@ Al termine del percorso sarai in grado di:
 - leggere timing report  
 - affrontare colloqui tecnici FPGA/ASIC  
 
----
 
-## 📄 Source File
 

@@ -30,7 +30,7 @@ Raccolta di esempi pratici e pattern comuni utilizzati nello sviluppo FPGA.
 
 ## 🔀 Combinational Always Block
 
-![](img/Combinational_always_block.png){ width="500" }
+![](img/Combinational_always_block.png){ width="400" }
 
 ---
 
