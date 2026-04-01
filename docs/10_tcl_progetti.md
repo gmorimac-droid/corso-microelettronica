@@ -3,10 +3,10 @@ Programmi TCL eseguibili con wish o tclwish.
 
 - [Task Dashboard](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/tcl/task_dashboard.tcl)
 
-- [editor grafico di workflow](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/tcl/WorkBench/)
+- [editor grafico di workflow](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/tcl/workflow_editor.tcl)
 
 # Engineering Workbench — Manuale Tecnico
-[Repository](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/tcl/workflow_editor.tcl)
+[Repository](https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/tcl/WorkBench/)
 
 ## 1. Introduzione
 
