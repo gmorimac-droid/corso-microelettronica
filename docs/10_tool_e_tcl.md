@@ -199,7 +199,5 @@ Next steps:
 | Constraints | timing-critical |
 | Scripts | enable scalability |
 
----
 
-## 📄 Source File
 

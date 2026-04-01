@@ -236,9 +236,3 @@ Focus:
 ```systemverilog
 --8<-- "code/systemverilog/project_counter/tb_counter.sv"
 ```
-
----
-
-## 📄 Source File
-
-fileciteturn9file0

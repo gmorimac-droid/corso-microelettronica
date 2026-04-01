@@ -171,7 +171,4 @@ You have completed a full path covering:
 
 👉 You are now ready to work on **real-world FPGA/ASIC projects**
 
----
-
-## 📄 Source File
 
