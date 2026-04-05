@@ -12,7 +12,20 @@ theme:
     - content.code.copy
     - search.suggest
     - search.highlight
+  logo: assets/logo.png
+  favicon: assets/favicon.png
 
+extra:
+  alternate:
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Passa a dark mode
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Passa a light mode
+        
 markdown_extensions:
   - admonition
   - tables
@@ -84,6 +97,7 @@ nav:
         - DMA Interrupt: 07_zynq_dma_interrupt_perf.md
         - X Parameters: 07_zynq_xparameters_guide.md
     - Risorse: https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf
+    - Zybo-Z7-20: https://github.com/Digilent/Zybo-Z7
   - ASIC: 
     - Overview: 08_asic_flow.md
     - Flowchart: 08_asic_flow_chart.md
