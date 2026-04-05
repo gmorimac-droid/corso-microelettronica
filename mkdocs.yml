@@ -14,12 +14,17 @@ theme:
     - search.highlight
   logo: assets/logo.png
   favicon: assets/favicon.png
-  alternate:
+  palette:
     - scheme: default
+      primary: blue grey
+      accent: green
       toggle:
         icon: material/weather-night
         name: Passa a dark mode
+
     - scheme: slate
+      primary: black
+      accent: lime
       toggle:
         icon: material/weather-sunny
         name: Passa a light mode
