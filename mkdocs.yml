@@ -14,8 +14,6 @@ theme:
     - search.highlight
   logo: assets/logo.png
   favicon: assets/favicon.png
-
-extra:
   alternate:
     - scheme: default
       toggle:
