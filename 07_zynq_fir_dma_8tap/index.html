@@ -1,0 +1,4368 @@
+
+<!doctype html>
+<html lang="it" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corso completo su HDL, verification e tool FPGA/ASIC">
+      
+      
+      
+        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/07_zynq_fir_dma_8tap/">
+      
+      
+        <link rel="prev" href="../07_zynq_ps_axi_led/">
+      
+      
+        <link rel="next" href="../07_zynq_fir_dma_files/">
+      
+      
+        
+          <link rel="alternate" href=".." hreflang="it">
+        
+          <link rel="alternate" href=".." hreflang="it">
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Descrizione - Corso di Microelettronica Digitale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#progetto-zynq-completo-ps-axi-dma-fir-8-tap-in-pl" class="md-skip">
+          Vai al contenuto
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Intestazione">
+    <a href=".." title="Corso di Microelettronica Digitale" class="md-header__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corso di Microelettronica Digitale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Descrizione
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Seleziona la lingua">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="" class="md-select__link">
+              
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="" class="md-select__link">
+              
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Cancella" aria-label="Cancella" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../00_introduzione/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Intro
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../01_fondamenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Fondamenti
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../02_vhdl/" class="md-tabs__link">
+          
+  
+  
+  VHDL
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../03_verilog/" class="md-tabs__link">
+          
+  
+  
+  Verilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../04_systemverilog_design/" class="md-tabs__link">
+          
+  
+  
+  SystemVerilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../05_verification_base/" class="md-tabs__link">
+          
+  
+  
+  Verification
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../06_uvm/" class="md-tabs__link">
+          
+  
+  
+  UVM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../07_fpga_flow/" class="md-tabs__link">
+          
+  
+  
+  FPGA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../08_asic_flow/" class="md-tabs__link">
+          
+  
+  
+  ASIC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../09_progetti/" class="md-tabs__link">
+          
+  
+  
+  Progetti
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../10_tool_e_tcl/" class="md-tabs__link">
+          
+  
+  
+  Tool e Tcl/Tk
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../11_appendici/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Appendici
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../12_riferimenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Riferimenti
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigazione" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Corso di Microelettronica Digitale" class="md-nav__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    Corso di Microelettronica Digitale
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00_introduzione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_fondamenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VHDL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    VHDL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_vhdl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_vhdl_progettazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_verilog_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foglio di lavoro
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foglio di lavoro
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Tool Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/in_out/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    In and Out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/utilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/clocks_registers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocks and Registers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/state_machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/modular_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modular Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/memories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/managing_clocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Managing Clocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/io_flavors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O Flavors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A Taste of Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Rest for Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SystemVerilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_systemverilog_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_SV_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_verification_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.chipverify.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChipVerify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verificationguide.com" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VerificationGuide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.doulos.com/knowhow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doulos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_uvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_uvm_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_3" id="__nav_8_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetto mini CPU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetto mini CPU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_mini_CPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_mini_CPU_waveform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Waveform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_fpga_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_fpga_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_zynq_ps_axi_led/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq LED
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9_4" id="__nav_9_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq FIR
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zynq FIR
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_zynq_fir_dma_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_zynq_axi_stream_theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AXI Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_zynq_dma_interrupt_perf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DMA Interrupt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_zynq_xparameters_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    X Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Digilent/Zybo-Z7" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zybo-Z7-20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASIC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ASIC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_asic_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_asic_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_openasic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAsic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_4" id="__nav_10_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openlane2.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenLAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/kunalg123/vsdflow" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CMOS VLSI Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_codice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorgenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool e Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tool e Tcl/Tk
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_tool_e_tcl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_tcl_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_12_3" id="__nav_12_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_12_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.tutorialspoint.com/tcl-tk/index.htm" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.amd.com/r/en-US/ug894-vivado-tcl-scripting/Tcl-Scripting-in-Vivado" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Script Tcl in Vivado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://yosyshq.readthedocs.io/projects/yosys/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yosis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openroad.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenROAD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://gtkwave.github.io/gtkwave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GTKWave Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verilator.org/guide/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilator Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_12_3_7" id="__nav_12_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vivado
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_12_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vivado
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug910-vivado-getting-started" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug901-vivado-synthesis" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug904-vivado-implementation" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug835-vivado-tcl-commands" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcl Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/swdocs/modelsim/modelsim_user_2024_2.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ModelSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_tcl_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_appendici/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendici
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_riferimenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Riferimenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="progetto-zynq-completo-ps-axi-dma-fir-8-tap-in-pl">🔵 Progetto Zynq completo: PS + AXI DMA + FIR 8 tap in PL<a class="headerlink" href="#progetto-zynq-completo-ps-axi-dma-fir-8-tap-in-pl" title="Permanent link">&para;</a></h1>
+<p>Questa guida realizza un progetto Zynq realistico in cui:</p>
+<ul>
+<li>il <strong>PS</strong> prepara un buffer di campioni in DDR</li>
+<li>un <strong>AXI DMA</strong> invia i campioni al <strong>PL</strong></li>
+<li>nel <strong>PL</strong> un filtro <strong>FIR a 8 tap</strong> elabora i campioni</li>
+<li>il risultato torna in DDR</li>
+<li>il <strong>PS</strong> confronta l'output hardware con una reference software</li>
+</ul>
+<hr />
+<h1 id="obiettivo-finale">🎯 Obiettivo finale<a class="headerlink" href="#obiettivo-finale" title="Permanent link">&para;</a></h1>
+<p>Costruire un sistema:</p>
+<ul>
+<li><strong>PS (ARM)</strong> → genera dati e gestisce il DMA</li>
+<li><strong>AXI DMA</strong> → trasferisce i dati tra DDR e PL</li>
+<li><strong>PL (FIR 8 tap)</strong> → elabora stream AXI4-Stream</li>
+<li><strong>UART</strong> → stampa i risultati e il debug</li>
+</ul>
+<hr />
+<h1 id="architettura-del-progetto">🧠 Architettura del progetto<a class="headerlink" href="#architettura-del-progetto" title="Permanent link">&para;</a></h1>
+<pre class="mermaid"><code>flowchart LR
+    CPU["PS: ARM Cortex-A9"]
+    DDR["DDR"]
+    DMA["AXI DMA"]
+    FIR["PL: FIR 8 tap AXI4-Stream"]
+    UART["UART / Console"]
+
+    CPU --&gt; DDR
+    CPU --&gt; DMA
+    DDR --&gt; DMA
+    DMA --&gt;|MM2S| FIR
+    FIR --&gt;|S2MM| DMA
+    DMA --&gt; DDR
+    CPU --&gt; UART</code></pre>
+<hr />
+<h1 id="struttura-delle-cartelle-consigliata">📦 Struttura delle cartelle consigliata<a class="headerlink" href="#struttura-delle-cartelle-consigliata" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code>zynq_fir_dma_project/
+├── vivado/
+│   ├── zynq_fir_dma.xpr
+│   ├── design_1.bd
+│   ├── design_1_wrapper.v
+│   ├── hdl/
+│   │   ├── fir8_core.sv
+│   │   ├── fir8_axi_stream.sv
+│   │   └── axis_loopback.sv
+│   └── constraints/
+│       └── optional_debug.xdc
+│
+└── vitis_workspace/
+    ├── platform/
+    └── fir_dma_app/
+        └── src/
+            ├── main.c
+            ├── fir_ref.c
+            └── fir_ref.h
+</code></pre></div>
+<hr />
+<h1 id="requisiti">🧰 Requisiti<a class="headerlink" href="#requisiti" title="Permanent link">&para;</a></h1>
+<ul>
+<li>Vivado</li>
+<li>Vitis</li>
+<li>scheda Zynq</li>
+<li>collegamento JTAG / USB</li>
+<li>terminale seriale per vedere <code>xil_printf</code></li>
+</ul>
+<hr />
+<h1 id="strategia-consigliata">⚠️ Strategia consigliata<a class="headerlink" href="#strategia-consigliata" title="Permanent link">&para;</a></h1>
+<p>Prima di testare il FIR:</p>
+<ol>
+<li>fai funzionare il <strong>loopback AXI-Stream</strong></li>
+<li>verifica che il DMA trasmetta e riceva correttamente</li>
+<li>solo dopo sostituisci il loopback con il FIR</li>
+</ol>
+<p>Questo ti evita di dover debuggare contemporaneamente:
+- DMA
+- AXI4-Stream
+- algoritmo FIR</p>
+<hr />
+<h1 id="parte-0-preparazione-dei-file-hdl">PARTE 0 — Preparazione dei file HDL<a class="headerlink" href="#parte-0-preparazione-dei-file-hdl" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="step-1-crea-la-cartella-hdl">STEP 1 — Crea la cartella HDL<a class="headerlink" href="#step-1-crea-la-cartella-hdl" title="Permanent link">&para;</a></h2>
+<p>Nel progetto Vivado crea una cartella tipo:</p>
+<div class="highlight"><pre><span></span><code>hdl/
+</code></pre></div>
+<p>Dentro ci metterai:</p>
+<ul>
+<li><code>axis_loopback.sv</code></li>
+<li><code>fir8_core.sv</code></li>
+<li><code>fir8_axi_stream.sv</code></li>
+</ul>
+<hr />
+<h2 id="step-2-crea-il-modulo-di-loopback-axi-stream">STEP 2 — Crea il modulo di loopback AXI-Stream<a class="headerlink" href="#step-2-crea-il-modulo-di-loopback-axi-stream" title="Permanent link">&para;</a></h2>
+<p>Questo serve per il primo test.</p>
+<p>File:</p>
+<div class="highlight"><pre><span></span><code>hdl/axis_loopback.sv
+</code></pre></div>
+<p>Codice:</p>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">axis_loopback</span><span class="w"> </span><span class="p">#(</span>
+<span class="w">    </span><span class="k">parameter</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">DATA_W</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span>
+<span class="p">)(</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">                  </span><span class="n">aclk</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">                  </span><span class="n">aresetn</span><span class="p">,</span>
+
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="n">DATA_W</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">     </span><span class="n">s_axis_tdata</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">                  </span><span class="n">s_axis_tvalid</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">logic</span><span class="w">                  </span><span class="n">s_axis_tready</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">                  </span><span class="n">s_axis_tlast</span><span class="p">,</span>
+
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="n">DATA_W</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">     </span><span class="n">m_axis_tdata</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">logic</span><span class="w">                  </span><span class="n">m_axis_tvalid</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">                  </span><span class="n">m_axis_tready</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">logic</span><span class="w">                  </span><span class="n">m_axis_tlast</span>
+<span class="p">);</span>
+
+<span class="w">    </span><span class="k">always_ff</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">aclk</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">aresetn</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="n">m_axis_tdata</span><span class="w">  </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">&#39;0</span><span class="p">;</span>
+<span class="w">            </span><span class="n">m_axis_tvalid</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mb">1&#39;b0</span><span class="p">;</span>
+<span class="w">            </span><span class="n">m_axis_tlast</span><span class="w">  </span><span class="o">&lt;=</span><span class="w"> </span><span class="mb">1&#39;b0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m_axis_tvalid</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">m_axis_tready</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">                </span><span class="n">m_axis_tvalid</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mb">1&#39;b0</span><span class="p">;</span>
+<span class="w">            </span><span class="k">end</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s_axis_tvalid</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">m_axis_tvalid</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">m_axis_tready</span><span class="p">))</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">                </span><span class="n">m_axis_tdata</span><span class="w">  </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">s_axis_tdata</span><span class="p">;</span>
+<span class="w">                </span><span class="n">m_axis_tvalid</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mb">1&#39;b1</span><span class="p">;</span>
+<span class="w">                </span><span class="n">m_axis_tlast</span><span class="w">  </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">s_axis_tlast</span><span class="p">;</span>
+<span class="w">            </span><span class="k">end</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+
+<span class="w">    </span><span class="k">assign</span><span class="w"> </span><span class="n">s_axis_tready</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">m_axis_tvalid</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">m_axis_tready</span><span class="p">;</span>
+
+<span class="k">endmodule</span>
+</code></pre></div>
+<hr />
+<h2 id="step-3-crea-il-core-fir">STEP 3 — Crea il core FIR<a class="headerlink" href="#step-3-crea-il-core-fir" title="Permanent link">&para;</a></h2>
+<p>File:</p>
+<div class="highlight"><pre><span></span><code>hdl/fir8_core.sv
+</code></pre></div>
+<p>Codice:</p>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">fir8_core</span><span class="w"> </span><span class="p">#(</span>
+<span class="w">    </span><span class="k">parameter</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">DATA_W</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span>
+<span class="w">    </span><span class="k">parameter</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">COEFF_W</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span>
+<span class="w">    </span><span class="k">parameter</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">ACC_W</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span>
+<span class="p">)(</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">                          </span><span class="n">clk</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">                          </span><span class="n">rstn</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">                          </span><span class="n">sample_valid</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w"> </span><span class="kt">signed</span><span class="w"> </span><span class="p">[</span><span class="n">DATA_W</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">      </span><span class="n">sample_in</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">logic</span><span class="w"> </span><span class="kt">signed</span><span class="w"> </span><span class="p">[</span><span class="n">DATA_W</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">      </span><span class="n">sample_out</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">logic</span><span class="w">                          </span><span class="n">sample_out_valid</span>
+<span class="p">);</span>
+
+<span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="kt">signed</span><span class="w"> </span><span class="p">[</span><span class="n">DATA_W</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="o">:</span><span class="mi">7</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="kt">signed</span><span class="w"> </span><span class="p">[</span><span class="n">COEFF_W</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="o">:</span><span class="mi">7</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="kt">signed</span><span class="w"> </span><span class="p">[</span><span class="n">ACC_W</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">acc</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">16&#39;sd8</span><span class="p">;</span>
+<span class="w">        </span><span class="n">h</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="mi">16&#39;sd0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">h</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="mi">16&#39;sd40</span><span class="p">;</span>
+<span class="w">        </span><span class="n">h</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="mi">16&#39;sd96</span><span class="p">;</span>
+<span class="w">        </span><span class="n">h</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="mi">16&#39;sd96</span><span class="p">;</span>
+<span class="w">        </span><span class="n">h</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="mi">16&#39;sd40</span><span class="p">;</span>
+<span class="w">        </span><span class="n">h</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="mi">16&#39;sd0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">h</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">16&#39;sd8</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+
+<span class="w">    </span><span class="k">always_ff</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rstn</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">                </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">&#39;0</span><span class="p">;</span>
+<span class="w">            </span><span class="k">end</span>
+<span class="w">            </span><span class="n">sample_out</span><span class="w">       </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">&#39;0</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sample_out_valid</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mb">1&#39;b0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="n">sample_out_valid</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mb">1&#39;b0</span><span class="p">;</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sample_valid</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">                    </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+<span class="w">                </span><span class="k">end</span>
+<span class="w">                </span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">sample_in</span><span class="p">;</span>
+
+<span class="w">                </span><span class="n">acc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">                    </span><span class="n">acc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">acc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">                </span><span class="k">end</span>
+
+<span class="w">                </span><span class="n">sample_out</span><span class="w">       </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">acc</span><span class="w"> </span><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="w">                </span><span class="n">sample_out_valid</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mb">1&#39;b1</span><span class="p">;</span>
+<span class="w">            </span><span class="k">end</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+
+<span class="k">endmodule</span>
+</code></pre></div>
+<hr />
+<h2 id="step-4-crea-il-wrapper-axi4-stream-del-fir">STEP 4 — Crea il wrapper AXI4-Stream del FIR<a class="headerlink" href="#step-4-crea-il-wrapper-axi4-stream-del-fir" title="Permanent link">&para;</a></h2>
+<p>File:</p>
+<div class="highlight"><pre><span></span><code>hdl/fir8_axi_stream.sv
+</code></pre></div>
+<p>Codice:</p>
+<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">fir8_axi_stream</span><span class="w"> </span><span class="p">#(</span>
+<span class="w">    </span><span class="k">parameter</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">DATA_W</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span>
+<span class="p">)(</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">                  </span><span class="n">aclk</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">                  </span><span class="n">aresetn</span><span class="p">,</span>
+
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="n">DATA_W</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">     </span><span class="n">s_axis_tdata</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">                  </span><span class="n">s_axis_tvalid</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">logic</span><span class="w">                  </span><span class="n">s_axis_tready</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">                  </span><span class="n">s_axis_tlast</span><span class="p">,</span>
+
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="n">DATA_W</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w">     </span><span class="n">m_axis_tdata</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">logic</span><span class="w">                  </span><span class="n">m_axis_tvalid</span><span class="p">,</span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w">                  </span><span class="n">m_axis_tready</span><span class="p">,</span>
+<span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">logic</span><span class="w">                  </span><span class="n">m_axis_tlast</span>
+<span class="p">);</span>
+
+<span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="kt">signed</span><span class="w"> </span><span class="p">[</span><span class="n">DATA_W</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">fir_out</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">logic</span><span class="w">                     </span><span class="n">fir_out_valid</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">logic</span><span class="w">                     </span><span class="n">tlast_pipe</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">assign</span><span class="w"> </span><span class="n">s_axis_tready</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">m_axis_tready</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">m_axis_tvalid</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">fir8_core</span><span class="w"> </span><span class="p">#(</span>
+<span class="w">        </span><span class="p">.</span><span class="n">DATA_W</span><span class="p">(</span><span class="n">DATA_W</span><span class="p">)</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="n">u_fir8_core</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="p">.</span><span class="n">clk</span><span class="w">             </span><span class="p">(</span><span class="n">aclk</span><span class="p">),</span>
+<span class="w">        </span><span class="p">.</span><span class="n">rstn</span><span class="w">            </span><span class="p">(</span><span class="n">aresetn</span><span class="p">),</span>
+<span class="w">        </span><span class="p">.</span><span class="n">sample_valid</span><span class="w">    </span><span class="p">(</span><span class="n">s_axis_tvalid</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">s_axis_tready</span><span class="p">),</span>
+<span class="w">        </span><span class="p">.</span><span class="n">sample_in</span><span class="w">       </span><span class="p">(</span><span class="n">s_axis_tdata</span><span class="p">),</span>
+<span class="w">        </span><span class="p">.</span><span class="n">sample_out</span><span class="w">      </span><span class="p">(</span><span class="n">fir_out</span><span class="p">),</span>
+<span class="w">        </span><span class="p">.</span><span class="n">sample_out_valid</span><span class="p">(</span><span class="n">fir_out_valid</span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">always_ff</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">aclk</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">aresetn</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="n">tlast_pipe</span><span class="w">    </span><span class="o">&lt;=</span><span class="w"> </span><span class="mb">1&#39;b0</span><span class="p">;</span>
+<span class="w">            </span><span class="n">m_axis_tdata</span><span class="w">  </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">&#39;0</span><span class="p">;</span>
+<span class="w">            </span><span class="n">m_axis_tvalid</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mb">1&#39;b0</span><span class="p">;</span>
+<span class="w">            </span><span class="n">m_axis_tlast</span><span class="w">  </span><span class="o">&lt;=</span><span class="w"> </span><span class="mb">1&#39;b0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">end</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s_axis_tvalid</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">s_axis_tready</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">                </span><span class="n">tlast_pipe</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">s_axis_tlast</span><span class="p">;</span>
+<span class="w">            </span><span class="k">end</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m_axis_tvalid</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">m_axis_tready</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">                </span><span class="n">m_axis_tvalid</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mb">1&#39;b0</span><span class="p">;</span>
+<span class="w">            </span><span class="k">end</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fir_out_valid</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">m_axis_tready</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">m_axis_tvalid</span><span class="p">))</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">                </span><span class="n">m_axis_tdata</span><span class="w">  </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">fir_out</span><span class="p">;</span>
+<span class="w">                </span><span class="n">m_axis_tvalid</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mb">1&#39;b1</span><span class="p">;</span>
+<span class="w">                </span><span class="n">m_axis_tlast</span><span class="w">  </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">tlast_pipe</span><span class="p">;</span>
+<span class="w">            </span><span class="k">end</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+
+<span class="k">endmodule</span>
+</code></pre></div>
+<hr />
+<h2 id="step-5-aggiungi-i-file-hdl-al-progetto-vivado">STEP 5 — Aggiungi i file HDL al progetto Vivado<a class="headerlink" href="#step-5-aggiungi-i-file-hdl-al-progetto-vivado" title="Permanent link">&para;</a></h2>
+<p>In Vivado:</p>
+<ul>
+<li><strong>Add Sources</strong></li>
+<li><strong>Add or create design sources</strong></li>
+<li>aggiungi:</li>
+<li><code>axis_loopback.sv</code></li>
+<li><code>fir8_core.sv</code></li>
+<li><code>fir8_axi_stream.sv</code></li>
+</ul>
+<hr />
+<h1 id="parte-1-creazione-del-progetto-vivado">PARTE 1 — Creazione del progetto Vivado<a class="headerlink" href="#parte-1-creazione-del-progetto-vivado" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="step-6-avvia-vivado">STEP 6 — Avvia Vivado<a class="headerlink" href="#step-6-avvia-vivado" title="Permanent link">&para;</a></h2>
+<p>Apri Vivado.</p>
+<hr />
+<h2 id="step-7-create-project">STEP 7 — Create Project<a class="headerlink" href="#step-7-create-project" title="Permanent link">&para;</a></h2>
+<ul>
+<li>click <strong>Create Project</strong></li>
+<li>nome: <code>zynq_fir_dma</code></li>
+<li>scegli cartella progetto</li>
+</ul>
+<hr />
+<h2 id="step-8-tipo-progetto">STEP 8 — Tipo progetto<a class="headerlink" href="#step-8-tipo-progetto" title="Permanent link">&para;</a></h2>
+<ul>
+<li>seleziona <strong>RTL Project</strong></li>
+<li>spunta <strong>Do not specify sources at this time</strong></li>
+</ul>
+<hr />
+<h2 id="step-9-scegli-board-o-part">STEP 9 — Scegli board o part<a class="headerlink" href="#step-9-scegli-board-o-part" title="Permanent link">&para;</a></h2>
+<p>Seleziona:</p>
+<ul>
+<li>la tua board Zynq, oppure</li>
+<li>il part Zynq corretto</li>
+</ul>
+<hr />
+<h2 id="step-10-fine-creazione-progetto">STEP 10 — Fine creazione progetto<a class="headerlink" href="#step-10-fine-creazione-progetto" title="Permanent link">&para;</a></h2>
+<p>Click <strong>Finish</strong>.</p>
+<hr />
+<h1 id="parte-2-creazione-del-block-design">PARTE 2 — Creazione del Block Design<a class="headerlink" href="#parte-2-creazione-del-block-design" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="step-11-apri-ip-integrator">STEP 11 — Apri IP Integrator<a class="headerlink" href="#step-11-apri-ip-integrator" title="Permanent link">&para;</a></h2>
+<p>Flow Navigator → <strong>IP Integrator</strong> → <strong>Create Block Design</strong></p>
+<hr />
+<h2 id="step-12-nome-block-design">STEP 12 — Nome block design<a class="headerlink" href="#step-12-nome-block-design" title="Permanent link">&para;</a></h2>
+<p>Nome consigliato:</p>
+<div class="highlight"><pre><span></span><code>design_1
+</code></pre></div>
+<hr />
+<h2 id="step-13-aggiungi-zynq7-processing-system">STEP 13 — Aggiungi ZYNQ7 Processing System<a class="headerlink" href="#step-13-aggiungi-zynq7-processing-system" title="Permanent link">&para;</a></h2>
+<ul>
+<li>click destro → <strong>Add IP</strong></li>
+<li>cerca <code>ZYNQ7 Processing System</code></li>
+<li>inseriscilo</li>
+</ul>
+<hr />
+<h2 id="step-14-run-block-automation">STEP 14 — Run Block Automation<a class="headerlink" href="#step-14-run-block-automation" title="Permanent link">&para;</a></h2>
+<p>Click <strong>Run Block Automation</strong><br />
+Lascia le opzioni di default.</p>
+<p>👉 Questo configura il PS, il clock e l’infrastruttura minima.</p>
+<hr />
+<h2 id="step-15-aggiungi-axi-dma">STEP 15 — Aggiungi AXI DMA<a class="headerlink" href="#step-15-aggiungi-axi-dma" title="Permanent link">&para;</a></h2>
+<ul>
+<li>click destro → <strong>Add IP</strong></li>
+<li>cerca <code>AXI DMA</code></li>
+<li>inseriscilo</li>
+</ul>
+<hr />
+<h2 id="step-16-configura-axi-dma">STEP 16 — Configura AXI DMA<a class="headerlink" href="#step-16-configura-axi-dma" title="Permanent link">&para;</a></h2>
+<p>Doppio click su <code>axi_dma_0</code>.</p>
+<p>Configura così:</p>
+<ul>
+<li>abilita <strong>MM2S</strong></li>
+<li>abilita <strong>S2MM</strong></li>
+<li>usa <strong>Simple Mode</strong></li>
+<li>disabilita <strong>Scatter Gather</strong></li>
+<li>data width stream coerente con i tuoi dati</li>
+</ul>
+<p>Per il primo progetto:
+- stream width = 16 bit oppure 32 bit, ma conviene tenerla coerente col design</p>
+<p>Se il DMA non accetta 16 bit nella tua configurazione/toolchain, usa 32 bit e impacchetta i tuoi dati a 16 bit nel lato PL e software. Per semplicità in questa guida assumiamo 16 bit end-to-end.</p>
+<hr />
+<h2 id="step-17-aggiungi-processor-system-reset">STEP 17 — Aggiungi Processor System Reset<a class="headerlink" href="#step-17-aggiungi-processor-system-reset" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Add IP</li>
+<li>cerca <code>Processor System Reset</code></li>
+<li>inseriscilo</li>
+</ul>
+<hr />
+<h2 id="step-18-test-1-aggiungi-il-loopback-axi-stream">STEP 18 — Test 1: aggiungi il loopback AXI-Stream<a class="headerlink" href="#step-18-test-1-aggiungi-il-loopback-axi-stream" title="Permanent link">&para;</a></h2>
+<p>Per il primo test usa <code>axis_loopback.sv</code>.</p>
+<p>Hai due possibilità:
+- creare un IP package
+- oppure usare un module reference</p>
+<p>La via più semplice, se disponibile nella tua versione Vivado, è <strong>Add Module</strong> / <strong>Add Module Reference</strong>.</p>
+<p>Aggiungi il modulo:</p>
+<div class="highlight"><pre><span></span><code>axis_loopback
+</code></pre></div>
+<hr />
+<h2 id="step-19-collega-il-clock">STEP 19 — Collega il clock<a class="headerlink" href="#step-19-collega-il-clock" title="Permanent link">&para;</a></h2>
+<p>Collega il clock del PS, per esempio <code>FCLK_CLK0</code>, a:</p>
+<ul>
+<li><code>axi_dma_0</code></li>
+<li><code>proc_sys_reset_0</code></li>
+<li><code>axis_loopback_0</code></li>
+</ul>
+<hr />
+<h2 id="step-20-collega-il-reset">STEP 20 — Collega il reset<a class="headerlink" href="#step-20-collega-il-reset" title="Permanent link">&para;</a></h2>
+<p>Usa il reset generator:</p>
+<ul>
+<li>ingresso reset da PS</li>
+<li>uscita reset sincronizzata verso:</li>
+<li>DMA</li>
+<li>loopback</li>
+</ul>
+<p>Verifica che il segnale sia attivo basso/alto coerentemente con le porte:
+- molti IP AXI usano <code>aresetn</code></p>
+<hr />
+<h2 id="step-21-collega-axi-lite-del-dma-al-ps">STEP 21 — Collega AXI-Lite del DMA al PS<a class="headerlink" href="#step-21-collega-axi-lite-del-dma-al-ps" title="Permanent link">&para;</a></h2>
+<p>L’AXI DMA ha una porta di controllo AXI-Lite (<code>S_AXI_LITE</code>).</p>
+<p>Usa <strong>Run Connection Automation</strong> e lascia che Vivado colleghi:</p>
+<ul>
+<li>porta master AXI del PS</li>
+<li>slave AXI-Lite del DMA</li>
+</ul>
+<hr />
+<h2 id="step-22-collega-il-dma-alla-ddr">STEP 22 — Collega il DMA alla DDR<a class="headerlink" href="#step-22-collega-il-dma-alla-ddr" title="Permanent link">&para;</a></h2>
+<p>Il DMA deve accedere alla memoria.</p>
+<p>Con <strong>Run Connection Automation</strong> Vivado collegherà le interfacce memory-mapped del DMA verso il PS/DDR.</p>
+<p>Controlla che siano collegati:</p>
+<ul>
+<li><code>M_AXI_MM2S</code></li>
+<li><code>M_AXI_S2MM</code></li>
+</ul>
+<hr />
+<h2 id="step-23-collega-lo-stream-mm2s-al-loopback">STEP 23 — Collega lo stream MM2S al loopback<a class="headerlink" href="#step-23-collega-lo-stream-mm2s-al-loopback" title="Permanent link">&para;</a></h2>
+<p>Collega:</p>
+<ul>
+<li><code>axi_dma_0/M_AXIS_MM2S</code>
+→ <code>axis_loopback_0/s_axis_*</code></li>
+</ul>
+<hr />
+<h2 id="step-24-collega-lo-stream-di-ritorno-al-dma">STEP 24 — Collega lo stream di ritorno al DMA<a class="headerlink" href="#step-24-collega-lo-stream-di-ritorno-al-dma" title="Permanent link">&para;</a></h2>
+<p>Collega:</p>
+<ul>
+<li><code>axis_loopback_0/m_axis_*</code>
+→ <code>axi_dma_0/S_AXIS_S2MM</code></li>
+</ul>
+<hr />
+<h2 id="step-25-validate-design">STEP 25 — Validate Design<a class="headerlink" href="#step-25-validate-design" title="Permanent link">&para;</a></h2>
+<p>Click:</p>
+<p>👉 <strong>Validate Design</strong></p>
+<p>Deve risultare tutto corretto.</p>
+<hr />
+<h2 id="step-26-create-hdl-wrapper">STEP 26 — Create HDL Wrapper<a class="headerlink" href="#step-26-create-hdl-wrapper" title="Permanent link">&para;</a></h2>
+<ul>
+<li>click destro su <code>design_1</code></li>
+<li><strong>Create HDL Wrapper</strong></li>
+<li><strong>Let Vivado manage wrapper</strong></li>
+</ul>
+<hr />
+<h2 id="step-27-run-synthesis">STEP 27 — Run Synthesis<a class="headerlink" href="#step-27-run-synthesis" title="Permanent link">&para;</a></h2>
+<p>Esegui <strong>Run Synthesis</strong>.</p>
+<hr />
+<h2 id="step-28-run-implementation">STEP 28 — Run Implementation<a class="headerlink" href="#step-28-run-implementation" title="Permanent link">&para;</a></h2>
+<p>Esegui <strong>Run Implementation</strong>.</p>
+<hr />
+<h2 id="step-29-generate-bitstream">STEP 29 — Generate Bitstream<a class="headerlink" href="#step-29-generate-bitstream" title="Permanent link">&para;</a></h2>
+<p>Esegui <strong>Generate Bitstream</strong>.</p>
+<hr />
+<h2 id="step-30-export-hardware">STEP 30 — Export Hardware<a class="headerlink" href="#step-30-export-hardware" title="Permanent link">&para;</a></h2>
+<p>Esporta l’hardware:</p>
+<ul>
+<li><strong>File → Export Hardware</strong></li>
+<li>include bitstream</li>
+</ul>
+<p>Otterrai un file <code>.xsa</code>.</p>
+<hr />
+<h1 id="parte-3-creazione-della-platform-e-dellapp-in-vitis">PARTE 3 — Creazione della platform e dell’app in Vitis<a class="headerlink" href="#parte-3-creazione-della-platform-e-dellapp-in-vitis" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="step-31-apri-vitis">STEP 31 — Apri Vitis<a class="headerlink" href="#step-31-apri-vitis" title="Permanent link">&para;</a></h2>
+<p>Apri Vitis e scegli un workspace.</p>
+<hr />
+<h2 id="step-32-crea-la-platform">STEP 32 — Crea la platform<a class="headerlink" href="#step-32-crea-la-platform" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>New Platform</strong></li>
+<li>importa il file <code>.xsa</code></li>
+</ul>
+<hr />
+<h2 id="step-33-crea-lapplicazione">STEP 33 — Crea l’applicazione<a class="headerlink" href="#step-33-crea-lapplicazione" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>New Application Project</strong></li>
+<li>nome: <code>fir_dma_app</code></li>
+<li>usa la platform appena creata</li>
+<li>template: <strong>Empty Application</strong></li>
+</ul>
+<hr />
+<h1 id="parte-4-test-iniziale-con-loopback">PARTE 4 — Test iniziale con loopback<a class="headerlink" href="#parte-4-test-iniziale-con-loopback" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="step-34-crea-fir_refh">STEP 34 — Crea <code>fir_ref.h</code><a class="headerlink" href="#step-34-crea-fir_refh" title="Permanent link">&para;</a></h2>
+<p>File:</p>
+<div class="highlight"><pre><span></span><code>src/fir_ref.h
+</code></pre></div>
+<p>Codice:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#ifndef FIR_REF_H</span>
+<span class="cp">#define FIR_REF_H</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">fir8_reference</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="o">*</span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="o">*</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+
+<span class="cp">#endif</span>
+</code></pre></div>
+<hr />
+<h2 id="step-35-crea-fir_refc">STEP 35 — Crea <code>fir_ref.c</code><a class="headerlink" href="#step-35-crea-fir_refc" title="Permanent link">&para;</a></h2>
+<p>Per il test di loopback questo file non è ancora necessario, ma lo prepariamo ora.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;fir_ref.h&quot;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">fir8_reference</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="o">*</span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="o">*</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">h</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">-8</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="mi">96</span><span class="p">,</span><span class="w"> </span><span class="mi">96</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">-8</span><span class="p">};</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">acc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">k</span><span class="p">;</span>
+<span class="w">            </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">idx</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">in</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="n">acc</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">h</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int16_t</span><span class="p">)(</span><span class="n">acc</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">8</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="step-36-scrivi-mainc-per-il-test-loopback">STEP 36 — Scrivi <code>main.c</code> per il test loopback<a class="headerlink" href="#step-36-scrivi-mainc-per-il-test-loopback" title="Permanent link">&para;</a></h2>
+<p>File:</p>
+<div class="highlight"><pre><span></span><code>src/main.c
+</code></pre></div>
+<p>Codice:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;xparameters.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;xaxidma.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;xil_cache.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;xil_printf.h&quot;</span>
+
+<span class="cp">#define DMA_DEV_ID       XPAR_AXIDMA_0_DEVICE_ID</span>
+<span class="cp">#define NSAMPLES         256</span>
+<span class="cp">#define BYTES_PER_SAMPLE 2</span>
+<span class="cp">#define BUF_SIZE_BYTES   (NSAMPLES * BYTES_PER_SAMPLE)</span>
+
+<span class="k">static</span><span class="w"> </span><span class="n">XAxiDma</span><span class="w"> </span><span class="n">AxiDma</span><span class="p">;</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">tx_buffer</span><span class="p">[</span><span class="n">NSAMPLES</span><span class="p">]</span><span class="w"> </span><span class="n">__attribute__</span><span class="w"> </span><span class="p">((</span><span class="n">aligned</span><span class="p">(</span><span class="mi">64</span><span class="p">)));</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">rx_buffer</span><span class="p">[</span><span class="n">NSAMPLES</span><span class="p">]</span><span class="w"> </span><span class="n">__attribute__</span><span class="w"> </span><span class="p">((</span><span class="n">aligned</span><span class="p">(</span><span class="mi">64</span><span class="p">)));</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">init_dma</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">XAxiDma_Config</span><span class="w"> </span><span class="o">*</span><span class="n">CfgPtr</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">CfgPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XAxiDma_LookupConfig</span><span class="p">(</span><span class="n">DMA_DEV_ID</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">CfgPtr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Errore: config DMA non trovata</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">XST_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XAxiDma_CfgInitialize</span><span class="p">(</span><span class="o">&amp;</span><span class="n">AxiDma</span><span class="p">,</span><span class="w"> </span><span class="n">CfgPtr</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">XST_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Errore: init DMA fallita</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">XST_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">XAxiDma_HasSg</span><span class="p">(</span><span class="o">&amp;</span><span class="n">AxiDma</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Errore: DMA in SG mode, atteso simple mode</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">XST_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">XST_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">prepare_input</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NSAMPLES</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">tx_buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int16_t</span><span class="p">)(</span><span class="n">i</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFF</span><span class="p">);</span>
+<span class="w">        </span><span class="n">rx_buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">run_dma_transfer</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Xil_DCacheFlushRange</span><span class="p">((</span><span class="n">UINTPTR</span><span class="p">)</span><span class="n">tx_buffer</span><span class="p">,</span><span class="w"> </span><span class="n">BUF_SIZE_BYTES</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Xil_DCacheFlushRange</span><span class="p">((</span><span class="n">UINTPTR</span><span class="p">)</span><span class="n">rx_buffer</span><span class="p">,</span><span class="w"> </span><span class="n">BUF_SIZE_BYTES</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XAxiDma_SimpleTransfer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">AxiDma</span><span class="p">,</span>
+<span class="w">                                    </span><span class="p">(</span><span class="n">UINTPTR</span><span class="p">)</span><span class="n">rx_buffer</span><span class="p">,</span>
+<span class="w">                                    </span><span class="n">BUF_SIZE_BYTES</span><span class="p">,</span>
+<span class="w">                                    </span><span class="n">XAXIDMA_DEVICE_TO_DMA</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">XST_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Errore: avvio S2MM fallito</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">XST_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XAxiDma_SimpleTransfer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">AxiDma</span><span class="p">,</span>
+<span class="w">                                    </span><span class="p">(</span><span class="n">UINTPTR</span><span class="p">)</span><span class="n">tx_buffer</span><span class="p">,</span>
+<span class="w">                                    </span><span class="n">BUF_SIZE_BYTES</span><span class="p">,</span>
+<span class="w">                                    </span><span class="n">XAXIDMA_DMA_TO_DEVICE</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">XST_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Errore: avvio MM2S fallito</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">XST_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">XAxiDma_Busy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">AxiDma</span><span class="p">,</span><span class="w"> </span><span class="n">XAXIDMA_DMA_TO_DEVICE</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">XAxiDma_Busy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">AxiDma</span><span class="p">,</span><span class="w"> </span><span class="n">XAXIDMA_DEVICE_TO_DMA</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">Xil_DCacheInvalidateRange</span><span class="p">((</span><span class="n">UINTPTR</span><span class="p">)</span><span class="n">rx_buffer</span><span class="p">,</span><span class="w"> </span><span class="n">BUF_SIZE_BYTES</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">XST_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">verify_loopback</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">errors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NSAMPLES</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rx_buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">tx_buffer</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Loopback mismatch [%d]: TX=%d RX=%d</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">tx_buffer</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">rx_buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">            </span><span class="n">errors</span><span class="o">++</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">errors</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">errors</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Loopback OK</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">XST_SUCCESS</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Loopback FALLITO</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">XST_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;==== Test AXI DMA loopback ====</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_dma</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">XST_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">XST_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">prepare_input</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run_dma_transfer</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">XST_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">XST_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">verify_loopback</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;[%d] tx=%d rx=%d</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">tx_buffer</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">rx_buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="step-37-build-dellapplicazione">STEP 37 — Build dell’applicazione<a class="headerlink" href="#step-37-build-dellapplicazione" title="Permanent link">&para;</a></h2>
+<p>Compila il progetto.</p>
+<hr />
+<h2 id="step-38-programma-la-fpga">STEP 38 — Programma la FPGA<a class="headerlink" href="#step-38-programma-la-fpga" title="Permanent link">&para;</a></h2>
+<p>Carica il bitstream sulla scheda.</p>
+<hr />
+<h2 id="step-39-esegui-il-test-loopback">STEP 39 — Esegui il test loopback<a class="headerlink" href="#step-39-esegui-il-test-loopback" title="Permanent link">&para;</a></h2>
+<p>Lancia l’applicazione su hardware.</p>
+<h3 id="risultato-atteso">Risultato atteso<a class="headerlink" href="#risultato-atteso" title="Permanent link">&para;</a></h3>
+<p>Devi vedere:</p>
+<div class="highlight"><pre><span></span><code>Loopback OK
+</code></pre></div>
+<p>Se questo non funziona, non passare ancora al FIR.</p>
+<hr />
+<h1 id="parte-5-sostituire-il-loopback-con-il-fir">PARTE 5 — Sostituire il loopback con il FIR<a class="headerlink" href="#parte-5-sostituire-il-loopback-con-il-fir" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="step-40-riapri-vivado">STEP 40 — Riapri Vivado<a class="headerlink" href="#step-40-riapri-vivado" title="Permanent link">&para;</a></h2>
+<p>Torna al progetto hardware.</p>
+<hr />
+<h2 id="step-41-rimuovi-il-loopback-dal-block-design">STEP 41 — Rimuovi il loopback dal block design<a class="headerlink" href="#step-41-rimuovi-il-loopback-dal-block-design" title="Permanent link">&para;</a></h2>
+<p>Elimina <code>axis_loopback_0</code>.</p>
+<hr />
+<h2 id="step-42-aggiungi-fir8_axi_stream">STEP 42 — Aggiungi <code>fir8_axi_stream</code><a class="headerlink" href="#step-42-aggiungi-fir8_axi_stream" title="Permanent link">&para;</a></h2>
+<p>Inserisci il modulo:</p>
+<div class="highlight"><pre><span></span><code>fir8_axi_stream
+</code></pre></div>
+<p>come module reference o IP.</p>
+<hr />
+<h2 id="step-43-collega-il-clock-al-fir">STEP 43 — Collega il clock al FIR<a class="headerlink" href="#step-43-collega-il-clock-al-fir" title="Permanent link">&para;</a></h2>
+<p>Collega:</p>
+<ul>
+<li><code>aclk</code></li>
+<li><code>aresetn</code></li>
+</ul>
+<p>agli stessi segnali del DMA.</p>
+<hr />
+<h2 id="step-44-collega-ingresso-stream-del-fir">STEP 44 — Collega ingresso stream del FIR<a class="headerlink" href="#step-44-collega-ingresso-stream-del-fir" title="Permanent link">&para;</a></h2>
+<p>Collega:</p>
+<ul>
+<li><code>axi_dma_0/M_AXIS_MM2S</code>
+→ <code>fir8_axi_stream_0/s_axis_*</code></li>
+</ul>
+<hr />
+<h2 id="step-45-collega-uscita-stream-del-fir">STEP 45 — Collega uscita stream del FIR<a class="headerlink" href="#step-45-collega-uscita-stream-del-fir" title="Permanent link">&para;</a></h2>
+<p>Collega:</p>
+<ul>
+<li><code>fir8_axi_stream_0/m_axis_*</code>
+→ <code>axi_dma_0/S_AXIS_S2MM</code></li>
+</ul>
+<hr />
+<h2 id="step-46-validate-design">STEP 46 — Validate Design<a class="headerlink" href="#step-46-validate-design" title="Permanent link">&para;</a></h2>
+<p>Valida di nuovo il design.</p>
+<hr />
+<h2 id="step-47-rebuild-hardware">STEP 47 — Rebuild hardware<a class="headerlink" href="#step-47-rebuild-hardware" title="Permanent link">&para;</a></h2>
+<p>Esegui:</p>
+<ul>
+<li>Synthesis</li>
+<li>Implementation</li>
+<li>Generate Bitstream</li>
+</ul>
+<hr />
+<h2 id="step-48-riesporta-xsa">STEP 48 — Riesporta <code>.xsa</code><a class="headerlink" href="#step-48-riesporta-xsa" title="Permanent link">&para;</a></h2>
+<p>Esporta nuovamente l’hardware aggiornato.</p>
+<p>⚠️ Questo è fondamentale.</p>
+<hr />
+<h2 id="step-49-aggiorna-la-platform-in-vitis">STEP 49 — Aggiorna la platform in Vitis<a class="headerlink" href="#step-49-aggiorna-la-platform-in-vitis" title="Permanent link">&para;</a></h2>
+<p>Aggiorna la platform con il nuovo <code>.xsa</code>.</p>
+<hr />
+<h1 id="parte-6-software-finale-per-fir-8-tap">PARTE 6 — Software finale per FIR 8 tap<a class="headerlink" href="#parte-6-software-finale-per-fir-8-tap" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="step-50-aggiorna-mainc-per-il-fir">STEP 50 — Aggiorna <code>main.c</code> per il FIR<a class="headerlink" href="#step-50-aggiorna-mainc-per-il-fir" title="Permanent link">&para;</a></h2>
+<p>Sostituisci <code>main.c</code> con questo:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;xparameters.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;xaxidma.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;xil_cache.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;xil_printf.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;fir_ref.h&quot;</span>
+
+<span class="cp">#define DMA_DEV_ID          XPAR_AXIDMA_0_DEVICE_ID</span>
+<span class="cp">#define NSAMPLES            256</span>
+<span class="cp">#define BYTES_PER_SAMPLE    2</span>
+<span class="cp">#define TX_SIZE_BYTES       (NSAMPLES * BYTES_PER_SAMPLE)</span>
+<span class="cp">#define RX_SIZE_BYTES       (NSAMPLES * BYTES_PER_SAMPLE)</span>
+
+<span class="k">static</span><span class="w"> </span><span class="n">XAxiDma</span><span class="w"> </span><span class="n">AxiDma</span><span class="p">;</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">tx_buffer</span><span class="p">[</span><span class="n">NSAMPLES</span><span class="p">]</span><span class="w"> </span><span class="n">__attribute__</span><span class="w"> </span><span class="p">((</span><span class="n">aligned</span><span class="p">(</span><span class="mi">64</span><span class="p">)));</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">rx_buffer</span><span class="p">[</span><span class="n">NSAMPLES</span><span class="p">]</span><span class="w"> </span><span class="n">__attribute__</span><span class="w"> </span><span class="p">((</span><span class="n">aligned</span><span class="p">(</span><span class="mi">64</span><span class="p">)));</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">sw_buffer</span><span class="p">[</span><span class="n">NSAMPLES</span><span class="p">]</span><span class="w"> </span><span class="n">__attribute__</span><span class="w"> </span><span class="p">((</span><span class="n">aligned</span><span class="p">(</span><span class="mi">64</span><span class="p">)));</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">init_dma</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">XAxiDma_Config</span><span class="w"> </span><span class="o">*</span><span class="n">CfgPtr</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">CfgPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XAxiDma_LookupConfig</span><span class="p">(</span><span class="n">DMA_DEV_ID</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">CfgPtr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Errore: config DMA non trovata</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">XST_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XAxiDma_CfgInitialize</span><span class="p">(</span><span class="o">&amp;</span><span class="n">AxiDma</span><span class="p">,</span><span class="w"> </span><span class="n">CfgPtr</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">XST_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Errore: init DMA fallita</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">XST_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">XAxiDma_HasSg</span><span class="p">(</span><span class="o">&amp;</span><span class="n">AxiDma</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Errore: DMA in SG mode, atteso simple mode</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">XST_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">XST_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">prepare_input</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NSAMPLES</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">tx_buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int16_t</span><span class="p">)(</span><span class="n">i</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFF</span><span class="p">);</span>
+<span class="w">        </span><span class="n">rx_buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sw_buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">run_dma_transfer</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Xil_DCacheFlushRange</span><span class="p">((</span><span class="n">UINTPTR</span><span class="p">)</span><span class="n">tx_buffer</span><span class="p">,</span><span class="w"> </span><span class="n">TX_SIZE_BYTES</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Xil_DCacheFlushRange</span><span class="p">((</span><span class="n">UINTPTR</span><span class="p">)</span><span class="n">rx_buffer</span><span class="p">,</span><span class="w"> </span><span class="n">RX_SIZE_BYTES</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XAxiDma_SimpleTransfer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">AxiDma</span><span class="p">,</span>
+<span class="w">                                    </span><span class="p">(</span><span class="n">UINTPTR</span><span class="p">)</span><span class="n">rx_buffer</span><span class="p">,</span>
+<span class="w">                                    </span><span class="n">RX_SIZE_BYTES</span><span class="p">,</span>
+<span class="w">                                    </span><span class="n">XAXIDMA_DEVICE_TO_DMA</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">XST_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Errore: avvio S2MM fallito</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">XST_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XAxiDma_SimpleTransfer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">AxiDma</span><span class="p">,</span>
+<span class="w">                                    </span><span class="p">(</span><span class="n">UINTPTR</span><span class="p">)</span><span class="n">tx_buffer</span><span class="p">,</span>
+<span class="w">                                    </span><span class="n">TX_SIZE_BYTES</span><span class="p">,</span>
+<span class="w">                                    </span><span class="n">XAXIDMA_DMA_TO_DEVICE</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">XST_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Errore: avvio MM2S fallito</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">XST_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">XAxiDma_Busy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">AxiDma</span><span class="p">,</span><span class="w"> </span><span class="n">XAXIDMA_DMA_TO_DEVICE</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">XAxiDma_Busy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">AxiDma</span><span class="p">,</span><span class="w"> </span><span class="n">XAXIDMA_DEVICE_TO_DMA</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">Xil_DCacheInvalidateRange</span><span class="p">((</span><span class="n">UINTPTR</span><span class="p">)</span><span class="n">rx_buffer</span><span class="p">,</span><span class="w"> </span><span class="n">RX_SIZE_BYTES</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">XST_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">verify_output</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">errors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">fir8_reference</span><span class="p">(</span><span class="n">tx_buffer</span><span class="p">,</span><span class="w"> </span><span class="n">sw_buffer</span><span class="p">,</span><span class="w"> </span><span class="n">NSAMPLES</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NSAMPLES</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rx_buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">sw_buffer</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Mismatch [%d]: HW=%d SW=%d</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">rx_buffer</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">sw_buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">            </span><span class="n">errors</span><span class="o">++</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">errors</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">errors</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Verifica OK</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">XST_SUCCESS</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Verifica FALLITA: %d errori</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">errors</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">XST_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;==== FIR 8 tap con AXI DMA ====</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_dma</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">XST_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">XST_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">prepare_input</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run_dma_transfer</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">XST_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">XST_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">verify_output</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Primi 16 campioni:</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;[%d] in=%d out=%d sw=%d</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">tx_buffer</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">rx_buffer</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">sw_buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="step-51-ricompila-lapp">STEP 51 — Ricompila l’app<a class="headerlink" href="#step-51-ricompila-lapp" title="Permanent link">&para;</a></h2>
+<p>Build del progetto Vitis.</p>
+<hr />
+<h2 id="step-52-programma-di-nuovo-la-fpga">STEP 52 — Programma di nuovo la FPGA<a class="headerlink" href="#step-52-programma-di-nuovo-la-fpga" title="Permanent link">&para;</a></h2>
+<p>Carica il nuovo bitstream.</p>
+<hr />
+<h2 id="step-53-esegui-il-test-fir">STEP 53 — Esegui il test FIR<a class="headerlink" href="#step-53-esegui-il-test-fir" title="Permanent link">&para;</a></h2>
+<p>Lancia l’applicazione.</p>
+<h3 id="risultato-atteso_1">Risultato atteso<a class="headerlink" href="#risultato-atteso_1" title="Permanent link">&para;</a></h3>
+<p>Dovresti vedere:</p>
+<div class="highlight"><pre><span></span><code>Verifica OK
+</code></pre></div>
+<p>oppure, se ci sono mismatch, i primi errori.</p>
+<hr />
+<h1 id="parte-7-debug-dettagliato">PARTE 7 — Debug dettagliato<a class="headerlink" href="#parte-7-debug-dettagliato" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="step-54-se-il-loopback-funziona-ma-il-fir-no">STEP 54 — Se il loopback funziona ma il FIR no<a class="headerlink" href="#step-54-se-il-loopback-funziona-ma-il-fir-no" title="Permanent link">&para;</a></h2>
+<p>Allora il problema è quasi certamente nel blocco FIR:</p>
+<ul>
+<li>gestione di <code>tvalid/tready</code></li>
+<li>pipeline di <code>tlast</code></li>
+<li>temporizzazione dell’uscita</li>
+<li>allineamento con la reference software</li>
+</ul>
+<hr />
+<h2 id="step-55-se-ne-loopback-ne-fir-funzionano">STEP 55 — Se né loopback né FIR funzionano<a class="headerlink" href="#step-55-se-ne-loopback-ne-fir-funzionano" title="Permanent link">&para;</a></h2>
+<p>Controlla in quest’ordine:</p>
+<h3 id="a-dma">A. DMA<a class="headerlink" href="#a-dma" title="Permanent link">&para;</a></h3>
+<ul>
+<li>simple mode attivo?</li>
+<li>MM2S attivo?</li>
+<li>S2MM attivo?</li>
+</ul>
+<h3 id="b-cache">B. cache<a class="headerlink" href="#b-cache" title="Permanent link">&para;</a></h3>
+<ul>
+<li>flush prima del trasferimento?</li>
+<li>invalidate dopo la ricezione?</li>
+</ul>
+<h3 id="c-platform">C. platform<a class="headerlink" href="#c-platform" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>.xsa</code> aggiornato?</li>
+<li>platform Vitis aggiornata?</li>
+</ul>
+<h3 id="d-connessioni-axi-stream">D. connessioni AXI-Stream<a class="headerlink" href="#d-connessioni-axi-stream" title="Permanent link">&para;</a></h3>
+<ul>
+<li>MM2S verso input corretto?</li>
+<li>output corretto verso S2MM?</li>
+</ul>
+<hr />
+<h2 id="step-56-se-il-programma-si-blocca-in-busy">STEP 56 — Se il programma si blocca in <code>Busy()</code><a class="headerlink" href="#step-56-se-il-programma-si-blocca-in-busy" title="Permanent link">&para;</a></h2>
+<p>Probabili cause:</p>
+<ul>
+<li>stream di ritorno non valido</li>
+<li><code>tready/tvalid</code> bloccati</li>
+<li><code>tlast</code> non propagato correttamente</li>
+<li>reset/clock mal collegati</li>
+</ul>
+<hr />
+<h2 id="step-57-se-i-dati-sono-tutti-zero">STEP 57 — Se i dati sono tutti zero<a class="headerlink" href="#step-57-se-i-dati-sono-tutti-zero" title="Permanent link">&para;</a></h2>
+<p>Possibili cause:</p>
+<ul>
+<li>reset sempre attivo</li>
+<li>FIR non riceve <code>sample_valid</code></li>
+<li>errore nel wrapper AXI-Stream</li>
+<li>cache non invalidata</li>
+</ul>
+<hr />
+<h2 id="step-58-se-i-primi-campioni-sono-strani">STEP 58 — Se i primi campioni sono strani<a class="headerlink" href="#step-58-se-i-primi-campioni-sono-strani" title="Permanent link">&para;</a></h2>
+<p>Questo può essere normale, perché il FIR parte con la delay line a zero.</p>
+<p>La reference software data nella guida usa la stessa convenzione, quindi l’output dovrebbe comunque combaciare.</p>
+<hr />
+<h1 id="parte-8-estensioni-consigliate">PARTE 8 — Estensioni consigliate<a class="headerlink" href="#parte-8-estensioni-consigliate" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="step-59-aggiungere-misura-prestazioni-hw-vs-sw">STEP 59 — Aggiungere misura prestazioni HW vs SW<a class="headerlink" href="#step-59-aggiungere-misura-prestazioni-hw-vs-sw" title="Permanent link">&para;</a></h2>
+<p>Puoi aggiungere un timer nel PS e confrontare:</p>
+<ul>
+<li>FIR software puro</li>
+<li>FIR hardware via DMA</li>
+</ul>
+<hr />
+<h2 id="step-60-aggiungere-coefficienti-configurabili">STEP 60 — Aggiungere coefficienti configurabili<a class="headerlink" href="#step-60-aggiungere-coefficienti-configurabili" title="Permanent link">&para;</a></h2>
+<p>Versione avanzata:</p>
+<ul>
+<li>AXI-Lite per scrivere i coefficienti</li>
+<li>stream per i campioni</li>
+</ul>
+<hr />
+<h2 id="step-61-aggiungere-interrupt-dma">STEP 61 — Aggiungere interrupt DMA<a class="headerlink" href="#step-61-aggiungere-interrupt-dma" title="Permanent link">&para;</a></h2>
+<p>Per ora usiamo polling.<br />
+Passo successivo naturale: interrupt.</p>
+<hr />
+<h2 id="step-62-aggiungere-visualizzazione-dati">STEP 62 — Aggiungere visualizzazione dati<a class="headerlink" href="#step-62-aggiungere-visualizzazione-dati" title="Permanent link">&para;</a></h2>
+<p>Puoi stampare:</p>
+<ul>
+<li>input</li>
+<li>output hardware</li>
+<li>output software</li>
+</ul>
+<p>oppure esportare i dati per plotting.</p>
+<hr />
+<h1 id="conclusione">🎯 Conclusione<a class="headerlink" href="#conclusione" title="Permanent link">&para;</a></h1>
+<p>Con questo progetto hai realizzato un sistema Zynq completo con:</p>
+<ul>
+<li><strong>PS</strong></li>
+<li><strong>DDR</strong></li>
+<li><strong>AXI DMA</strong></li>
+<li><strong>PL custom AXI4-Stream</strong></li>
+<li><strong>verifica HW vs SW</strong></li>
+</ul>
+<p>Hai quindi fatto un vero progetto embedded accelerato, molto più rappresentativo di un uso reale di Zynq rispetto a LED o PWM.</p>
+<hr />
+<h1 id="checklist-finale">✅ Checklist finale<a class="headerlink" href="#checklist-finale" title="Permanent link">&para;</a></h1>
+<ul>
+<li>[ ] loopback AXI-Stream testato</li>
+<li>[ ] FIR inserito nel PL</li>
+<li>[ ] DMA in simple mode</li>
+<li>[ ] cache gestita correttamente</li>
+<li>[ ] output hardware verificato contro software</li>
+<li>[ ] <code>.xsa</code> riesportato dopo ogni modifica hardware</li>
+</ul>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

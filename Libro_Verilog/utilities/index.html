@@ -1,0 +1,3749 @@
+
+<!doctype html>
+<html lang="it" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corso completo su HDL, verification e tool FPGA/ASIC">
+      
+      
+      
+        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/Libro_Verilog/utilities/">
+      
+      
+        <link rel="prev" href="../in_out/">
+      
+      
+        <link rel="next" href="../clocks_registers/">
+      
+      
+        
+          <link rel="alternate" href="../.." hreflang="it">
+        
+          <link rel="alternate" href="../.." hreflang="it">
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Utilities - Corso di Microelettronica Digitale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#utilities" class="md-skip">
+          Vai al contenuto
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Intestazione">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-header__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corso di Microelettronica Digitale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Utilities
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Seleziona la lingua">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../.." hreflang="" class="md-select__link">
+              
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../.." hreflang="" class="md-select__link">
+              
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Cancella" aria-label="Cancella" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../00_introduzione/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Intro
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../01_fondamenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Fondamenti
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../02_vhdl/" class="md-tabs__link">
+          
+  
+  
+  VHDL
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../03_verilog/" class="md-tabs__link">
+          
+  
+  
+  Verilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../04_systemverilog_design/" class="md-tabs__link">
+          
+  
+  
+  SystemVerilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../05_verification_base/" class="md-tabs__link">
+          
+  
+  
+  Verification
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../06_uvm/" class="md-tabs__link">
+          
+  
+  
+  UVM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../07_fpga_flow/" class="md-tabs__link">
+          
+  
+  
+  FPGA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../08_asic_flow/" class="md-tabs__link">
+          
+  
+  
+  ASIC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../09_progetti/" class="md-tabs__link">
+          
+  
+  
+  Progetti
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../10_tool_e_tcl/" class="md-tabs__link">
+          
+  
+  
+  Tool e Tcl/Tk
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../11_appendici/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Appendici
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../12_riferimenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Riferimenti
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigazione" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-nav__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Corso di Microelettronica Digitale
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00_introduzione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01_fondamenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VHDL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    VHDL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl_progettazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foglio di lavoro
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foglio di lavoro
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Tool Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../in_out/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    In and Out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#utilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UTILITIES
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clocks_registers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocks and Registers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../state_machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modular_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modular Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../memories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../managing_clocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Managing Clocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../io_flavors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O Flavors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A Taste of Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Rest for Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SystemVerilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_systemverilog_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_SV_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05_verification_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.chipverify.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChipVerify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verificationguide.com" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VerificationGuide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.doulos.com/knowhow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doulos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_3" id="__nav_8_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetto mini CPU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetto mini CPU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU_waveform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Waveform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_fpga_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_fpga_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_ps_axi_led/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq LED
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_4" id="__nav_9_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq FIR
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zynq FIR
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_8tap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_axi_stream_theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AXI Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_dma_interrupt_perf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DMA Interrupt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_xparameters_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    X Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Digilent/Zybo-Z7" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zybo-Z7-20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASIC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ASIC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_asic_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_asic_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_openasic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAsic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_4" id="__nav_10_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openlane2.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenLAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/kunalg123/vsdflow" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CMOS VLSI Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_codice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorgenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool e Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tool e Tcl/Tk
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_e_tcl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_12_3" id="__nav_12_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_12_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.tutorialspoint.com/tcl-tk/index.htm" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.amd.com/r/en-US/ug894-vivado-tcl-scripting/Tcl-Scripting-in-Vivado" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Script Tcl in Vivado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://yosyshq.readthedocs.io/projects/yosys/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yosis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openroad.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenROAD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://gtkwave.github.io/gtkwave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GTKWave Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verilator.org/guide/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilator Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_12_3_7" id="__nav_12_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vivado
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_12_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vivado
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug910-vivado-getting-started" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug901-vivado-synthesis" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug904-vivado-implementation" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug835-vivado-tcl-commands" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcl Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/swdocs/modelsim/modelsim_user_2024_2.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ModelSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11_appendici/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendici
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12_riferimenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Riferimenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#utilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UTILITIES
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Utilities</h1>
+
+<h2 id="utilities">UTILITIES<a class="headerlink" href="#utilities" title="Permanent link">&para;</a></h2>
+<div style="font-size: 0.8em">
+
+# GENERATORE CLOCK CON DUTY-CYCLE
+
+<div class="highlight"><pre><span></span><code><span class="c1">//generate clock pulses of 20% duty cycle</span>
+<span class="k">module</span><span class="w"> </span><span class="n">clk_gen</span><span class="w"> </span><span class="p">(</span><span class="n">clk</span><span class="p">);</span>
+<span class="k">output</span><span class="w"> </span><span class="n">clk</span><span class="p">;</span>
+<span class="kt">reg</span><span class="w"> </span><span class="n">clk</span><span class="p">;</span>
+<span class="k">initial</span>
+<span class="w">    </span><span class="k">begin</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">0</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">5</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">5</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">5</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">20</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">5</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="nb">$stop</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">endmodule</span>
+</code></pre></div>
+---
+
+# CONVERTITORE BINARY TO GRAY CODE
+
+<div class="highlight"><pre><span></span><code><span class="c1">//binary-to-gray code converter</span>
+<span class="k">module</span><span class="w"> </span><span class="n">bin_to_gray</span><span class="w"> </span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">x3</span><span class="p">,</span><span class="w"> </span><span class="n">x4</span><span class="p">,</span><span class="w"> </span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">z2</span><span class="p">,</span><span class="w"> </span><span class="n">z3</span><span class="p">,</span><span class="w"> </span><span class="n">z4</span><span class="p">);</span>
+<span class="k">input</span><span class="w"> </span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">x3</span><span class="p">,</span><span class="w"> </span><span class="n">x4</span><span class="p">;</span>
+<span class="k">output</span><span class="w"> </span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">z2</span><span class="p">,</span><span class="w"> </span><span class="n">z3</span><span class="p">,</span><span class="w"> </span><span class="n">z4</span><span class="p">;</span>
+<span class="k">buf</span><span class="w"> </span><span class="n">inst1</span><span class="w"> </span><span class="p">(</span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">x1</span><span class="p">);</span>
+<span class="k">xor</span><span class="w"> </span><span class="n">inst2</span><span class="w"> </span><span class="p">(</span><span class="n">z2</span><span class="p">,</span><span class="w"> </span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">);</span>
+<span class="k">xor</span><span class="w"> </span><span class="n">inst3</span><span class="w"> </span><span class="p">(</span><span class="n">z3</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">x3</span><span class="p">);</span>
+<span class="k">xor</span><span class="w"> </span><span class="n">inst4</span><span class="w"> </span><span class="p">(</span><span class="n">z4</span><span class="p">,</span><span class="w"> </span><span class="n">x3</span><span class="p">,</span><span class="w"> </span><span class="n">x4</span><span class="p">);</span>
+<span class="k">endmodule</span>
+</code></pre></div>
+
+---
+
+# FULL HADDER
+
+<div class="highlight"><pre><span></span><code><span class="c1">//full adder using built-in primitives</span>
+<span class="k">module</span><span class="w"> </span><span class="n">full_adder_bip</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">cin</span><span class="p">,</span><span class="w"> </span><span class="n">sum</span><span class="p">,</span><span class="w"> </span><span class="n">cout</span><span class="p">);</span>
+<span class="k">input</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">cin</span><span class="p">;</span>
+<span class="k">output</span><span class="w"> </span><span class="n">sum</span><span class="p">,</span><span class="w"> </span><span class="n">cout</span><span class="p">;</span>
+<span class="k">xor</span><span class="w"> </span><span class="n">inst1</span><span class="w"> </span><span class="p">(</span><span class="n">net1</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="k">and</span><span class="w"> </span><span class="n">inst2</span><span class="w"> </span><span class="p">(</span><span class="n">net2</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="k">xor</span><span class="w"> </span><span class="n">inst3</span><span class="w"> </span><span class="p">(</span><span class="n">sum</span><span class="p">,</span><span class="w"> </span><span class="n">net1</span><span class="p">,</span><span class="w"> </span><span class="n">cin</span><span class="p">);</span>
+<span class="k">and</span><span class="w"> </span><span class="n">inst4</span><span class="w"> </span><span class="p">(</span><span class="n">net4</span><span class="p">,</span><span class="w"> </span><span class="n">net1</span><span class="p">,</span><span class="w"> </span><span class="n">cin</span><span class="p">);</span>
+<span class="k">or</span><span class="w"> </span><span class="n">inst5</span><span class="w"> </span><span class="p">(</span><span class="n">cout</span><span class="p">,</span><span class="w"> </span><span class="n">net4</span><span class="p">,</span><span class="w"> </span><span class="n">net2</span><span class="p">);</span>
+<span class="k">endmodule</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1">//dataflow full adder</span>
+<span class="k">module</span><span class="w"> </span><span class="n">full_adder</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">cin</span><span class="p">,</span><span class="w"> </span><span class="n">sum</span><span class="p">,</span><span class="w"> </span><span class="n">cout</span><span class="p">);</span>
+<span class="c1">//list all inputs and outputs</span>
+<span class="k">input</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">cin</span><span class="p">;</span>
+<span class="k">output</span><span class="w"> </span><span class="n">sum</span><span class="p">,</span><span class="w"> </span><span class="n">cout</span><span class="p">;</span>
+<span class="c1">//define wires</span>
+<span class="kt">wire</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">cin</span><span class="p">;</span>
+<span class="kt">wire</span><span class="w"> </span><span class="n">sum</span><span class="p">,</span><span class="w"> </span><span class="n">cout</span><span class="p">;</span>
+<span class="c1">//continuous assign</span>
+<span class="k">assign</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="n">cin</span><span class="p">;</span>
+<span class="k">assign</span><span class="w"> </span><span class="n">cout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cin</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="k">endmodule</span>
+</code></pre></div>
+
+# TESTBENCH FULL HADDER
+
+<div class="highlight"><pre><span></span><code><span class="c1">//test bench for full adder using built-in primitives</span>
+<span class="k">module</span><span class="w"> </span><span class="n">full_adder_bip_tb</span><span class="p">;</span>
+<span class="kt">reg</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">cin</span><span class="p">;</span>
+<span class="kt">wire</span><span class="w"> </span><span class="n">sum</span><span class="p">,</span><span class="w"> </span><span class="n">cout</span><span class="p">;</span>
+<span class="c1">//apply input vectors</span>
+<span class="k">initial</span>
+<span class="w">    </span><span class="k">begin</span><span class="o">:</span><span class="w"> </span><span class="n">apply_stimulus</span>
+<span class="w">        </span><span class="kt">reg</span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">invect</span><span class="p">;</span><span class="w"> </span><span class="c1">//invect[3] terminates the for loop</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">invect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span><span class="w"> </span><span class="n">invect</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mh">8</span><span class="p">;</span><span class="w"> </span><span class="n">invect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">invect</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">1</span><span class="p">)</span>
+<span class="w">            </span><span class="k">begin</span>
+<span class="w">                </span><span class="p">{</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">cin</span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">invect</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">];</span>
+<span class="w">                </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="nb">$display</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;abcin = %b, cout = %b, sum = %b&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="p">{</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">cin</span><span class="p">},</span><span class="w"> </span><span class="n">cout</span><span class="p">,</span><span class="w"> </span><span class="n">sum</span><span class="p">);</span>
+<span class="w">            </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="c1">//instantiate the module into the test bench</span>
+<span class="n">full_adder_bip</span><span class="w"> </span><span class="n">inst1</span><span class="w"> </span><span class="p">(</span>
+<span class="p">.</span><span class="n">a</span><span class="p">(</span><span class="n">a</span><span class="p">),</span>
+<span class="p">.</span><span class="n">b</span><span class="p">(</span><span class="n">b</span><span class="p">),</span>
+<span class="p">.</span><span class="n">cin</span><span class="p">(</span><span class="n">cin</span><span class="p">),</span>
+<span class="p">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sum</span><span class="p">),</span>
+<span class="p">.</span><span class="n">cout</span><span class="p">(</span><span class="n">cout</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="k">endmodule</span>
+</code></pre></div>
+
+---
+
+# MULTIPLEXER
+
+<div class="highlight"><pre><span></span><code><span class="c1">//dataflow for 4:1 mux using the conditional operator</span>
+<span class="k">module</span><span class="w"> </span><span class="n">mux_4to1_cond2</span><span class="w"> </span><span class="p">(</span><span class="n">s0</span><span class="p">,</span><span class="w"> </span><span class="n">s1</span><span class="p">,</span><span class="w"> </span><span class="n">d0</span><span class="p">,</span><span class="w"> </span><span class="n">d1</span><span class="p">,</span><span class="w"> </span><span class="n">d2</span><span class="p">,</span><span class="w"> </span><span class="n">d3</span><span class="p">,</span><span class="w"> </span><span class="n">z1</span><span class="p">);</span>
+<span class="c1">//define inputs and output</span>
+<span class="k">input</span><span class="w"> </span><span class="n">s0</span><span class="p">,</span><span class="w"> </span><span class="n">s1</span><span class="p">,</span><span class="w"> </span><span class="n">d0</span><span class="p">,</span><span class="w"> </span><span class="n">d1</span><span class="p">,</span><span class="w"> </span><span class="n">d2</span><span class="p">,</span><span class="w"> </span><span class="n">d3</span><span class="p">;</span>
+<span class="k">output</span><span class="w"> </span><span class="n">z1</span><span class="p">;</span>
+<span class="c1">//use the nested conditional operator</span>
+<span class="k">assign</span><span class="w"> </span><span class="n">z1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="p">(</span><span class="n">s0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">d3</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">d2</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="n">s0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">d1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">d0</span><span class="p">);</span>
+<span class="k">endmodule</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1">//8:1 multiplexed using the case statement</span>
+<span class="k">module</span><span class="w"> </span><span class="n">mux_8to1_case4</span><span class="w"> </span><span class="p">(</span><span class="n">sel</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">z1</span><span class="p">);</span>
+<span class="c1">//define inputs and outputs</span>
+<span class="k">input</span><span class="w"> </span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">sel</span><span class="p">;</span>
+<span class="k">input</span><span class="w"> </span><span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+<span class="k">output</span><span class="w"> </span><span class="n">z1</span><span class="p">;</span>
+<span class="c1">//variables in always are declared as reg</span>
+<span class="kt">reg</span><span class="w"> </span><span class="n">z1</span><span class="p">;</span>
+<span class="k">always</span><span class="w"> </span><span class="p">@</span><span class="w"> </span><span class="p">(</span><span class="n">sel</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">data</span><span class="p">)</span>
+<span class="k">begin</span>
+<span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="n">sel</span><span class="p">)</span>
+<span class="w">    </span><span class="p">(</span><span class="mh">0</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">z1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">[</span><span class="mh">0</span><span class="p">];</span>
+<span class="w">    </span><span class="p">(</span><span class="mh">1</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">z1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">[</span><span class="mh">1</span><span class="p">];</span>
+<span class="w">    </span><span class="p">(</span><span class="mh">2</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">z1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">[</span><span class="mh">2</span><span class="p">];</span>
+<span class="w">    </span><span class="p">(</span><span class="mh">3</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">z1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">[</span><span class="mh">3</span><span class="p">];</span>
+<span class="w">    </span><span class="p">(</span><span class="mh">4</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">z1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">[</span><span class="mh">4</span><span class="p">];</span>
+<span class="w">    </span><span class="p">(</span><span class="mh">5</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">z1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">[</span><span class="mh">5</span><span class="p">];</span>
+<span class="w">    </span><span class="p">(</span><span class="mh">6</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">z1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">[</span><span class="mh">6</span><span class="p">];</span>
+<span class="w">    </span><span class="p">(</span><span class="mh">7</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">z1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="p">[</span><span class="mh">7</span><span class="p">];</span>
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">z1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<span class="k">endcase</span>
+<span class="k">end</span>
+<span class="k">endmodule</span>
+</code></pre></div>
+---
+
+# PROM
+
+<div class="highlight"><pre><span></span><code><span class="c1">//structural prom to generate four equations</span>
+<span class="c1">//z1 = x1&#39; x2&#39; + x1 x2&#39;</span>
+<span class="c1">//z2 = x1&#39; x2&#39; + x1&#39; x2</span>
+<span class="c1">//z3 = x1&#39; x2 + x1 x2&#39;</span>
+<span class="k">module</span><span class="w"> </span><span class="n">prom3</span><span class="w"> </span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">z2</span><span class="p">,</span><span class="w"> </span><span class="n">z3</span><span class="p">);</span>
+<span class="k">input</span><span class="w"> </span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">;</span><span class="w"> </span><span class="c1">//define inputs and outputs</span>
+<span class="k">output</span><span class="w"> </span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">z2</span><span class="p">,</span><span class="w"> </span><span class="n">z3</span><span class="p">;</span>
+<span class="c1">//define internal nets</span>
+<span class="kt">wire</span><span class="w"> </span><span class="n">net1</span><span class="p">,</span><span class="w"> </span><span class="n">net2</span><span class="p">,</span><span class="w"> </span><span class="n">net3</span><span class="p">,</span><span class="w"> </span><span class="n">net4</span><span class="p">,</span><span class="w"> </span><span class="n">net5</span><span class="p">,</span><span class="w"> </span><span class="n">net6</span><span class="p">,</span><span class="w"> </span><span class="n">net7</span><span class="p">,</span><span class="w"> </span><span class="n">net8</span><span class="p">;</span>
+<span class="c1">//define the input logic</span>
+<span class="k">buf</span><span class="w"> </span><span class="p">(</span><span class="n">net1</span><span class="p">,</span><span class="w"> </span><span class="n">x1</span><span class="p">);</span>
+<span class="k">not</span><span class="w"> </span><span class="p">(</span><span class="n">net2</span><span class="p">,</span><span class="w"> </span><span class="n">x1</span><span class="p">);</span>
+<span class="k">buf</span><span class="w"> </span><span class="p">(</span><span class="n">net3</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">);</span>
+<span class="k">not</span><span class="w"> </span><span class="p">(</span><span class="n">net4</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">);</span>
+<span class="c1">//define the logic for the and array</span>
+<span class="k">and</span><span class="w"> </span><span class="p">(</span><span class="n">net5</span><span class="p">,</span><span class="w"> </span><span class="n">net2</span><span class="p">,</span><span class="w"> </span><span class="n">net4</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="n">net6</span><span class="p">,</span><span class="w"> </span><span class="n">net2</span><span class="p">,</span><span class="w"> </span><span class="n">net3</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="n">net7</span><span class="p">,</span><span class="w"> </span><span class="n">net1</span><span class="p">,</span><span class="w"> </span><span class="n">net4</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="n">net8</span><span class="p">,</span><span class="w"> </span><span class="n">net1</span><span class="p">,</span><span class="w"> </span><span class="n">net3</span><span class="p">);</span>
+<span class="c1">//define the logic for the or array</span>
+<span class="k">or</span><span class="w">  </span><span class="p">(</span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">net5</span><span class="p">,</span><span class="w"> </span><span class="n">net7</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="n">z2</span><span class="p">,</span><span class="w"> </span><span class="n">net5</span><span class="p">,</span><span class="w"> </span><span class="n">net6</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="n">z3</span><span class="p">,</span><span class="w"> </span><span class="n">net6</span><span class="p">,</span><span class="w"> </span><span class="n">net7</span><span class="p">);</span>
+<span class="k">endmodule</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1">//test bench for the structural prom3 module</span>
+<span class="k">module</span><span class="w"> </span><span class="n">prom3_tb</span><span class="p">;</span>
+<span class="c1">//inputs are reg for test bench</span>
+<span class="c1">//outputs are wire for test bench</span>
+<span class="kt">reg</span><span class="w"> </span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">;</span>
+<span class="kt">wire</span><span class="w"> </span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">z2</span><span class="p">,</span><span class="w"> </span><span class="n">z3</span><span class="p">;</span>
+<span class="c1">//display variables</span>
+<span class="k">initial</span>
+<span class="nb">$monitor</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;x1 x2 = %b, z1 z2 z3 = %b&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">{</span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">z2</span><span class="p">,</span><span class="w"> </span><span class="n">z3</span><span class="p">});</span>
+<span class="c1">//apply input vectors</span>
+<span class="k">initial</span>
+<span class="w">    </span><span class="k">begin</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">0</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="nb">$stop</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="c1">//instantiate the module into the test bench</span>
+<span class="n">prom3</span><span class="w"> </span><span class="n">inst1</span><span class="w"> </span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">z2</span><span class="p">,</span><span class="w"> </span><span class="n">z3</span><span class="p">);</span>
+<span class="k">endmodule</span>
+</code></pre></div>
+
+---
+
+# PAL
+
+<div class="highlight"><pre><span></span><code><span class="c1">//structural pla to implement four equations</span>
+<span class="c1">//z1 = x1x2&#39; + x1&#39;x2</span>
+<span class="c1">//z2 = x1x3 + x1&#39;x3&#39;</span>
+<span class="c1">//z3 = x1x2&#39; + x1&#39;x2&#39;x3&#39; + x1x3&#39;</span>
+<span class="c1">//z4 = x1x2x3 + x1&#39;x3</span>
+<span class="k">module</span><span class="w"> </span><span class="n">pla_4eqtns</span><span class="w"> </span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">x3</span><span class="p">,</span><span class="w"> </span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">z2</span><span class="p">,</span><span class="w"> </span><span class="n">z3</span><span class="p">,</span><span class="w"> </span><span class="n">z4</span><span class="p">);</span>
+<span class="c1">//define inputs and outputs</span>
+<span class="k">input</span><span class="w"> </span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">x3</span><span class="p">;</span>
+<span class="k">output</span><span class="w"> </span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">z2</span><span class="p">,</span><span class="w"> </span><span class="n">z3</span><span class="p">,</span><span class="w"> </span><span class="n">z4</span><span class="p">;</span>
+<span class="c1">//define internal nets</span>
+<span class="kt">wire</span><span class="w"> </span><span class="n">net1</span><span class="p">,</span><span class="w"> </span><span class="n">net2</span><span class="p">,</span><span class="w"> </span><span class="n">net3</span><span class="p">,</span><span class="w"> </span><span class="n">net4</span><span class="p">,</span><span class="w"> </span><span class="n">net5</span><span class="p">,</span><span class="w"> </span><span class="n">net6</span><span class="p">,</span><span class="w"> </span><span class="n">net7</span><span class="p">,</span><span class="w"> </span><span class="n">net8</span><span class="p">,</span>
+<span class="w">    </span><span class="n">net9</span><span class="p">,</span><span class="w"> </span><span class="n">net10</span><span class="p">,</span><span class="w"> </span><span class="n">net11</span><span class="p">,</span><span class="w"> </span><span class="n">net12</span><span class="p">,</span><span class="w"> </span><span class="n">net13</span><span class="p">,</span><span class="w"> </span><span class="n">net14</span><span class="p">;</span>
+<span class="c1">//design the input drivers</span>
+<span class="k">buf</span><span class="w"> </span><span class="p">(</span><span class="n">net1</span><span class="p">,</span><span class="w"> </span><span class="n">x1</span><span class="p">);</span>
+<span class="k">not</span><span class="w"> </span><span class="p">(</span><span class="n">net2</span><span class="p">,</span><span class="w"> </span><span class="n">x1</span><span class="p">);</span>
+<span class="k">buf</span><span class="w"> </span><span class="p">(</span><span class="n">net3</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">);</span>
+<span class="k">not</span><span class="w"> </span><span class="p">(</span><span class="n">net4</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">);</span>
+<span class="k">buf</span><span class="w"> </span><span class="p">(</span><span class="n">net5</span><span class="p">,</span><span class="w"> </span><span class="n">x3</span><span class="p">);</span>
+<span class="k">not</span><span class="w"> </span><span class="p">(</span><span class="n">net6</span><span class="p">,</span><span class="w"> </span><span class="n">x3</span><span class="p">);</span>
+<span class="c1">//design the logic for the and array and the or array for z1</span>
+<span class="k">and</span><span class="w"> </span><span class="p">(</span><span class="n">net7</span><span class="p">,</span><span class="w"> </span><span class="n">net1</span><span class="p">,</span><span class="w"> </span><span class="n">net4</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="n">net8</span><span class="p">,</span><span class="w"> </span><span class="n">net2</span><span class="p">,</span><span class="w"> </span><span class="n">net3</span><span class="p">);</span>
+<span class="k">or</span><span class="w"> </span><span class="p">(</span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">net7</span><span class="p">,</span><span class="w"> </span><span class="n">net8</span><span class="p">);</span>
+<span class="c1">//design the logic for the and array and the or array for z2</span>
+<span class="k">and</span><span class="w"> </span><span class="p">(</span><span class="n">net9</span><span class="p">,</span><span class="w"> </span><span class="n">net1</span><span class="p">,</span><span class="w"> </span><span class="n">net5</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="n">net10</span><span class="p">,</span><span class="w"> </span><span class="n">net2</span><span class="p">,</span><span class="w"> </span><span class="n">net6</span><span class="p">);</span>
+<span class="k">or</span><span class="w"> </span><span class="p">(</span><span class="n">z2</span><span class="p">,</span><span class="w"> </span><span class="n">net9</span><span class="p">,</span><span class="w"> </span><span class="n">net10</span><span class="p">);</span>
+<span class="c1">//design the logic for the and array and the or array for z3</span>
+<span class="k">and</span><span class="w"> </span><span class="p">(</span><span class="n">net12</span><span class="p">,</span><span class="w"> </span><span class="n">net2</span><span class="p">,</span><span class="w"> </span><span class="n">net4</span><span class="p">,</span><span class="w"> </span><span class="n">net6</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="n">net14</span><span class="p">,</span><span class="w"> </span><span class="n">net1</span><span class="p">,</span><span class="w"> </span><span class="n">net6</span><span class="p">);</span>
+<span class="k">or</span><span class="w"> </span><span class="p">(</span><span class="n">z3</span><span class="p">,</span><span class="w"> </span><span class="n">net7</span><span class="p">,</span><span class="w"> </span><span class="n">net12</span><span class="p">,</span><span class="w"> </span><span class="n">net14</span><span class="p">);</span>
+<span class="c1">//design the logic for the and array and the or array for z4</span>
+<span class="k">and</span><span class="w"> </span><span class="p">(</span><span class="n">net11</span><span class="p">,</span><span class="w"> </span><span class="n">net1</span><span class="p">,</span><span class="w"> </span><span class="n">net3</span><span class="p">,</span><span class="w"> </span><span class="n">net5</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="n">net13</span><span class="p">,</span><span class="w"> </span><span class="n">net2</span><span class="p">,</span><span class="w"> </span><span class="n">net5</span><span class="p">);</span>
+<span class="k">or</span><span class="w"> </span><span class="p">(</span><span class="n">z4</span><span class="p">,</span><span class="w"> </span><span class="n">net11</span><span class="p">,</span><span class="w"> </span><span class="n">net13</span><span class="p">);</span>
+<span class="k">endmodule</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">//test bench to implement four equations</span>
+<span class="k">module</span><span class="w"> </span><span class="n">pla_4eqtns_tb</span><span class="p">;</span>
+<span class="c1">//inputs are reg for test bench</span>
+<span class="c1">//outputs are wire for test bench</span>
+<span class="kt">reg</span><span class="w"> </span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">x3</span><span class="p">;</span>
+<span class="kt">wire</span><span class="w"> </span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">z2</span><span class="p">,</span><span class="w"> </span><span class="n">z3</span><span class="p">,</span><span class="w"> </span><span class="n">z4</span><span class="p">;</span>
+<span class="k">initial</span><span class="w"> </span><span class="c1">//display variables</span>
+<span class="nb">$monitor</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;x1 x2 x3 = %b, z1 z2 z3 z4 = %b&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">x3</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">z2</span><span class="p">,</span><span class="w"> </span><span class="n">z3</span><span class="p">,</span><span class="w"> </span><span class="n">z4</span><span class="p">});</span>
+<span class="k">initial</span><span class="w"> </span><span class="c1">//apply input vectors</span>
+<span class="k">begin</span>
+<span class="w">    </span><span class="p">#</span><span class="mh">0</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span><span class="w"> </span><span class="n">x3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span><span class="w"> </span><span class="n">x3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span><span class="w"> </span><span class="n">x3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span><span class="w"> </span><span class="n">x3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span><span class="w"> </span><span class="n">x3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span><span class="w"> </span><span class="n">x3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span><span class="w"> </span><span class="n">x3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span><span class="w"> </span><span class="n">x3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">#</span><span class="mh">10</span><span class="w"> </span><span class="nb">$stop</span><span class="p">;</span>
+<span class="k">end</span>
+<span class="c1">//instantiate the module into the test bench</span>
+<span class="n">pla_4eqtns</span><span class="w"> </span><span class="n">inst1</span><span class="w"> </span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">x3</span><span class="p">,</span><span class="w"> </span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">z2</span><span class="p">,</span><span class="w"> </span><span class="n">z3</span><span class="p">,</span><span class="w"> </span><span class="n">z4</span><span class="p">);</span>
+<span class="k">endmodule</span>
+</code></pre></div>
+
+---
+
+# PRIMITIVE & TABLE
+<div class="highlight"><pre><span></span><code><span class="c1">//used-defined primitive for a 2-input OR gate</span>
+<span class="k">primitive</span><span class="w"> </span><span class="n">udp_or2</span><span class="w"> </span><span class="p">(</span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">);</span><span class="c1">//list output first</span>
+<span class="c1">//input/output declarations</span>
+<span class="k">input</span><span class="w"> </span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">;</span>
+<span class="k">output</span><span class="w"> </span><span class="n">z1</span><span class="p">;</span><span class="w"> </span><span class="c1">//must be output (not reg)</span>
+<span class="c1">//...for combinational logic</span>
+<span class="c1">//state table definition</span>
+<span class="k">table</span>
+<span class="c1">//inputs are in same order as input list</span>
+<span class="c1">// x1 x2 : z1; comment is for readability</span>
+<span class="w">    </span><span class="mh">0</span><span class="w"> </span><span class="mh">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">    </span><span class="mh">0</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">    </span><span class="mh">1</span><span class="w"> </span><span class="mh">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">    </span><span class="mh">1</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">    </span><span class="mh">1</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="k">endtable</span>
+<span class="k">endprimitive</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1">//4:1 multiplexer as a UDP</span>
+<span class="k">primitive</span><span class="w"> </span><span class="n">udp_mux4</span><span class="w"> </span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">s1</span><span class="p">,</span><span class="w"> </span><span class="n">s0</span><span class="p">,</span><span class="w"> </span><span class="n">d0</span><span class="p">,</span><span class="w"> </span><span class="n">d1</span><span class="p">,</span><span class="w"> </span><span class="n">d2</span><span class="p">,</span><span class="w"> </span><span class="n">d3</span><span class="p">);</span>
+<span class="k">input</span><span class="w"> </span><span class="n">s1</span><span class="p">,</span><span class="w"> </span><span class="n">s0</span><span class="p">,</span><span class="w"> </span><span class="n">d0</span><span class="p">,</span><span class="w"> </span><span class="n">d1</span><span class="p">,</span><span class="w"> </span><span class="n">d2</span><span class="p">,</span><span class="w"> </span><span class="n">d3</span><span class="p">;</span>
+<span class="k">output</span><span class="w"> </span><span class="n">out</span><span class="p">;</span>
+<span class="k">table</span><span class="w"> </span><span class="c1">//define state table</span>
+<span class="c1">//inputs are in the same order as the input list</span>
+<span class="c1">// s1 s0 d0 d1 d2 d3 : out comment is for readability</span>
+<span class="w">    </span><span class="mh">0</span><span class="w"> </span><span class="mh">0</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span><span class="w"> </span><span class="c1">//? is &quot;don&#39;t care&quot;</span>
+<span class="w">    </span><span class="mh">0</span><span class="w"> </span><span class="mh">0</span><span class="w"> </span><span class="mh">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">    </span><span class="mh">0</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">    </span><span class="mh">0</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mh">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">    </span><span class="mh">1</span><span class="w"> </span><span class="mh">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">    </span><span class="mh">1</span><span class="w"> </span><span class="mh">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mh">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">    </span><span class="mh">1</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="w">    </span><span class="mh">1</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mh">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">    </span><span class="o">?</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mh">0</span><span class="w"> </span><span class="mh">0</span><span class="w"> </span><span class="mh">0</span><span class="w"> </span><span class="mh">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<span class="w">    </span><span class="o">?</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<span class="k">endtable</span>
+<span class="k">endprimitive</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

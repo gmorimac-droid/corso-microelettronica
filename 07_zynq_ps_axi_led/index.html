@@ -1,0 +1,3694 @@
+
+<!doctype html>
+<html lang="it" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corso completo su HDL, verification e tool FPGA/ASIC">
+      
+      
+      
+        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/07_zynq_ps_axi_led/">
+      
+      
+        <link rel="prev" href="../07_fpga_flow_chart/">
+      
+      
+        <link rel="next" href="../07_zynq_fir_dma_8tap/">
+      
+      
+        
+          <link rel="alternate" href=".." hreflang="it">
+        
+          <link rel="alternate" href=".." hreflang="it">
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Zynq LED - Corso di Microelettronica Digitale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#0-obiettivo-del-progetto" class="md-skip">
+          Vai al contenuto
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Intestazione">
+    <a href=".." title="Corso di Microelettronica Digitale" class="md-header__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corso di Microelettronica Digitale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Zynq LED
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Seleziona la lingua">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="" class="md-select__link">
+              
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="" class="md-select__link">
+              
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Cancella" aria-label="Cancella" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../00_introduzione/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Intro
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../01_fondamenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Fondamenti
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../02_vhdl/" class="md-tabs__link">
+          
+  
+  
+  VHDL
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../03_verilog/" class="md-tabs__link">
+          
+  
+  
+  Verilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../04_systemverilog_design/" class="md-tabs__link">
+          
+  
+  
+  SystemVerilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../05_verification_base/" class="md-tabs__link">
+          
+  
+  
+  Verification
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../06_uvm/" class="md-tabs__link">
+          
+  
+  
+  UVM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../07_fpga_flow/" class="md-tabs__link">
+          
+  
+  
+  FPGA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../08_asic_flow/" class="md-tabs__link">
+          
+  
+  
+  ASIC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../09_progetti/" class="md-tabs__link">
+          
+  
+  
+  Progetti
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../10_tool_e_tcl/" class="md-tabs__link">
+          
+  
+  
+  Tool e Tcl/Tk
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../11_appendici/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Appendici
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../12_riferimenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Riferimenti
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigazione" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Corso di Microelettronica Digitale" class="md-nav__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    Corso di Microelettronica Digitale
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00_introduzione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_fondamenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VHDL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    VHDL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_vhdl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_vhdl_progettazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_verilog_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foglio di lavoro
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foglio di lavoro
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Tool Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/in_out/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    In and Out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/utilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/clocks_registers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocks and Registers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/state_machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/modular_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modular Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/memories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/managing_clocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Managing Clocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/io_flavors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O Flavors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A Taste of Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Rest for Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SystemVerilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_systemverilog_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_SV_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_verification_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.chipverify.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChipVerify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verificationguide.com" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VerificationGuide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.doulos.com/knowhow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doulos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_uvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_uvm_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_3" id="__nav_8_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetto mini CPU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetto mini CPU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_mini_CPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_mini_CPU_waveform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Waveform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_fpga_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_fpga_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq LED
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_4" id="__nav_9_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq FIR
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zynq FIR
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_zynq_fir_dma_8tap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_zynq_fir_dma_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_zynq_axi_stream_theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AXI Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_zynq_dma_interrupt_perf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DMA Interrupt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_zynq_xparameters_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    X Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Digilent/Zybo-Z7" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zybo-Z7-20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASIC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ASIC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_asic_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_asic_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_openasic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAsic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_4" id="__nav_10_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openlane2.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenLAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/kunalg123/vsdflow" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CMOS VLSI Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_codice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorgenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool e Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tool e Tcl/Tk
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_tool_e_tcl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_tcl_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_12_3" id="__nav_12_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_12_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.tutorialspoint.com/tcl-tk/index.htm" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.amd.com/r/en-US/ug894-vivado-tcl-scripting/Tcl-Scripting-in-Vivado" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Script Tcl in Vivado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://yosyshq.readthedocs.io/projects/yosys/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yosis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openroad.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenROAD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://gtkwave.github.io/gtkwave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GTKWave Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verilator.org/guide/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilator Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_12_3_7" id="__nav_12_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vivado
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_12_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vivado
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug910-vivado-getting-started" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug901-vivado-synthesis" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug904-vivado-implementation" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug835-vivado-tcl-commands" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcl Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/swdocs/modelsim/modelsim_user_2024_2.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ModelSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_tcl_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_appendici/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendici
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_riferimenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Riferimenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="0-obiettivo-del-progetto">0. Obiettivo del progetto<a class="headerlink" href="#0-obiettivo-del-progetto" title="Permanent link">&para;</a></h1>
+<p><a href="https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/verilog/ZYNQ/LED">Repository</a></p>
+<p>Vogliamo ottenere questo:</p>
+<p>PS Zynq: esegue un programma C.
+AXI GPIO nel PL: espone un registro AXI controllato dal processore.
+LED: collegato a un’uscita del blocco AXI GPIO.
+Il C scrive sul GPIO e il LED si accende/spegne. Questo è il caso d’uso base del driver XGpio, che assume tipicamente che il bit 0 del canale 1 sia collegato a un LED.</p>
+<h1 id="1-cosa-ti-serve-prima-di-iniziare">1. Cosa ti serve prima di iniziare<a class="headerlink" href="#1-cosa-ti-serve-prima-di-iniziare" title="Permanent link">&para;</a></h1>
+<p>Ti servono:</p>
+<p>una scheda Zynq-7000 o simile,
+Vivado per la parte hardware,
+Vitis per la parte software bare-metal,
+il file di vincoli della board oppure l’infrastruttura board-aware di Vivado,
+una connessione JTAG/USB per programmare e fare run del software. Il flusso con Zynq PS + AXI GPIO è coperto nei tutorial embedded AMD aggiornati, e il driver XGpio è documentato ufficialmente nella BSP embeddedsw.</p>
+<h1 id="2-struttura-mentale-del-progetto">2. Struttura mentale del progetto<a class="headerlink" href="#2-struttura-mentale-del-progetto" title="Permanent link">&para;</a></h1>
+<p>La struttura del design è questa:</p>
+<p>ARM (PS) --&gt;  AXI GP master --&gt; AXI interconnect --&gt; AXI GPIO --&gt; LED</p>
+<p>Nel tutorial Zynq di AMD, il PS viene inserito nel block design e si collegano IP AXI nel PL tramite i porti GP; l’uso di AXI GPIO per controllare LED è un esempio standard.</p>
+<h1 id="3-file-che-avrai-alla-fine">3. File che avrai alla fine<a class="headerlink" href="#3-file-che-avrai-alla-fine" title="Permanent link">&para;</a></h1>
+<p>Hardware</p>
+<p>In Vivado avrai tipicamente:</p>
+<p>project_name.xpr
+block design, per esempio design_1.bd
+wrapper top, per esempio design_1_wrapper.v
+bitstream .bit
+export hardware .xsa
+Software</p>
+<p>In Vitis avrai:</p>
+<p>src/main.c
+BSP / platform generata da .xsa
+xparameters.h con gli indirizzi base dei blocchi AXI
+librerie driver, incluso xgpio.h. Il driver XGpio espone funzioni come XGpio_Initialize e la BSP contiene gli identificativi dei device e gli indirizzi necessari.</p>
+<h2 id="hardware">HARDWARE<a class="headerlink" href="#hardware" title="Permanent link">&para;</a></h2>
+<h1 id="4-passo-hardware-1-creare-il-progetto-vivado">4. Passo hardware 1: creare il progetto Vivado<a class="headerlink" href="#4-passo-hardware-1-creare-il-progetto-vivado" title="Permanent link">&para;</a></h1>
+<p>In Vivado:</p>
+<p>Create Project
+scegli nome e cartella
+seleziona la tua board oppure il part corretto
+crea un progetto RTL “vuoto”</p>
+<p>Qui non devi ancora scrivere Verilog: per questo esercizio usiamo IP Integrator. AMD raccomanda proprio l’uso di IP Integrator e della Designer Assistance per assemblare subsystem di base con Zynq e IP AXI.</p>
+<h1 id="5-passo-hardware-2-creare-il-block-design">5. Passo hardware 2: creare il Block Design<a class="headerlink" href="#5-passo-hardware-2-creare-il-block-design" title="Permanent link">&para;</a></h1>
+<p>In Vivado:</p>
+<p>Create Block Design
+chiamalo per esempio design_1</p>
+<p>Questo file .bd sarà il cuore del progetto hardware.</p>
+<p>Cosa contiene all’inizio</p>
+<p>All’inizio è vuoto. Devi aggiungere:</p>
+<p>ZYNQ7 Processing System
+AXI GPIO</p>
+<p>AMD nei tutorial embedded mostra proprio il flusso “Add IP” → inserisci PS e AXI GPIO nel diagramma.</p>
+<h1 id="6-passo-hardware-3-aggiungere-il-processing-system">6. Passo hardware 3: aggiungere il Processing System<a class="headerlink" href="#6-passo-hardware-3-aggiungere-il-processing-system" title="Permanent link">&para;</a></h1>
+<p>Nel block design:</p>
+<p>tasto destro → Add IP
+cerca ZYNQ7 Processing System
+inseriscilo</p>
+<p>Poi clicca Run Block Automation.</p>
+<p>Cosa fa Block Automation</p>
+<p>Configura automaticamente il PS con i collegamenti di base necessari nel block design. AMD descrive questa funzione come parte della Designer Assistance, che aiuta a mettere insieme un subsystem base facendo connessioni standard in automatico.</p>
+<h1 id="7-passo-hardware-4-aggiungere-axi-gpio">7. Passo hardware 4: aggiungere AXI GPIO<a class="headerlink" href="#7-passo-hardware-4-aggiungere-axi-gpio" title="Permanent link">&para;</a></h1>
+<p>Sempre nel block design:</p>
+<p>tasto destro → Add IP
+cerca AXI GPIO
+inseriscilo</p>
+<p>Poi fai doppio click su axi_gpio_0 e configuralo così:</p>
+<p>GPIO width = 1
+All outputs
+niente GPIO2, oppure lascialo disattivato se non ti serve</p>
+<p>AMD mostra l’uso di AXI GPIO nei propri tutorial embedded e indica la customizzazione del blocco per i GPIO da usare verso il PL.</p>
+<h1 id="8-passo-hardware-5-collegare-ps-e-axi-gpio">8. Passo hardware 5: collegare PS e AXI GPIO<a class="headerlink" href="#8-passo-hardware-5-collegare-ps-e-axi-gpio" title="Permanent link">&para;</a></h1>
+<p>Adesso devi collegare:</p>
+<p>interfaccia AXI del PS
+clock
+reset
+bus AXI verso axi_gpio_0</p>
+<p>Il modo più semplice è:</p>
+<p>cliccare Run Connection Automation</p>
+<p>Vivado collegherà automaticamente:</p>
+<p>master AXI del PS
+slave AXI del GPIO
+clock
+reset
+interconnect, se necessario</p>
+<p>AMD documenta proprio questo uso di Connection Automation per fare le connessioni interne standard tra blocchi IP.</p>
+<h1 id="9-passo-hardware-6-portare-il-gpio-allesterno">9. Passo hardware 6: portare il GPIO all’esterno<a class="headerlink" href="#9-passo-hardware-6-portare-il-gpio-allesterno" title="Permanent link">&para;</a></h1>
+<p>Adesso hai axi_gpio_0, ma il suo segnale deve uscire dal design verso un pin della FPGA.</p>
+<p>Nel block design:</p>
+<p>seleziona il segnale GPIO del blocco
+tasto destro → Make External</p>
+<p>Ti verrà creata una porta esterna, spesso chiamata qualcosa come gpio_rtl_0_tri_o.</p>
+<p>Cosa rappresenta</p>
+<p>È il segnale fisico che poi mapperai su un pin della board, per esempio il LED utente.</p>
+<h1 id="10-passo-hardware-7-assegnare-il-pin-del-led">10. Passo hardware 7: assegnare il pin del LED<a class="headerlink" href="#10-passo-hardware-7-assegnare-il-pin-del-led" title="Permanent link">&para;</a></h1>
+<p>Qui dipende dalla tua board.</p>
+<p>Hai due casi:</p>
+<p>Caso A: board files supportati</p>
+<p>Vivado può già conoscere alcuni mapping board-aware.</p>
+<p>Caso B: file .xdc manuale</p>
+<p>Devi aggiungere un file di vincoli con il pin del LED.</p>
+<p>Esempio generico .xdc:
+<div class="highlight"><pre><span></span><code><span class="n">set_property</span><span class="w"> </span><span class="n">PACKAGE_PIN</span><span class="w"> </span><span class="n">T22</span><span class="w"> </span><span class="p">[</span><span class="n">get_ports</span><span class="w"> </span><span class="n">gpio_rtl_0_tri_o</span><span class="p">]</span>
+<span class="n">set_property</span><span class="w"> </span><span class="n">IOSTANDARD</span><span class="w"> </span><span class="n">LVCMOS33</span><span class="w"> </span><span class="p">[</span><span class="n">get_ports</span><span class="w"> </span><span class="n">gpio_rtl_0_tri_o</span><span class="p">]</span>
+</code></pre></div>
+Attenzione
+T22 è solo un esempio
+devi usare il pin vero della tua scheda
+il nome della porta deve coincidere con quello generato nel wrapper</p>
+<h1 id="11-passo-hardware-8-validare-il-design">11. Passo hardware 8: validare il design<a class="headerlink" href="#11-passo-hardware-8-validare-il-design" title="Permanent link">&para;</a></h1>
+<p>In block design:</p>
+<p>clicca Validate Design</p>
+<p>Questo controlla connessioni mancanti, reset, clock, indirizzi, ecc.</p>
+<p>Se ci sono errori, fermati qui e correggili prima di andare avanti.</p>
+<h1 id="12-passo-hardware-9-creare-il-wrapper-hdl">12. Passo hardware 9: creare il wrapper HDL<a class="headerlink" href="#12-passo-hardware-9-creare-il-wrapper-hdl" title="Permanent link">&para;</a></h1>
+<p>Quando il block design è valido:</p>
+<p>tasto destro sul block design
+Create HDL Wrapper
+scegli Let Vivado manage wrapper</p>
+<p>Vivado ti creerà un top-level HDL, tipicamente:</p>
+<p>design_1_wrapper.v</p>
+<p>Questo è il file top del tuo progetto.</p>
+<h1 id="13-passo-hardware-10-synthesize-implement-generate-bitstream">13. Passo hardware 10: synthesize, implement, generate bitstream<a class="headerlink" href="#13-passo-hardware-10-synthesize-implement-generate-bitstream" title="Permanent link">&para;</a></h1>
+<p>Poi fai:</p>
+<p>Run Synthesis
+Run Implementation
+Generate Bitstream</p>
+<p>Alla fine avrai il file .bit.</p>
+<h1 id="14-passo-hardware-11-esportare-lhardware-verso-vitis">14. Passo hardware 11: esportare l’hardware verso Vitis<a class="headerlink" href="#14-passo-hardware-11-esportare-lhardware-verso-vitis" title="Permanent link">&para;</a></h1>
+<p>Da Vivado:</p>
+<p>File → Export Hardware oppure usa il flusso equivalente verso Vitis
+assicurati di includere il bitstream
+otterrai un file .xsa</p>
+<p>Questo .xsa contiene:</p>
+<p>descrizione hardware
+address map AXI
+clock/reset
+bitstream associato o riferimenti utili per la platform</p>
+<p>AMD usa il file hardware export/XSA come base per creare la platform e le applicazioni in Vitis.</p>
+<h2 id="parte-software">Parte software<a class="headerlink" href="#parte-software" title="Permanent link">&para;</a></h2>
+<h1 id="15-passo-software-1-creare-la-platform-in-vitis">15. Passo software 1: creare la platform in Vitis<a class="headerlink" href="#15-passo-software-1-creare-la-platform-in-vitis" title="Permanent link">&para;</a></h1>
+<p>In Vitis:</p>
+<p>crea un workspace
+New Platform Component oppure importa l’hardware dal file .xsa
+seleziona lo .xsa esportato da Vivado</p>
+<p>Questo genera la platform con la BSP bare-metal e i driver compatibili con l’hardware che hai appena creato. AMD documenta la creazione di application/platform component dal design hardware esportato.</p>
+<h1 id="16-passo-software-2-creare-lapplicazione">16. Passo software 2: creare l’applicazione<a class="headerlink" href="#16-passo-software-2-creare-lapplicazione" title="Permanent link">&para;</a></h1>
+<p>In Vitis:</p>
+<p>New Application Project
+scegli la platform appena creata
+scegli un template vuoto oppure “Hello World”
+chiamala per esempio led_axi_gpio_app</p>
+<p>A questo punto il file che ti interessa davvero è:</p>
+<p>src/main.c</p>
+<h1 id="17-passo-software-3-capire-quali-header-servono">17. Passo software 3: capire quali header servono<a class="headerlink" href="#17-passo-software-3-capire-quali-header-servono" title="Permanent link">&para;</a></h1>
+<p>Per controllare l’AXI GPIO in C servono in genere:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;xparameters.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;xgpio.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;xil_printf.h&quot;</span>
+</code></pre></div>
+<p>Cosa fanno
+xparameters.h: contiene ID e indirizzi generati dalla BSP
+xgpio.h: API del driver AXI GPIO
+xil_printf.h: stampa debug su UART, se configurata</p>
+<p>Il driver XGpio definisce API come XGpio_Initialize, XGpio_SetDataDirection e le strutture istanza necessarie.</p>
+<h1 id="18-passo-software-4-il-programma-c-minimo">18. Passo software 4: il programma C minimo<a class="headerlink" href="#18-passo-software-4-il-programma-c-minimo" title="Permanent link">&para;</a></h1>
+<p>Ecco un main.c semplice e corretto per far blinkare il LED.
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;xparameters.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;xgpio.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;xil_printf.h&quot;</span>
+</code></pre></div></p>
+<h1 id="define-led_channel-1">define LED_CHANNEL 1<a class="headerlink" href="#define-led_channel-1" title="Permanent link">&para;</a></h1>
+<p>XGpio Gpio;</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">delay_loop</span><span class="p">(</span><span class="k">volatile</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">count</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Inizializzazione AXI GPIO...</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XGpio_Initialize</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Gpio</span><span class="p">,</span><span class="w"> </span><span class="n">XPAR_AXI_GPIO_0_DEVICE_ID</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">XST_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Errore: init GPIO fallita</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">XST_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/* Tutti i bit del canale 1 in output */</span>
+<span class="w">    </span><span class="n">XGpio_SetDataDirection</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Gpio</span><span class="p">,</span><span class="w"> </span><span class="n">LED_CHANNEL</span><span class="p">,</span><span class="w"> </span><span class="mh">0x0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">xil_printf</span><span class="p">(</span><span class="s">&quot;Blink LED avviato</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">XGpio_DiscreteWrite</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Gpio</span><span class="p">,</span><span class="w"> </span><span class="n">LED_CHANNEL</span><span class="p">,</span><span class="w"> </span><span class="mh">0x1</span><span class="p">);</span>
+<span class="w">        </span><span class="n">delay_loop</span><span class="p">(</span><span class="mi">5000000</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">XGpio_DiscreteWrite</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Gpio</span><span class="p">,</span><span class="w"> </span><span class="n">LED_CHANNEL</span><span class="p">,</span><span class="w"> </span><span class="mh">0x0</span><span class="p">);</span>
+<span class="w">        </span><span class="n">delay_loop</span><span class="p">(</span><span class="mi">5000000</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">API</span><span class="w"> </span><span class="n">usate</span>
+<span class="n">XGpio_Initialize</span><span class="p">(...)</span>
+<span class="n">XGpio_SetDataDirection</span><span class="p">(...)</span>
+<span class="n">XGpio_DiscreteWrite</span><span class="p">(...)</span>
+</code></pre></div>
+Sono proprio le primitive base del driver XGpio, documentate negli esempi ufficiali AMD/Xilinx.</p>
+<h1 id="19-cosa-significa-xpar_axi_gpio_0_device_id">19. Cosa significa XPAR_AXI_GPIO_0_DEVICE_ID<a class="headerlink" href="#19-cosa-significa-xpar_axi_gpio_0_device_id" title="Permanent link">&para;</a></h1>
+<p>Questo simbolo viene generato automaticamente nella BSP in base all’hardware esportato.
+Di solito lo trovi in xparameters.h.</p>
+<p>Quindi:</p>
+<p>non devi inventarlo a mano
+devi solo usare il nome che Vitis ha generato per quel blocco AXI GPIO</p>
+<p>Se il blocco non si chiama axi_gpio_0, il nome del define potrebbe cambiare.</p>
+<h1 id="20-cosa-significa-xgpio_setdatadirectiongpio-1-0x0">20. Cosa significa XGpio_SetDataDirection(&amp;Gpio, 1, 0x0)<a class="headerlink" href="#20-cosa-significa-xgpio_setdatadirectiongpio-1-0x0" title="Permanent link">&para;</a></h1>
+<p>Il secondo argomento è il channel.
+Il terzo è una mask di direzione:</p>
+<p>bit = 1 → input
+bit = 0 → output</p>
+<p>Quindi:</p>
+<p>XGpio_SetDataDirection(&amp;Gpio, 1, 0x0);</p>
+<p>significa: tutti i bit del canale 1 sono uscite. Gli esempi ufficiali XGpio usano proprio il canale 1 e spesso assumono che il bit 0 sia collegato a un LED.</p>
+<h1 id="21-passo-software-5-build-e-run">21. Passo software 5: build e run<a class="headerlink" href="#21-passo-software-5-build-e-run" title="Permanent link">&para;</a></h1>
+<p>In Vitis:</p>
+<p>build dell’applicazione
+programma la FPGA con l’hardware esportato
+lancia l’eseguibile sul target</p>
+<p>A livello pratico, Vitis usa la platform basata su .xsa e carica sia hardware sia software sulla board. AMD documenta il flusso di esecuzione di applicazioni embedded dopo la creazione della platform.</p>
+<p>Parte di verifica e debug</p>
+<h1 id="22-se-il-led-non-si-accende-ordine-di-controllo">22. Se il LED non si accende: ordine di controllo<a class="headerlink" href="#22-se-il-led-non-si-accende-ordine-di-controllo" title="Permanent link">&para;</a></h1>
+<p>Controlla in questo ordine:</p>
+<p>A. Hardware
+axi_gpio_0 è davvero collegato al PS tramite AXI?
+gpio_rtl_0_tri_o è stato fatto external?
+il pin .xdc è corretto?
+hai rigenerato bitstream dopo ogni modifica?
+B. Export
+hai riesportato il nuovo .xsa dopo le modifiche hardware?
+la platform Vitis è allineata all’ultimo hardware?
+C. Software
+stai usando il DEVICE_ID giusto?
+il channel è 1?
+la direzione è output?
+il delay non è troppo corto per vedere il blink?
+23. File minimi che ti consiglio di avere
+Vivado
+design_1.bd
+design_1_wrapper.v
+constraints/board_led.xdc
+Vitis
+src/main.c</p>
+<h1 id="24-esempio-di-xdc-da-creare">24. Esempio di .xdc da creare<a class="headerlink" href="#24-esempio-di-xdc-da-creare" title="Permanent link">&para;</a></h1>
+<p>Puoi creare un file, per esempio:</p>
+<p>board_led.xdc</p>
+<p>con contenuto simile a questo:
+<div class="highlight"><pre><span></span><code><span class="n">set_property</span><span class="w"> </span><span class="n">PACKAGE_PIN</span><span class="w"> </span><span class="n">T22</span><span class="w"> </span><span class="p">[</span><span class="n">get_ports</span><span class="w"> </span><span class="n">gpio_rtl_0_tri_o</span><span class="p">]</span>
+<span class="n">set_property</span><span class="w"> </span><span class="n">IOSTANDARD</span><span class="w"> </span><span class="n">LVCMOS33</span><span class="w"> </span><span class="p">[</span><span class="n">get_ports</span><span class="w"> </span><span class="n">gpio_rtl_0_tri_o</span><span class="p">]</span>
+</code></pre></div>
+Ripeto: il pin dipende dalla tua board.</p>
+<h1 id="25-cosa-succede-internamente-davvero">25. Cosa succede internamente, davvero<a class="headerlink" href="#25-cosa-succede-internamente-davvero" title="Permanent link">&para;</a></h1>
+<p>Questo è il punto chiave da capire:</p>
+<p>Il C chiama XGpio_DiscreteWrite(...).
+Il driver scrive in un registro del blocco AXI GPIO.
+Il PS raggiunge il blocco via AXI.
+Il bit del GPIO cambia.
+L’uscita del blocco guida il pin del LED.</p>
+<p>Questa è l’essenza di PS + AXI + PL su Zynq: il software controlla una periferica hardware memory-mapped. Il driver GPIO e gli esempi ufficiali AMD/Xilinx implementano proprio questo modello di accesso.</p>
+<h1 id="26-variante-ancora-piu-semplice-nessun-driver-accesso-diretto-ai-registri">26. Variante ancora più semplice: nessun driver, accesso diretto ai registri<a class="headerlink" href="#26-variante-ancora-piu-semplice-nessun-driver-accesso-diretto-ai-registri" title="Permanent link">&para;</a></h1>
+<p>Più avanti puoi anche fare accesso diretto all’indirizzo base del blocco AXI GPIO, ma per iniziare ti consiglio fortemente di usare XGpio, perché è il percorso documentato e più pulito. Gli esempi ufficiali sul driver GPIO sono pensati proprio per questo uso di base.</p>
+<h1 id="27-sequenza-completa-riassunta">27. Sequenza completa riassunta<a class="headerlink" href="#27-sequenza-completa-riassunta" title="Permanent link">&para;</a></h1>
+<p>In Vivado
+Create Project
+Create Block Design
+Add ZYNQ7 Processing System
+Run Block Automation
+Add AXI GPIO
+Configure AXI GPIO as 1-bit output
+Run Connection Automation
+Make GPIO external
+Add .xdc for LED pin
+Validate Design
+Create HDL Wrapper
+Generate Bitstream
+Export Hardware (.xsa)
+In Vitis
+Create platform from .xsa
+Create bare-metal application
+scrivi main.c
+build
+program/run target</p>
+<h1 id="28-il-tuo-primo-mini-progetto-completo">28. Il tuo primo mini-progetto completo<a class="headerlink" href="#28-il-tuo-primo-mini-progetto-completo" title="Permanent link">&para;</a></h1>
+<p>Questi sono i soli artefatti che devi davvero scrivere a mano all’inizio:</p>
+<p>main.c</p>
+<p>Quello che ti ho già dato.</p>
+<p>board_led.xdc</p>
+<p>Con il pin LED corretto.</p>
+<p>Tutto il resto viene generato da Vivado/Vitis.</p>
+<h1 id="29-cosa-farei-io-come-prossimo-step-dopo-questo">29. Cosa farei io come prossimo step dopo questo<a class="headerlink" href="#29-cosa-farei-io-come-prossimo-step-dopo-questo" title="Permanent link">&para;</a></h1>
+<p>Dopo che questo funziona, i due step naturali sono:</p>
+<p>sostituire AXI GPIO con un tuo IP custom AXI-Lite,
+oppure aggiungere più LED / switch / pulsanti e leggere input oltre a scrivere output.</p>
+<p>Questo segue direttamente il percorso dei tutorial embedded AMD che usano AXI GPIO come periferica di base nel PL collegata al PS.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

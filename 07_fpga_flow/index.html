@@ -10,24 +10,28 @@
       
       
       
-        <link rel="canonical" href="https://example.github.io/corso-microelettronica/07_fpga_flow/">
+        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/07_fpga_flow/">
       
       
-        <link rel="prev" href="../06_uvm/">
+        <link rel="prev" href="../06_mini_CPU_waveform/">
       
       
-        <link rel="next" href="../08_asic_flow/">
+        <link rel="next" href="../07_fpga_flow_chart/">
       
       
         
+          <link rel="alternate" href=".." hreflang="it">
+        
+          <link rel="alternate" href=".." hreflang="it">
+        
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../assets/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>07 FPGA Flow - Corso di Microelettronica Digitale</title>
+        <title>Overview - Corso di Microelettronica Digitale</title>
       
     
     
@@ -84,8 +88,7 @@
   <nav class="md-header__inner md-grid" aria-label="Intestazione">
     <a href=".." title="Corso di Microelettronica Digitale" class="md-header__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="../assets/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -102,7 +105,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              07 FPGA Flow
+              Overview
             
           </span>
         </div>
@@ -112,6 +115,32 @@
     
       <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Seleziona la lingua">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="" class="md-select__link">
+              
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href=".." hreflang="" class="md-select__link">
+              
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
     
     
       
@@ -202,7 +231,7 @@
   
     
   
-  00 Introduzione
+  Intro
 
       </a>
     </li>
@@ -221,7 +250,7 @@
   
     
   
-  01 Fondamenti
+  Fondamenti
 
       </a>
     </li>
@@ -233,17 +262,18 @@
   
   
   
-    <li class="md-tabs__item">
-      <a href="../02_vhdl/" class="md-tabs__link">
-        
-  
-  
     
+    
+      <li class="md-tabs__item">
+        <a href="../02_vhdl/" class="md-tabs__link">
+          
   
-  02 VHDL
+  
+  VHDL
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -259,7 +289,7 @@
           
   
   
-  03 Verilog
+  Verilog
 
         </a>
       </li>
@@ -272,17 +302,18 @@
   
   
   
-    <li class="md-tabs__item">
-      <a href="../04_systemverilog_design/" class="md-tabs__link">
-        
-  
-  
     
+    
+      <li class="md-tabs__item">
+        <a href="../04_systemverilog_design/" class="md-tabs__link">
+          
   
-  04 SystemVerilog Design
+  
+  SystemVerilog
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -291,17 +322,18 @@
   
   
   
-    <li class="md-tabs__item">
-      <a href="../05_verification_base/" class="md-tabs__link">
-        
-  
-  
     
+    
+      <li class="md-tabs__item">
+        <a href="../05_verification_base/" class="md-tabs__link">
+          
   
-  05 Verification Base
+  
+  Verification
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -310,17 +342,18 @@
   
   
   
-    <li class="md-tabs__item">
-      <a href="../06_uvm/" class="md-tabs__link">
-        
-  
-  
     
+    
+      <li class="md-tabs__item">
+        <a href="../06_uvm/" class="md-tabs__link">
+          
   
-  06 UVM
+  
+  UVM
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -331,17 +364,18 @@
     
   
   
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
-        
-  
-  
     
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
   
-  07 FPGA Flow
+  
+  FPGA
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -350,17 +384,18 @@
   
   
   
-    <li class="md-tabs__item">
-      <a href="../08_asic_flow/" class="md-tabs__link">
-        
-  
-  
     
+    
+      <li class="md-tabs__item">
+        <a href="../08_asic_flow/" class="md-tabs__link">
+          
   
-  08 ASIC Flow
+  
+  ASIC
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -369,17 +404,18 @@
   
   
   
-    <li class="md-tabs__item">
-      <a href="../09_progetti/" class="md-tabs__link">
-        
-  
-  
     
+    
+      <li class="md-tabs__item">
+        <a href="../09_progetti/" class="md-tabs__link">
+          
   
-  09 Progetti
+  
+  Progetti
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -388,17 +424,18 @@
   
   
   
-    <li class="md-tabs__item">
-      <a href="../10_tool_e_tcl/" class="md-tabs__link">
-        
-  
-  
     
+    
+      <li class="md-tabs__item">
+        <a href="../10_tool_e_tcl/" class="md-tabs__link">
+          
   
-  10 Tool e TCL
+  
+  Tool e Tcl/Tk
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -414,7 +451,26 @@
   
     
   
-  11 Appendici
+  Appendici
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../12_riferimenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Riferimenti
 
       </a>
     </li>
@@ -445,8 +501,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="Corso di Microelettronica Digitale" class="md-nav__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="../assets/logo.png" alt="logo">
 
     </a>
     Corso di Microelettronica Digitale
@@ -495,7 +550,7 @@
   <span class="md-ellipsis">
     
   
-    00 Introduzione
+    Intro
   
 
     
@@ -522,7 +577,7 @@
   <span class="md-ellipsis">
     
   
-    01 Fondamenti
+    Fondamenti
   
 
     
@@ -541,6 +596,60 @@
   
   
   
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VHDL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    VHDL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../02_vhdl/" class="md-nav__link">
         
@@ -549,7 +658,7 @@
   <span class="md-ellipsis">
     
   
-    02 VHDL
+    Overview
   
 
     
@@ -558,6 +667,42 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_vhdl_progettazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -594,7 +739,7 @@
   <span class="md-ellipsis">
     
   
-    03 Verilog
+    Verilog
   
 
     
@@ -610,7 +755,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    03 Verilog
+    Verilog
   
 
           </label>
@@ -630,7 +775,35 @@
   <span class="md-ellipsis">
     
   
-    Teoria
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_verilog_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
   
 
     
@@ -666,10 +839,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
         
           
-          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
             
   
   
@@ -687,8 +860,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_2">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -769,6 +942,34 @@
     
   
     In and Out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Libro_Verilog/utilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
   
 
     
@@ -1027,6 +1228,60 @@
   
   
   
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SystemVerilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../04_systemverilog_design/" class="md-nav__link">
         
@@ -1035,7 +1290,7 @@
   <span class="md-ellipsis">
     
   
-    04 SystemVerilog Design
+    Overview
   
 
     
@@ -1047,9 +1302,99 @@
     </li>
   
 
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_SV_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
     
       
       
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
   
   
   
@@ -1062,7 +1407,7 @@
   <span class="md-ellipsis">
     
   
-    05 Verification Base
+    Overview
   
 
     
@@ -1074,9 +1419,217 @@
     </li>
   
 
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
     
       
       
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.chipverify.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChipVerify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verificationguide.com" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VerificationGuide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.doulos.com/knowhow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doulos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
   
   
   
@@ -1089,7 +1642,7 @@
   <span class="md-ellipsis">
     
   
-    06 UVM
+    Overview
   
 
     
@@ -1101,9 +1654,220 @@
     </li>
   
 
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_uvm_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
     
       
       
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_3" id="__nav_8_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetto mini CPU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetto mini CPU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_mini_CPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_mini_CPU_waveform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Waveform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
   
   
     
@@ -1125,7 +1889,7 @@
   <span class="md-ellipsis">
     
   
-    07 FPGA Flow
+    Overview
   
 
     
@@ -1143,7 +1907,7 @@
   <span class="md-ellipsis">
     
   
-    07 FPGA Flow
+    Overview
   
 
     
@@ -1169,10 +1933,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#obiettivi" class="md-nav__link">
+  <a href="#objectives" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🎯 Obiettivi
+        🎯 Objectives
       
     </span>
   </a>
@@ -1180,37 +1944,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-cose-un-fpga" class="md-nav__link">
+  <a href="#1-what-is-an-fpga" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧠 1. Cos’è un FPGA
+        🧠 1. What is an FPGA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧠 1. What is an FPGA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Characteristics
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#2-flusso-fpga-completo" class="md-nav__link">
+  <a href="#2-complete-fpga-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔁 2. Flusso FPGA completo
+        🔁 2. Complete FPGA Flow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔁 2. Complete FPGA Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#engineering-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Engineering View
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#3-fasi-del-flusso" class="md-nav__link">
+  <a href="#3-flow-breakdown" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔍 3. Fasi del flusso
+        🔍 3. Flow Breakdown
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🔍 3. Fasi del flusso">
+    <nav class="md-nav" aria-label="🔍 3. Flow Breakdown">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1247,6 +2045,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#hardware-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hardware Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#34-implementation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1269,10 +2078,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#36-bitstream" class="md-nav__link">
+  <a href="#critical-path" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📦 3.6 Bitstream
+        Critical Path
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-bitstream-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📦 3.6 Bitstream Generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-hardware-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔌 3.7 Hardware Execution
       
     </span>
   </a>
@@ -1285,15 +2127,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-tool-principali" class="md-nav__link">
+  <a href="#4-industry-tools" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧰 4. Tool principali
+        🧰 4. Industry Tools
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🧰 4. Tool principali">
+    <nav class="md-nav" aria-label="🧰 4. Industry Tools">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1324,10 +2166,88 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-constraints-vincoli" class="md-nav__link">
+  <a href="#5-constraints-timing-physical" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔧 5. Constraints (vincoli)
+        🔧 5. Constraints (Timing &amp; Physical)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 5. Constraints (Timing &amp; Physical)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Constraints
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-timing-closure-critical-topic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 6. Timing Closure (Critical Topic)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 6. Timing Closure (Critical Topic)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Techniques
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ 7. Common Pitfalls
       
     </span>
   </a>
@@ -1335,10 +2255,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-caricamento-su-fpga" class="md-nav__link">
+  <a href="#8-exercises-design-oriented" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔌 6. Caricamento su FPGA
+        🧪 8. Exercises (Design-Oriented)
       
     </span>
   </a>
@@ -1346,32 +2266,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-errori-comuni" class="md-nav__link">
+  <a href="#next-module" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚠️ 7. Errori comuni
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-esercizi" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧪 8. Esercizi
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#collegamento-al-prossimo-modulo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Collegamento al prossimo modulo
+        🚀 Next Module
       
     </span>
   </a>
@@ -1396,9 +2294,388 @@
     </li>
   
 
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_fpga_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_zynq_ps_axi_led/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq LED
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
     
       
       
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_4" id="__nav_9_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq FIR
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zynq FIR
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_zynq_fir_dma_8tap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_zynq_fir_dma_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_zynq_axi_stream_theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AXI Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_zynq_dma_interrupt_perf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DMA Interrupt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_zynq_xparameters_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    X Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Digilent/Zybo-Z7" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zybo-Z7-20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASIC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ASIC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
   
   
   
@@ -1411,7 +2688,7 @@
   <span class="md-ellipsis">
     
   
-    08 ASIC Flow
+    Overview
   
 
     
@@ -1423,9 +2700,273 @@
     </li>
   
 
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_asic_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_openasic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAsic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
     
       
       
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_4" id="__nav_10_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openlane2.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenLAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/kunalg123/vsdflow" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CMOS VLSI Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
   
   
   
@@ -1438,7 +2979,7 @@
   <span class="md-ellipsis">
     
   
-    09 Progetti
+    Overview
   
 
     
@@ -1450,9 +2991,99 @@
     </li>
   
 
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_codice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorgenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
     
       
       
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool e Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tool e Tcl/Tk
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
   
   
   
@@ -1465,7 +3096,7 @@
   <span class="md-ellipsis">
     
   
-    10 Tool e TCL
+    Overview
   
 
     
@@ -1474,6 +3105,530 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_tcl_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_12_3" id="__nav_12_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_12_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.tutorialspoint.com/tcl-tk/index.htm" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.amd.com/r/en-US/ug894-vivado-tcl-scripting/Tcl-Scripting-in-Vivado" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Script Tcl in Vivado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://yosyshq.readthedocs.io/projects/yosys/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yosis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openroad.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenROAD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://gtkwave.github.io/gtkwave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GTKWave Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verilator.org/guide/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilator Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_12_3_7" id="__nav_12_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vivado
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_12_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vivado
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug910-vivado-getting-started" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug901-vivado-synthesis" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug904-vivado-implementation" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug835-vivado-tcl-commands" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcl Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/swdocs/modelsim/modelsim_user_2024_2.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ModelSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_tcl_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -1492,7 +3647,34 @@
   <span class="md-ellipsis">
     
   
-    11 Appendici
+    Appendici
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_riferimenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Riferimenti
   
 
     
@@ -1532,10 +3714,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#obiettivi" class="md-nav__link">
+  <a href="#objectives" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🎯 Obiettivi
+        🎯 Objectives
       
     </span>
   </a>
@@ -1543,37 +3725,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-cose-un-fpga" class="md-nav__link">
+  <a href="#1-what-is-an-fpga" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧠 1. Cos’è un FPGA
+        🧠 1. What is an FPGA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧠 1. What is an FPGA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Characteristics
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#2-flusso-fpga-completo" class="md-nav__link">
+  <a href="#2-complete-fpga-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔁 2. Flusso FPGA completo
+        🔁 2. Complete FPGA Flow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔁 2. Complete FPGA Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#engineering-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Engineering View
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#3-fasi-del-flusso" class="md-nav__link">
+  <a href="#3-flow-breakdown" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔍 3. Fasi del flusso
+        🔍 3. Flow Breakdown
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🔍 3. Fasi del flusso">
+    <nav class="md-nav" aria-label="🔍 3. Flow Breakdown">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1610,6 +3826,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#hardware-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hardware Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#34-implementation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1632,10 +3859,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#36-bitstream" class="md-nav__link">
+  <a href="#critical-path" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📦 3.6 Bitstream
+        Critical Path
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-bitstream-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📦 3.6 Bitstream Generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-hardware-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔌 3.7 Hardware Execution
       
     </span>
   </a>
@@ -1648,15 +3908,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-tool-principali" class="md-nav__link">
+  <a href="#4-industry-tools" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧰 4. Tool principali
+        🧰 4. Industry Tools
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🧰 4. Tool principali">
+    <nav class="md-nav" aria-label="🧰 4. Industry Tools">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1687,10 +3947,88 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-constraints-vincoli" class="md-nav__link">
+  <a href="#5-constraints-timing-physical" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔧 5. Constraints (vincoli)
+        🔧 5. Constraints (Timing &amp; Physical)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 5. Constraints (Timing &amp; Physical)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Constraints
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-timing-closure-critical-topic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 6. Timing Closure (Critical Topic)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 6. Timing Closure (Critical Topic)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Techniques
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-common-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ 7. Common Pitfalls
       
     </span>
   </a>
@@ -1698,10 +4036,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-caricamento-su-fpga" class="md-nav__link">
+  <a href="#8-exercises-design-oriented" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔌 6. Caricamento su FPGA
+        🧪 8. Exercises (Design-Oriented)
       
     </span>
   </a>
@@ -1709,32 +4047,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-errori-comuni" class="md-nav__link">
+  <a href="#next-module" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚠️ 7. Errori comuni
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-esercizi" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧪 8. Esercizi
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#collegamento-al-prossimo-modulo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Collegamento al prossimo modulo
+        🚀 Next Module
       
     </span>
   </a>
@@ -1770,106 +4086,160 @@
 
 
 <h1 id="07-fpga-flow">07 — FPGA Flow<a class="headerlink" href="#07-fpga-flow" title="Permanent link">&para;</a></h1>
-<h2 id="obiettivi">🎯 Obiettivi<a class="headerlink" href="#obiettivi" title="Permanent link">&para;</a></h2>
+<h2 id="objectives">🎯 Objectives<a class="headerlink" href="#objectives" title="Permanent link">&para;</a></h2>
+<p>This module introduces the <strong>complete FPGA implementation flow</strong> from RTL to hardware execution.</p>
+<p>By the end, you will:
+- Understand the <strong>end-to-end FPGA flow</strong>
+- Map RTL into <strong>physical hardware resources</strong>
+- Interpret <strong>timing analysis and constraints</strong>
+- Use <strong>industry-standard tools (Vivado / Quartus)</strong></p>
+<hr />
+<h2 id="1-what-is-an-fpga">🧠 1. What is an FPGA<a class="headerlink" href="#1-what-is-an-fpga" title="Permanent link">&para;</a></h2>
+<p>An FPGA (Field Programmable Gate Array) is a <strong>reconfigurable digital device</strong>.</p>
+<h3 id="key-characteristics">Key Characteristics<a class="headerlink" href="#key-characteristics" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Comprendere il flusso completo FPGA</li>
-<li>Passare da RTL a hardware reale</li>
-<li>Introdurre tool industriali</li>
-<li>Capire timing e vincoli</li>
+<li>Programmable after manufacturing</li>
+<li>Composed of:</li>
+<li>LUTs (logic)</li>
+<li>Flip-flops (storage)</li>
+<li>DSP blocks (arithmetic)</li>
+<li>BRAM (memory)</li>
 </ul>
+<p>👉 Enables rapid prototyping and deployment without ASIC fabrication</p>
 <hr />
-<h2 id="1-cose-un-fpga">🧠 1. Cos’è un FPGA<a class="headerlink" href="#1-cose-un-fpga" title="Permanent link">&para;</a></h2>
-<p>Un FPGA (Field Programmable Gate Array) è un dispositivo programmabile.</p>
-<p>👉 permette di implementare circuiti digitali senza fabbricazione ASIC</p>
-<hr />
-<h2 id="2-flusso-fpga-completo">🔁 2. Flusso FPGA completo<a class="headerlink" href="#2-flusso-fpga-completo" title="Permanent link">&para;</a></h2>
+<h2 id="2-complete-fpga-flow">🔁 2. Complete FPGA Flow<a class="headerlink" href="#2-complete-fpga-flow" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>RTL → Simulation → Synthesis → Implementation → Bitstream → FPGA
 </code></pre></div>
+<h3 id="engineering-view">Engineering View<a class="headerlink" href="#engineering-view" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>RTL Design
+   ↓
+Functional Verification
+   ↓
+Logic Synthesis
+   ↓
+Physical Implementation
+   ↓
+Timing Closure
+   ↓
+Bitstream Generation
+   ↓
+Hardware Debug
+</code></pre></div>
 <hr />
-<h2 id="3-fasi-del-flusso">🔍 3. Fasi del flusso<a class="headerlink" href="#3-fasi-del-flusso" title="Permanent link">&para;</a></h2>
-<hr />
+<h2 id="3-flow-breakdown">🔍 3. Flow Breakdown<a class="headerlink" href="#3-flow-breakdown" title="Permanent link">&para;</a></h2>
 <h3 id="31-rtl-design">🧩 3.1 RTL Design<a class="headerlink" href="#31-rtl-design" title="Permanent link">&para;</a></h3>
 <ul>
 <li>VHDL / Verilog / SystemVerilog</li>
-<li>descrizione del circuito</li>
+<li>Describes functionality</li>
 </ul>
+<p>👉 Output: abstract hardware model</p>
 <hr />
 <h3 id="32-simulation">🧪 3.2 Simulation<a class="headerlink" href="#32-simulation" title="Permanent link">&para;</a></h3>
 <ul>
-<li>verifica funzionale</li>
-<li>uso di testbench</li>
+<li>Functional verification</li>
+<li>Testbench-based validation</li>
 </ul>
+<p>👉 Goal: eliminate logical bugs before synthesis</p>
 <hr />
 <h3 id="33-synthesis">⚙️ 3.3 Synthesis<a class="headerlink" href="#33-synthesis" title="Permanent link">&para;</a></h3>
 <ul>
-<li>traduce RTL in gate logici</li>
+<li>Converts RTL → gate-level netlist</li>
 </ul>
-<p>👉 output:</p>
+<h3 id="hardware-mapping">Hardware Mapping<a class="headerlink" href="#hardware-mapping" title="Permanent link">&para;</a></h3>
 <ul>
-<li>netlist</li>
+<li>LUTs → combinational logic  </li>
+<li>FFs → registers  </li>
+<li>DSP → arithmetic  </li>
 </ul>
 <hr />
 <h3 id="34-implementation">🧱 3.4 Implementation<a class="headerlink" href="#34-implementation" title="Permanent link">&para;</a></h3>
-<p>Include:</p>
+<p>Includes:</p>
 <ul>
-<li>placement (posizionamento)</li>
-<li>routing (connessioni)</li>
+<li>Placement → physical location of logic</li>
+<li>Routing → interconnections</li>
 </ul>
+<p>👉 Determines real performance</p>
 <hr />
 <h3 id="35-timing-analysis">⏱️ 3.5 Timing Analysis<a class="headerlink" href="#35-timing-analysis" title="Permanent link">&para;</a></h3>
-<p>Verifica che il circuito rispetti i tempi:</p>
+<p>Ensures design meets clock constraints.</p>
+<h3 id="critical-path">Critical Path<a class="headerlink" href="#critical-path" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>FF → Logic → Logic → FF
+</code></pre></div>
+<h3 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h3>
 <ul>
-<li>setup time</li>
-<li>hold time</li>
-<li>clock frequency</li>
+<li>Setup time</li>
+<li>Hold time</li>
+<li>Max frequency (Fmax)</li>
 </ul>
 <hr />
-<h3 id="36-bitstream">📦 3.6 Bitstream<a class="headerlink" href="#36-bitstream" title="Permanent link">&para;</a></h3>
-<p>File finale da caricare su FPGA.</p>
+<h3 id="36-bitstream-generation">📦 3.6 Bitstream Generation<a class="headerlink" href="#36-bitstream-generation" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Final binary file</li>
+<li>Programs FPGA configuration memory</li>
+</ul>
 <hr />
-<h2 id="4-tool-principali">🧰 4. Tool principali<a class="headerlink" href="#4-tool-principali" title="Permanent link">&para;</a></h2>
+<h3 id="37-hardware-execution">🔌 3.7 Hardware Execution<a class="headerlink" href="#37-hardware-execution" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Load bitstream</li>
+<li>Run design on board</li>
+<li>Perform validation</li>
+</ul>
+<hr />
+<h2 id="4-industry-tools">🧰 4. Industry Tools<a class="headerlink" href="#4-industry-tools" title="Permanent link">&para;</a></h2>
 <h3 id="xilinx-vivado">🔷 Xilinx Vivado<a class="headerlink" href="#xilinx-vivado" title="Permanent link">&para;</a></h3>
 <ul>
-<li>per FPGA Xilinx</li>
+<li>Design, synthesis, implementation</li>
 </ul>
 <h3 id="intel-quartus">🔶 Intel Quartus<a class="headerlink" href="#intel-quartus" title="Permanent link">&para;</a></h3>
 <ul>
-<li>per FPGA Intel</li>
+<li>Equivalent flow for Intel FPGAs</li>
 </ul>
 <hr />
-<h2 id="5-constraints-vincoli">🔧 5. Constraints (vincoli)<a class="headerlink" href="#5-constraints-vincoli" title="Permanent link">&para;</a></h2>
-<p>Definiscono:</p>
-<ul>
-<li>clock</li>
-<li>pin</li>
-<li>timing</li>
-</ul>
-<p>Esempio:</p>
+<h2 id="5-constraints-timing-physical">🔧 5. Constraints (Timing &amp; Physical)<a class="headerlink" href="#5-constraints-timing-physical" title="Permanent link">&para;</a></h2>
+<p>Constraints define how the tool interprets your design.</p>
+<h3 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nv">create_clock</span><span class="w"> </span><span class="o">-</span>period<span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">[</span><span class="nv">get_ports</span><span class="w"> </span>clk<span class="k">]</span>
 </code></pre></div>
-<hr />
-<h2 id="6-caricamento-su-fpga">🔌 6. Caricamento su FPGA<a class="headerlink" href="#6-caricamento-su-fpga" title="Permanent link">&para;</a></h2>
+<h3 id="key-constraints">Key Constraints<a class="headerlink" href="#key-constraints" title="Permanent link">&para;</a></h3>
 <ul>
-<li>collegare board</li>
-<li>programmare dispositivo</li>
-<li>verificare comportamento</li>
+<li>Clock definition</li>
+<li>IO pin mapping</li>
+<li>Timing exceptions</li>
+</ul>
+<p>👉 Incorrect constraints = incorrect hardware behavior</p>
+<hr />
+<h2 id="6-timing-closure-critical-topic">📊 6. Timing Closure (Critical Topic)<a class="headerlink" href="#6-timing-closure-critical-topic" title="Permanent link">&para;</a></h2>
+<h3 id="goal">Goal<a class="headerlink" href="#goal" title="Permanent link">&para;</a></h3>
+<p>Meet required clock frequency</p>
+<h3 id="techniques">Techniques<a class="headerlink" href="#techniques" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Pipeline insertion</li>
+<li>Reduce combinational depth</li>
+<li>Use DSP blocks</li>
+<li>Optimize fanout</li>
 </ul>
 <hr />
-<h2 id="7-errori-comuni">⚠️ 7. Errori comuni<a class="headerlink" href="#7-errori-comuni" title="Permanent link">&para;</a></h2>
-<p>❌ ignorare timing
-❌ constraints sbagliati
-❌ non simulare prima
-❌ clock non definito</p>
+<h2 id="7-common-pitfalls">⚠️ 7. Common Pitfalls<a class="headerlink" href="#7-common-pitfalls" title="Permanent link">&para;</a></h2>
+<p>❌ Ignoring timing reports<br />
+❌ Incorrect constraints<br />
+❌ Skipping simulation<br />
+❌ Undefined clock domains  </p>
 <hr />
-<h2 id="8-esercizi">🧪 8. Esercizi<a class="headerlink" href="#8-esercizi" title="Permanent link">&para;</a></h2>
+<h2 id="8-exercises-design-oriented">🧪 8. Exercises (Design-Oriented)<a class="headerlink" href="#8-exercises-design-oriented" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Sintetizzare un contatore</li>
-<li>Definire un clock constraint</li>
-<li>Caricare su FPGA</li>
+<li>Synthesize a counter  </li>
+<li>Define clock constraint  </li>
+<li>Achieve timing closure  </li>
+<li>Deploy on FPGA  </li>
 </ol>
 <hr />
-<h2 id="collegamento-al-prossimo-modulo">🚀 Collegamento al prossimo modulo<a class="headerlink" href="#collegamento-al-prossimo-modulo" title="Permanent link">&para;</a></h2>
-<p>👉 Nel prossimo capitolo vedremo <strong>ASIC Flow</strong></p>
+<h2 id="next-module">🚀 Next Module<a class="headerlink" href="#next-module" title="Permanent link">&para;</a></h2>
+<p>👉 ASIC Flow</p>
+<p>Focus:
+- physical design
+- silicon implementation
+- advanced timing constraints</p>
+<hr />
 <h2 id="codice-di-riferimento">💻 Codice di riferimento<a class="headerlink" href="#codice-di-riferimento" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/constraints/counter_example.xdc">Constraints XDC</a></li>
