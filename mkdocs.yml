@@ -109,6 +109,19 @@ nav:
         - OpenLAN: https://openlane2.readthedocs.io/en/latest/
         - Tutorial: https://github.com/kunalg123/vsdflow
         - CMOS VLSI Design: https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908
+  - SoC:
+      - Introduzione ai SoC: soc/index.md
+      - Architettura di un SoC: soc/architettura.md
+      - Interconnessioni e bus: soc/bus.md
+      - Memorie e gerarchia: soc/memorie.md
+      - Periferiche e I/O: soc/periferiche.md
+      - Integrazione IP: soc/ip-integration.md
+      - Verifica di sistema: soc/verifica.md
+      - HW/SW co-design: soc/hw-sw-codesign.md
+      - Consumi, clock e reset: soc/power-clock-reset.md
+      - Safety e Security: soc/safety-security.md
+      - Physical awareness nel SoC: soc/physical-design-awareness.md
+      - Caso di studio: soc/case-study.md        
   - Progetti: 
     - Overview: 09_progetti.md
     - Sorgenti: 09_codice.md
