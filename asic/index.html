@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/07_fpga_flow/">
+        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/asic/">
       
       
-        <link rel="prev" href="../06_mini_CPU_waveform/">
+        <link rel="prev" href="../07_zynq_xparameters_guide/">
       
       
-        <link rel="next" href="../07_fpga_flow_chart/">
+        <link rel="next" href="flow/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Overview - Corso di Microelettronica Digitale</title>
+        <title>Introduzione agli ASIC - Corso di Microelettronica Digitale</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#07-fpga-flow" class="md-skip">
+        <a href="#introduzione-agli-asic" class="md-skip">
           Vai al contenuto
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overview
+              Introduzione agli ASIC
             
           </span>
         </div>
@@ -367,13 +367,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../fpga/" class="md-tabs__link">
           
   
   
@@ -389,11 +387,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../08_asic_flow/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -1839,31 +1839,28 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
         
           
-          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
             
   
   
@@ -1881,7 +1878,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1896,44 +1893,17 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Overview
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../fpga/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Overview
+    Introduzione alle FPGA
   
 
     
@@ -1942,381 +1912,370 @@
   
 
       </a>
-      
-        
+    </li>
+  
 
-<nav class="md-nav md-nav--secondary" aria-label="Indice">
+              
+            
+              
+                
   
   
   
+  
+    <li class="md-nav__item">
+      <a href="../fpga/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
     
   
+    Architettura di una FPGA
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Indice
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#objectives" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🎯 Objectives
-      
-    </span>
-  </a>
+
+    
+  </span>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1-what-is-an-fpga" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧠 1. What is an FPGA
-      
-    </span>
-  </a>
   
-    <nav class="md-nav" aria-label="🧠 1. What is an FPGA">
-      <ul class="md-nav__list">
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fpga/flow/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#key-characteristics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Key Characteristics
-      
-    </span>
-  </a>
   
-</li>
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fpga/rtl-design/" class="md-nav__link">
         
-      </ul>
-    </nav>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-complete-fpga-flow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔁 2. Complete FPGA Flow
-      
-    </span>
-  </a>
   
-    <nav class="md-nav" aria-label="🔁 2. Complete FPGA Flow">
-      <ul class="md-nav__list">
+  <span class="md-ellipsis">
+    
+  
+    RTL design per FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fpga/constraints-timing/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#engineering-view" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Engineering View
-      
-    </span>
-  </a>
   
-</li>
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fpga/synthesis/" class="md-nav__link">
         
-      </ul>
-    </nav>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-flow-breakdown" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔍 3. Flow Breakdown
-      
-    </span>
-  </a>
   
-    <nav class="md-nav" aria-label="🔍 3. Flow Breakdown">
-      <ul class="md-nav__list">
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fpga/resources/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#31-rtl-design" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧩 3.1 RTL Design
-      
-    </span>
-  </a>
   
-</li>
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse dedicate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fpga/clock-reset/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#32-simulation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧪 3.2 Simulation
-      
-    </span>
-  </a>
   
-</li>
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocking e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fpga/place-route/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#33-synthesis" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ⚙️ 3.3 Synthesis
-      
-    </span>
-  </a>
   
-</li>
+  
+  <span class="md-ellipsis">
+    
+  
+    Placement, routing e timing closure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fpga/verification/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#hardware-mapping" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Hardware Mapping
-      
-    </span>
-  </a>
   
-</li>
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica e test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fpga/debug/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#34-implementation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧱 3.4 Implementation
-      
-    </span>
-  </a>
   
-</li>
+  
+  <span class="md-ellipsis">
+    
+  
+    Debug su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fpga/prototyping-soc/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#35-timing-analysis" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ⏱️ 3.5 Timing Analysis
-      
-    </span>
-  </a>
   
-</li>
+  
+  <span class="md-ellipsis">
+    
+  
+    Prototipazione di sistemi e SoC su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fpga/fpga-vs-asic/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#critical-path" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Critical Path
-      
-    </span>
-  </a>
   
-</li>
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA vs ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fpga/case-study/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Metrics
-      
-    </span>
-  </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#36-bitstream-generation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📦 3.6 Bitstream Generation
-      
-    </span>
-  </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#37-hardware-execution" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔌 3.7 Hardware Execution
-      
-    </span>
-  </a>
+  <span class="md-ellipsis">
+    
   
-</li>
-        
-      </ul>
-    </nav>
+    Caso di studio FPGA
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-industry-tools" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧰 4. Industry Tools
-      
-    </span>
-  </a>
+
+    
+  </span>
   
-    <nav class="md-nav" aria-label="🧰 4. Industry Tools">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#xilinx-vivado" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔷 Xilinx Vivado
-      
-    </span>
-  </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#intel-quartus" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔶 Intel Quartus
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-constraints-timing-physical" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔧 5. Constraints (Timing &amp; Physical)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🔧 5. Constraints (Timing &amp; Physical)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#key-constraints" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Key Constraints
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-timing-closure-critical-topic" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📊 6. Timing Closure (Critical Topic)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="📊 6. Timing Closure (Critical Topic)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#goal" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Goal
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#techniques" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Techniques
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-common-pitfalls" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ⚠️ 7. Common Pitfalls
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-exercises-design-oriented" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧪 8. Exercises (Design-Oriented)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#next-module" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Next Module
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#codice-di-riferimento" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        💻 Codice di riferimento
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
+
+      </a>
     </li>
   
 
@@ -2391,22 +2350,19 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_4" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_17" >
         
           
-          <label class="md-nav__link" for="__nav_9_4" id="__nav_9_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_9_17" id="__nav_9_17_label" tabindex="0">
             
   
   
@@ -2424,8 +2380,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_9_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_17">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2650,28 +2606,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
-        
-          
-          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
             
   
   
@@ -2689,7 +2648,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2704,17 +2663,1021 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../08_asic_flow/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione agli ASIC
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
     
   
-    Overview
+    Introduzione agli ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-che-cose-un-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Che cos'è un ASIC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-perche-progettare-un-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Perché progettare un ASIC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Perché progettare un ASIC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-prestazioni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Prestazioni
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-efficienza-energetica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Efficienza energetica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-integrazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Integrazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-costo-per-grandi-volumi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Costo per grandi volumi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-quando-un-asic-non-e-la-scelta-giusta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Quando un ASIC non è la scelta giusta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-differenza-tra-asic-fpga-e-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Differenza tra ASIC, FPGA e SoC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Differenza tra ASIC, FPGA e SoC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 ASIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 FPGA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 SoC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-il-flusso-di-progettazione-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Il flusso di progettazione ASIC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-caratteristiche-del-flow-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Caratteristiche del flow ASIC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-le-fasi-principali-in-breve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Le fasi principali, in breve
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Le fasi principali, in breve">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-specifica-e-architettura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Specifica e architettura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-rtl-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 RTL design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-verifica-funzionale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Verifica funzionale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-sintesi-logica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Sintesi logica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 DFT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76-implementazione-fisica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6 Implementazione fisica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#77-signoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.7 Signoff
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#78-tape-out-e-fabbricazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.8 Tape-out e fabbricazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-input-output-e-responsabilita-nel-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Input, output e responsabilità nel flow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Input, output e responsabilità nel flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esempi-di-input" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esempi di input
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esempi-di-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esempi di output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-metriche-fondamentali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Metriche fondamentali
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Metriche fondamentali">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Area
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Timing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-potenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Potenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-testabilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 Testabilità
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#95-rischio-di-implementazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5 Rischio di implementazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-il-ruolo-delle-librerie-e-della-tecnologia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Il ruolo delle librerie e della tecnologia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-il-ruolo-della-verifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Il ruolo della verifica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-il-legame-tra-logica-e-fisica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Il legame tra logica e fisica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-errori-concettuali-frequenti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Errori concettuali frequenti
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Errori concettuali frequenti">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pensare-che-lrtl-basti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pensare che l'RTL basti
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pensare-che-il-backend-risolva-tutto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pensare che il backend "risolva tutto"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trascurare-dft-e-signoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trascurare DFT e signoff
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confondere-soc-e-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confondere SoC e ASIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-collegamenti-con-fpga-e-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Collegamenti con FPGA e SoC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Collegamenti con FPGA e SoC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collegamento-con-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Collegamento con FPGA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collegamento-con-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Collegamento con SoC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-obiettivo-della-sezione-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Obiettivo della sezione ASIC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="spec-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specifiche e architettura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="rtl-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTL design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="constraints-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="synthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DFT e testabilità
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="floorplanning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Floorplanning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="place-route/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Place and Route
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="cts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clock Tree Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="signoff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Signoff fisico e temporale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power analysis e low-power design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica funzionale e equivalenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="libraries-pdk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Librerie standard cell e PDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tapeout-fabrication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tape-out e fabbricazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio ASIC
   
 
     
@@ -2797,19 +3760,22 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_4" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_19" >
         
           
-          <label class="md-nav__link" for="__nav_10_4" id="__nav_10_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_10_19" id="__nav_10_19_label" tabindex="">
             
   
   
@@ -2827,8 +3793,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_10_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_19">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4137,10 +5103,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#objectives" class="md-nav__link">
+  <a href="#1-che-cose-un-asic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🎯 Objectives
+        1. Che cos'è un ASIC
       
     </span>
   </a>
@@ -4148,22 +5114,55 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-what-is-an-fpga" class="md-nav__link">
+  <a href="#2-perche-progettare-un-asic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧠 1. What is an FPGA
+        2. Perché progettare un ASIC
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🧠 1. What is an FPGA">
+    <nav class="md-nav" aria-label="2. Perché progettare un ASIC">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#key-characteristics" class="md-nav__link">
+  <a href="#21-prestazioni" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Key Characteristics
+        2.1 Prestazioni
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-efficienza-energetica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Efficienza energetica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-integrazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Integrazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-costo-per-grandi-volumi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Costo per grandi volumi
       
     </span>
   </a>
@@ -4176,22 +5175,55 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-complete-fpga-flow" class="md-nav__link">
+  <a href="#3-quando-un-asic-non-e-la-scelta-giusta" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔁 2. Complete FPGA Flow
+        3. Quando un ASIC non è la scelta giusta
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🔁 2. Complete FPGA Flow">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-differenza-tra-asic-fpga-e-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Differenza tra ASIC, FPGA e SoC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Differenza tra ASIC, FPGA e SoC">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#engineering-view" class="md-nav__link">
+  <a href="#41-asic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Engineering View
+        4.1 ASIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 FPGA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 SoC
       
     </span>
   </a>
@@ -4204,22 +5236,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-flow-breakdown" class="md-nav__link">
+  <a href="#5-il-flusso-di-progettazione-asic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔍 3. Flow Breakdown
+        5. Il flusso di progettazione ASIC
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🔍 3. Flow Breakdown">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-caratteristiche-del-flow-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Caratteristiche del flow ASIC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-le-fasi-principali-in-breve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Le fasi principali, in breve
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Le fasi principali, in breve">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-rtl-design" class="md-nav__link">
+  <a href="#71-specifica-e-architettura" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧩 3.1 RTL Design
+        7.1 Specifica e architettura
       
     </span>
   </a>
@@ -4227,10 +5281,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-simulation" class="md-nav__link">
+  <a href="#72-rtl-design" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧪 3.2 Simulation
+        7.2 RTL design
       
     </span>
   </a>
@@ -4238,10 +5292,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-synthesis" class="md-nav__link">
+  <a href="#73-verifica-funzionale" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚙️ 3.3 Synthesis
+        7.3 Verifica funzionale
       
     </span>
   </a>
@@ -4249,10 +5303,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#hardware-mapping" class="md-nav__link">
+  <a href="#74-sintesi-logica" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Hardware Mapping
+        7.4 Sintesi logica
       
     </span>
   </a>
@@ -4260,10 +5314,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-implementation" class="md-nav__link">
+  <a href="#75-dft" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧱 3.4 Implementation
+        7.5 DFT
       
     </span>
   </a>
@@ -4271,10 +5325,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-timing-analysis" class="md-nav__link">
+  <a href="#76-implementazione-fisica" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⏱️ 3.5 Timing Analysis
+        7.6 Implementazione fisica
       
     </span>
   </a>
@@ -4282,10 +5336,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#critical-path" class="md-nav__link">
+  <a href="#77-signoff" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Critical Path
+        7.7 Signoff
       
     </span>
   </a>
@@ -4293,32 +5347,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#metrics" class="md-nav__link">
+  <a href="#78-tape-out-e-fabbricazione" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Metrics
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#36-bitstream-generation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📦 3.6 Bitstream Generation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#37-hardware-execution" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔌 3.7 Hardware Execution
+        7.8 Tape-out e fabbricazione
       
     </span>
   </a>
@@ -4331,22 +5363,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-industry-tools" class="md-nav__link">
+  <a href="#8-input-output-e-responsabilita-nel-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧰 4. Industry Tools
+        8. Input, output e responsabilità nel flow
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🧰 4. Industry Tools">
+    <nav class="md-nav" aria-label="8. Input, output e responsabilità nel flow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#xilinx-vivado" class="md-nav__link">
+  <a href="#esempi-di-input" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔷 Xilinx Vivado
+        Esempi di input
       
     </span>
   </a>
@@ -4354,10 +5386,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#intel-quartus" class="md-nav__link">
+  <a href="#esempi-di-output" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔶 Intel Quartus
+        Esempi di output
       
     </span>
   </a>
@@ -4370,22 +5402,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-constraints-timing-physical" class="md-nav__link">
+  <a href="#9-metriche-fondamentali" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔧 5. Constraints (Timing &amp; Physical)
+        9. Metriche fondamentali
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🔧 5. Constraints (Timing &amp; Physical)">
+    <nav class="md-nav" aria-label="9. Metriche fondamentali">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
+  <a href="#91-area" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example
+        9.1 Area
       
     </span>
   </a>
@@ -4393,10 +5425,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#key-constraints" class="md-nav__link">
+  <a href="#92-timing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Key Constraints
+        9.2 Timing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-potenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Potenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-testabilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 Testabilità
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#95-rischio-di-implementazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5 Rischio di implementazione
       
     </span>
   </a>
@@ -4409,22 +5474,55 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-timing-closure-critical-topic" class="md-nav__link">
+  <a href="#10-il-ruolo-delle-librerie-e-della-tecnologia" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📊 6. Timing Closure (Critical Topic)
+        10. Il ruolo delle librerie e della tecnologia
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="📊 6. Timing Closure (Critical Topic)">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-il-ruolo-della-verifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Il ruolo della verifica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-il-legame-tra-logica-e-fisica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Il legame tra logica e fisica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-errori-concettuali-frequenti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Errori concettuali frequenti
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Errori concettuali frequenti">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#goal" class="md-nav__link">
+  <a href="#pensare-che-lrtl-basti" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Goal
+        Pensare che l'RTL basti
       
     </span>
   </a>
@@ -4432,10 +5530,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#techniques" class="md-nav__link">
+  <a href="#pensare-che-il-backend-risolva-tutto" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Techniques
+        Pensare che il backend "risolva tutto"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trascurare-dft-e-signoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trascurare DFT e signoff
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confondere-soc-e-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confondere SoC e ASIC
       
     </span>
   </a>
@@ -4448,10 +5568,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-common-pitfalls" class="md-nav__link">
+  <a href="#14-collegamenti-con-fpga-e-soc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚠️ 7. Common Pitfalls
+        14. Collegamenti con FPGA e SoC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Collegamenti con FPGA e SoC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collegamento-con-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Collegamento con FPGA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collegamento-con-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Collegamento con SoC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-obiettivo-della-sezione-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Obiettivo della sezione ASIC
       
     </span>
   </a>
@@ -4459,10 +5618,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-exercises-design-oriented" class="md-nav__link">
+  <a href="#16-in-sintesi" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧪 8. Exercises (Design-Oriented)
+        16. In sintesi
       
     </span>
   </a>
@@ -4470,21 +5629,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-module" class="md-nav__link">
+  <a href="#prossimo-passo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Next Module
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#codice-di-riferimento" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        💻 Codice di riferimento
+        Prossimo passo
       
     </span>
   </a>
@@ -4508,167 +5656,309 @@
 
 
 
-<h1 id="07-fpga-flow">07 — FPGA Flow<a class="headerlink" href="#07-fpga-flow" title="Permanent link">&para;</a></h1>
-<h2 id="objectives">🎯 Objectives<a class="headerlink" href="#objectives" title="Permanent link">&para;</a></h2>
-<p>This module introduces the <strong>complete FPGA implementation flow</strong> from RTL to hardware execution.</p>
-<p>By the end, you will:
-- Understand the <strong>end-to-end FPGA flow</strong>
-- Map RTL into <strong>physical hardware resources</strong>
-- Interpret <strong>timing analysis and constraints</strong>
-- Use <strong>industry-standard tools (Vivado / Quartus)</strong></p>
-<hr />
-<h2 id="1-what-is-an-fpga">🧠 1. What is an FPGA<a class="headerlink" href="#1-what-is-an-fpga" title="Permanent link">&para;</a></h2>
-<p>An FPGA (Field Programmable Gate Array) is a <strong>reconfigurable digital device</strong>.</p>
-<h3 id="key-characteristics">Key Characteristics<a class="headerlink" href="#key-characteristics" title="Permanent link">&para;</a></h3>
+<h1 id="introduzione-agli-asic">Introduzione agli ASIC<a class="headerlink" href="#introduzione-agli-asic" title="Permanent link">&para;</a></h1>
+<p>Gli <strong>ASIC</strong> (<em>Application-Specific Integrated Circuits</em>) sono circuiti integrati progettati per svolgere una funzione specifica o una famiglia ben definita di funzioni.<br />
+A differenza dei dispositivi programmabili come le FPGA, un ASIC non viene configurato dopo la fabbricazione per implementare logiche diverse: viene invece <strong>progettato, verificato e realizzato fisicamente</strong> per uno scopo preciso.</p>
+<p>Questa caratteristica rende gli ASIC particolarmente interessanti quando si vogliono ottenere:</p>
 <ul>
-<li>Programmable after manufacturing</li>
-<li>Composed of:</li>
-<li>LUTs (logic)</li>
-<li>Flip-flops (storage)</li>
-<li>DSP blocks (arithmetic)</li>
-<li>BRAM (memory)</li>
+<li>elevate prestazioni;</li>
+<li>alta efficienza energetica;</li>
+<li>integrazione spinta;</li>
+<li>costo unitario ridotto su grandi volumi;</li>
+<li>proprietà fisiche e temporali più controllate rispetto a una piattaforma programmabile.</li>
 </ul>
-<p>👉 Enables rapid prototyping and deployment without ASIC fabrication</p>
+<p>D'altra parte, la progettazione ASIC richiede un flusso molto più rigoroso e costoso rispetto a un progetto FPGA, perché il risultato finale è destinato alla <strong>fabbricazione del chip</strong>.</p>
 <hr />
-<h2 id="2-complete-fpga-flow">🔁 2. Complete FPGA Flow<a class="headerlink" href="#2-complete-fpga-flow" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>RTL → Simulation → Synthesis → Implementation → Bitstream → FPGA
-</code></pre></div>
-<h3 id="engineering-view">Engineering View<a class="headerlink" href="#engineering-view" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>RTL Design
-   ↓
-Functional Verification
-   ↓
-Logic Synthesis
-   ↓
-Physical Implementation
-   ↓
-Timing Closure
-   ↓
-Bitstream Generation
-   ↓
-Hardware Debug
-</code></pre></div>
-<hr />
-<h2 id="3-flow-breakdown">🔍 3. Flow Breakdown<a class="headerlink" href="#3-flow-breakdown" title="Permanent link">&para;</a></h2>
-<h3 id="31-rtl-design">🧩 3.1 RTL Design<a class="headerlink" href="#31-rtl-design" title="Permanent link">&para;</a></h3>
+<h2 id="1-che-cose-un-asic">1. Che cos'è un ASIC<a class="headerlink" href="#1-che-cose-un-asic" title="Permanent link">&para;</a></h2>
+<p>Un ASIC è un circuito integrato progettato per una specifica applicazione.<br />
+Può trattarsi, ad esempio, di:</p>
 <ul>
-<li>VHDL / Verilog / SystemVerilog</li>
-<li>Describes functionality</li>
+<li>un acceleratore hardware;</li>
+<li>un controller di comunicazione;</li>
+<li>un processore dedicato;</li>
+<li>un blocco di elaborazione del segnale;</li>
+<li>un sottosistema completo inserito in un SoC;</li>
+<li>un chip interamente dedicato a una funzione applicativa.</li>
 </ul>
-<p>👉 Output: abstract hardware model</p>
+<p>Il termine "specifico" non implica necessariamente semplicità: un ASIC può essere un piccolo controller oppure un sistema estremamente complesso.</p>
 <hr />
-<h3 id="32-simulation">🧪 3.2 Simulation<a class="headerlink" href="#32-simulation" title="Permanent link">&para;</a></h3>
+<h2 id="2-perche-progettare-un-asic">2. Perché progettare un ASIC<a class="headerlink" href="#2-perche-progettare-un-asic" title="Permanent link">&para;</a></h2>
+<p>La scelta di sviluppare un ASIC nasce quando i vantaggi di una soluzione dedicata superano quelli di una piattaforma programmabile o general-purpose.</p>
+<h3 id="21-prestazioni">2.1 Prestazioni<a class="headerlink" href="#21-prestazioni" title="Permanent link">&para;</a></h3>
+<p>Un ASIC può essere ottimizzato per:</p>
 <ul>
-<li>Functional verification</li>
-<li>Testbench-based validation</li>
+<li>un determinato datapath;</li>
+<li>una specifica frequenza di lavoro;</li>
+<li>una precisa gerarchia di memoria;</li>
+<li>un determinato protocollo o carico applicativo.</li>
 </ul>
-<p>👉 Goal: eliminate logical bugs before synthesis</p>
-<hr />
-<h3 id="33-synthesis">⚙️ 3.3 Synthesis<a class="headerlink" href="#33-synthesis" title="Permanent link">&para;</a></h3>
+<p>Questo consente di raggiungere prestazioni spesso superiori a quelle ottenibili con una FPGA o con una CPU general-purpose.</p>
+<h3 id="22-efficienza-energetica">2.2 Efficienza energetica<a class="headerlink" href="#22-efficienza-energetica" title="Permanent link">&para;</a></h3>
+<p>Poiché l'hardware viene progettato ad hoc, è possibile evitare molte delle risorse generiche presenti nelle piattaforme programmabili.<br />
+Questo porta spesso a una migliore efficienza energetica.</p>
+<h3 id="23-integrazione">2.3 Integrazione<a class="headerlink" href="#23-integrazione" title="Permanent link">&para;</a></h3>
+<p>Un ASIC può integrare in un unico chip:</p>
 <ul>
-<li>Converts RTL → gate-level netlist</li>
+<li>logica digitale;</li>
+<li>memorie;</li>
+<li>interfacce;</li>
+<li>moduli di controllo;</li>
+<li>talvolta anche blocchi analogici o mixed-signal, a seconda del contesto.</li>
 </ul>
-<h3 id="hardware-mapping">Hardware Mapping<a class="headerlink" href="#hardware-mapping" title="Permanent link">&para;</a></h3>
+<h3 id="24-costo-per-grandi-volumi">2.4 Costo per grandi volumi<a class="headerlink" href="#24-costo-per-grandi-volumi" title="Permanent link">&para;</a></h3>
+<p>Il costo iniziale di sviluppo di un ASIC è elevato, ma su produzioni molto grandi il costo per unità può diventare molto competitivo.</p>
+<hr />
+<h2 id="3-quando-un-asic-non-e-la-scelta-giusta">3. Quando un ASIC non è la scelta giusta<a class="headerlink" href="#3-quando-un-asic-non-e-la-scelta-giusta" title="Permanent link">&para;</a></h2>
+<p>Non sempre un ASIC è la soluzione migliore.<br />
+Può essere poco conveniente quando:</p>
 <ul>
-<li>LUTs → combinational logic  </li>
-<li>FFs → registers  </li>
-<li>DSP → arithmetic  </li>
+<li>i volumi sono bassi;</li>
+<li>i requisiti cambiano spesso;</li>
+<li>serve massima flessibilità;</li>
+<li>si vuole ridurre drasticamente il time-to-market;</li>
+<li>si è ancora in una fase esplorativa del progetto.</li>
 </ul>
+<p>In questi casi, spesso una <strong>FPGA</strong> è una scelta più adatta.</p>
 <hr />
-<h3 id="34-implementation">🧱 3.4 Implementation<a class="headerlink" href="#34-implementation" title="Permanent link">&para;</a></h3>
-<p>Includes:</p>
+<h2 id="4-differenza-tra-asic-fpga-e-soc">4. Differenza tra ASIC, FPGA e SoC<a class="headerlink" href="#4-differenza-tra-asic-fpga-e-soc" title="Permanent link">&para;</a></h2>
+<p>È utile distinguere chiaramente questi tre concetti.</p>
+<h3 id="41-asic">4.1 ASIC<a class="headerlink" href="#41-asic" title="Permanent link">&para;</a></h3>
+<p>È il <strong>circuito integrato custom</strong> realizzato per una funzione specifica.</p>
+<h3 id="42-fpga">4.2 FPGA<a class="headerlink" href="#42-fpga" title="Permanent link">&para;</a></h3>
+<p>È un dispositivo programmabile dopo la fabbricazione, utile per:</p>
 <ul>
-<li>Placement → physical location of logic</li>
-<li>Routing → interconnections</li>
+<li>prototipazione;</li>
+<li>sperimentazione;</li>
+<li>implementazioni flessibili;</li>
+<li>validazione rapida.</li>
 </ul>
-<p>👉 Determines real performance</p>
-<hr />
-<h3 id="35-timing-analysis">⏱️ 3.5 Timing Analysis<a class="headerlink" href="#35-timing-analysis" title="Permanent link">&para;</a></h3>
-<p>Ensures design meets clock constraints.</p>
-<h3 id="critical-path">Critical Path<a class="headerlink" href="#critical-path" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>FF → Logic → Logic → FF
-</code></pre></div>
-<h3 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h3>
+<h3 id="43-soc">4.3 SoC<a class="headerlink" href="#43-soc" title="Permanent link">&para;</a></h3>
+<p>Un <strong>System on Chip</strong> è un sistema integrato su singolo chip che può contenere:</p>
 <ul>
-<li>Setup time</li>
-<li>Hold time</li>
-<li>Max frequency (Fmax)</li>
+<li>CPU;</li>
+<li>memorie;</li>
+<li>interconnect;</li>
+<li>periferiche;</li>
+<li>acceleratori;</li>
+<li>moduli di sicurezza;</li>
+<li>sottosistemi di controllo.</li>
 </ul>
+<p>Un SoC può essere realizzato come ASIC.<br />
+In altre parole: <strong>ASIC</strong> descrive la natura implementativa del chip, mentre <strong>SoC</strong> descrive il livello architetturale del sistema integrato.</p>
+<pre class="mermaid"><code>flowchart LR
+    FPGA[FPGA]
+    ASIC[ASIC]
+    SOC[SoC]
+
+    FPGA --&gt;|prototipazione / flessibilità| ASIC
+    SOC --&gt;|può essere realizzato come| ASIC</code></pre>
 <hr />
-<h3 id="36-bitstream-generation">📦 3.6 Bitstream Generation<a class="headerlink" href="#36-bitstream-generation" title="Permanent link">&para;</a></h3>
+<h2 id="5-il-flusso-di-progettazione-asic">5. Il flusso di progettazione ASIC<a class="headerlink" href="#5-il-flusso-di-progettazione-asic" title="Permanent link">&para;</a></h2>
+<p>Uno degli aspetti distintivi della progettazione ASIC è il <strong>flow</strong>.<br />
+Un ASIC non nasce direttamente dall'RTL: passa attraverso molte fasi intermedie, ciascuna con obiettivi, vincoli e artefatti specifici.</p>
+<p>Una visione semplificata del flusso è la seguente:</p>
+<pre class="mermaid"><code>flowchart TD
+    SPEC[Specifica]
+    ARCH[Architettura]
+    RTL[RTL Design]
+    VER[Verifica]
+    SYN[Sintesi logica]
+    DFT[DFT / Testabilità]
+    FP[Floorplanning]
+    PNR[Place and Route]
+    CTS[Clock Tree Synthesis]
+    SIGN[Signoff]
+    TAPE[Tape-out]
+    FAB[Fabbricazione]
+
+    SPEC --&gt; ARCH --&gt; RTL
+    RTL --&gt; VER
+    VER --&gt; SYN --&gt; DFT --&gt; FP --&gt; PNR --&gt; CTS --&gt; SIGN --&gt; TAPE --&gt; FAB</code></pre>
+<p>Questa rappresentazione è volutamente lineare, ma nella pratica il flusso è iterativo: molte fasi si influenzano reciprocamente e richiedono correzioni o raffinamenti.</p>
+<hr />
+<h2 id="6-caratteristiche-del-flow-asic">6. Caratteristiche del flow ASIC<a class="headerlink" href="#6-caratteristiche-del-flow-asic" title="Permanent link">&para;</a></h2>
+<p>Rispetto ad altri contesti progettuali, il flow ASIC si distingue per:</p>
 <ul>
-<li>Final binary file</li>
-<li>Programs FPGA configuration memory</li>
+<li>forte dipendenza dai vincoli di timing;</li>
+<li>attenzione a area e potenza;</li>
+<li>necessità di testabilità;</li>
+<li>dipendenza da librerie di celle e tecnologia di processo;</li>
+<li>forte collegamento tra progetto logico e implementazione fisica;</li>
+<li>verifiche rigorose prima della fabbricazione.</li>
 </ul>
+<p>Questa combinazione rende il progetto ASIC molto più vicino alla realizzazione industriale del chip.</p>
 <hr />
-<h3 id="37-hardware-execution">🔌 3.7 Hardware Execution<a class="headerlink" href="#37-hardware-execution" title="Permanent link">&para;</a></h3>
+<h2 id="7-le-fasi-principali-in-breve">7. Le fasi principali, in breve<a class="headerlink" href="#7-le-fasi-principali-in-breve" title="Permanent link">&para;</a></h2>
+<p>Questa sezione ASIC verrà sviluppata in più pagine. Qui anticipiamo il senso delle fasi principali.</p>
+<h3 id="71-specifica-e-architettura">7.1 Specifica e architettura<a class="headerlink" href="#71-specifica-e-architettura" title="Permanent link">&para;</a></h3>
+<p>Si definiscono:</p>
 <ul>
-<li>Load bitstream</li>
-<li>Run design on board</li>
-<li>Perform validation</li>
+<li>funzione del chip;</li>
+<li>interfacce;</li>
+<li>frequenza target;</li>
+<li>vincoli di area e potenza;</li>
+<li>metriche principali;</li>
+<li>organizzazione generale del sistema.</li>
 </ul>
-<hr />
-<h2 id="4-industry-tools">🧰 4. Industry Tools<a class="headerlink" href="#4-industry-tools" title="Permanent link">&para;</a></h2>
-<h3 id="xilinx-vivado">🔷 Xilinx Vivado<a class="headerlink" href="#xilinx-vivado" title="Permanent link">&para;</a></h3>
+<h3 id="72-rtl-design">7.2 RTL design<a class="headerlink" href="#72-rtl-design" title="Permanent link">&para;</a></h3>
+<p>La funzione viene descritta in linguaggio hardware sintetizzabile, tipicamente tramite:</p>
 <ul>
-<li>Design, synthesis, implementation</li>
+<li>moduli;</li>
+<li>FSM;</li>
+<li>datapath;</li>
+<li>pipeline;</li>
+<li>registri;</li>
+<li>interfacce.</li>
 </ul>
-<h3 id="intel-quartus">🔶 Intel Quartus<a class="headerlink" href="#intel-quartus" title="Permanent link">&para;</a></h3>
+<h3 id="73-verifica-funzionale">7.3 Verifica funzionale<a class="headerlink" href="#73-verifica-funzionale" title="Permanent link">&para;</a></h3>
+<p>Si controlla che la descrizione RTL realizzi correttamente il comportamento voluto.</p>
+<h3 id="74-sintesi-logica">7.4 Sintesi logica<a class="headerlink" href="#74-sintesi-logica" title="Permanent link">&para;</a></h3>
+<p>L'RTL viene trasformato in una netlist di celle logiche appartenenti a una libreria standard-cell.</p>
+<h3 id="75-dft">7.5 DFT<a class="headerlink" href="#75-dft" title="Permanent link">&para;</a></h3>
+<p>Si introducono strutture per rendere il chip testabile dopo la fabbricazione.</p>
+<h3 id="76-implementazione-fisica">7.6 Implementazione fisica<a class="headerlink" href="#76-implementazione-fisica" title="Permanent link">&para;</a></h3>
+<p>Comprende:</p>
 <ul>
-<li>Equivalent flow for Intel FPGAs</li>
+<li>floorplanning;</li>
+<li>placement;</li>
+<li>routing;</li>
+<li>clock tree synthesis;</li>
+<li>ottimizzazioni fisiche.</li>
 </ul>
+<h3 id="77-signoff">7.7 Signoff<a class="headerlink" href="#77-signoff" title="Permanent link">&para;</a></h3>
+<p>Si eseguono le verifiche finali di correttezza fisica e temporale prima del tape-out.</p>
+<h3 id="78-tape-out-e-fabbricazione">7.8 Tape-out e fabbricazione<a class="headerlink" href="#78-tape-out-e-fabbricazione" title="Permanent link">&para;</a></h3>
+<p>Il progetto viene consegnato per la produzione del chip.</p>
 <hr />
-<h2 id="5-constraints-timing-physical">🔧 5. Constraints (Timing &amp; Physical)<a class="headerlink" href="#5-constraints-timing-physical" title="Permanent link">&para;</a></h2>
-<p>Constraints define how the tool interprets your design.</p>
-<h3 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nv">create_clock</span><span class="w"> </span><span class="o">-</span>period<span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">[</span><span class="nv">get_ports</span><span class="w"> </span>clk<span class="k">]</span>
-</code></pre></div>
-<h3 id="key-constraints">Key Constraints<a class="headerlink" href="#key-constraints" title="Permanent link">&para;</a></h3>
+<h2 id="8-input-output-e-responsabilita-nel-flow">8. Input, output e responsabilità nel flow<a class="headerlink" href="#8-input-output-e-responsabilita-nel-flow" title="Permanent link">&para;</a></h2>
+<p>Un modo molto utile per capire la progettazione ASIC è pensare a ogni fase come a una trasformazione di artefatti.</p>
+<h3 id="esempi-di-input">Esempi di input<a class="headerlink" href="#esempi-di-input" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Clock definition</li>
-<li>IO pin mapping</li>
-<li>Timing exceptions</li>
+<li>specifica;</li>
+<li>diagrammi architetturali;</li>
+<li>codice RTL;</li>
+<li>vincoli temporali;</li>
+<li>librerie;</li>
+<li>file tecnologici.</li>
 </ul>
-<p>👉 Incorrect constraints = incorrect hardware behavior</p>
-<hr />
-<h2 id="6-timing-closure-critical-topic">📊 6. Timing Closure (Critical Topic)<a class="headerlink" href="#6-timing-closure-critical-topic" title="Permanent link">&para;</a></h2>
-<h3 id="goal">Goal<a class="headerlink" href="#goal" title="Permanent link">&para;</a></h3>
-<p>Meet required clock frequency</p>
-<h3 id="techniques">Techniques<a class="headerlink" href="#techniques" title="Permanent link">&para;</a></h3>
+<h3 id="esempi-di-output">Esempi di output<a class="headerlink" href="#esempi-di-output" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Pipeline insertion</li>
-<li>Reduce combinational depth</li>
-<li>Use DSP blocks</li>
-<li>Optimize fanout</li>
+<li>netlist;</li>
+<li>report di sintesi;</li>
+<li>struttura DFT;</li>
+<li>floorplan;</li>
+<li>layout;</li>
+<li>report STA;</li>
+<li>file di tape-out.</li>
 </ul>
+<p>Questo approccio aiuta a comprendere che il flow ASIC è anche una <strong>catena di produzione di deliverable tecnici</strong>.</p>
 <hr />
-<h2 id="7-common-pitfalls">⚠️ 7. Common Pitfalls<a class="headerlink" href="#7-common-pitfalls" title="Permanent link">&para;</a></h2>
-<p>❌ Ignoring timing reports<br />
-❌ Incorrect constraints<br />
-❌ Skipping simulation<br />
-❌ Undefined clock domains  </p>
+<h2 id="9-metriche-fondamentali">9. Metriche fondamentali<a class="headerlink" href="#9-metriche-fondamentali" title="Permanent link">&para;</a></h2>
+<p>Nel progetto ASIC si lavora quasi sempre con alcune metriche chiave.</p>
+<h3 id="91-area">9.1 Area<a class="headerlink" href="#91-area" title="Permanent link">&para;</a></h3>
+<p>Quanto spazio logico e fisico occupa il design.</p>
+<h3 id="92-timing">9.2 Timing<a class="headerlink" href="#92-timing" title="Permanent link">&para;</a></h3>
+<p>Se il progetto soddisfa la frequenza target e i vincoli temporali.</p>
+<h3 id="93-potenza">9.3 Potenza<a class="headerlink" href="#93-potenza" title="Permanent link">&para;</a></h3>
+<p>Include sia consumo dinamico sia consumo statico.</p>
+<h3 id="94-testabilita">9.4 Testabilità<a class="headerlink" href="#94-testabilita" title="Permanent link">&para;</a></h3>
+<p>Quanto è facile verificare il chip dopo la fabbricazione.</p>
+<h3 id="95-rischio-di-implementazione">9.5 Rischio di implementazione<a class="headerlink" href="#95-rischio-di-implementazione" title="Permanent link">&para;</a></h3>
+<p>Quanto il progetto è realistico da chiudere correttamente entro i vincoli.</p>
+<p>Queste metriche non sono indipendenti: migliorare una può peggiorare un'altra.</p>
 <hr />
-<h2 id="8-exercises-design-oriented">🧪 8. Exercises (Design-Oriented)<a class="headerlink" href="#8-exercises-design-oriented" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Synthesize a counter  </li>
-<li>Define clock constraint  </li>
-<li>Achieve timing closure  </li>
-<li>Deploy on FPGA  </li>
-</ol>
-<hr />
-<h2 id="next-module">🚀 Next Module<a class="headerlink" href="#next-module" title="Permanent link">&para;</a></h2>
-<p>👉 ASIC Flow</p>
-<p>Focus:
-- physical design
-- silicon implementation
-- advanced timing constraints</p>
-<hr />
-<h2 id="codice-di-riferimento">💻 Codice di riferimento<a class="headerlink" href="#codice-di-riferimento" title="Permanent link">&para;</a></h2>
+<h2 id="10-il-ruolo-delle-librerie-e-della-tecnologia">10. Il ruolo delle librerie e della tecnologia<a class="headerlink" href="#10-il-ruolo-delle-librerie-e-della-tecnologia" title="Permanent link">&para;</a></h2>
+<p>Un ASIC non viene realizzato "nel vuoto".<br />
+Dipende sempre da:</p>
 <ul>
-<li><a href="https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/constraints/counter_example.xdc">Constraints XDC</a></li>
-<li><a href="https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/constraints/counter_example.sdc">Constraints SDC</a></li>
-<li><a href="https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/constraints/timing_only.sdc">Timing minimale</a></li>
+<li>una tecnologia di processo;</li>
+<li>una libreria di celle standard;</li>
+<li>modelli temporali;</li>
+<li>modelli di potenza;</li>
+<li>vincoli fisici;</li>
+<li>regole geometriche.</li>
 </ul>
+<p>Per questo la progettazione ASIC è profondamente legata al contesto tecnologico in cui il chip verrà realizzato.</p>
+<hr />
+<h2 id="11-il-ruolo-della-verifica">11. Il ruolo della verifica<a class="headerlink" href="#11-il-ruolo-della-verifica" title="Permanent link">&para;</a></h2>
+<p>Un ASIC deve essere verificato con estrema attenzione, perché una volta fabbricato non può essere corretto con la stessa libertà con cui si corregge un progetto FPGA o software.</p>
+<p>Per questo la verifica accompagna tutto il flow:</p>
+<ul>
+<li>verifica RTL;</li>
+<li>verifica di integrazione;</li>
+<li>equivalence checking;</li>
+<li>timing verification;</li>
+<li>verifiche fisiche finali.</li>
+</ul>
+<p>La progettazione ASIC è quindi tanto una disciplina di implementazione quanto una disciplina di controllo del rischio.</p>
+<hr />
+<h2 id="12-il-legame-tra-logica-e-fisica">12. Il legame tra logica e fisica<a class="headerlink" href="#12-il-legame-tra-logica-e-fisica" title="Permanent link">&para;</a></h2>
+<p>Una delle differenze culturali più importanti rispetto a molti corsi introduttivi di digitale è che, in ASIC, <strong>la struttura fisica conta moltissimo</strong>.</p>
+<p>Le decisioni logiche influenzano:</p>
+<ul>
+<li>floorplanning;</li>
+<li>congestione;</li>
+<li>clock tree;</li>
+<li>timing closure;</li>
+<li>potenza;</li>
+<li>testabilità;</li>
+<li>probabilità di successo del tape-out.</li>
+</ul>
+<p>Per questo il progettista ASIC deve sviluppare una forte sensibilità non solo verso il comportamento funzionale, ma anche verso le conseguenze fisiche delle proprie scelte.</p>
+<hr />
+<h2 id="13-errori-concettuali-frequenti">13. Errori concettuali frequenti<a class="headerlink" href="#13-errori-concettuali-frequenti" title="Permanent link">&para;</a></h2>
+<p>Quando si inizia a studiare gli ASIC, alcuni errori di impostazione sono molto comuni.</p>
+<h3 id="pensare-che-lrtl-basti">Pensare che l'RTL basti<a class="headerlink" href="#pensare-che-lrtl-basti" title="Permanent link">&para;</a></h3>
+<p>L'RTL è solo una parte del progetto. L'ASIC nasce dal collegamento tra RTL, vincoli, librerie, backend e verifiche.</p>
+<h3 id="pensare-che-il-backend-risolva-tutto">Pensare che il backend "risolva tutto"<a class="headerlink" href="#pensare-che-il-backend-risolva-tutto" title="Permanent link">&para;</a></h3>
+<p>Molte difficoltà fisiche derivano da scelte architetturali o RTL poco consapevoli.</p>
+<h3 id="trascurare-dft-e-signoff">Trascurare DFT e signoff<a class="headerlink" href="#trascurare-dft-e-signoff" title="Permanent link">&para;</a></h3>
+<p>Un chip che funziona in simulazione ma non è testabile o non chiude timing non è pronto per la fabbricazione.</p>
+<h3 id="confondere-soc-e-asic">Confondere SoC e ASIC<a class="headerlink" href="#confondere-soc-e-asic" title="Permanent link">&para;</a></h3>
+<p>Un SoC può essere realizzato come ASIC, ma la progettazione ASIC riguarda il <strong>come si realizza il chip</strong>, non solo <strong>come si organizza il sistema</strong>.</p>
+<hr />
+<h2 id="14-collegamenti-con-fpga-e-soc">14. Collegamenti con FPGA e SoC<a class="headerlink" href="#14-collegamenti-con-fpga-e-soc" title="Permanent link">&para;</a></h2>
+<p>Questa sezione ASIC si collega naturalmente alle altre due sezioni del corso.</p>
+<h3 id="collegamento-con-fpga">Collegamento con FPGA<a class="headerlink" href="#collegamento-con-fpga" title="Permanent link">&para;</a></h3>
+<p>La FPGA è spesso usata per:</p>
+<ul>
+<li>prototipare il design;</li>
+<li>validare sottosistemi;</li>
+<li>sviluppare firmware di bring-up;</li>
+<li>ridurre il rischio prima del tape-out.</li>
+</ul>
+<h3 id="collegamento-con-soc">Collegamento con SoC<a class="headerlink" href="#collegamento-con-soc" title="Permanent link">&para;</a></h3>
+<p>La sezione SoC descrive il sistema integrato dal punto di vista architetturale.<br />
+La sezione ASIC descrive invece il flusso che porta quel sistema a diventare un chip reale.</p>
+<hr />
+<h2 id="15-obiettivo-della-sezione-asic">15. Obiettivo della sezione ASIC<a class="headerlink" href="#15-obiettivo-della-sezione-asic" title="Permanent link">&para;</a></h2>
+<p>L'obiettivo di questa sezione è fornire una visione strutturata e progressiva del flow ASIC, chiarendo:</p>
+<ul>
+<li>cosa avviene in ogni fase;</li>
+<li>quali artefatti vengono prodotti;</li>
+<li>quali problemi tipici emergono;</li>
+<li>come si collegano progetto logico, vincoli e implementazione fisica;</li>
+<li>quali sono i passaggi che portano al tape-out.</li>
+</ul>
+<p>La sezione non sostituisce i manuali di tool o i corsi specialistici di backend, ma vuole offrire una base concettuale forte e coerente.</p>
+<hr />
+<h2 id="16-in-sintesi">16. In sintesi<a class="headerlink" href="#16-in-sintesi" title="Permanent link">&para;</a></h2>
+<p>Un ASIC è un circuito integrato progettato per una funzione specifica e realizzato attraverso un flusso rigoroso che collega:</p>
+<ul>
+<li>specifica;</li>
+<li>architettura;</li>
+<li>RTL;</li>
+<li>verifica;</li>
+<li>sintesi;</li>
+<li>DFT;</li>
+<li>implementazione fisica;</li>
+<li>signoff;</li>
+<li>tape-out.</li>
+</ul>
+<p>Studiare gli ASIC significa comprendere non solo come descrivere l'hardware, ma come trasformarlo in un chip reale, verificato e producibile.</p>
+<hr />
+<h2 id="prossimo-passo">Prossimo passo<a class="headerlink" href="#prossimo-passo" title="Permanent link">&para;</a></h2>
+<p>Dopo questa introduzione, il passo naturale successivo è approfondire il <strong>flusso di progettazione ASIC</strong>, cioè la sequenza completa delle fasi che porta dalla specifica iniziale fino al tape-out.</p>
 
 
 

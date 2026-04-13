@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/08_asic_flow/">
+        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/fpga/">
       
       
-        <link rel="prev" href="../07_zynq_xparameters_guide/">
+        <link rel="prev" href="../06_mini_CPU_waveform/">
       
       
-        <link rel="next" href="../08_asic_flow_chart/">
+        <link rel="next" href="architecture/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Overview - Corso di Microelettronica Digitale</title>
+        <title>Introduzione alle FPGA - Corso di Microelettronica Digitale</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#08-asic-flow" class="md-skip">
+        <a href="#introduzione-alle-fpga" class="md-skip">
           Vai al contenuto
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overview
+              Introduzione alle FPGA
             
           </span>
         </div>
@@ -367,11 +367,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../07_fpga_flow/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -387,13 +389,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../asic/" class="md-tabs__link">
           
   
   
@@ -1839,28 +1839,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
-        
-          
-          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
             
   
   
@@ -1878,7 +1881,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1893,17 +1896,848 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../07_fpga_flow/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione alle FPGA
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
     
   
-    Overview
+    Introduzione alle FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-che-cose-una-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Che cos'è una FPGA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-perche-le-fpga-sono-importanti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Perché le FPGA sono importanti
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Perché le FPGA sono importanti">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi-principali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi principali
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-quando-si-usa-una-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Quando si usa una FPGA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Quando si usa una FPGA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-didattica-e-apprendimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Didattica e apprendimento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-prototipazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Prototipazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-prodotti-reali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Prodotti reali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-validazione-pre-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Validazione pre-ASIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-differenza-tra-fpga-asic-e-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Differenza tra FPGA, ASIC e SoC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 FPGA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 ASIC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 SoC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-perche-una-fpga-non-e-solo-una-soluzione-temporanea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Perché una FPGA non è solo "una soluzione temporanea"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-architettura-interna-visione-introduttiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Architettura interna: visione introduttiva
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-il-flow-di-progetto-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Il flow di progetto FPGA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-bitstream-e-configurazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Bitstream e configurazione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#81-che-cose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Che cos'è
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-timing-e-realta-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Timing e realtà hardware
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-fpga-e-risorse-dedicate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. FPGA e risorse dedicate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-fpga-e-board-level-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. FPGA e board-level design
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-fpga-e-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. FPGA e debug
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-fpga-e-prototipazione-di-sistemi-complessi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. FPGA e prototipazione di sistemi complessi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-vantaggi-e-limiti-delle-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Vantaggi e limiti delle FPGA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Vantaggi e limiti delle FPGA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limiti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limiti
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-errori-concettuali-frequenti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Errori concettuali frequenti
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Errori concettuali frequenti">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pensare-che-basti-la-simulazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pensare che basti la simulazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pensare-che-lfpga-sia-quasi-un-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pensare che l'FPGA sia "quasi un ASIC"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trascurare-vincoli-e-clocking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trascurare vincoli e clocking
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vedere-la-scheda-solo-come-supporto-finale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vedere la scheda solo come supporto finale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-collegamento-con-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Collegamento con ASIC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-collegamento-con-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Collegamento con SoC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-obiettivo-della-sezione-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Obiettivo della sezione FPGA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di una FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="rtl-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTL design per FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="constraints-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="synthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse dedicate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocking e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="place-route/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Placement, routing e timing closure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica e test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="debug/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debug su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="prototyping-soc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prototipazione di sistemi e SoC su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="fpga-vs-asic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA vs ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio FPGA
   
 
     
@@ -1986,19 +2820,22 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_4" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_17" >
         
           
-          <label class="md-nav__link" for="__nav_9_4" id="__nav_9_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_9_17" id="__nav_9_17_label" tabindex="">
             
   
   
@@ -2016,8 +2853,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_9_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_17">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2242,31 +3079,28 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
         
           
-          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
             
   
   
@@ -2284,7 +3118,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2299,44 +3133,17 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Overview
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../asic/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Overview
+    Introduzione agli ASIC
   
 
     
@@ -2345,353 +3152,426 @@
   
 
       </a>
-      
-        
+    </li>
+  
 
-<nav class="md-nav md-nav--secondary" aria-label="Indice">
+              
+            
+              
+                
   
   
   
+  
+    <li class="md-nav__item">
+      <a href="../asic/flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
     
   
+    Flusso di progettazione ASIC
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Indice
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#objectives" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🎯 Objectives
-      
-    </span>
-  </a>
+
+    
+  </span>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1-what-is-an-asic" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧠 1. What is an ASIC
-      
-    </span>
-  </a>
   
-    <nav class="md-nav" aria-label="🧠 1. What is an ASIC">
-      <ul class="md-nav__list">
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../asic/spec-architecture/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#key-characteristics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Key Characteristics
-      
-    </span>
-  </a>
   
-</li>
+  
+  <span class="md-ellipsis">
+    
+  
+    Specifiche e architettura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../asic/rtl-design/" class="md-nav__link">
         
-      </ul>
-    </nav>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-fpga-vs-asic-engineering-view" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ⚖️ 2. FPGA vs ASIC (Engineering View)
-      
-    </span>
-  </a>
   
-    <nav class="md-nav" aria-label="⚖️ 2. FPGA vs ASIC (Engineering View)">
-      <ul class="md-nav__list">
+  <span class="md-ellipsis">
+    
+  
+    RTL design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../asic/constraints-timing/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#design-trade-off" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📌 Design Trade-off
-      
-    </span>
-  </a>
   
-</li>
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../asic/synthesis/" class="md-nav__link">
         
-      </ul>
-    </nav>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-complete-asic-flow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔁 3. Complete ASIC Flow
-      
-    </span>
-  </a>
   
-    <nav class="md-nav" aria-label="🔁 3. Complete ASIC Flow">
-      <ul class="md-nav__list">
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../asic/dft/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#engineering-flow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Engineering Flow
-      
-    </span>
-  </a>
   
-</li>
+  
+  <span class="md-ellipsis">
+    
+  
+    DFT e testabilità
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../asic/floorplanning/" class="md-nav__link">
         
-      </ul>
-    </nav>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-flow-breakdown" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔍 4. Flow Breakdown
-      
-    </span>
-  </a>
   
-    <nav class="md-nav" aria-label="🔍 4. Flow Breakdown">
-      <ul class="md-nav__list">
+  <span class="md-ellipsis">
+    
+  
+    Floorplanning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../asic/place-route/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#41-rtl-design" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧩 4.1 RTL Design
-      
-    </span>
-  </a>
   
-</li>
+  
+  <span class="md-ellipsis">
+    
+  
+    Place and Route
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../asic/cts/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#42-simulation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧪 4.2 Simulation
-      
-    </span>
-  </a>
   
-</li>
+  
+  <span class="md-ellipsis">
+    
+  
+    Clock Tree Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../asic/signoff/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#43-synthesis" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ⚙️ 4.3 Synthesis
-      
-    </span>
-  </a>
   
-</li>
+  
+  <span class="md-ellipsis">
+    
+  
+    Signoff fisico e temporale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../asic/power/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#tools" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Tools
-      
-    </span>
-  </a>
   
-</li>
+  
+  <span class="md-ellipsis">
+    
+  
+    Power analysis e low-power design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../asic/verification/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#output" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Output
-      
-    </span>
-  </a>
   
-</li>
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica funzionale e equivalenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../asic/libraries-pdk/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#44-static-timing-analysis-sta" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ⏱️ 4.4 Static Timing Analysis (STA)
-      
-    </span>
-  </a>
   
-</li>
+  
+  <span class="md-ellipsis">
+    
+  
+    Librerie standard cell e PDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../asic/tapeout-fabrication/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#key-checks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Key Checks
-      
-    </span>
-  </a>
   
-</li>
+  
+  <span class="md-ellipsis">
+    
+  
+    Tape-out e fabbricazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../asic/case-study/" class="md-nav__link">
         
-          <li class="md-nav__item">
-  <a href="#45-physical-design" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧱 4.5 Physical Design
-      
-    </span>
-  </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#impact" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📌 Impact
-      
-    </span>
-  </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#46-signoff" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔍 4.6 Signoff
-      
-    </span>
-  </a>
+  <span class="md-ellipsis">
+    
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#47-tape-out" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📦 4.7 Tape-out
-      
-    </span>
-  </a>
+    Caso di studio ASIC
   
-</li>
-        
-      </ul>
-    </nav>
+
+    
+  </span>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-timing-ppa-optimization" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📊 5. Timing &amp; PPA Optimization
-      
-    </span>
-  </a>
   
-    <nav class="md-nav" aria-label="📊 5. Timing &amp; PPA Optimization">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#critical-path" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Critical Path
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#optimization-techniques" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Optimization Techniques
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-industry-toolchains" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧰 6. Industry Toolchains
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-common-pitfalls" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ⚠️ 7. Common Pitfalls
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-exercises-design-oriented" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧪 8. Exercises (Design-Oriented)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#next-module" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Next Module
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#codice-di-riferimento" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        💻 Codice di riferimento
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
+
+      </a>
     </li>
   
 
@@ -2766,22 +3646,19 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_4" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_19" >
         
           
-          <label class="md-nav__link" for="__nav_10_4" id="__nav_10_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_10_19" id="__nav_10_19_label" tabindex="0">
             
   
   
@@ -2799,8 +3676,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_10_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_19">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4109,10 +4986,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#objectives" class="md-nav__link">
+  <a href="#1-che-cose-una-fpga" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🎯 Objectives
+        1. Che cos'è una FPGA
       
     </span>
   </a>
@@ -4120,22 +4997,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-what-is-an-asic" class="md-nav__link">
+  <a href="#2-perche-le-fpga-sono-importanti" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧠 1. What is an ASIC
+        2. Perché le FPGA sono importanti
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🧠 1. What is an ASIC">
+    <nav class="md-nav" aria-label="2. Perché le FPGA sono importanti">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#key-characteristics" class="md-nav__link">
+  <a href="#vantaggi-principali" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Key Characteristics
+        Vantaggi principali
       
     </span>
   </a>
@@ -4148,22 +5025,55 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-fpga-vs-asic-engineering-view" class="md-nav__link">
+  <a href="#3-quando-si-usa-una-fpga" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚖️ 2. FPGA vs ASIC (Engineering View)
+        3. Quando si usa una FPGA
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="⚖️ 2. FPGA vs ASIC (Engineering View)">
+    <nav class="md-nav" aria-label="3. Quando si usa una FPGA">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#design-trade-off" class="md-nav__link">
+  <a href="#31-didattica-e-apprendimento" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📌 Design Trade-off
+        3.1 Didattica e apprendimento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-prototipazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Prototipazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-prodotti-reali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Prodotti reali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-validazione-pre-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Validazione pre-ASIC
       
     </span>
   </a>
@@ -4176,22 +5086,198 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-complete-asic-flow" class="md-nav__link">
+  <a href="#4-differenza-tra-fpga-asic-e-soc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔁 3. Complete ASIC Flow
+        4. Differenza tra FPGA, ASIC e SoC
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🔁 3. Complete ASIC Flow">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 FPGA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 ASIC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 SoC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-perche-una-fpga-non-e-solo-una-soluzione-temporanea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Perché una FPGA non è solo "una soluzione temporanea"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-architettura-interna-visione-introduttiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Architettura interna: visione introduttiva
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-il-flow-di-progetto-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Il flow di progetto FPGA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-bitstream-e-configurazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Bitstream e configurazione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#81-che-cose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Che cos'è
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-timing-e-realta-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Timing e realtà hardware
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-fpga-e-risorse-dedicate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. FPGA e risorse dedicate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-fpga-e-board-level-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. FPGA e board-level design
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-fpga-e-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. FPGA e debug
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-fpga-e-prototipazione-di-sistemi-complessi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. FPGA e prototipazione di sistemi complessi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-vantaggi-e-limiti-delle-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Vantaggi e limiti delle FPGA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Vantaggi e limiti delle FPGA">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#engineering-flow" class="md-nav__link">
+  <a href="#vantaggi" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Engineering Flow
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limiti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limiti
       
     </span>
   </a>
@@ -4204,22 +5290,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-flow-breakdown" class="md-nav__link">
+  <a href="#15-errori-concettuali-frequenti" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔍 4. Flow Breakdown
+        15. Errori concettuali frequenti
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🔍 4. Flow Breakdown">
+    <nav class="md-nav" aria-label="15. Errori concettuali frequenti">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-rtl-design" class="md-nav__link">
+  <a href="#pensare-che-basti-la-simulazione" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧩 4.1 RTL Design
+        Pensare che basti la simulazione
       
     </span>
   </a>
@@ -4227,10 +5313,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-simulation" class="md-nav__link">
+  <a href="#pensare-che-lfpga-sia-quasi-un-asic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧪 4.2 Simulation
+        Pensare che l'FPGA sia "quasi un ASIC"
       
     </span>
   </a>
@@ -4238,10 +5324,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-synthesis" class="md-nav__link">
+  <a href="#trascurare-vincoli-e-clocking" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚙️ 4.3 Synthesis
+        Trascurare vincoli e clocking
       
     </span>
   </a>
@@ -4249,87 +5335,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tools" class="md-nav__link">
+  <a href="#vedere-la-scheda-solo-come-supporto-finale" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tools
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#output" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Output
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#44-static-timing-analysis-sta" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ⏱️ 4.4 Static Timing Analysis (STA)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#key-checks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Key Checks
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#45-physical-design" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧱 4.5 Physical Design
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#impact" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📌 Impact
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#46-signoff" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔍 4.6 Signoff
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#47-tape-out" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📦 4.7 Tape-out
+        Vedere la scheda solo come supporto finale
       
     </span>
   </a>
@@ -4342,49 +5351,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-timing-ppa-optimization" class="md-nav__link">
+  <a href="#16-collegamento-con-asic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📊 5. Timing &amp; PPA Optimization
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="📊 5. Timing &amp; PPA Optimization">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#critical-path" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Critical Path
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#optimization-techniques" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Optimization Techniques
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-industry-toolchains" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧰 6. Industry Toolchains
+        16. Collegamento con ASIC
       
     </span>
   </a>
@@ -4392,10 +5362,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-common-pitfalls" class="md-nav__link">
+  <a href="#17-collegamento-con-soc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚠️ 7. Common Pitfalls
+        17. Collegamento con SoC
       
     </span>
   </a>
@@ -4403,10 +5373,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-exercises-design-oriented" class="md-nav__link">
+  <a href="#18-obiettivo-della-sezione-fpga" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧪 8. Exercises (Design-Oriented)
+        18. Obiettivo della sezione FPGA
       
     </span>
   </a>
@@ -4414,10 +5384,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-module" class="md-nav__link">
+  <a href="#19-in-sintesi" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Next Module
+        19. In sintesi
       
     </span>
   </a>
@@ -4425,10 +5395,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#codice-di-riferimento" class="md-nav__link">
+  <a href="#prossimo-passo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        💻 Codice di riferimento
+        Prossimo passo
       
     </span>
   </a>
@@ -4452,189 +5422,358 @@
 
 
 
-<h1 id="08-asic-flow">08 — ASIC Flow<a class="headerlink" href="#08-asic-flow" title="Permanent link">&para;</a></h1>
-<h2 id="objectives">🎯 Objectives<a class="headerlink" href="#objectives" title="Permanent link">&para;</a></h2>
-<p>This module introduces the <strong>complete ASIC design flow</strong> from RTL to silicon fabrication.</p>
-<p>By the end, you will:
-- Understand the <strong>end-to-end ASIC flow</strong>
-- Compare FPGA vs ASIC implementation strategies
-- Interpret <strong>timing, power, and physical constraints</strong>
-- Connect <strong>RTL design with physical implementation</strong></p>
-<hr />
-<h2 id="1-what-is-an-asic">🧠 1. What is an ASIC<a class="headerlink" href="#1-what-is-an-asic" title="Permanent link">&para;</a></h2>
-<p>An ASIC (Application-Specific Integrated Circuit) is a <strong>custom-designed chip</strong> optimized for a specific application.</p>
-<h3 id="key-characteristics">Key Characteristics<a class="headerlink" href="#key-characteristics" title="Permanent link">&para;</a></h3>
+<h1 id="introduzione-alle-fpga">Introduzione alle FPGA<a class="headerlink" href="#introduzione-alle-fpga" title="Permanent link">&para;</a></h1>
+<p>Le <strong>FPGA</strong> (<em>Field-Programmable Gate Array</em>) sono dispositivi digitali programmabili che permettono di implementare circuiti hardware personalizzati <strong>dopo la fabbricazione del chip</strong>.<br />
+A differenza di un ASIC, che viene realizzato fisicamente per una funzione specifica, una FPGA è una piattaforma hardware riconfigurabile che può essere configurata per realizzare:</p>
 <ul>
-<li>Fixed functionality after fabrication</li>
-<li>Optimized for:</li>
-<li>performance</li>
-<li>power</li>
-<li>area (PPA)</li>
+<li>logica combinatoria e sequenziale;</li>
+<li>datapath dedicati;</li>
+<li>interfacce digitali;</li>
+<li>controller;</li>
+<li>acceleratori hardware;</li>
+<li>sistemi completi con processore, memorie e periferiche.</li>
 </ul>
-<p>👉 Unlike FPGA, no reconfiguration after tape-out</p>
-<hr />
-<h2 id="2-fpga-vs-asic-engineering-view">⚖️ 2. FPGA vs ASIC (Engineering View)<a class="headerlink" href="#2-fpga-vs-asic-engineering-view" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>FPGA</th>
-<th>ASIC</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>programmable</td>
-<td>fixed</td>
-</tr>
-<tr>
-<td>lower performance</td>
-<td>higher performance</td>
-</tr>
-<tr>
-<td>higher unit cost</td>
-<td>low cost at scale</td>
-</tr>
-<tr>
-<td>fast development</td>
-<td>long development cycle</td>
-</tr>
-</tbody>
-</table>
-<h3 id="design-trade-off">📌 Design Trade-off<a class="headerlink" href="#design-trade-off" title="Permanent link">&para;</a></h3>
+<p>Questa caratteristica rende le FPGA estremamente importanti sia in ambito didattico sia industriale, perché permettono di:</p>
 <ul>
-<li>FPGA → flexibility and fast iteration  </li>
-<li>ASIC → efficiency and scalability  </li>
+<li>sviluppare rapidamente architetture hardware;</li>
+<li>validare idee e prototipi;</li>
+<li>implementare sistemi complessi senza ricorrere subito a un ASIC;</li>
+<li>fare debug su hardware reale;</li>
+<li>ridurre il rischio di progetto prima di un eventuale tape-out.</li>
+</ul>
+<p>Le FPGA occupano quindi una posizione centrale nella progettazione moderna, come punto di incontro tra:</p>
+<ul>
+<li>progettazione logica;</li>
+<li>sperimentazione pratica;</li>
+<li>prototipazione di sistemi;</li>
+<li>validazione di sottosistemi e SoC;</li>
+<li>accelerazione hardware.</li>
 </ul>
 <hr />
-<h2 id="3-complete-asic-flow">🔁 3. Complete ASIC Flow<a class="headerlink" href="#3-complete-asic-flow" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>RTL → Simulation → Synthesis → STA → Physical Design → Signoff → Tape-out
-</code></pre></div>
-<h3 id="engineering-flow">Engineering Flow<a class="headerlink" href="#engineering-flow" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>RTL Design
-   ↓
-Functional Verification
-   ↓
-Logic Synthesis
-   ↓
-Static Timing Analysis (STA)
-   ↓
-Physical Design (Place &amp; Route)
-   ↓
-Signoff (Timing / Power / Integrity)
-   ↓
-Tape-out (Fabrication)
-</code></pre></div>
-<hr />
-<h2 id="4-flow-breakdown">🔍 4. Flow Breakdown<a class="headerlink" href="#4-flow-breakdown" title="Permanent link">&para;</a></h2>
-<h3 id="41-rtl-design">🧩 4.1 RTL Design<a class="headerlink" href="#41-rtl-design" title="Permanent link">&para;</a></h3>
+<h2 id="1-che-cose-una-fpga">1. Che cos'è una FPGA<a class="headerlink" href="#1-che-cose-una-fpga" title="Permanent link">&para;</a></h2>
+<p>Una FPGA è un circuito integrato che contiene una grande quantità di risorse programmabili, configurabili dal progettista per implementare un circuito digitale.</p>
+<p>In modo concettuale, una FPGA contiene:</p>
 <ul>
-<li>VHDL / Verilog / SystemVerilog</li>
-<li>Functional description of hardware</li>
+<li>blocchi logici configurabili;</li>
+<li>registri;</li>
+<li>rete di interconnessione programmabile;</li>
+<li>blocchi di memoria;</li>
+<li>risorse aritmetiche dedicate;</li>
+<li>risorse di clock;</li>
+<li>blocchi di I/O.</li>
+</ul>
+<p>Dopo la configurazione, la FPGA si comporta come un circuito hardware specifico, anche se il dispositivo fisico sottostante è generico.</p>
+<hr />
+<h2 id="2-perche-le-fpga-sono-importanti">2. Perché le FPGA sono importanti<a class="headerlink" href="#2-perche-le-fpga-sono-importanti" title="Permanent link">&para;</a></h2>
+<p>Le FPGA sono importanti perché uniscono due proprietà molto preziose:</p>
+<ul>
+<li><strong>flessibilità</strong>;</li>
+<li><strong>realismo hardware</strong>.</li>
+</ul>
+<p>A differenza del software, una FPGA non simula semplicemente il comportamento del circuito: realizza davvero un hardware concorrente e temporizzato.<br />
+A differenza di un ASIC, permette di modificare il progetto senza rifabbricare il chip.</p>
+<h3 id="vantaggi-principali">Vantaggi principali<a class="headerlink" href="#vantaggi-principali" title="Permanent link">&para;</a></h3>
+<ul>
+<li>iterazione rapida;</li>
+<li>prototipazione realistica;</li>
+<li>possibilità di test su hardware vero;</li>
+<li>riuso della stessa piattaforma per più progetti;</li>
+<li>riduzione del rischio prima di un eventuale ASIC;</li>
+<li>adatta sia a sistemi piccoli sia a piattaforme complesse.</li>
 </ul>
 <hr />
-<h3 id="42-simulation">🧪 4.2 Simulation<a class="headerlink" href="#42-simulation" title="Permanent link">&para;</a></h3>
+<h2 id="3-quando-si-usa-una-fpga">3. Quando si usa una FPGA<a class="headerlink" href="#3-quando-si-usa-una-fpga" title="Permanent link">&para;</a></h2>
+<p>Le FPGA vengono usate in molti contesti diversi.</p>
+<h3 id="31-didattica-e-apprendimento">3.1 Didattica e apprendimento<a class="headerlink" href="#31-didattica-e-apprendimento" title="Permanent link">&para;</a></h3>
+<p>Sono ideali per:</p>
 <ul>
-<li>Functional verification using testbenches</li>
-<li>Bug fixing before synthesis</li>
+<li>imparare il design digitale;</li>
+<li>verificare concretamente FSM, datapath e protocolli;</li>
+<li>collegare teoria e pratica;</li>
+<li>fare esperimenti con clock, reset, timing e I/O.</li>
+</ul>
+<h3 id="32-prototipazione">3.2 Prototipazione<a class="headerlink" href="#32-prototipazione" title="Permanent link">&para;</a></h3>
+<p>Permettono di validare rapidamente:</p>
+<ul>
+<li>IP hardware;</li>
+<li>acceleratori;</li>
+<li>interfacce;</li>
+<li>sottosistemi;</li>
+<li>interi SoC.</li>
+</ul>
+<h3 id="33-prodotti-reali">3.3 Prodotti reali<a class="headerlink" href="#33-prodotti-reali" title="Permanent link">&para;</a></h3>
+<p>In alcuni casi, la FPGA è la piattaforma finale del prodotto, soprattutto quando servono:</p>
+<ul>
+<li>volumi medio-bassi;</li>
+<li>aggiornabilità;</li>
+<li>time-to-market rapido;</li>
+<li>flessibilità futura.</li>
+</ul>
+<h3 id="34-validazione-pre-asic">3.4 Validazione pre-ASIC<a class="headerlink" href="#34-validazione-pre-asic" title="Permanent link">&para;</a></h3>
+<p>Le FPGA sono spesso usate per:</p>
+<ul>
+<li>prototipare architetture ASIC;</li>
+<li>sviluppare firmware e software di bring-up;</li>
+<li>ridurre il rischio prima del tape-out.</li>
 </ul>
 <hr />
-<h3 id="43-synthesis">⚙️ 4.3 Synthesis<a class="headerlink" href="#43-synthesis" title="Permanent link">&para;</a></h3>
+<h2 id="4-differenza-tra-fpga-asic-e-soc">4. Differenza tra FPGA, ASIC e SoC<a class="headerlink" href="#4-differenza-tra-fpga-asic-e-soc" title="Permanent link">&para;</a></h2>
+<p>È utile chiarire da subito la differenza tra questi concetti.</p>
+<h2 id="41-fpga">4.1 FPGA<a class="headerlink" href="#41-fpga" title="Permanent link">&para;</a></h2>
+<p>È un dispositivo programmabile dopo la fabbricazione.</p>
+<h2 id="42-asic">4.2 ASIC<a class="headerlink" href="#42-asic" title="Permanent link">&para;</a></h2>
+<p>È un chip progettato e fabbricato per una funzione specifica.</p>
+<h2 id="43-soc">4.3 SoC<a class="headerlink" href="#43-soc" title="Permanent link">&para;</a></h2>
+<p>È un sistema integrato su chip, che può contenere:</p>
 <ul>
-<li>RTL → gate-level netlist</li>
+<li>CPU;</li>
+<li>memorie;</li>
+<li>interconnect;</li>
+<li>periferiche;</li>
+<li>acceleratori.</li>
 </ul>
-<h3 id="tools">Tools<a class="headerlink" href="#tools" title="Permanent link">&para;</a></h3>
+<p>Un SoC può essere prototipato su FPGA e poi realizzato come ASIC.<br />
+Questo rende la FPGA un ponte molto naturale tra progettazione di sistema e realizzazione hardware.</p>
+<pre class="mermaid"><code>flowchart LR
+    FPGA[FPGA]
+    SOC[SoC]
+    ASIC[ASIC]
+
+    FPGA --&gt;|prototipazione / validazione| ASIC
+    SOC --&gt;|può essere prototipato su| FPGA
+    SOC --&gt;|può essere realizzato come| ASIC</code></pre>
+<hr />
+<h2 id="5-perche-una-fpga-non-e-solo-una-soluzione-temporanea">5. Perché una FPGA non è solo "una soluzione temporanea"<a class="headerlink" href="#5-perche-una-fpga-non-e-solo-una-soluzione-temporanea" title="Permanent link">&para;</a></h2>
+<p>Una visione superficiale considera la FPGA soltanto come "passo intermedio" verso un ASIC.<br />
+In realtà, la FPGA è una tecnologia con una propria identità progettuale.</p>
+<p>Una FPGA richiede infatti competenze specifiche su:</p>
 <ul>
-<li>Synopsys Design Compiler  </li>
-<li>Cadence Genus  </li>
+<li>architettura interna del dispositivo;</li>
+<li>mapping delle risorse;</li>
+<li>timing closure;</li>
+<li>clocking;</li>
+<li>interfacce verso la board;</li>
+<li>debug su hardware reale.</li>
 </ul>
-<h3 id="output">Output<a class="headerlink" href="#output" title="Permanent link">&para;</a></h3>
+<p>Per questo progettare bene su FPGA è una disciplina autonoma, non una semplice anticipazione del flow ASIC.</p>
+<hr />
+<h2 id="6-architettura-interna-visione-introduttiva">6. Architettura interna: visione introduttiva<a class="headerlink" href="#6-architettura-interna-visione-introduttiva" title="Permanent link">&para;</a></h2>
+<p>Anche se i dettagli verranno approfonditi nella sezione successiva, è utile anticipare che una FPGA non è un "vuoto digitale" programmabile arbitrariamente, ma un insieme strutturato di risorse.</p>
+<p>Una vista concettuale molto semplificata è la seguente:</p>
+<pre class="mermaid"><code>flowchart TB
+    LUT[LUT e logica configurabile]
+    FF[Flip-flop]
+    ROUTE[Routing programmabile]
+    BRAM[Block RAM]
+    DSP[DSP / risorse aritmetiche]
+    CLK[Clocking resources]
+    IO[Blocchi I/O]
+
+    LUT --&gt; ROUTE
+    FF --&gt; ROUTE
+    BRAM --&gt; ROUTE
+    DSP --&gt; ROUTE
+    CLK --&gt; ROUTE
+    ROUTE --&gt; IO</code></pre>
+<p>Questa struttura spiega perché il progettista FPGA debba conoscere non solo l'RTL, ma anche le risorse del dispositivo su cui il progetto verrà implementato.</p>
+<hr />
+<h2 id="7-il-flow-di-progetto-fpga">7. Il flow di progetto FPGA<a class="headerlink" href="#7-il-flow-di-progetto-fpga" title="Permanent link">&para;</a></h2>
+<p>Uno degli aspetti più importanti delle FPGA è il <strong>flow di implementazione</strong>, che porta da una descrizione hardware al caricamento del circuito sulla scheda.</p>
+<p>Una visione semplificata del flow è la seguente:</p>
+<pre class="mermaid"><code>flowchart TD
+    SPEC[Specifica]
+    RTL[RTL design]
+    SIM[Simulazione / verifica]
+    CONS[Vincoli]
+    SYN[Sintesi]
+    IMPL[Implementazione]
+    BIT[Bitstream]
+    PROG[Programmazione FPGA]
+    TEST[Test su board]
+
+    SPEC --&gt; RTL --&gt; SIM
+    RTL --&gt; SYN
+    CONS --&gt; SYN
+    SYN --&gt; IMPL --&gt; BIT --&gt; PROG --&gt; TEST</code></pre>
+<p>Questo flow è diverso da quello ASIC perché si conclude non con il tape-out, ma con la generazione del <strong>bitstream</strong> e la configurazione del dispositivo.</p>
+<hr />
+<h2 id="8-bitstream-e-configurazione">8. Bitstream e configurazione<a class="headerlink" href="#8-bitstream-e-configurazione" title="Permanent link">&para;</a></h2>
+<p>Una differenza cruciale rispetto agli ASIC è la presenza del <strong>bitstream</strong>.</p>
+<h2 id="81-che-cose">8.1 Che cos'è<a class="headerlink" href="#81-che-cose" title="Permanent link">&para;</a></h2>
+<p>Il bitstream è il file che configura la FPGA, definendo:</p>
 <ul>
-<li>Standard cell netlist</li>
+<li>la logica implementata;</li>
+<li>le connessioni interne;</li>
+<li>l'uso delle memorie;</li>
+<li>la rete di clock;</li>
+<li>i blocchi di I/O.</li>
+</ul>
+<h2 id="82-perche-e-importante">8.2 Perché è importante<a class="headerlink" href="#82-perche-e-importante" title="Permanent link">&para;</a></h2>
+<p>Il bitstream è il punto finale del flow FPGA, equivalente concettuale della "realizzazione finale" del progetto, ma con una differenza fondamentale: può essere rigenerato e ricaricato molto più facilmente rispetto a un ASIC.</p>
+<p>Questo rende la FPGA ideale per iterazioni rapide e sperimentazione.</p>
+<hr />
+<h2 id="9-timing-e-realta-hardware">9. Timing e realtà hardware<a class="headerlink" href="#9-timing-e-realta-hardware" title="Permanent link">&para;</a></h2>
+<p>Uno degli aspetti più formativi delle FPGA è che obbligano il progettista a confrontarsi con la realtà del timing.</p>
+<p>Su FPGA non basta scrivere RTL corretta in simulazione: bisogna anche verificare che il design:</p>
+<ul>
+<li>chiuda timing;</li>
+<li>usi bene le risorse;</li>
+<li>abbia clocking corretto;</li>
+<li>gestisca reset e crossing;</li>
+<li>sia compatibile con la board e le periferiche reali.</li>
+</ul>
+<p>Per questo le FPGA sono una scuola eccellente di progettazione hardware concreta.</p>
+<hr />
+<h2 id="10-fpga-e-risorse-dedicate">10. FPGA e risorse dedicate<a class="headerlink" href="#10-fpga-e-risorse-dedicate" title="Permanent link">&para;</a></h2>
+<p>Le FPGA moderne non sono costituite solo da logica generica.<br />
+Mettono a disposizione anche risorse dedicate molto importanti, ad esempio:</p>
+<ul>
+<li>block RAM;</li>
+<li>distributed RAM;</li>
+<li>DSP slice;</li>
+<li>FIFO;</li>
+<li>PLL o risorse di clocking;</li>
+<li>interfacce hard o blocchi speciali, in alcuni dispositivi.</li>
+</ul>
+<p>Questo significa che progettare bene su FPGA richiede di sapere <strong>quale risorsa usare per quale funzione</strong>.</p>
+<hr />
+<h2 id="11-fpga-e-board-level-design">11. FPGA e board-level design<a class="headerlink" href="#11-fpga-e-board-level-design" title="Permanent link">&para;</a></h2>
+<p>A differenza di molta teoria del digitale astratto, il lavoro su FPGA è spesso collegato a una <strong>scheda reale</strong>.</p>
+<p>Questo implica considerare:</p>
+<ul>
+<li>pin assignment;</li>
+<li>clock disponibili sulla board;</li>
+<li>reset esterni;</li>
+<li>LED, pulsanti, UART, SPI, GPIO;</li>
+<li>memorie esterne;</li>
+<li>interfacce fisiche reali.</li>
+</ul>
+<p>La progettazione FPGA ha quindi una dimensione pratica molto concreta che collega il design hardware al contesto fisico del sistema.</p>
+<hr />
+<h2 id="12-fpga-e-debug">12. FPGA e debug<a class="headerlink" href="#12-fpga-e-debug" title="Permanent link">&para;</a></h2>
+<p>Uno dei grandi vantaggi delle FPGA è che il progetto può essere testato e osservato su hardware reale, usando tecniche di debug come:</p>
+<ul>
+<li>logic analyzer interni;</li>
+<li>segnali di test su pin;</li>
+<li>UART di debug;</li>
+<li>LED e display;</li>
+<li>trigger su segnali interni.</li>
+</ul>
+<p>Questo rende la FPGA uno strumento prezioso non solo per implementare hardware, ma anche per <strong>capire</strong> come esso si comporti davvero.</p>
+<hr />
+<h2 id="13-fpga-e-prototipazione-di-sistemi-complessi">13. FPGA e prototipazione di sistemi complessi<a class="headerlink" href="#13-fpga-e-prototipazione-di-sistemi-complessi" title="Permanent link">&para;</a></h2>
+<p>Le FPGA non servono solo per piccoli esercizi o moduli isolati.<br />
+Possono essere usate per prototipare:</p>
+<ul>
+<li>acceleratori;</li>
+<li>sottosistemi di memoria;</li>
+<li>controller di comunicazione;</li>
+<li>sistemi con processore softcore;</li>
+<li>piattaforme complete con periferiche;</li>
+<li>prototipi di SoC.</li>
+</ul>
+<p>Questa capacità le rende centrali in molti flussi moderni di co-design hardware/software.</p>
+<hr />
+<h2 id="14-vantaggi-e-limiti-delle-fpga">14. Vantaggi e limiti delle FPGA<a class="headerlink" href="#14-vantaggi-e-limiti-delle-fpga" title="Permanent link">&para;</a></h2>
+<p>Per capire bene il loro ruolo, è utile vedere insieme vantaggi e limiti.</p>
+<h3 id="vantaggi">Vantaggi<a class="headerlink" href="#vantaggi" title="Permanent link">&para;</a></h3>
+<ul>
+<li>programmabilità;</li>
+<li>prototipazione rapida;</li>
+<li>riuso;</li>
+<li>time-to-market breve;</li>
+<li>debug reale;</li>
+<li>possibilità di iterare facilmente.</li>
+</ul>
+<h3 id="limiti">Limiti<a class="headerlink" href="#limiti" title="Permanent link">&para;</a></h3>
+<ul>
+<li>prestazioni in genere inferiori a un ASIC dedicato;</li>
+<li>consumi spesso maggiori;</li>
+<li>area meno efficiente dal punto di vista hardware;</li>
+<li>costo unitario poco conveniente su altissimi volumi;</li>
+<li>architettura interna vincolata dal dispositivo scelto.</li>
+</ul>
+<p>Questi limiti non riducono il valore della FPGA: aiutano a capire quando usarla e come progettare in modo consapevole.</p>
+<hr />
+<h2 id="15-errori-concettuali-frequenti">15. Errori concettuali frequenti<a class="headerlink" href="#15-errori-concettuali-frequenti" title="Permanent link">&para;</a></h2>
+<p>Quando si inizia a lavorare con le FPGA, alcuni errori di impostazione sono molto comuni.</p>
+<h3 id="pensare-che-basti-la-simulazione">Pensare che basti la simulazione<a class="headerlink" href="#pensare-che-basti-la-simulazione" title="Permanent link">&para;</a></h3>
+<p>La simulazione è fondamentale, ma non basta: il design deve anche usare correttamente le risorse del dispositivo e chiudere timing.</p>
+<h3 id="pensare-che-lfpga-sia-quasi-un-asic">Pensare che l'FPGA sia "quasi un ASIC"<a class="headerlink" href="#pensare-che-lfpga-sia-quasi-un-asic" title="Permanent link">&para;</a></h3>
+<p>Una FPGA e un ASIC hanno in comune molte tecniche di design, ma sono tecnologie diverse e vanno capite nelle loro specificità.</p>
+<h3 id="trascurare-vincoli-e-clocking">Trascurare vincoli e clocking<a class="headerlink" href="#trascurare-vincoli-e-clocking" title="Permanent link">&para;</a></h3>
+<p>Su FPGA, i problemi di clock, reset e timing sono reali e molto importanti.</p>
+<h3 id="vedere-la-scheda-solo-come-supporto-finale">Vedere la scheda solo come supporto finale<a class="headerlink" href="#vedere-la-scheda-solo-come-supporto-finale" title="Permanent link">&para;</a></h3>
+<p>In realtà, il comportamento della board fa parte del progetto stesso.</p>
+<hr />
+<h2 id="16-collegamento-con-asic">16. Collegamento con ASIC<a class="headerlink" href="#16-collegamento-con-asic" title="Permanent link">&para;</a></h2>
+<p>Le FPGA sono spesso usate come ponte verso il mondo ASIC.</p>
+<p>Permettono di:</p>
+<ul>
+<li>verificare architetture;</li>
+<li>prototipare acceleratori;</li>
+<li>sviluppare software di supporto;</li>
+<li>osservare problemi di sistema;</li>
+<li>ridurre il rischio prima del tape-out.</li>
+</ul>
+<p>Tuttavia, una FPGA non replica perfettamente un ASIC: alcune differenze riguardano:</p>
+<ul>
+<li>architettura interna;</li>
+<li>potenza;</li>
+<li>timing;</li>
+<li>flessibilità;</li>
+<li>contesto tecnologico.</li>
+</ul>
+<p>Studiare le FPGA aiuta quindi anche a capire meglio perché il flow ASIC richieda disciplina così forte.</p>
+<hr />
+<h2 id="17-collegamento-con-soc">17. Collegamento con SoC<a class="headerlink" href="#17-collegamento-con-soc" title="Permanent link">&para;</a></h2>
+<p>Le FPGA sono una piattaforma eccellente per prototipare e sperimentare concetti di SoC.</p>
+<p>Su FPGA si possono costruire sistemi che includono:</p>
+<ul>
+<li>processore;</li>
+<li>bus;</li>
+<li>memorie;</li>
+<li>periferiche;</li>
+<li>acceleratori;</li>
+<li>firmware di controllo.</li>
+</ul>
+<p>Per questo la sezione FPGA è naturalmente complementare alla sezione SoC: mostra il lato <strong>realizzabile e sperimentabile</strong> dei concetti architetturali.</p>
+<hr />
+<h2 id="18-obiettivo-della-sezione-fpga">18. Obiettivo della sezione FPGA<a class="headerlink" href="#18-obiettivo-della-sezione-fpga" title="Permanent link">&para;</a></h2>
+<p>L'obiettivo di questa sezione è costruire una visione chiara e progressiva di come si progetta su FPGA, affrontando in modo ordinato:</p>
+<ul>
+<li>architettura interna del dispositivo;</li>
+<li>flow di progetto;</li>
+<li>RTL design;</li>
+<li>vincoli e timing;</li>
+<li>uso delle risorse;</li>
+<li>implementazione fisica sul dispositivo;</li>
+<li>verifica e debug su hardware reale;</li>
+<li>collegamenti con SoC e ASIC.</li>
+</ul>
+<p>La sezione non vuole essere soltanto una guida all'uso di tool, ma una base concettuale solida per comprendere la logica progettuale delle FPGA.</p>
+<hr />
+<h2 id="19-in-sintesi">19. In sintesi<a class="headerlink" href="#19-in-sintesi" title="Permanent link">&para;</a></h2>
+<p>Le FPGA sono dispositivi programmabili che permettono di implementare circuiti hardware personalizzati dopo la fabbricazione del chip.</p>
+<p>Il loro valore sta nella combinazione di:</p>
+<ul>
+<li>flessibilità;</li>
+<li>realismo hardware;</li>
+<li>rapidità di iterazione;</li>
+<li>capacità di prototipare sistemi complessi;</li>
+<li>possibilità di test e debug su piattaforma reale.</li>
+</ul>
+<p>Studiare le FPGA significa imparare non solo a scrivere RTL, ma anche a comprendere:</p>
+<ul>
+<li>risorse hardware programmabili;</li>
+<li>timing;</li>
+<li>clocking;</li>
+<li>implementazione su dispositivo;</li>
+<li>collegamento tra simulazione e hardware reale.</li>
 </ul>
 <hr />
-<h3 id="44-static-timing-analysis-sta">⏱️ 4.4 Static Timing Analysis (STA)<a class="headerlink" href="#44-static-timing-analysis-sta" title="Permanent link">&para;</a></h3>
-<p>Analyzes timing without simulation.</p>
-<h3 id="key-checks">Key Checks<a class="headerlink" href="#key-checks" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Setup time  </li>
-<li>Hold time  </li>
-<li>Clock skew  </li>
-<li>Critical paths  </li>
-</ul>
-<hr />
-<h3 id="45-physical-design">🧱 4.5 Physical Design<a class="headerlink" href="#45-physical-design" title="Permanent link">&para;</a></h3>
-<p>Includes:</p>
-<ul>
-<li>Floorplanning  </li>
-<li>Placement  </li>
-<li>Clock Tree Synthesis (CTS)  </li>
-<li>Routing  </li>
-</ul>
-<h3 id="impact">📌 Impact<a class="headerlink" href="#impact" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Directly affects performance, power, and area</li>
-</ul>
-<hr />
-<h3 id="46-signoff">🔍 4.6 Signoff<a class="headerlink" href="#46-signoff" title="Permanent link">&para;</a></h3>
-<p>Final verification before fabrication:</p>
-<ul>
-<li>Timing closure  </li>
-<li>Power analysis  </li>
-<li>Signal integrity  </li>
-<li>DRC / LVS checks  </li>
-</ul>
-<hr />
-<h3 id="47-tape-out">📦 4.7 Tape-out<a class="headerlink" href="#47-tape-out" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Final design sent to foundry</li>
-<li>Silicon fabrication begins</li>
-</ul>
-<p>👉 Errors at this stage are extremely costly</p>
-<hr />
-<h2 id="5-timing-ppa-optimization">📊 5. Timing &amp; PPA Optimization<a class="headerlink" href="#5-timing-ppa-optimization" title="Permanent link">&para;</a></h2>
-<h3 id="critical-path">Critical Path<a class="headerlink" href="#critical-path" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>FF → Logic → Logic → FF
-</code></pre></div>
-<h3 id="optimization-techniques">Optimization Techniques<a class="headerlink" href="#optimization-techniques" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Pipeline insertion  </li>
-<li>Gate sizing  </li>
-<li>Buffer insertion  </li>
-<li>Clock tree optimization  </li>
-</ul>
-<hr />
-<h2 id="6-industry-toolchains">🧰 6. Industry Toolchains<a class="headerlink" href="#6-industry-toolchains" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Synopsys (DC, PrimeTime)  </li>
-<li>Cadence (Genus, Innovus)  </li>
-<li>Siemens EDA (Mentor Graphics)  </li>
-</ul>
-<hr />
-<h2 id="7-common-pitfalls">⚠️ 7. Common Pitfalls<a class="headerlink" href="#7-common-pitfalls" title="Permanent link">&para;</a></h2>
-<p>❌ Ignoring timing constraints<br />
-❌ Underestimating power consumption<br />
-❌ Poor floorplanning<br />
-❌ Insufficient verification  </p>
-<hr />
-<h2 id="8-exercises-design-oriented">🧪 8. Exercises (Design-Oriented)<a class="headerlink" href="#8-exercises-design-oriented" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Describe full ASIC flow  </li>
-<li>Compare FPGA vs ASIC trade-offs  </li>
-<li>Identify a critical path  </li>
-<li>Propose timing optimizations  </li>
-</ol>
-<hr />
-<h2 id="next-module">🚀 Next Module<a class="headerlink" href="#next-module" title="Permanent link">&para;</a></h2>
-<p>👉 Complete Projects</p>
-<p>Focus:
-- end-to-end design
-- system integration
-- real-world applications</p>
-<hr />
-<h2 id="codice-di-riferimento">💻 Codice di riferimento<a class="headerlink" href="#codice-di-riferimento" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://github.com/gmorimac-droid/corso-microelettronica/blob/main/code/constraints/counter_example.sdc">SDC Example</a></li>
-</ul>
+<h2 id="prossimo-passo">Prossimo passo<a class="headerlink" href="#prossimo-passo" title="Permanent link">&para;</a></h2>
+<p>Dopo questa introduzione, il passo naturale successivo è approfondire l'<strong>architettura di una FPGA</strong>, cioè le risorse interne del dispositivo e il modo in cui esse condizionano il design e l'implementazione dei progetti hardware.</p>
 
 
 

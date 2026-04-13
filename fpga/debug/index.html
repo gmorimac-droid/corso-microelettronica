@@ -1,0 +1,6282 @@
+
+<!doctype html>
+<html lang="it" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corso completo su HDL, verification e tool FPGA/ASIC">
+      
+      
+      
+        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/fpga/debug/">
+      
+      
+        <link rel="prev" href="../verification/">
+      
+      
+        <link rel="next" href="../prototyping-soc/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Debug su FPGA - Corso di Microelettronica Digitale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#debug-su-fpga" class="md-skip">
+          Vai al contenuto
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Intestazione">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-header__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corso di Microelettronica Digitale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Debug su FPGA
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green"  aria-label="Passa a dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passa a dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="lime"  aria-label="Passa a light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passa a light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Cancella" aria-label="Cancella" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../00_introduzione/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Intro
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../01_fondamenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Fondamenti
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../02_vhdl/" class="md-tabs__link">
+          
+  
+  
+  VHDL
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../03_verilog/" class="md-tabs__link">
+          
+  
+  
+  Verilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../04_systemverilog_design/" class="md-tabs__link">
+          
+  
+  
+  SystemVerilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../05_verification_base/" class="md-tabs__link">
+          
+  
+  
+  Verification
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../06_uvm/" class="md-tabs__link">
+          
+  
+  
+  UVM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  FPGA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../asic/" class="md-tabs__link">
+          
+  
+  
+  ASIC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../soc/" class="md-tabs__link">
+          
+  
+  
+  SoC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../09_progetti/" class="md-tabs__link">
+          
+  
+  
+  Progetti
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../10_tool_e_tcl/" class="md-tabs__link">
+          
+  
+  
+  Tool e Tcl/Tk
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../11_appendici/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Appendici
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../12_riferimenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Riferimenti
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigazione" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-nav__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Corso di Microelettronica Digitale
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00_introduzione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01_fondamenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VHDL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    VHDL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl_progettazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foglio di lavoro
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foglio di lavoro
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Tool Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/in_out/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    In and Out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/utilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/clocks_registers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocks and Registers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/state_machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/modular_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modular Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/memories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/managing_clocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Managing Clocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/io_flavors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O Flavors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A Taste of Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Rest for Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SystemVerilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_systemverilog_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_SV_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05_verification_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.chipverify.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChipVerify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verificationguide.com" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VerificationGuide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.doulos.com/knowhow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doulos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_3" id="__nav_8_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetto mini CPU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetto mini CPU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU_waveform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Waveform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione alle FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di una FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rtl-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTL design per FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../constraints-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../synthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse dedicate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocking e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../place-route/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Placement, routing e timing closure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica e test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debug su FPGA
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debug su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-perche-il-debug-su-fpga-e-diverso-dalla-simulazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Perché il debug su FPGA è diverso dalla simulazione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-obiettivi-del-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Obiettivi del debug
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Obiettivi del debug">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obiettivi-tipici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Obiettivi tipici
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-le-grandi-famiglie-di-debug-su-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Le grandi famiglie di debug su FPGA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-debug-esterno-semplice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Debug esterno semplice
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Debug esterno semplice">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esempi-classici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esempi classici
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-quando-e-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Quando è utile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-limiti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Limiti
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-led-come-strumento-di-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. LED come strumento di debug
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. LED come strumento di debug">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cosa-possono-mostrare" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cosa possono mostrare
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limiti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limiti
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-gpio-e-pin-di-osservazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. GPIO e pin di osservazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. GPIO e pin di osservazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-e-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando è utile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limiti_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limiti
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-debug-via-uart-o-interfacce-simili" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Debug via UART o interfacce simili
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#71-cosa-si-puo-fare" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Cosa si può fare
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72-vantaggi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#73-limiti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Limiti
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-logic-analyzer-interni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Logic analyzer interni
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#81-che-cose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Che cos'è
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82-perche-e-cosi-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Perché è così utile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-cosa-osservare-con-un-logic-analyzer-interno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Cosa osservare con un logic analyzer interno
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-trigger" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Trigger
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#101-a-cosa-servono" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 A cosa servono
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#102-perche-sono-fondamentali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Perché sono fondamentali
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-debug-e-profondita-temporale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Debug e profondità temporale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Debug e profondità temporale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esempi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esempi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-debug-di-clock-e-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Debug di clock e reset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#121-verifiche-tipiche-sul-clock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Verifiche tipiche sul clock
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#122-verifiche-tipiche-sul-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Verifiche tipiche sul reset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-debug-di-fsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Debug di FSM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Debug di FSM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#domande-tipiche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Domande tipiche
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-debug-di-datapath-e-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Debug di datapath e pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-debug-di-interfacce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Debug di interfacce
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-debug-dei-cdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Debug dei CDC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-correlare-simulazione-e-hardware-reale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Correlare simulazione e hardware reale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17. Correlare simulazione e hardware reale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#approccio-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approccio utile
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-inserire-il-debug-gia-nella-progettazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Inserire il debug già nella progettazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. Inserire il debug già nella progettazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esempi_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esempi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-debug-e-impatto-sul-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Debug e impatto sul design
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-errori-frequenti-nel-debug-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Errori frequenti nel debug FPGA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-buone-pratiche-concettuali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. Buone pratiche concettuali
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-collegamento-con-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. Collegamento con ASIC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-collegamento-con-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23. Collegamento con SoC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-esempio-concettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24. Esempio concettuale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        25. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../prototyping-soc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prototipazione di sistemi e SoC su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fpga-vs-asic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA vs ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_fpga_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_ps_axi_led/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq LED
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_17" id="__nav_9_17_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq FIR
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zynq FIR
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_8tap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_axi_stream_theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AXI Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_dma_interrupt_perf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DMA Interrupt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_xparameters_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    X Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Digilent/Zybo-Z7" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zybo-Z7-20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASIC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ASIC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione agli ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/spec-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specifiche e architettura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/rtl-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTL design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/constraints-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/synthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DFT e testabilità
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/floorplanning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Floorplanning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/place-route/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Place and Route
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/cts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clock Tree Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/signoff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Signoff fisico e temporale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power analysis e low-power design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica funzionale e equivalenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/libraries-pdk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Librerie standard cell e PDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/tapeout-fabrication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tape-out e fabbricazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_asic_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_openasic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAsic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_19" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_19" id="__nav_10_19_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_19">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openlane2.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenLAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/kunalg123/vsdflow" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CMOS VLSI Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SoC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SoC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione ai SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/architettura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di un SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/bus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interconnessioni e bus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/memorie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memorie e gerarchia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/periferiche/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Periferiche e I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/ip-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrazione IP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/verifica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica di sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/hw-sw-codesign/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HW/SW co-design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/power-clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consumi, clock e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/safety-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Safety e Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/physical-design-awareness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physical awareness nel SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_codice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorgenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool e Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tool e Tcl/Tk
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_e_tcl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3" id="__nav_13_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.tutorialspoint.com/tcl-tk/index.htm" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.amd.com/r/en-US/ug894-vivado-tcl-scripting/Tcl-Scripting-in-Vivado" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Script Tcl in Vivado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://yosyshq.readthedocs.io/projects/yosys/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yosis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openroad.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenROAD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://gtkwave.github.io/gtkwave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GTKWave Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verilator.org/guide/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilator Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3_7" id="__nav_13_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vivado
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_13_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vivado
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug910-vivado-getting-started" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug901-vivado-synthesis" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug904-vivado-implementation" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug835-vivado-tcl-commands" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcl Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/swdocs/modelsim/modelsim_user_2024_2.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ModelSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11_appendici/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendici
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12_riferimenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Riferimenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-perche-il-debug-su-fpga-e-diverso-dalla-simulazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Perché il debug su FPGA è diverso dalla simulazione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-obiettivi-del-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Obiettivi del debug
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Obiettivi del debug">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obiettivi-tipici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Obiettivi tipici
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-le-grandi-famiglie-di-debug-su-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Le grandi famiglie di debug su FPGA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-debug-esterno-semplice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Debug esterno semplice
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Debug esterno semplice">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esempi-classici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esempi classici
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-quando-e-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Quando è utile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-limiti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Limiti
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-led-come-strumento-di-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. LED come strumento di debug
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. LED come strumento di debug">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cosa-possono-mostrare" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cosa possono mostrare
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limiti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limiti
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-gpio-e-pin-di-osservazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. GPIO e pin di osservazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. GPIO e pin di osservazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-e-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando è utile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limiti_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limiti
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-debug-via-uart-o-interfacce-simili" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Debug via UART o interfacce simili
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#71-cosa-si-puo-fare" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Cosa si può fare
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72-vantaggi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#73-limiti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Limiti
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-logic-analyzer-interni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Logic analyzer interni
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#81-che-cose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Che cos'è
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82-perche-e-cosi-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Perché è così utile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-cosa-osservare-con-un-logic-analyzer-interno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Cosa osservare con un logic analyzer interno
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-trigger" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Trigger
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#101-a-cosa-servono" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 A cosa servono
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#102-perche-sono-fondamentali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Perché sono fondamentali
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-debug-e-profondita-temporale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Debug e profondità temporale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Debug e profondità temporale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esempi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esempi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-debug-di-clock-e-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Debug di clock e reset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#121-verifiche-tipiche-sul-clock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Verifiche tipiche sul clock
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#122-verifiche-tipiche-sul-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Verifiche tipiche sul reset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-debug-di-fsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Debug di FSM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Debug di FSM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#domande-tipiche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Domande tipiche
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-debug-di-datapath-e-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Debug di datapath e pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-debug-di-interfacce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Debug di interfacce
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-debug-dei-cdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Debug dei CDC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-correlare-simulazione-e-hardware-reale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Correlare simulazione e hardware reale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17. Correlare simulazione e hardware reale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#approccio-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approccio utile
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-inserire-il-debug-gia-nella-progettazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Inserire il debug già nella progettazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. Inserire il debug già nella progettazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esempi_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esempi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-debug-e-impatto-sul-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Debug e impatto sul design
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-errori-frequenti-nel-debug-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Errori frequenti nel debug FPGA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-buone-pratiche-concettuali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. Buone pratiche concettuali
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-collegamento-con-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. Collegamento con ASIC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-collegamento-con-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23. Collegamento con SoC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-esempio-concettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24. Esempio concettuale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        25. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="debug-su-fpga">Debug su FPGA<a class="headerlink" href="#debug-su-fpga" title="Permanent link">&para;</a></h1>
+<p>Il <strong>debug</strong> è una delle attività più importanti e caratteristiche della progettazione su FPGA.<br />
+Anche con una buona simulazione e una verifica ben fatta, il momento in cui il progetto viene caricato sulla scheda reale può far emergere problemi che in precedenza non erano visibili oppure non erano stati interpretati correttamente.</p>
+<p>Nel contesto FPGA, il debug ha un ruolo speciale perché il progettista ha accesso a un hardware reale ma non può osservare liberamente tutti i segnali interni come in simulazione.<br />
+Per questo è necessario costruire una strategia di osservazione e diagnosi che permetta di:</p>
+<ul>
+<li>capire se il progetto è realmente in esecuzione;</li>
+<li>osservare stati e transizioni interne;</li>
+<li>identificare problemi di clock, reset e timing;</li>
+<li>verificare interfacce con la board;</li>
+<li>correlare comportamento simulato e comportamento reale.</li>
+</ul>
+<p>Il debug su FPGA non è quindi un'attività improvvisata, ma una disciplina tecnica che richiede metodo, strumenti e una buona struttura del progetto.</p>
+<hr />
+<h2 id="1-perche-il-debug-su-fpga-e-diverso-dalla-simulazione">1. Perché il debug su FPGA è diverso dalla simulazione<a class="headerlink" href="#1-perche-il-debug-su-fpga-e-diverso-dalla-simulazione" title="Permanent link">&para;</a></h2>
+<p>In simulazione il progettista può, in linea di principio, osservare quasi tutto:</p>
+<ul>
+<li>segnali interni;</li>
+<li>registri;</li>
+<li>stati di FSM;</li>
+<li>percorsi del datapath;</li>
+<li>eventi temporali;</li>
+<li>transizioni e condizioni di controllo.</li>
+</ul>
+<p>Su una FPGA reale, invece, l'osservabilità è limitata.<br />
+Non è possibile collegare direttamente ogni segnale a uno strumento esterno, e molte informazioni restano interne al dispositivo.</p>
+<p>Per questo il debug su FPGA richiede di costruire <strong>punti di osservazione</strong> e <strong>meccanismi di raccolta dei segnali</strong>.</p>
+<pre class="mermaid"><code>flowchart LR
+    SIM[Simulazione]
+    VIS[Osservabilità quasi completa]
+    HW[Hardware reale]
+    LIM[Osservabilità limitata]
+
+    SIM --&gt; VIS
+    HW --&gt; LIM</code></pre>
+<p>Questa differenza è il motivo per cui il debug su FPGA ha strumenti e tecniche così specifiche.</p>
+<hr />
+<h2 id="2-obiettivi-del-debug">2. Obiettivi del debug<a class="headerlink" href="#2-obiettivi-del-debug" title="Permanent link">&para;</a></h2>
+<p>Il debug su FPGA può avere obiettivi diversi, a seconda della fase del progetto.</p>
+<h3 id="obiettivi-tipici">Obiettivi tipici<a class="headerlink" href="#obiettivi-tipici" title="Permanent link">&para;</a></h3>
+<ul>
+<li>verificare che il clock sia presente;</li>
+<li>verificare che il reset si comporti correttamente;</li>
+<li>capire se il design entra negli stati attesi;</li>
+<li>osservare il flusso dei dati;</li>
+<li>identificare errori nelle interfacce;</li>
+<li>verificare l'allineamento di valid/data;</li>
+<li>diagnosticare problemi di CDC;</li>
+<li>distinguere tra bug di logica e problemi di board.</li>
+</ul>
+<p>In pratica, il debug cerca di rispondere a una domanda fondamentale:</p>
+<blockquote>
+<p>Il progetto sta facendo davvero quello che penso stia facendo?</p>
+</blockquote>
+<hr />
+<h2 id="3-le-grandi-famiglie-di-debug-su-fpga">3. Le grandi famiglie di debug su FPGA<a class="headerlink" href="#3-le-grandi-famiglie-di-debug-su-fpga" title="Permanent link">&para;</a></h2>
+<p>In modo concettuale, il debug su FPGA si può dividere in tre grandi famiglie:</p>
+<ul>
+<li><strong>debug esterno semplice</strong></li>
+<li><strong>debug tramite interfacce di servizio</strong></li>
+<li><strong>debug interno al dispositivo</strong></li>
+</ul>
+<pre class="mermaid"><code>flowchart TD
+    DBG[Debug FPGA]
+    EXT[Debug esterno semplice]
+    IF[Debug via interfacce]
+    INT[Debug interno al dispositivo]
+
+    DBG --&gt; EXT
+    DBG --&gt; IF
+    DBG --&gt; INT</code></pre>
+<p>Queste tecniche spesso si usano insieme, non in alternativa.</p>
+<hr />
+<h2 id="4-debug-esterno-semplice">4. Debug esterno semplice<a class="headerlink" href="#4-debug-esterno-semplice" title="Permanent link">&para;</a></h2>
+<p>La forma più elementare di debug consiste nel portare alcune informazioni verso segnali o dispositivi visibili dall'esterno.</p>
+<h3 id="esempi-classici">Esempi classici<a class="headerlink" href="#esempi-classici" title="Permanent link">&para;</a></h3>
+<ul>
+<li>LED;</li>
+<li>GPIO;</li>
+<li>display;</li>
+<li>pin dedicati;</li>
+<li>segnali di stato su connettori della board.</li>
+</ul>
+<h2 id="41-quando-e-utile">4.1 Quando è utile<a class="headerlink" href="#41-quando-e-utile" title="Permanent link">&para;</a></h2>
+<p>È utile per verifiche molto rapide come:</p>
+<ul>
+<li>il clock sta avanzando?</li>
+<li>il reset è stato rilasciato?</li>
+<li>la FSM è entrata in uno stato specifico?</li>
+<li>un errore è stato rilevato?</li>
+<li>è arrivato un <code>done</code>?</li>
+</ul>
+<h2 id="42-limiti">4.2 Limiti<a class="headerlink" href="#42-limiti" title="Permanent link">&para;</a></h2>
+<ul>
+<li>bassa banda informativa;</li>
+<li>pochi segnali osservabili;</li>
+<li>osservazione spesso qualitativa e non temporale;</li>
+<li>difficile analizzare sequenze complesse.</li>
+</ul>
+<p>Per questo i LED e i GPIO sono utili, ma non sufficienti per debug non banali.</p>
+<hr />
+<h2 id="5-led-come-strumento-di-debug">5. LED come strumento di debug<a class="headerlink" href="#5-led-come-strumento-di-debug" title="Permanent link">&para;</a></h2>
+<p>I <strong>LED</strong> sono una delle risorse di debug più semplici e usate.</p>
+<h3 id="cosa-possono-mostrare">Cosa possono mostrare<a class="headerlink" href="#cosa-possono-mostrare" title="Permanent link">&para;</a></h3>
+<ul>
+<li>presenza del clock, tramite blink o divisore visibile;</li>
+<li>stato del reset;</li>
+<li>stato principale della FSM;</li>
+<li>flag di errore;</li>
+<li>segnali <code>busy</code>, <code>done</code>, <code>valid</code>.</li>
+</ul>
+<h3 id="vantaggi">Vantaggi<a class="headerlink" href="#vantaggi" title="Permanent link">&para;</a></h3>
+<ul>
+<li>semplicissimi da usare;</li>
+<li>immediati;</li>
+<li>utili nelle prime fasi di bring-up.</li>
+</ul>
+<h3 id="limiti">Limiti<a class="headerlink" href="#limiti" title="Permanent link">&para;</a></h3>
+<ul>
+<li>informazione molto ridotta;</li>
+<li>nessuna visione dettagliata nel tempo;</li>
+<li>difficile osservare segnali veloci.</li>
+</ul>
+<p>I LED sono perfetti per capire "se il progetto è vivo", ma non bastano per diagnosticare bug complessi.</p>
+<hr />
+<h2 id="6-gpio-e-pin-di-osservazione">6. GPIO e pin di osservazione<a class="headerlink" href="#6-gpio-e-pin-di-osservazione" title="Permanent link">&para;</a></h2>
+<p>Un altro approccio semplice consiste nell'esportare alcuni segnali interni su <strong>GPIO</strong> o pin della board.</p>
+<h3 id="quando-e-utile">Quando è utile<a class="headerlink" href="#quando-e-utile" title="Permanent link">&para;</a></h3>
+<ul>
+<li>per misure con oscilloscopio o analizzatore logico esterno;</li>
+<li>per osservare handshake o clock;</li>
+<li>per verificare eventi o impulsi;</li>
+<li>per controllare segnali temporizzati.</li>
+</ul>
+<h3 id="vantaggi_1">Vantaggi<a class="headerlink" href="#vantaggi_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>osservazione più flessibile dei LED;</li>
+<li>possibilità di usare strumenti esterni;</li>
+<li>utile per segnali digitali interessanti.</li>
+</ul>
+<h3 id="limiti_1">Limiti<a class="headerlink" href="#limiti_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>numero di pin disponibile limitato;</li>
+<li>possibile impatto sul pin assignment;</li>
+<li>non adatto a osservare grandi quantità di segnali interni.</li>
+</ul>
+<hr />
+<h2 id="7-debug-via-uart-o-interfacce-simili">7. Debug via UART o interfacce simili<a class="headerlink" href="#7-debug-via-uart-o-interfacce-simili" title="Permanent link">&para;</a></h2>
+<p>Una tecnica molto comune consiste nell'usare un canale seriale, ad esempio <strong>UART</strong>, per esportare informazioni di debug.</p>
+<h2 id="71-cosa-si-puo-fare">7.1 Cosa si può fare<a class="headerlink" href="#71-cosa-si-puo-fare" title="Permanent link">&para;</a></h2>
+<ul>
+<li>stampare valori di registri;</li>
+<li>riportare stati della FSM;</li>
+<li>tracciare eventi;</li>
+<li>inviare contatori o statistiche;</li>
+<li>confermare il completamento di operazioni.</li>
+</ul>
+<h2 id="72-vantaggi">7.2 Vantaggi<a class="headerlink" href="#72-vantaggi" title="Permanent link">&para;</a></h2>
+<ul>
+<li>più informazione rispetto ai LED;</li>
+<li>comodo su molte board;</li>
+<li>utile per debug testuale o numerico;</li>
+<li>ben adatto a stati e valori discreti.</li>
+</ul>
+<h2 id="73-limiti">7.3 Limiti<a class="headerlink" href="#73-limiti" title="Permanent link">&para;</a></h2>
+<ul>
+<li>banda limitata;</li>
+<li>non adatto a catturare segnali molto veloci o eventi densi;</li>
+<li>richiede logica di supporto;</li>
+<li>può alterare leggermente il design se usato in modo invasivo.</li>
+</ul>
+<p>La UART è ottima per il debug "di alto livello", ma non sostituisce la visione temporale di un logic analyzer.</p>
+<hr />
+<h2 id="8-logic-analyzer-interni">8. Logic analyzer interni<a class="headerlink" href="#8-logic-analyzer-interni" title="Permanent link">&para;</a></h2>
+<p>Uno degli strumenti più potenti del debug FPGA è il <strong>logic analyzer interno</strong>.</p>
+<h2 id="81-che-cose">8.1 Che cos'è<a class="headerlink" href="#81-che-cose" title="Permanent link">&para;</a></h2>
+<p>È uno strumento integrato nel flow del vendor che permette di:</p>
+<ul>
+<li>selezionare segnali interni del design;</li>
+<li>campionarli nel tempo;</li>
+<li>impostare trigger;</li>
+<li>osservarli dopo l'acquisizione.</li>
+</ul>
+<h2 id="82-perche-e-cosi-utile">8.2 Perché è così utile<a class="headerlink" href="#82-perche-e-cosi-utile" title="Permanent link">&para;</a></h2>
+<p>Permette di ottenere una visione molto più vicina alla simulazione, ma direttamente sul progetto implementato nella FPGA reale.</p>
+<pre class="mermaid"><code>flowchart LR
+    SIG[Segnali interni]
+    ILA[Logic analyzer interno]
+    CAP[Campionamento]
+    VIEW[Visualizzazione]
+
+    SIG --&gt; ILA --&gt; CAP --&gt; VIEW</code></pre>
+<p>Per molti progetti FPGA, questo è lo strumento di debug più importante.</p>
+<hr />
+<h2 id="9-cosa-osservare-con-un-logic-analyzer-interno">9. Cosa osservare con un logic analyzer interno<a class="headerlink" href="#9-cosa-osservare-con-un-logic-analyzer-interno" title="Permanent link">&para;</a></h2>
+<p>I segnali più utili da osservare dipendono dal progetto, ma tipicamente includono:</p>
+<ul>
+<li>stato della FSM;</li>
+<li>segnali <code>valid</code>, <code>ready</code>, <code>busy</code>, <code>done</code>;</li>
+<li>registri di pipeline;</li>
+<li>contatori;</li>
+<li>segnali di reset;</li>
+<li>segnali di handshake;</li>
+<li>segnali coinvolti in error conditions;</li>
+<li>flag di FIFO o buffer;</li>
+<li>segnali di crossing tra domini.</li>
+</ul>
+<p>La scelta dei segnali è cruciale: osservare troppi segnali inutili complica il debug, mentre osservare pochi segnali sbagliati rende l'acquisizione poco utile.</p>
+<hr />
+<h2 id="10-trigger">10. Trigger<a class="headerlink" href="#10-trigger" title="Permanent link">&para;</a></h2>
+<p>Un grande vantaggio del logic analyzer interno è la possibilità di usare <strong>trigger</strong>.</p>
+<h2 id="101-a-cosa-servono">10.1 A cosa servono<a class="headerlink" href="#101-a-cosa-servono" title="Permanent link">&para;</a></h2>
+<p>Permettono di catturare una finestra temporale attorno a un evento interessante, ad esempio:</p>
+<ul>
+<li>ingresso in uno stato;</li>
+<li>comparsa di un errore;</li>
+<li>transizione di un segnale specifico;</li>
+<li>ricezione di un pacchetto o blocco dati;</li>
+<li>timeout o condizione anomala.</li>
+</ul>
+<h2 id="102-perche-sono-fondamentali">10.2 Perché sono fondamentali<a class="headerlink" href="#102-perche-sono-fondamentali" title="Permanent link">&para;</a></h2>
+<p>Molti bug FPGA sono:</p>
+<ul>
+<li>sporadici;</li>
+<li>difficili da riprodurre;</li>
+<li>visibili solo in certe sequenze;</li>
+<li>troppo veloci per essere osservati a mano.</li>
+</ul>
+<p>Il trigger permette di catturare proprio questi eventi critici.</p>
+<hr />
+<h2 id="11-debug-e-profondita-temporale">11. Debug e profondità temporale<a class="headerlink" href="#11-debug-e-profondita-temporale" title="Permanent link">&para;</a></h2>
+<p>Nel debug temporale, è importante capire non solo <strong>che cosa</strong> osservare, ma anche <strong>quanto intervallo temporale</strong> serva.</p>
+<h3 id="esempi">Esempi<a class="headerlink" href="#esempi" title="Permanent link">&para;</a></h3>
+<ul>
+<li>alcuni bug si vedono in pochi cicli;</li>
+<li>altri richiedono osservare lunghi periodi di attività;</li>
+<li>alcuni problemi di handshake richiedono solo pochi segnali e alta precisione;</li>
+<li>altri richiedono più contesto, ma meno dettaglio.</li>
+</ul>
+<p>Questa scelta influenza:</p>
+<ul>
+<li>numero di segnali osservabili;</li>
+<li>profondità dell'acquisizione;</li>
+<li>qualità dell'analisi.</li>
+</ul>
+<p>Il debug è quindi anche una questione di strategia, non solo di strumenti.</p>
+<hr />
+<h2 id="12-debug-di-clock-e-reset">12. Debug di clock e reset<a class="headerlink" href="#12-debug-di-clock-e-reset" title="Permanent link">&para;</a></h2>
+<p>I primi segnali da controllare in un progetto che non funziona sulla board sono spesso:</p>
+<ul>
+<li>clock;</li>
+<li>reset.</li>
+</ul>
+<h2 id="121-verifiche-tipiche-sul-clock">12.1 Verifiche tipiche sul clock<a class="headerlink" href="#121-verifiche-tipiche-sul-clock" title="Permanent link">&para;</a></h2>
+<ul>
+<li>il clock è presente?</li>
+<li>ha la frequenza attesa?</li>
+<li>il PLL è lockato?</li>
+<li>il dominio corretto è realmente attivo?</li>
+</ul>
+<h2 id="122-verifiche-tipiche-sul-reset">12.2 Verifiche tipiche sul reset<a class="headerlink" href="#122-verifiche-tipiche-sul-reset" title="Permanent link">&para;</a></h2>
+<ul>
+<li>il reset viene assertato correttamente?</li>
+<li>viene rilasciato come previsto?</li>
+<li>tutti i sottoblocchi escono dal reset?</li>
+<li>ci sono stati iniziali coerenti?</li>
+</ul>
+<p>Molti problemi apparentemente "misteriosi" sono in realtà problemi molto semplici di clock o reset.</p>
+<hr />
+<h2 id="13-debug-di-fsm">13. Debug di FSM<a class="headerlink" href="#13-debug-di-fsm" title="Permanent link">&para;</a></h2>
+<p>Le FSM sono spesso uno dei primi oggetti da osservare nel debug su FPGA.</p>
+<h3 id="domande-tipiche">Domande tipiche<a class="headerlink" href="#domande-tipiche" title="Permanent link">&para;</a></h3>
+<ul>
+<li>il controller entra negli stati attesi?</li>
+<li>rimane bloccato in uno stato?</li>
+<li>una transizione non avviene mai?</li>
+<li>un segnale di handshake impedisce l'avanzamento?</li>
+<li>il reset porta davvero allo stato iniziale corretto?</li>
+</ul>
+<p>Esportare o catturare lo stato della FSM è spesso una delle tecniche più rapide per capire se il progetto stia seguendo la sequenza prevista.</p>
+<hr />
+<h2 id="14-debug-di-datapath-e-pipeline">14. Debug di datapath e pipeline<a class="headerlink" href="#14-debug-di-datapath-e-pipeline" title="Permanent link">&para;</a></h2>
+<p>Nei progetti con pipeline o elaborazione numerica, è utile osservare:</p>
+<ul>
+<li>registri di pipeline;</li>
+<li>allineamento tra <code>data</code> e <code>valid</code>;</li>
+<li>contatori di avanzamento;</li>
+<li>segnali di stall;</li>
+<li>output intermedi del datapath;</li>
+<li>eventi di overflow o saturazione, se previsti.</li>
+</ul>
+<p>I problemi tipici includono:</p>
+<ul>
+<li>disallineamento dei dati;</li>
+<li>perdita di validità;</li>
+<li>latenza errata;</li>
+<li>uso di dati non ancora stabilizzati;</li>
+<li>reset incompleto di stadi interni.</li>
+</ul>
+<p>Questi bug spesso non si vedono con LED o UART e richiedono logic analyzer interni.</p>
+<hr />
+<h2 id="15-debug-di-interfacce">15. Debug di interfacce<a class="headerlink" href="#15-debug-di-interfacce" title="Permanent link">&para;</a></h2>
+<p>Le interfacce sono una delle aree più sensibili di un progetto FPGA.</p>
+<p>È importante osservare:</p>
+<ul>
+<li>segnali di handshake;</li>
+<li>ordine temporale tra richiesta e risposta;</li>
+<li>dati in ingresso e in uscita;</li>
+<li>eventuali segnali di errore;</li>
+<li>tempi di attesa o timeout;</li>
+<li>interazione con periferiche reali.</li>
+</ul>
+<p>Questo vale sia per interfacce interne sia per interfacce verso:</p>
+<ul>
+<li>UART;</li>
+<li>SPI;</li>
+<li>I2C;</li>
+<li>memorie;</li>
+<li>sensori;</li>
+<li>altri chip.</li>
+</ul>
+<hr />
+<h2 id="16-debug-dei-cdc">16. Debug dei CDC<a class="headerlink" href="#16-debug-dei-cdc" title="Permanent link">&para;</a></h2>
+<p>Quando il progetto usa più clock domain, il debug deve considerare con attenzione i <strong>crossing</strong>.</p>
+<p>Segnali utili da osservare:</p>
+<ul>
+<li>output dei sincronizzatori;</li>
+<li>segnali di richiesta/acknowledge;</li>
+<li>flag di FIFO asincrone;</li>
+<li>errori di allineamento tra domini;</li>
+<li>eventi che scompaiono o si duplicano.</li>
+</ul>
+<p>I bug di CDC sono tra i più difficili da diagnosticare, perché:</p>
+<ul>
+<li>possono essere intermittenti;</li>
+<li>possono dipendere dalla fase relativa dei clock;</li>
+<li>spesso non si vedono chiaramente in simulazione standard.</li>
+</ul>
+<p>Per questo richiedono una strategia di debug molto ordinata.</p>
+<hr />
+<h2 id="17-correlare-simulazione-e-hardware-reale">17. Correlare simulazione e hardware reale<a class="headerlink" href="#17-correlare-simulazione-e-hardware-reale" title="Permanent link">&para;</a></h2>
+<p>Un buon debug su FPGA non consiste solo nel guardare segnali a caso sulla scheda.<br />
+Consiste nel <strong>correlare il comportamento reale con quello atteso in simulazione</strong>.</p>
+<h3 id="approccio-utile">Approccio utile<a class="headerlink" href="#approccio-utile" title="Permanent link">&para;</a></h3>
+<ul>
+<li>identificare l'evento che in simulazione dovrebbe accadere;</li>
+<li>misurare o catturare lo stesso evento sulla FPGA;</li>
+<li>verificare se l'ordine, la latenza e le condizioni sono coerenti;</li>
+<li>isolare il primo punto in cui il comportamento diverge.</li>
+</ul>
+<p>Questo approccio è molto più efficace del semplice "provare modifiche finché qualcosa funziona".</p>
+<hr />
+<h2 id="18-inserire-il-debug-gia-nella-progettazione">18. Inserire il debug già nella progettazione<a class="headerlink" href="#18-inserire-il-debug-gia-nella-progettazione" title="Permanent link">&para;</a></h2>
+<p>Una buona pratica molto importante è <strong>progettare pensando al debug</strong>.</p>
+<h3 id="esempi_1">Esempi<a class="headerlink" href="#esempi_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>dare nomi chiari ai segnali;</li>
+<li>mantenere una gerarchia leggibile;</li>
+<li>separare bene controllo e datapath;</li>
+<li>prevedere segnali di stato utili;</li>
+<li>costruire punti naturali per osservare l'avanzamento del progetto;</li>
+<li>non rendere il design inutilmente opaco.</li>
+</ul>
+<p>Una RTL progettata bene è molto più facile da debuggare sulla board.</p>
+<hr />
+<h2 id="19-debug-e-impatto-sul-design">19. Debug e impatto sul design<a class="headerlink" href="#19-debug-e-impatto-sul-design" title="Permanent link">&para;</a></h2>
+<p>Gli strumenti di debug, soprattutto interni, non sono completamente gratuiti.<br />
+Possono usare:</p>
+<ul>
+<li>LUT;</li>
+<li>registri;</li>
+<li>memoria interna;</li>
+<li>routing;</li>
+<li>banda di clocking.</li>
+</ul>
+<p>Per questo è importante:</p>
+<ul>
+<li>selezionare i segnali davvero utili;</li>
+<li>non esagerare con il debug instrumentation;</li>
+<li>capire che il design con debug inserito può differire leggermente da quello "pulito".</li>
+</ul>
+<p>Questo non significa evitare il debug, ma usarlo in modo consapevole.</p>
+<hr />
+<h2 id="20-errori-frequenti-nel-debug-fpga">20. Errori frequenti nel debug FPGA<a class="headerlink" href="#20-errori-frequenti-nel-debug-fpga" title="Permanent link">&para;</a></h2>
+<p>Tra gli errori più comuni:</p>
+<ul>
+<li>iniziare il debug senza una ipotesi precisa;</li>
+<li>osservare troppi segnali inutili;</li>
+<li>osservare troppo pochi segnali critici;</li>
+<li>non controllare subito clock e reset;</li>
+<li>usare solo LED per problemi complessi;</li>
+<li>non confrontare i risultati con la simulazione;</li>
+<li>fare modifiche casuali senza metodo;</li>
+<li>ignorare il CDC;</li>
+<li>non progettare la RTL pensando alla debuggabilità.</li>
+</ul>
+<hr />
+<h2 id="21-buone-pratiche-concettuali">21. Buone pratiche concettuali<a class="headerlink" href="#21-buone-pratiche-concettuali" title="Permanent link">&para;</a></h2>
+<p>Una buona strategia di debug su FPGA tende a seguire questi principi:</p>
+<ul>
+<li>partire da domande precise;</li>
+<li>controllare prima clock e reset;</li>
+<li>osservare lo stato del controller;</li>
+<li>verificare handshake e pipeline;</li>
+<li>usare logic analyzer interni per eventi complessi;</li>
+<li>correlare sempre hardware e simulazione;</li>
+<li>fare modifiche mirate, non casuali;</li>
+<li>trattare il debug come parte naturale del flow.</li>
+</ul>
+<hr />
+<h2 id="22-collegamento-con-asic">22. Collegamento con ASIC<a class="headerlink" href="#22-collegamento-con-asic" title="Permanent link">&para;</a></h2>
+<p>Il debug FPGA è molto importante anche in prospettiva ASIC.</p>
+<p>Le FPGA vengono infatti spesso usate per:</p>
+<ul>
+<li>validare un blocco hardware;</li>
+<li>prototipare sistemi complessi;</li>
+<li>sviluppare firmware di supporto;</li>
+<li>ridurre il rischio prima di una possibile implementazione ASIC.</li>
+</ul>
+<p>Per questo imparare a fare debug su FPGA significa anche imparare a osservare il comportamento reale di un sistema hardware in modo molto utile per il mondo ASIC.</p>
+<hr />
+<h2 id="23-collegamento-con-soc">23. Collegamento con SoC<a class="headerlink" href="#23-collegamento-con-soc" title="Permanent link">&para;</a></h2>
+<p>Nel contesto SoC, il debug su FPGA diventa ancora più prezioso perché permette di osservare:</p>
+<ul>
+<li>interconnect;</li>
+<li>periferiche;</li>
+<li>acceleratori;</li>
+<li>softcore o hard processor;</li>
+<li>sequenze di boot;</li>
+<li>interazione hardware/software.</li>
+</ul>
+<p>Questo rende il debug FPGA uno strumento centrale per la prototipazione di sottosistemi e sistemi completi.</p>
+<hr />
+<h2 id="24-esempio-concettuale">24. Esempio concettuale<a class="headerlink" href="#24-esempio-concettuale" title="Permanent link">&para;</a></h2>
+<p>Immaginiamo un acceleratore su FPGA che, in simulazione, produce correttamente un <code>done</code>, ma sulla scheda reale non conclude mai l'operazione.</p>
+<p>Una strategia di debug ragionevole potrebbe essere:</p>
+<ol>
+<li>verificare che il clock sia presente e corretto;</li>
+<li>controllare il reset e il suo rilascio;</li>
+<li>osservare lo stato della FSM;</li>
+<li>verificare che il segnale <code>start</code> venga davvero campionato;</li>
+<li>controllare i segnali <code>valid</code> lungo la pipeline;</li>
+<li>usare un logic analyzer interno per catturare l'evento di blocco.</li>
+</ol>
+<p>Questo esempio mostra bene che il debug efficace è una sequenza ordinata di ipotesi e verifiche, non un insieme di tentativi casuali.</p>
+<hr />
+<h2 id="25-in-sintesi">25. In sintesi<a class="headerlink" href="#25-in-sintesi" title="Permanent link">&para;</a></h2>
+<p>Il debug su FPGA è l'insieme delle tecniche che permettono di osservare e diagnosticare il comportamento del progetto sulla board reale.</p>
+<p>Gli strumenti principali includono:</p>
+<ul>
+<li>LED e GPIO;</li>
+<li>UART o interfacce di servizio;</li>
+<li>logic analyzer interni;</li>
+<li>trigger e cattura temporale;</li>
+<li>osservazione di clock, reset, FSM, pipeline e interfacce.</li>
+</ul>
+<p>Il debug efficace richiede:</p>
+<ul>
+<li>metodo;</li>
+<li>segnali scelti con criterio;</li>
+<li>correlazione con la simulazione;</li>
+<li>una RTL progettata in modo leggibile e osservabile.</li>
+</ul>
+<p>In FPGA, il debug non è una fase accessoria: è una componente essenziale del percorso che porta dal progetto simulato al sistema hardware realmente funzionante.</p>
+<hr />
+<h2 id="prossimo-passo">Prossimo passo<a class="headerlink" href="#prossimo-passo" title="Permanent link">&para;</a></h2>
+<p>Dopo il debug, il passo naturale successivo è approfondire il tema della <strong>prototipazione di sistemi e SoC su FPGA</strong>, cioè il modo in cui la FPGA viene usata come piattaforma per sperimentare sottosistemi complessi, acceleratori, processori e co-design hardware/software.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

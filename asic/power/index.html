@@ -1,0 +1,6631 @@
+
+<!doctype html>
+<html lang="it" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corso completo su HDL, verification e tool FPGA/ASIC">
+      
+      
+      
+        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/asic/power/">
+      
+      
+        <link rel="prev" href="../signoff/">
+      
+      
+        <link rel="next" href="../verification/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Power analysis e low-power design - Corso di Microelettronica Digitale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#power-analysis-e-low-power-design-in-un-progetto-asic" class="md-skip">
+          Vai al contenuto
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Intestazione">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-header__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corso di Microelettronica Digitale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Power analysis e low-power design
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green"  aria-label="Passa a dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passa a dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="lime"  aria-label="Passa a light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passa a light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Cancella" aria-label="Cancella" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../00_introduzione/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Intro
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../01_fondamenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Fondamenti
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../02_vhdl/" class="md-tabs__link">
+          
+  
+  
+  VHDL
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../03_verilog/" class="md-tabs__link">
+          
+  
+  
+  Verilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../04_systemverilog_design/" class="md-tabs__link">
+          
+  
+  
+  SystemVerilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../05_verification_base/" class="md-tabs__link">
+          
+  
+  
+  Verification
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../06_uvm/" class="md-tabs__link">
+          
+  
+  
+  UVM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../fpga/" class="md-tabs__link">
+          
+  
+  
+  FPGA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  ASIC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../soc/" class="md-tabs__link">
+          
+  
+  
+  SoC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../09_progetti/" class="md-tabs__link">
+          
+  
+  
+  Progetti
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../10_tool_e_tcl/" class="md-tabs__link">
+          
+  
+  
+  Tool e Tcl/Tk
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../11_appendici/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Appendici
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../12_riferimenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Riferimenti
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigazione" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-nav__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Corso di Microelettronica Digitale
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00_introduzione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01_fondamenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VHDL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    VHDL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl_progettazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foglio di lavoro
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foglio di lavoro
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Tool Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/in_out/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    In and Out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/utilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/clocks_registers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocks and Registers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/state_machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/modular_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modular Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/memories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/managing_clocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Managing Clocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/io_flavors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O Flavors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A Taste of Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Rest for Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SystemVerilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_systemverilog_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_SV_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05_verification_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.chipverify.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChipVerify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verificationguide.com" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VerificationGuide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.doulos.com/knowhow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doulos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_3" id="__nav_8_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetto mini CPU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetto mini CPU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU_waveform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Waveform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione alle FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di una FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/rtl-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTL design per FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/constraints-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/synthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse dedicate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocking e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/place-route/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Placement, routing e timing closure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica e test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/debug/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debug su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/prototyping-soc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prototipazione di sistemi e SoC su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/fpga-vs-asic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA vs ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_fpga_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_ps_axi_led/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq LED
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_17" id="__nav_9_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq FIR
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zynq FIR
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_8tap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_axi_stream_theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AXI Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_dma_interrupt_perf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DMA Interrupt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_xparameters_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    X Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Digilent/Zybo-Z7" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zybo-Z7-20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASIC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ASIC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione agli ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spec-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specifiche e architettura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rtl-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTL design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../constraints-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../synthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DFT e testabilità
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../floorplanning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Floorplanning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../place-route/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Place and Route
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clock Tree Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../signoff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Signoff fisico e temporale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power analysis e low-power design
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power analysis e low-power design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-perche-la-potenza-e-cosi-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Perché la potenza è così importante
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Perché la potenza è così importante">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-vincoli-di-prodotto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Vincoli di prodotto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-vincoli-termici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Vincoli termici
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-vincoli-di-alimentazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Vincoli di alimentazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-costo-e-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Costo e packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-le-due-grandi-componenti-della-potenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Le due grandi componenti della potenza
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-potenza-dinamica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Potenza dinamica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-quando-si-genera" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Quando si genera
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-da-cosa-dipende" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Da cosa dipende
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-potenza-statica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Potenza statica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-origine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Origine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-perche-conta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Perché conta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-switching-activity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Switching activity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#51-perche-e-cruciale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Perché è cruciale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52-dove-si-concentra-spesso-lattivita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Dove si concentra spesso l'attività
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-perche-conta-in-fase-di-stima" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Perché conta in fase di stima
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-la-rete-di-clock-come-sorgente-di-consumo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. La rete di clock come sorgente di consumo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#61-perche-il-clock-pesa-molto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Perché il clock pesa molto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-implicazioni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Implicazioni
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-power-budgeting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Power budgeting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#71-che-cose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Che cos'è
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72-perche-e-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Perché è utile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-analisi-della-potenza-nel-flow-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Analisi della potenza nel flow ASIC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#81-fase-architetturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Fase architetturale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82-fase-rtl-e-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Fase RTL e sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#83-backend-e-signoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Backend e signoff
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-analisi-preliminare-vs-analisi-di-signoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Analisi preliminare vs analisi di signoff
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#91-stime-preliminari" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Stime preliminari
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#92-analisi-finale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Analisi finale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-tecniche-di-riduzione-della-potenza-dinamica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Tecniche di riduzione della potenza dinamica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Tecniche di riduzione della potenza dinamica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tecniche-tipiche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tecniche tipiche
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-clock-gating" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Clock gating
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#111-perche-funziona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Perché funziona
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112-dove-e-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Dove è utile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#113-attenzioni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Attenzioni
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-riduzione-dello-switching-inutile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Riduzione dello switching inutile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-power-aware-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Power-aware architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#131-parallelismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Parallelismo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#132-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#133-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 Memoria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#134-interconnect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4 Interconnect
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-power-aware-rtl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Power-aware RTL
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Power-aware RTL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esempi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esempi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-memorie-e-potenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Memorie e potenza
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#151-perche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Perché
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#152-scelte-rilevanti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 Scelte rilevanti
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-leakage-e-low-power-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Leakage e low-power design
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-power-domains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Power domains
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#171-idea-di-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1 Idea di base
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#172-benefici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.2 Benefici
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#173-complessita-introdotta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3 Complessità introdotta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-potenza-e-timing-un-compromesso-continuo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Potenza e timing: un compromesso continuo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. Potenza e timing: un compromesso continuo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esempi_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esempi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-potenza-e-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Potenza e area
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="19. Potenza e area">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#piu-area-puo-voler-dire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Più area può voler dire
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ma-meno-area-non-garantisce-sempre-meno-potenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ma meno area non garantisce sempre meno potenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-potenza-e-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Potenza e backend
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-potenza-e-signoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. Potenza e signoff
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-errori-frequenti-nella-gestione-della-potenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. Errori frequenti nella gestione della potenza
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-buone-pratiche-concettuali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23. Buone pratiche concettuali
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-collegamento-con-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24. Collegamento con FPGA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-collegamento-con-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        25. Collegamento con SoC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-esempio-concettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        26. Esempio concettuale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        27. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica funzionale e equivalenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../libraries-pdk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Librerie standard cell e PDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tapeout-fabrication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tape-out e fabbricazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_asic_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_openasic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAsic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_19" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_19" id="__nav_10_19_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_19">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openlane2.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenLAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/kunalg123/vsdflow" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CMOS VLSI Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SoC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SoC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione ai SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/architettura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di un SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/bus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interconnessioni e bus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/memorie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memorie e gerarchia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/periferiche/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Periferiche e I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/ip-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrazione IP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/verifica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica di sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/hw-sw-codesign/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HW/SW co-design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/power-clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consumi, clock e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/safety-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Safety e Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/physical-design-awareness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physical awareness nel SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_codice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorgenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool e Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tool e Tcl/Tk
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_e_tcl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3" id="__nav_13_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.tutorialspoint.com/tcl-tk/index.htm" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.amd.com/r/en-US/ug894-vivado-tcl-scripting/Tcl-Scripting-in-Vivado" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Script Tcl in Vivado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://yosyshq.readthedocs.io/projects/yosys/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yosis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openroad.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenROAD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://gtkwave.github.io/gtkwave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GTKWave Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verilator.org/guide/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilator Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3_7" id="__nav_13_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vivado
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_13_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vivado
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug910-vivado-getting-started" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug901-vivado-synthesis" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug904-vivado-implementation" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug835-vivado-tcl-commands" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcl Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/swdocs/modelsim/modelsim_user_2024_2.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ModelSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11_appendici/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendici
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12_riferimenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Riferimenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-perche-la-potenza-e-cosi-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Perché la potenza è così importante
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Perché la potenza è così importante">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-vincoli-di-prodotto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Vincoli di prodotto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-vincoli-termici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Vincoli termici
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-vincoli-di-alimentazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Vincoli di alimentazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-costo-e-packaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Costo e packaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-le-due-grandi-componenti-della-potenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Le due grandi componenti della potenza
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-potenza-dinamica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Potenza dinamica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-quando-si-genera" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Quando si genera
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-da-cosa-dipende" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Da cosa dipende
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-potenza-statica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Potenza statica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-origine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Origine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-perche-conta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Perché conta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-switching-activity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Switching activity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#51-perche-e-cruciale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Perché è cruciale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52-dove-si-concentra-spesso-lattivita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Dove si concentra spesso l'attività
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-perche-conta-in-fase-di-stima" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Perché conta in fase di stima
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-la-rete-di-clock-come-sorgente-di-consumo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. La rete di clock come sorgente di consumo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#61-perche-il-clock-pesa-molto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Perché il clock pesa molto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-implicazioni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Implicazioni
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-power-budgeting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Power budgeting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#71-che-cose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Che cos'è
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72-perche-e-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Perché è utile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-analisi-della-potenza-nel-flow-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Analisi della potenza nel flow ASIC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#81-fase-architetturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Fase architetturale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82-fase-rtl-e-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Fase RTL e sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#83-backend-e-signoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Backend e signoff
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-analisi-preliminare-vs-analisi-di-signoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Analisi preliminare vs analisi di signoff
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#91-stime-preliminari" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Stime preliminari
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#92-analisi-finale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Analisi finale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-tecniche-di-riduzione-della-potenza-dinamica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Tecniche di riduzione della potenza dinamica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Tecniche di riduzione della potenza dinamica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tecniche-tipiche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tecniche tipiche
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-clock-gating" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Clock gating
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#111-perche-funziona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Perché funziona
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112-dove-e-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Dove è utile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#113-attenzioni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Attenzioni
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-riduzione-dello-switching-inutile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Riduzione dello switching inutile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-power-aware-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Power-aware architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#131-parallelismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Parallelismo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#132-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#133-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 Memoria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#134-interconnect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4 Interconnect
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-power-aware-rtl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Power-aware RTL
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Power-aware RTL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esempi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esempi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-memorie-e-potenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Memorie e potenza
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#151-perche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Perché
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#152-scelte-rilevanti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 Scelte rilevanti
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-leakage-e-low-power-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Leakage e low-power design
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-power-domains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Power domains
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#171-idea-di-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1 Idea di base
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#172-benefici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.2 Benefici
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#173-complessita-introdotta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3 Complessità introdotta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-potenza-e-timing-un-compromesso-continuo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Potenza e timing: un compromesso continuo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. Potenza e timing: un compromesso continuo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esempi_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esempi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-potenza-e-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Potenza e area
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="19. Potenza e area">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#piu-area-puo-voler-dire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Più area può voler dire
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ma-meno-area-non-garantisce-sempre-meno-potenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ma meno area non garantisce sempre meno potenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-potenza-e-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Potenza e backend
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-potenza-e-signoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. Potenza e signoff
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-errori-frequenti-nella-gestione-della-potenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. Errori frequenti nella gestione della potenza
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-buone-pratiche-concettuali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        23. Buone pratiche concettuali
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-collegamento-con-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24. Collegamento con FPGA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-collegamento-con-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        25. Collegamento con SoC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-esempio-concettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        26. Esempio concettuale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        27. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="power-analysis-e-low-power-design-in-un-progetto-asic">Power analysis e low-power design in un progetto ASIC<a class="headerlink" href="#power-analysis-e-low-power-design-in-un-progetto-asic" title="Permanent link">&para;</a></h1>
+<p>La <strong>potenza</strong> è una delle metriche fondamentali nella progettazione ASIC.<br />
+Un chip non deve solo essere corretto e rispettare il timing: deve anche consumare in modo compatibile con i requisiti del prodotto e con i vincoli fisici del sistema in cui sarà inserito.</p>
+<p>Nel flow ASIC, il tema della potenza attraversa più livelli del progetto:</p>
+<ul>
+<li>specifica;</li>
+<li>architettura;</li>
+<li>RTL;</li>
+<li>sintesi;</li>
+<li>backend;</li>
+<li>signoff.</li>
+</ul>
+<p>Per questo parlare di <strong>power analysis</strong> e <strong>low-power design</strong> non significa soltanto fare una stima numerica finale del consumo, ma comprendere come le scelte progettuali influenzino:</p>
+<ul>
+<li>consumo dinamico;</li>
+<li>consumo statico;</li>
+<li>densità di potenza;</li>
+<li>comportamento termico;</li>
+<li>robustezza dell'alimentazione;</li>
+<li>sostenibilità fisica del chip.</li>
+</ul>
+<hr />
+<h2 id="1-perche-la-potenza-e-cosi-importante">1. Perché la potenza è così importante<a class="headerlink" href="#1-perche-la-potenza-e-cosi-importante" title="Permanent link">&para;</a></h2>
+<p>La potenza è importante per più ragioni.</p>
+<h3 id="11-vincoli-di-prodotto">1.1 Vincoli di prodotto<a class="headerlink" href="#11-vincoli-di-prodotto" title="Permanent link">&para;</a></h3>
+<p>Molti ASIC operano in sistemi con limiti precisi di consumo, ad esempio:</p>
+<ul>
+<li>dispositivi portatili;</li>
+<li>sistemi embedded;</li>
+<li>applicazioni automotive;</li>
+<li>nodi edge;</li>
+<li>apparati ad alta densità.</li>
+</ul>
+<h3 id="12-vincoli-termici">1.2 Vincoli termici<a class="headerlink" href="#12-vincoli-termici" title="Permanent link">&para;</a></h3>
+<p>Maggiore consumo significa anche maggiore dissipazione termica, che può generare:</p>
+<ul>
+<li>aumento della temperatura;</li>
+<li>degrado dell'affidabilità;</li>
+<li>necessità di raffreddamento;</li>
+<li>limiti sulla frequenza o sull'uso del chip.</li>
+</ul>
+<h3 id="13-vincoli-di-alimentazione">1.3 Vincoli di alimentazione<a class="headerlink" href="#13-vincoli-di-alimentazione" title="Permanent link">&para;</a></h3>
+<p>La distribuzione della corrente nel chip deve restare robusta e sostenibile.</p>
+<h3 id="14-costo-e-packaging">1.4 Costo e packaging<a class="headerlink" href="#14-costo-e-packaging" title="Permanent link">&para;</a></h3>
+<p>Un chip che consuma troppo può richiedere:</p>
+<ul>
+<li>package più complessi;</li>
+<li>sistemi di raffreddamento più costosi;</li>
+<li>infrastrutture di alimentazione più gravose.</li>
+</ul>
+<p>Per questo la potenza non è una metrica secondaria, ma uno dei pilastri del progetto ASIC.</p>
+<hr />
+<h2 id="2-le-due-grandi-componenti-della-potenza">2. Le due grandi componenti della potenza<a class="headerlink" href="#2-le-due-grandi-componenti-della-potenza" title="Permanent link">&para;</a></h2>
+<p>In modo concettuale, la potenza di un ASIC viene spesso letta come somma di due contributi principali:</p>
+<ul>
+<li><strong>potenza dinamica</strong>;</li>
+<li><strong>potenza statica</strong>.</li>
+</ul>
+<pre class="mermaid"><code>flowchart TD
+    P[Potenza totale]
+    PD[Potenza dinamica]
+    PS[Potenza statica]
+
+    P --&gt; PD
+    P --&gt; PS</code></pre>
+<p>Questa distinzione è molto utile perché i due contributi hanno cause, sintomi e tecniche di riduzione differenti.</p>
+<hr />
+<h2 id="3-potenza-dinamica">3. Potenza dinamica<a class="headerlink" href="#3-potenza-dinamica" title="Permanent link">&para;</a></h2>
+<p>La <strong>potenza dinamica</strong> è legata alle commutazioni dei nodi del circuito.</p>
+<h2 id="31-quando-si-genera">3.1 Quando si genera<a class="headerlink" href="#31-quando-si-genera" title="Permanent link">&para;</a></h2>
+<p>Si genera quando:</p>
+<ul>
+<li>i segnali cambiano valore;</li>
+<li>le capacità interne ed esterne vengono caricate e scaricate;</li>
+<li>i registri commutano a ogni fronte utile di clock;</li>
+<li>la rete di clock distribuisce il segnale a un grande numero di sink.</li>
+</ul>
+<h2 id="32-da-cosa-dipende">3.2 Da cosa dipende<a class="headerlink" href="#32-da-cosa-dipende" title="Permanent link">&para;</a></h2>
+<p>In modo qualitativo, la potenza dinamica cresce con:</p>
+<ul>
+<li>frequenza di clock;</li>
+<li>attività di switching;</li>
+<li>capacità totale coinvolta;</li>
+<li>tensione di alimentazione.</li>
+</ul>
+<p>Questo significa che un design con molta attività e molte commutazioni può consumare molto anche se l'area non è enorme.</p>
+<hr />
+<h2 id="4-potenza-statica">4. Potenza statica<a class="headerlink" href="#4-potenza-statica" title="Permanent link">&para;</a></h2>
+<p>La <strong>potenza statica</strong> è il contributo che il chip dissipa anche quando la logica non sta commutando attivamente.</p>
+<h2 id="41-origine">4.1 Origine<a class="headerlink" href="#41-origine" title="Permanent link">&para;</a></h2>
+<p>È associata principalmente a fenomeni di leakage e correnti residue nei dispositivi fisici.</p>
+<h2 id="42-perche-conta">4.2 Perché conta<a class="headerlink" href="#42-perche-conta" title="Permanent link">&para;</a></h2>
+<p>Con la riduzione delle tecnologie e l'aumento della densità, il contributo statico può diventare molto importante, soprattutto in chip:</p>
+<ul>
+<li>molto grandi;</li>
+<li>sempre alimentati;</li>
+<li>con lunghi tempi di inattività;</li>
+<li>progettati in nodi tecnologici avanzati.</li>
+</ul>
+<p>La potenza statica è quindi un tema fortemente legato alla tecnologia e all'implementazione fisica.</p>
+<hr />
+<h2 id="5-switching-activity">5. Switching activity<a class="headerlink" href="#5-switching-activity" title="Permanent link">&para;</a></h2>
+<p>Uno dei concetti centrali del power analysis è la <strong>switching activity</strong>, cioè quanto spesso i segnali cambiano stato.</p>
+<h2 id="51-perche-e-cruciale">5.1 Perché è cruciale<a class="headerlink" href="#51-perche-e-cruciale" title="Permanent link">&para;</a></h2>
+<p>La potenza dinamica dipende direttamente dal numero di commutazioni effettive nel circuito.</p>
+<h2 id="52-dove-si-concentra-spesso-lattivita">5.2 Dove si concentra spesso l'attività<a class="headerlink" href="#52-dove-si-concentra-spesso-lattivita" title="Permanent link">&para;</a></h2>
+<ul>
+<li>datapath ad alta frequenza;</li>
+<li>registri di pipeline;</li>
+<li>interconnect con traffico elevato;</li>
+<li>reti di controllo molto attive;</li>
+<li>clock tree.</li>
+</ul>
+<h2 id="53-perche-conta-in-fase-di-stima">5.3 Perché conta in fase di stima<a class="headerlink" href="#53-perche-conta-in-fase-di-stima" title="Permanent link">&para;</a></h2>
+<p>Anche un blocco piccolo può consumare molto se commuta continuamente, mentre un blocco più grande ma poco attivo può avere un impatto inferiore.</p>
+<p>Per questo la semplice area non basta a stimare correttamente la potenza.</p>
+<hr />
+<h2 id="6-la-rete-di-clock-come-sorgente-di-consumo">6. La rete di clock come sorgente di consumo<a class="headerlink" href="#6-la-rete-di-clock-come-sorgente-di-consumo" title="Permanent link">&para;</a></h2>
+<p>Il clock è spesso uno dei contributori più importanti alla potenza dinamica totale del chip.</p>
+<h2 id="61-perche-il-clock-pesa-molto">6.1 Perché il clock pesa molto<a class="headerlink" href="#61-perche-il-clock-pesa-molto" title="Permanent link">&para;</a></h2>
+<ul>
+<li>commuta a ogni ciclo;</li>
+<li>raggiunge moltissimi registri;</li>
+<li>attraversa una rete ampia e bufferizzata;</li>
+<li>ha elevato fanout;</li>
+<li>contribuisce a una quota importante dello switching complessivo.</li>
+</ul>
+<h2 id="62-implicazioni">6.2 Implicazioni<a class="headerlink" href="#62-implicazioni" title="Permanent link">&para;</a></h2>
+<p>La progettazione della rete di clock è quindi anche un problema di potenza, non solo di timing.</p>
+<pre class="mermaid"><code>flowchart LR
+    CLK[Clock tree]
+    FF1[Reg]
+    FF2[Reg]
+    FF3[Reg]
+    FF4[Reg]
+
+    CLK --&gt; FF1
+    CLK --&gt; FF2
+    CLK --&gt; FF3
+    CLK --&gt; FF4</code></pre>
+<p>Questo è uno dei motivi per cui le tecniche di riduzione del consumo spesso passano proprio attraverso una migliore gestione del clock.</p>
+<hr />
+<h2 id="7-power-budgeting">7. Power budgeting<a class="headerlink" href="#7-power-budgeting" title="Permanent link">&para;</a></h2>
+<p>Già nelle fasi iniziali del progetto è utile definire un <strong>budget di potenza</strong>.</p>
+<h2 id="71-che-cose">7.1 Che cos'è<a class="headerlink" href="#71-che-cose" title="Permanent link">&para;</a></h2>
+<p>È una suddivisione preliminare del consumo ammissibile tra:</p>
+<ul>
+<li>sottoblocchi;</li>
+<li>datapath;</li>
+<li>memoria;</li>
+<li>clocking;</li>
+<li>interfacce;</li>
+<li>macro o IP particolarmente costosi.</li>
+</ul>
+<h2 id="72-perche-e-utile">7.2 Perché è utile<a class="headerlink" href="#72-perche-e-utile" title="Permanent link">&para;</a></h2>
+<p>Aiuta a capire:</p>
+<ul>
+<li>se l'architettura è plausibile;</li>
+<li>quali blocchi sono più critici;</li>
+<li>dove concentrare ottimizzazioni;</li>
+<li>se i requisiti di prodotto siano compatibili con il design.</li>
+</ul>
+<p>Senza budgeting, il rischio è accorgersi troppo tardi che il chip consuma molto più del previsto.</p>
+<hr />
+<h2 id="8-analisi-della-potenza-nel-flow-asic">8. Analisi della potenza nel flow ASIC<a class="headerlink" href="#8-analisi-della-potenza-nel-flow-asic" title="Permanent link">&para;</a></h2>
+<p>La potenza viene stimata e raffinata in più momenti del progetto.</p>
+<h2 id="81-fase-architetturale">8.1 Fase architetturale<a class="headerlink" href="#81-fase-architetturale" title="Permanent link">&para;</a></h2>
+<p>Si fanno stime di ordine alto, basate su:</p>
+<ul>
+<li>numero di operazioni;</li>
+<li>parallelismo;</li>
+<li>frequenze;</li>
+<li>uso previsto dei blocchi;</li>
+<li>modelli semplificati.</li>
+</ul>
+<h2 id="82-fase-rtl-e-sintesi">8.2 Fase RTL e sintesi<a class="headerlink" href="#82-fase-rtl-e-sintesi" title="Permanent link">&para;</a></h2>
+<p>Si ottengono stime più concrete grazie a:</p>
+<ul>
+<li>struttura della logica;</li>
+<li>registri effettivi;</li>
+<li>prime informazioni di switching;</li>
+<li>librerie.</li>
+</ul>
+<h2 id="83-backend-e-signoff">8.3 Backend e signoff<a class="headerlink" href="#83-backend-e-signoff" title="Permanent link">&para;</a></h2>
+<p>Le stime diventano più realistiche perché entrano in gioco:</p>
+<ul>
+<li>parassitici;</li>
+<li>clock tree reale;</li>
+<li>routing fisico;</li>
+<li>carichi effettivi;</li>
+<li>distribuzione concreta dell'alimentazione.</li>
+</ul>
+<pre class="mermaid"><code>flowchart TD
+    ARCH[Stima architetturale]
+    RTL[Stima RTL / sintesi]
+    PNR[Stima post-layout]
+    SO[Power signoff]
+
+    ARCH --&gt; RTL --&gt; PNR --&gt; SO</code></pre>
+<p>La potenza, quindi, non è un numero fisso ma una grandezza che viene raffinata lungo il flow.</p>
+<hr />
+<h2 id="9-analisi-preliminare-vs-analisi-di-signoff">9. Analisi preliminare vs analisi di signoff<a class="headerlink" href="#9-analisi-preliminare-vs-analisi-di-signoff" title="Permanent link">&para;</a></h2>
+<p>È importante distinguere fra:</p>
+<ul>
+<li><strong>stima preliminare</strong>;</li>
+<li><strong>analisi finale o di signoff</strong>.</li>
+</ul>
+<h2 id="91-stime-preliminari">9.1 Stime preliminari<a class="headerlink" href="#91-stime-preliminari" title="Permanent link">&para;</a></h2>
+<p>Sono utili per guidare il progetto, ma possono essere ancora lontane dal comportamento reale.</p>
+<h2 id="92-analisi-finale">9.2 Analisi finale<a class="headerlink" href="#92-analisi-finale" title="Permanent link">&para;</a></h2>
+<p>Tiene conto di molti più dettagli fisici e permette una valutazione molto più credibile del consumo effettivo del chip.</p>
+<p>Non bisogna quindi trattare la prima stima di potenza come un verdetto definitivo, ma neppure ignorarla: è un segnale progettuale molto importante.</p>
+<hr />
+<h2 id="10-tecniche-di-riduzione-della-potenza-dinamica">10. Tecniche di riduzione della potenza dinamica<a class="headerlink" href="#10-tecniche-di-riduzione-della-potenza-dinamica" title="Permanent link">&para;</a></h2>
+<p>Una gran parte del low-power design mira a ridurre la potenza dinamica.</p>
+<h3 id="tecniche-tipiche">Tecniche tipiche<a class="headerlink" href="#tecniche-tipiche" title="Permanent link">&para;</a></h3>
+<ul>
+<li>riduzione della frequenza, se compatibile con le prestazioni richieste;</li>
+<li>riduzione dello switching inutile;</li>
+<li>miglior località dei dati;</li>
+<li>semplificazione del datapath;</li>
+<li>riduzione del fanout;</li>
+<li>uso efficiente delle memorie;</li>
+<li>clock gating.</li>
+</ul>
+<p>Tra tutte, il <strong>clock gating</strong> è una delle tecniche più note e diffuse.</p>
+<hr />
+<h2 id="11-clock-gating">11. Clock gating<a class="headerlink" href="#11-clock-gating" title="Permanent link">&para;</a></h2>
+<p>Il <strong>clock gating</strong> consiste nel disabilitare il clock in porzioni del design che in un certo momento non devono lavorare.</p>
+<h2 id="111-perche-funziona">11.1 Perché funziona<a class="headerlink" href="#111-perche-funziona" title="Permanent link">&para;</a></h2>
+<p>Se un blocco non riceve il clock:</p>
+<ul>
+<li>i suoi registri non commutano;</li>
+<li>si riduce lo switching interno;</li>
+<li>si abbassa il contributo dinamico della regione interessata.</li>
+</ul>
+<h2 id="112-dove-e-utile">11.2 Dove è utile<a class="headerlink" href="#112-dove-e-utile" title="Permanent link">&para;</a></h2>
+<ul>
+<li>periferiche inattive;</li>
+<li>sottoblocchi opzionali;</li>
+<li>pipeline ferme;</li>
+<li>acceleratori non usati;</li>
+<li>regioni di controllo non attive.</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    CLK[Clock]
+    GATE[Clock gate]
+    BLK[Blocco]
+
+    CLK --&gt; GATE --&gt; BLK
+    EN[Enable] --&gt; GATE</code></pre>
+<h2 id="113-attenzioni">11.3 Attenzioni<a class="headerlink" href="#113-attenzioni" title="Permanent link">&para;</a></h2>
+<p>Il clock gating deve essere progettato con disciplina, perché influisce su:</p>
+<ul>
+<li>timing;</li>
+<li>testabilità;</li>
+<li>CTS;</li>
+<li>reset;</li>
+<li>verifica funzionale.</li>
+</ul>
+<hr />
+<h2 id="12-riduzione-dello-switching-inutile">12. Riduzione dello switching inutile<a class="headerlink" href="#12-riduzione-dello-switching-inutile" title="Permanent link">&para;</a></h2>
+<p>Molti consumi derivano da attività che non producono valore reale.</p>
+<p>Esempi di switching inutile:</p>
+<ul>
+<li>datapath che commuta anche quando il risultato non serve;</li>
+<li>segnali di controllo che oscillano senza motivo;</li>
+<li>registri aggiornati inutilmente;</li>
+<li>mux e blocchi attivi anche in modalità idle.</li>
+</ul>
+<p>Ridurre questo tipo di attività può portare benefici significativi senza necessariamente modificare in modo radicale l'architettura.</p>
+<hr />
+<h2 id="13-power-aware-architecture">13. Power-aware architecture<a class="headerlink" href="#13-power-aware-architecture" title="Permanent link">&para;</a></h2>
+<p>Le scelte architetturali hanno un impatto enorme sulla potenza.</p>
+<h2 id="131-parallelismo">13.1 Parallelismo<a class="headerlink" href="#131-parallelismo" title="Permanent link">&para;</a></h2>
+<p>Maggiore parallelismo può aumentare throughput, ma anche area e switching.</p>
+<h2 id="132-pipeline">13.2 Pipeline<a class="headerlink" href="#132-pipeline" title="Permanent link">&para;</a></h2>
+<p>Le pipeline aiutano il timing, ma introducono più registri e quindi più commutazioni.</p>
+<h2 id="133-memoria">13.3 Memoria<a class="headerlink" href="#133-memoria" title="Permanent link">&para;</a></h2>
+<p>Centralizzare o distribuire i buffer cambia:</p>
+<ul>
+<li>traffico;</li>
+<li>lunghezza dei percorsi;</li>
+<li>costi energetici del movimento dati.</li>
+</ul>
+<h2 id="134-interconnect">13.4 Interconnect<a class="headerlink" href="#134-interconnect" title="Permanent link">&para;</a></h2>
+<p>Bus, crossbar e strutture di comunicazione influenzano notevolmente il consumo.</p>
+<p>Una buona architettura ASIC deve quindi essere <strong>power-aware</strong> già nelle prime fasi del progetto.</p>
+<hr />
+<h2 id="14-power-aware-rtl">14. Power-aware RTL<a class="headerlink" href="#14-power-aware-rtl" title="Permanent link">&para;</a></h2>
+<p>Anche a livello RTL ci sono scelte che influenzano direttamente il consumo.</p>
+<h3 id="esempi">Esempi<a class="headerlink" href="#esempi" title="Permanent link">&para;</a></h3>
+<ul>
+<li>aggiornare un registro solo quando necessario;</li>
+<li>strutturare il controllo per evitare attività superflue;</li>
+<li>usare enable coerenti;</li>
+<li>separare chiaramente modalità attive e inattive;</li>
+<li>ridurre propagazioni inutili nel datapath.</li>
+</ul>
+<p>Una RTL che "funziona" ma produce molta attività inutile può generare risultati di potenza molto deludenti.</p>
+<hr />
+<h2 id="15-memorie-e-potenza">15. Memorie e potenza<a class="headerlink" href="#15-memorie-e-potenza" title="Permanent link">&para;</a></h2>
+<p>Le memorie sono spesso una componente importante del consumo.</p>
+<h2 id="151-perche">15.1 Perché<a class="headerlink" href="#151-perche" title="Permanent link">&para;</a></h2>
+<ul>
+<li>possono essere grandi;</li>
+<li>sono accedute frequentemente;</li>
+<li>richiedono interfacce e buffering;</li>
+<li>influenzano anche il traffico di interconnessione.</li>
+</ul>
+<h2 id="152-scelte-rilevanti">15.2 Scelte rilevanti<a class="headerlink" href="#152-scelte-rilevanti" title="Permanent link">&para;</a></h2>
+<ul>
+<li>numero di memorie;</li>
+<li>dimensione;</li>
+<li>località;</li>
+<li>accessi concorrenti;</li>
+<li>uso di buffer locali;</li>
+<li>riduzione di letture/scritture inutili.</li>
+</ul>
+<p>In molti design, ottimizzare il movimento dei dati è tanto importante quanto ottimizzare il calcolo stesso.</p>
+<hr />
+<h2 id="16-leakage-e-low-power-design">16. Leakage e low-power design<a class="headerlink" href="#16-leakage-e-low-power-design" title="Permanent link">&para;</a></h2>
+<p>Per contenere la <strong>potenza statica</strong>, l'attenzione si sposta su temi come:</p>
+<ul>
+<li>scelta della tecnologia;</li>
+<li>dimensione del design;</li>
+<li>domini di potenza;</li>
+<li>strategie di spegnimento parziale;</li>
+<li>isolamento e retention, nei casi più avanzati.</li>
+</ul>
+<p>A livello introduttivo, è importante capire che il leakage non si riduce solo con "meno attività", perché è presente anche quando il chip non commuta molto.</p>
+<p>Per questo il low-power design include sia tecniche dinamiche sia tecniche legate alla gestione dell'alimentazione.</p>
+<hr />
+<h2 id="17-power-domains">17. Power domains<a class="headerlink" href="#17-power-domains" title="Permanent link">&para;</a></h2>
+<p>In design più avanzati, una tecnica importante è la suddivisione in <strong>power domain</strong>.</p>
+<h2 id="171-idea-di-base">17.1 Idea di base<a class="headerlink" href="#171-idea-di-base" title="Permanent link">&para;</a></h2>
+<p>Regioni diverse del chip possono essere alimentate o gestite in modo relativamente indipendente.</p>
+<h2 id="172-benefici">17.2 Benefici<a class="headerlink" href="#172-benefici" title="Permanent link">&para;</a></h2>
+<ul>
+<li>spegnere sottoblocchi inattivi;</li>
+<li>ridurre consumo statico;</li>
+<li>adattare il chip a diverse modalità operative.</li>
+</ul>
+<h2 id="173-complessita-introdotta">17.3 Complessità introdotta<a class="headerlink" href="#173-complessita-introdotta" title="Permanent link">&para;</a></h2>
+<ul>
+<li>isolation;</li>
+<li>retention;</li>
+<li>power sequencing;</li>
+<li>verifica più complessa;</li>
+<li>impatto sul backend.</li>
+</ul>
+<p>Questa tecnica è molto potente, ma richiede forte disciplina architetturale e fisica.</p>
+<hr />
+<h2 id="18-potenza-e-timing-un-compromesso-continuo">18. Potenza e timing: un compromesso continuo<a class="headerlink" href="#18-potenza-e-timing-un-compromesso-continuo" title="Permanent link">&para;</a></h2>
+<p>Ridurre la potenza può entrare in conflitto con il timing.</p>
+<h3 id="esempi_1">Esempi<a class="headerlink" href="#esempi_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>celle più piccole consumano meno, ma possono essere più lente;</li>
+<li>ridurre il buffering può limitare il consumo, ma peggiorare i ritardi;</li>
+<li>diminuire l'attività può richiedere controllo aggiuntivo;</li>
+<li>clock gating può introdurre complessità su CTS e test.</li>
+</ul>
+<p>Per questo il power optimization non va vista isolatamente: deve essere coordinata con timing, area e testabilità.</p>
+<hr />
+<h2 id="19-potenza-e-area">19. Potenza e area<a class="headerlink" href="#19-potenza-e-area" title="Permanent link">&para;</a></h2>
+<p>Anche il rapporto tra area e potenza non è banale.</p>
+<h3 id="piu-area-puo-voler-dire">Più area può voler dire<a class="headerlink" href="#piu-area-puo-voler-dire" title="Permanent link">&para;</a></h3>
+<ul>
+<li>più capacità;</li>
+<li>più leakage;</li>
+<li>più clock sinks;</li>
+<li>più costi energetici complessivi.</li>
+</ul>
+<h3 id="ma-meno-area-non-garantisce-sempre-meno-potenza">Ma meno area non garantisce sempre meno potenza<a class="headerlink" href="#ma-meno-area-non-garantisce-sempre-meno-potenza" title="Permanent link">&para;</a></h3>
+<p>Una logica troppo compressa può:</p>
+<ul>
+<li>aumentare il fanout;</li>
+<li>creare percorsi più difficili;</li>
+<li>richiedere celle più aggressive;</li>
+<li>peggiorare la struttura del clock.</li>
+</ul>
+<p>Quindi il design low-power richiede equilibrio, non solo miniaturizzazione.</p>
+<hr />
+<h2 id="20-potenza-e-backend">20. Potenza e backend<a class="headerlink" href="#20-potenza-e-backend" title="Permanent link">&para;</a></h2>
+<p>Il backend influisce fortemente sulla potenza finale.</p>
+<p>Aspetti rilevanti:</p>
+<ul>
+<li>lunghezza reale delle interconnessioni;</li>
+<li>clock tree effettiva;</li>
+<li>buffering;</li>
+<li>routing congestion;</li>
+<li>densità fisica;</li>
+<li>distribuzione dell'alimentazione.</li>
+</ul>
+<p>Per questo la potenza finale del chip non può essere valutata credibilmente senza considerare il layout e la struttura fisica realizzata.</p>
+<hr />
+<h2 id="21-potenza-e-signoff">21. Potenza e signoff<a class="headerlink" href="#21-potenza-e-signoff" title="Permanent link">&para;</a></h2>
+<p>Il <strong>power signoff</strong> rappresenta la valutazione finale della potenza del design in condizioni realistiche.</p>
+<p>Si vuole capire almeno se:</p>
+<ul>
+<li>il budget globale è rispettato;</li>
+<li>i blocchi più attivi sono coerenti con le attese;</li>
+<li>il comportamento energetico del chip è compatibile con il prodotto;</li>
+<li>il layout non introduce criticità non previste.</li>
+</ul>
+<p>Anche senza entrare nel dettaglio di tutti i tool e modelli, è importante capire che il signoff della potenza è una parte reale del processo finale di approvazione del chip.</p>
+<hr />
+<h2 id="22-errori-frequenti-nella-gestione-della-potenza">22. Errori frequenti nella gestione della potenza<a class="headerlink" href="#22-errori-frequenti-nella-gestione-della-potenza" title="Permanent link">&para;</a></h2>
+<p>Tra gli errori più comuni:</p>
+<ul>
+<li>considerare la potenza solo come verifica finale;</li>
+<li>ignorare la switching activity reale;</li>
+<li>sottostimare il peso del clock;</li>
+<li>non definire budget per i sottoblocchi;</li>
+<li>introdurre clock gating senza metodo;</li>
+<li>trascurare l'impatto di memorie e interconnect;</li>
+<li>guardare solo la potenza totale senza capire dove si concentra;</li>
+<li>non usare la potenza come guida progettuale nelle fasi iniziali.</li>
+</ul>
+<hr />
+<h2 id="23-buone-pratiche-concettuali">23. Buone pratiche concettuali<a class="headerlink" href="#23-buone-pratiche-concettuali" title="Permanent link">&para;</a></h2>
+<p>Una buona strategia di low-power design tende a seguire queste regole:</p>
+<ul>
+<li>definire budget di potenza fin dall'inizio;</li>
+<li>considerare la potenza già in architettura e RTL;</li>
+<li>osservare attentamente la switching activity;</li>
+<li>trattare il clock come un problema energetico centrale;</li>
+<li>usare clock gating con disciplina;</li>
+<li>correlare sempre potenza, timing e area;</li>
+<li>raffinare progressivamente le stime lungo il flow.</li>
+</ul>
+<hr />
+<h2 id="24-collegamento-con-fpga">24. Collegamento con FPGA<a class="headerlink" href="#24-collegamento-con-fpga" title="Permanent link">&para;</a></h2>
+<p>Nel mondo FPGA la potenza è anch'essa importante, ma in ASIC il tema è spesso più incisivo perché:</p>
+<ul>
+<li>il chip è progettato ad hoc;</li>
+<li>non esistono le stesse strutture programmabili general-purpose;</li>
+<li>il margine di ottimizzazione è maggiore, ma anche la responsabilità progettuale;</li>
+<li>leakage, clock tree e distribuzione fisica pesano in modo diverso.</li>
+</ul>
+<p>Studiare la potenza in ambito ASIC aiuta comunque anche a sviluppare una migliore sensibilità progettuale su FPGA.</p>
+<hr />
+<h2 id="25-collegamento-con-soc">25. Collegamento con SoC<a class="headerlink" href="#25-collegamento-con-soc" title="Permanent link">&para;</a></h2>
+<p>Nel contesto SoC, la potenza diventa ancora più centrale per via della presenza di:</p>
+<ul>
+<li>CPU;</li>
+<li>memorie;</li>
+<li>interconnect;</li>
+<li>acceleratori;</li>
+<li>periferiche;</li>
+<li>power domain;</li>
+<li>software che può gestire stati di attività e idle.</li>
+</ul>
+<p>La prospettiva ASIC aiuta a vedere come questi elementi si traducano poi in consumi reali e in vincoli fisici del chip integrato.</p>
+<hr />
+<h2 id="26-esempio-concettuale">26. Esempio concettuale<a class="headerlink" href="#26-esempio-concettuale" title="Permanent link">&para;</a></h2>
+<p>Immaginiamo un ASIC con:</p>
+<ul>
+<li>datapath molto pipeline-izzata;</li>
+<li>memoria locale;</li>
+<li>rete di clock estesa;</li>
+<li>acceleratore attivo solo in alcune modalità.</li>
+</ul>
+<p>Una buona analisi di potenza potrebbe mostrare che:</p>
+<ul>
+<li>il clock pesa più del previsto;</li>
+<li>la pipeline aumenta l'attività dei registri;</li>
+<li>la memoria è acceduta più spesso del necessario;</li>
+<li>l'acceleratore consuma poco quando è fermo, ma molto in fase attiva.</li>
+</ul>
+<p>Da qui potrebbero nascere decisioni come:</p>
+<ul>
+<li>miglior clock gating;</li>
+<li>riduzione di attività inutile nei registri;</li>
+<li>riorganizzazione degli accessi ai buffer;</li>
+<li>raffinamento dell'architettura di controllo.</li>
+</ul>
+<p>Questo esempio mostra come la potenza sia un feedback progettuale concreto, non solo una misura finale.</p>
+<hr />
+<h2 id="27-in-sintesi">27. In sintesi<a class="headerlink" href="#27-in-sintesi" title="Permanent link">&para;</a></h2>
+<p>La power analysis e il low-power design sono una parte fondamentale del flow ASIC.<br />
+Per comprendere e controllare il consumo del chip è necessario distinguere tra:</p>
+<ul>
+<li>potenza dinamica;</li>
+<li>potenza statica;</li>
+</ul>
+<p>e ragionare su:</p>
+<ul>
+<li>switching activity;</li>
+<li>clock tree;</li>
+<li>budget di potenza;</li>
+<li>architettura;</li>
+<li>RTL;</li>
+<li>backend;</li>
+<li>tecniche di riduzione come il clock gating.</li>
+</ul>
+<p>Un buon progetto ASIC non si limita a "funzionare" e "chiudere timing": deve anche consumare in modo coerente con gli obiettivi del prodotto e con la realtà fisica del chip.</p>
+<hr />
+<h2 id="prossimo-passo">Prossimo passo<a class="headerlink" href="#prossimo-passo" title="Permanent link">&para;</a></h2>
+<p>Dopo la potenza, il passo successivo naturale è approfondire il tema della <strong>verifica funzionale e dell'equivalenza</strong>, cioè il modo in cui si dimostra che il design è corretto lungo tutto il flow, dall'RTL fino alle trasformazioni di sintesi e backend.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
