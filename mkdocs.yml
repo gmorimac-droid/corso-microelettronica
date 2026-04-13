@@ -90,7 +90,20 @@ nav:
             - Descrizione: 06_mini_CPU.md
             - Waveform: 06_mini_CPU_waveform.md
   - FPGA: 
-    - Overview: 07_fpga_flow.md
+    - Introduzione alle FPGA: fpga/index.md
+    - Architettura di una FPGA: fpga/architecture.md
+    - Flusso di progettazione FPGA: fpga/flow.md
+    - RTL design per FPGA: fpga/rtl-design.md
+    - Vincoli e timing: fpga/constraints-timing.md
+    - Sintesi logica: fpga/synthesis.md
+    - Risorse dedicate: fpga/resources.md
+    - Clocking e reset: fpga/clock-reset.md
+    - Placement, routing e timing closure: fpga/place-route.md
+    - Verifica e test: fpga/verification.md
+    - Debug su FPGA: fpga/debug.md
+    - Prototipazione di sistemi e SoC su FPGA: fpga/prototyping-soc.md
+    - FPGA vs ASIC: fpga/fpga-vs-asic.md
+    - Caso di studio FPGA: fpga/case-study.md
     - Flowchart: 07_fpga_flow_chart.md
     - Zynq LED: 07_zynq_ps_axi_led.md
     - Zynq FIR: 
@@ -102,7 +115,22 @@ nav:
     - Risorse: https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf
     - Zybo-Z7-20: https://github.com/Digilent/Zybo-Z7
   - ASIC: 
-    - Overview: 08_asic_flow.md
+    - Introduzione agli ASIC: asic/index.md
+    - Flusso di progettazione ASIC: asic/flow.md
+    - Specifiche e architettura: asic/spec-architecture.md
+    - RTL design: asic/rtl-design.md
+    - Vincoli e timing: asic/constraints-timing.md
+    - Sintesi logica: asic/synthesis.md
+    - DFT e testabilità: asic/dft.md
+    - Floorplanning: asic/floorplanning.md
+    - Place and Route: asic/place-route.md
+    - Clock Tree Synthesis: asic/cts.md
+    - Signoff fisico e temporale: asic/signoff.md
+    - Power analysis e low-power design: asic/power.md
+    - Verifica funzionale e equivalenza: asic/verification.md
+    - Librerie standard cell e PDK: asic/libraries-pdk.md
+    - Tape-out e fabbricazione: asic/tapeout-fabrication.md
+    - Caso di studio ASIC: asic/case-study.md
     - Flowchart: 08_asic_flow_chart.md
     - OpenAsic: 08_openasic.md
     - Risorse: 
