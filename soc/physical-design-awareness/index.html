@@ -1,0 +1,5322 @@
+
+<!doctype html>
+<html lang="it" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corso completo su HDL, verification e tool FPGA/ASIC">
+      
+      
+      
+        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/soc/physical-design-awareness/">
+      
+      
+        <link rel="prev" href="../safety-security/">
+      
+      
+        <link rel="next" href="../case-study/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Physical awareness nel SoC - Corso di Microelettronica Digitale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#physical-design-awareness-in-un-soc" class="md-skip">
+          Vai al contenuto
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Intestazione">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-header__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corso di Microelettronica Digitale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Physical awareness nel SoC
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green"  aria-label="Passa a dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passa a dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="lime"  aria-label="Passa a light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passa a light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Cancella" aria-label="Cancella" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../00_introduzione/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Intro
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../01_fondamenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Fondamenti
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../02_vhdl/" class="md-tabs__link">
+          
+  
+  
+  VHDL
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../03_verilog/" class="md-tabs__link">
+          
+  
+  
+  Verilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../04_systemverilog_design/" class="md-tabs__link">
+          
+  
+  
+  SystemVerilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../05_verification_base/" class="md-tabs__link">
+          
+  
+  
+  Verification
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../06_uvm/" class="md-tabs__link">
+          
+  
+  
+  UVM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../07_fpga_flow/" class="md-tabs__link">
+          
+  
+  
+  FPGA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../08_asic_flow/" class="md-tabs__link">
+          
+  
+  
+  ASIC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  SoC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../09_progetti/" class="md-tabs__link">
+          
+  
+  
+  Progetti
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../10_tool_e_tcl/" class="md-tabs__link">
+          
+  
+  
+  Tool e Tcl/Tk
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../11_appendici/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Appendici
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../12_riferimenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Riferimenti
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigazione" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-nav__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Corso di Microelettronica Digitale
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00_introduzione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01_fondamenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VHDL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    VHDL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl_progettazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foglio di lavoro
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foglio di lavoro
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Tool Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/in_out/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    In and Out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/utilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/clocks_registers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocks and Registers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/state_machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/modular_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modular Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/memories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/managing_clocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Managing Clocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/io_flavors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O Flavors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A Taste of Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Rest for Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SystemVerilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_systemverilog_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_SV_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05_verification_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.chipverify.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChipVerify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verificationguide.com" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VerificationGuide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.doulos.com/knowhow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doulos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_3" id="__nav_8_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetto mini CPU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetto mini CPU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU_waveform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Waveform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_fpga_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_fpga_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_ps_axi_led/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq LED
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_4" id="__nav_9_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq FIR
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zynq FIR
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_8tap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_axi_stream_theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AXI Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_dma_interrupt_perf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DMA Interrupt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_xparameters_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    X Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Digilent/Zybo-Z7" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zybo-Z7-20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASIC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ASIC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_asic_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_asic_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_openasic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAsic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_4" id="__nav_10_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openlane2.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenLAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/kunalg123/vsdflow" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CMOS VLSI Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SoC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SoC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione ai SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architettura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di un SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interconnessioni e bus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../memorie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memorie e gerarchia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../periferiche/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Periferiche e I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ip-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrazione IP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../verifica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica di sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hw-sw-codesign/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HW/SW co-design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../power-clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consumi, clock e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../safety-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Safety e Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physical awareness nel SoC
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physical awareness nel SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-che-cosa-significa-physical-design-awareness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Che cosa significa physical design awareness
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-perche-e-importante-gia-a-livello-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Perché è importante già a livello SoC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-dallarchitettura-al-floorplan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Dall'architettura al floorplan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-perche-il-floorplan-conta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Perché il floorplan conta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-affinita-funzionale-e-vicinanza-fisica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Affinità funzionale e vicinanza fisica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-area-e-costo-fisico-dellarchitettura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Area e costo fisico dell'architettura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-le-memorie-dominano-spesso-larea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Le memorie dominano spesso l'area
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-area-frammentata-vs-area-compatta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Area frammentata vs area compatta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-macroblocchi-e-hard-macros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Macroblocchi e hard macros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-interconnect-e-distanza-fisica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Interconnect e distanza fisica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#61-topologia-logica-e-costo-fisico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Topologia logica e costo fisico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-traffico-intenso-e-lunghe-interconnessioni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Traffico intenso e lunghe interconnessioni
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-congestione-del-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Congestione del routing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#71-da-cosa-dipende" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Da cosa dipende
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72-effetti-della-congestione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Effetti della congestione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-timing-closure-e-conseguenze-architetturali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Timing closure e conseguenze architetturali
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#81-perche-il-timing-dipende-dallarchitettura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Perché il timing dipende dall'architettura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82-architetture-difficili-da-chiudere" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Architetture difficili da chiudere
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-clock-tree-e-scelte-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Clock tree e scelte SoC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#91-effetti-di-molti-clock-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Effetti di molti clock domain
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#92-blocchi-ad-alta-frequenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Blocchi ad alta frequenza
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-power-distribution-e-architettura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Power distribution e architettura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#101-power-domain-e-implicazioni-fisiche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Power domain e implicazioni fisiche
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#102-hot-spots-e-densita-di-potenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Hot spots e densità di potenza
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-physical-awareness-di-memorie-e-buffer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Physical awareness di memorie e buffer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#111-posizionamento-delle-memorie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Posizionamento delle memorie
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112-molte-memorie-piccole-o-poche-memorie-grandi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Molte memorie piccole o poche memorie grandi?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.2 Molte memorie piccole o poche memorie grandi?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#molte-memorie-piccole" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Molte memorie piccole
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#poche-memorie-grandi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Poche memorie grandi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-partizionamento-in-sottosistemi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Partizionamento in sottosistemi
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Partizionamento in sottosistemi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#benefici-del-partizionamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Benefici del partizionamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-physical-awareness-e-testabilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Physical awareness e testabilità
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#131-dft-e-accessibilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 DFT e accessibilità
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#132-debug-e-osservabilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Debug e osservabilità
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-physical-awareness-e-verificabilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Physical awareness e verificabilità
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-collaborazione-tra-architettura-soc-e-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Collaborazione tra architettura SoC e backend
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-esempi-di-segnali-dallarme-architetturali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Esempi di segnali d'allarme architetturali
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-errori-frequenti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Errori frequenti
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-collegamento-con-la-sezione-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Collegamento con la sezione ASIC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-collegamento-con-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Collegamento con FPGA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-esempio-di-vista-fisicamente-consapevole-di-un-soc-didattico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Esempio di vista fisicamente consapevole di un SoC didattico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_codice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorgenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool e Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tool e Tcl/Tk
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_e_tcl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3" id="__nav_13_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.tutorialspoint.com/tcl-tk/index.htm" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.amd.com/r/en-US/ug894-vivado-tcl-scripting/Tcl-Scripting-in-Vivado" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Script Tcl in Vivado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://yosyshq.readthedocs.io/projects/yosys/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yosis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openroad.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenROAD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://gtkwave.github.io/gtkwave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GTKWave Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verilator.org/guide/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilator Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3_7" id="__nav_13_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vivado
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_13_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vivado
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug910-vivado-getting-started" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug901-vivado-synthesis" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug904-vivado-implementation" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug835-vivado-tcl-commands" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcl Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/swdocs/modelsim/modelsim_user_2024_2.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ModelSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11_appendici/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendici
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12_riferimenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Riferimenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-che-cosa-significa-physical-design-awareness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Che cosa significa physical design awareness
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-perche-e-importante-gia-a-livello-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Perché è importante già a livello SoC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-dallarchitettura-al-floorplan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Dall'architettura al floorplan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-perche-il-floorplan-conta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Perché il floorplan conta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-affinita-funzionale-e-vicinanza-fisica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Affinità funzionale e vicinanza fisica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-area-e-costo-fisico-dellarchitettura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Area e costo fisico dell'architettura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-le-memorie-dominano-spesso-larea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Le memorie dominano spesso l'area
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-area-frammentata-vs-area-compatta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Area frammentata vs area compatta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-macroblocchi-e-hard-macros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Macroblocchi e hard macros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-interconnect-e-distanza-fisica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Interconnect e distanza fisica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#61-topologia-logica-e-costo-fisico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Topologia logica e costo fisico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-traffico-intenso-e-lunghe-interconnessioni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Traffico intenso e lunghe interconnessioni
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-congestione-del-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Congestione del routing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#71-da-cosa-dipende" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Da cosa dipende
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72-effetti-della-congestione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Effetti della congestione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-timing-closure-e-conseguenze-architetturali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Timing closure e conseguenze architetturali
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#81-perche-il-timing-dipende-dallarchitettura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Perché il timing dipende dall'architettura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82-architetture-difficili-da-chiudere" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Architetture difficili da chiudere
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-clock-tree-e-scelte-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Clock tree e scelte SoC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#91-effetti-di-molti-clock-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Effetti di molti clock domain
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#92-blocchi-ad-alta-frequenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Blocchi ad alta frequenza
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-power-distribution-e-architettura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Power distribution e architettura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#101-power-domain-e-implicazioni-fisiche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Power domain e implicazioni fisiche
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#102-hot-spots-e-densita-di-potenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Hot spots e densità di potenza
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-physical-awareness-di-memorie-e-buffer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Physical awareness di memorie e buffer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#111-posizionamento-delle-memorie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Posizionamento delle memorie
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112-molte-memorie-piccole-o-poche-memorie-grandi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Molte memorie piccole o poche memorie grandi?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.2 Molte memorie piccole o poche memorie grandi?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#molte-memorie-piccole" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Molte memorie piccole
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#poche-memorie-grandi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Poche memorie grandi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-partizionamento-in-sottosistemi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Partizionamento in sottosistemi
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Partizionamento in sottosistemi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#benefici-del-partizionamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Benefici del partizionamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-physical-awareness-e-testabilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Physical awareness e testabilità
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#131-dft-e-accessibilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 DFT e accessibilità
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#132-debug-e-osservabilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Debug e osservabilità
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-physical-awareness-e-verificabilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Physical awareness e verificabilità
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-collaborazione-tra-architettura-soc-e-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Collaborazione tra architettura SoC e backend
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-esempi-di-segnali-dallarme-architetturali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Esempi di segnali d'allarme architetturali
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-errori-frequenti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Errori frequenti
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-collegamento-con-la-sezione-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Collegamento con la sezione ASIC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-collegamento-con-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Collegamento con FPGA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-esempio-di-vista-fisicamente-consapevole-di-un-soc-didattico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Esempio di vista fisicamente consapevole di un SoC didattico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="physical-design-awareness-in-un-soc">Physical design awareness in un SoC<a class="headerlink" href="#physical-design-awareness-in-un-soc" title="Permanent link">&para;</a></h1>
+<p>La progettazione di un <strong>System on Chip (SoC)</strong> non si esaurisce nella definizione architetturale e nella descrizione RTL dei blocchi.<br />
+Anche se il progettista di sistema lavora spesso a un livello più astratto rispetto al backend fisico, è fondamentale sviluppare una forte <strong>physical design awareness</strong>, cioè la consapevolezza di come le scelte architetturali influenzino:</p>
+<ul>
+<li>area del chip;</li>
+<li>floorplanning;</li>
+<li>distribuzione dei clock;</li>
+<li>power distribution;</li>
+<li>congestione del routing;</li>
+<li>timing closure;</li>
+<li>testabilità e verificabilità fisica;</li>
+<li>consumo e comportamento termico.</li>
+</ul>
+<p>Questa consapevolezza è cruciale perché molte decisioni prese a livello SoC hanno effetti profondi e spesso irreversibili nelle fasi successive di implementazione ASIC.</p>
+<hr />
+<h2 id="1-che-cosa-significa-physical-design-awareness">1. Che cosa significa physical design awareness<a class="headerlink" href="#1-che-cosa-significa-physical-design-awareness" title="Permanent link">&para;</a></h2>
+<p>Avere physical design awareness non significa sostituirsi al physical designer o al backend engineer.<br />
+Significa piuttosto progettare il SoC con una visione che tenga conto del fatto che il chip dovrà poi essere:</p>
+<ul>
+<li>posizionato fisicamente;</li>
+<li>interconnesso;</li>
+<li>alimentato;</li>
+<li>temporizzato;</li>
+<li>verificato rispetto a vincoli reali.</li>
+</ul>
+<p>In pratica, significa evitare architetture che siano corrette dal punto di vista funzionale ma difficili, costose o rischiose da implementare fisicamente.</p>
+<hr />
+<h2 id="2-perche-e-importante-gia-a-livello-soc">2. Perché è importante già a livello SoC<a class="headerlink" href="#2-perche-e-importante-gia-a-livello-soc" title="Permanent link">&para;</a></h2>
+<p>Molti problemi fisici nascono da decisioni apparentemente architetturali, ad esempio:</p>
+<ul>
+<li>numero e posizione dei macroblocchi di memoria;</li>
+<li>topologia dell'interconnect;</li>
+<li>quantità di domini di clock;</li>
+<li>quantità di domini di alimentazione;</li>
+<li>collocazione logica dei sottosistemi;</li>
+<li>eccessiva frammentazione del design;</li>
+<li>traffico intenso tra blocchi lontani.</li>
+</ul>
+<p>Se questi aspetti non sono considerati abbastanza presto, si rischia di avere:</p>
+<ul>
+<li>area eccessiva;</li>
+<li>congestione del routing;</li>
+<li>percorsi temporali difficili da chiudere;</li>
+<li>clock tree complesso;</li>
+<li>power grid pesante;</li>
+<li>tempi di implementazione molto lunghi;</li>
+<li>maggiore rischio di fallire la convergenza fisica.</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    ARCH[Scelte architetturali]
+    PHY[Conseguenze fisiche]
+    RISK[Rischio di implementazione]
+
+    ARCH --&gt; PHY --&gt; RISK</code></pre>
+<hr />
+<h2 id="3-dallarchitettura-al-floorplan">3. Dall'architettura al floorplan<a class="headerlink" href="#3-dallarchitettura-al-floorplan" title="Permanent link">&para;</a></h2>
+<p>Il <strong>floorplan</strong> è la disposizione fisica di macroblocchi, sottosistemi, memorie, interconnect e aree funzionali all'interno del chip.</p>
+<p>Dal punto di vista SoC, il floorplan non è ancora un layout definitivo, ma una conseguenza diretta del modo in cui il sistema è stato concepito.</p>
+<h2 id="31-perche-il-floorplan-conta">3.1 Perché il floorplan conta<a class="headerlink" href="#31-perche-il-floorplan-conta" title="Permanent link">&para;</a></h2>
+<p>Una buona organizzazione fisica aiuta a:</p>
+<ul>
+<li>ridurre lunghezza delle interconnessioni;</li>
+<li>migliorare timing;</li>
+<li>contenere consumi;</li>
+<li>semplificare routing e clock distribution;</li>
+<li>rendere più ordinata la gerarchia del chip.</li>
+</ul>
+<p>Una cattiva organizzazione può invece creare percorsi lunghi, hot spot, congestione e difficoltà nella chiusura del progetto.</p>
+<h2 id="32-affinita-funzionale-e-vicinanza-fisica">3.2 Affinità funzionale e vicinanza fisica<a class="headerlink" href="#32-affinita-funzionale-e-vicinanza-fisica" title="Permanent link">&para;</a></h2>
+<p>Una regola concettuale importante è che blocchi che scambiano molto traffico dovrebbero, per quanto possibile, essere anche relativamente vicini dal punto di vista fisico.</p>
+<p>Esempi:</p>
+<ul>
+<li>CPU vicino a cache o memoria locale;</li>
+<li>acceleratore vicino ai buffer che usa frequentemente;</li>
+<li>controller di memoria vicino alle macro di memoria o ai pad pertinenti;</li>
+<li>periferiche raggruppate per dominio o funzione.</li>
+</ul>
+<pre class="mermaid"><code>flowchart TB
+    subgraph Compute
+        CPU[CPU]
+        ACC[Acceleratore]
+        CACHE[Cache / SRAM]
+    end
+
+    subgraph Peripheral
+        UART[UART]
+        SPI[SPI]
+        GPIO[GPIO]
+    end
+
+    subgraph Memory
+        MEMCTRL[Controller memoria]
+        DDRIF[Interfaccia esterna]
+    end
+
+    CPU --&gt; CACHE
+    CPU --&gt; ACC
+    MEMCTRL --&gt; DDRIF</code></pre>
+<hr />
+<h2 id="4-area-e-costo-fisico-dellarchitettura">4. Area e costo fisico dell'architettura<a class="headerlink" href="#4-area-e-costo-fisico-dellarchitettura" title="Permanent link">&para;</a></h2>
+<p>Ogni scelta architetturale ha un costo in area.<br />
+Nel SoC, questo costo non dipende solo dalla logica combinatoria e sequenziale, ma in larga misura da:</p>
+<ul>
+<li>macro di memoria;</li>
+<li>cache;</li>
+<li>buffer;</li>
+<li>interconnect;</li>
+<li>unità di power management;</li>
+<li>clocking infrastructure;</li>
+<li>logiche di debug, test e safety/security.</li>
+</ul>
+<h2 id="41-le-memorie-dominano-spesso-larea">4.1 Le memorie dominano spesso l'area<a class="headerlink" href="#41-le-memorie-dominano-spesso-larea" title="Permanent link">&para;</a></h2>
+<p>In molti SoC, una parte molto significativa dell'area complessiva è occupata da:</p>
+<ul>
+<li>SRAM;</li>
+<li>ROM;</li>
+<li>cache;</li>
+<li>buffer dedicati;</li>
+<li>memorie di retention.</li>
+</ul>
+<p>Questo significa che la gerarchia di memoria non è solo una scelta prestazionale, ma anche una scelta fisica primaria.</p>
+<h2 id="42-area-frammentata-vs-area-compatta">4.2 Area frammentata vs area compatta<a class="headerlink" href="#42-area-frammentata-vs-area-compatta" title="Permanent link">&para;</a></h2>
+<p>Un'architettura con molti piccoli blocchi sparsi può essere più difficile da floorplannare rispetto a un'architettura organizzata in sottosistemi compatti e ben separati.</p>
+<hr />
+<h2 id="5-macroblocchi-e-hard-macros">5. Macroblocchi e hard macros<a class="headerlink" href="#5-macroblocchi-e-hard-macros" title="Permanent link">&para;</a></h2>
+<p>Nel SoC sono molto comuni i <strong>macroblocchi</strong>, cioè blocchi con forte identità fisica, come:</p>
+<ul>
+<li>memorie;</li>
+<li>PLL;</li>
+<li>IP hard;</li>
+<li>PHY;</li>
+<li>blocchi analogici o mixed-signal;</li>
+<li>acceleratori pre-implementati.</li>
+</ul>
+<p>Questi macroblocchi influenzano fortemente il floorplanning perché:</p>
+<ul>
+<li>non sono arbitrariamente deformabili;</li>
+<li>hanno vincoli di orientamento o posizione;</li>
+<li>possono richiedere alimentazioni specifiche;</li>
+<li>hanno pin o interfacce da collocare coerentemente;</li>
+<li>possono diventare sorgenti di congestione.</li>
+</ul>
+<pre class="mermaid"><code>flowchart TB
+    CHIP[Chip area]
+    M1[Macro memoria]
+    M2[PLL / clock macro]
+    M3[PHY / I/O macro]
+    LOG[Logica standard-cell]
+
+    CHIP --&gt; M1
+    CHIP --&gt; M2
+    CHIP --&gt; M3
+    CHIP --&gt; LOG</code></pre>
+<p>Il progettista SoC deve quindi sapere che introdurre un hard IP o una memoria non significa soltanto "aggiungere una funzione", ma anche imporre vincoli fisici reali.</p>
+<hr />
+<h2 id="6-interconnect-e-distanza-fisica">6. Interconnect e distanza fisica<a class="headerlink" href="#6-interconnect-e-distanza-fisica" title="Permanent link">&para;</a></h2>
+<p>L'interconnect è una delle aree in cui l'impatto fisico delle scelte SoC è più evidente.</p>
+<h2 id="61-topologia-logica-e-costo-fisico">6.1 Topologia logica e costo fisico<a class="headerlink" href="#61-topologia-logica-e-costo-fisico" title="Permanent link">&para;</a></h2>
+<p>Una topologia di bus o crossbar può essere corretta dal punto di vista funzionale, ma molto costosa dal punto di vista fisico se:</p>
+<ul>
+<li>collega un grande numero di blocchi lontani;</li>
+<li>richiede molti percorsi larghi e ad alta attività;</li>
+<li>attraversa più regioni del chip;</li>
+<li>impone connessioni incrociate numerose.</li>
+</ul>
+<h2 id="62-traffico-intenso-e-lunghe-interconnessioni">6.2 Traffico intenso e lunghe interconnessioni<a class="headerlink" href="#62-traffico-intenso-e-lunghe-interconnessioni" title="Permanent link">&para;</a></h2>
+<p>Se due blocchi si scambiano grandi quantità di dati ma risultano lontani nel floorplan, si possono avere:</p>
+<ul>
+<li>ritardi elevati;</li>
+<li>consumi dinamici più alti;</li>
+<li>congestione del routing;</li>
+<li>difficoltà nel timing closure.</li>
+</ul>
+<p>Per questo la physical awareness suggerisce di far coincidere, per quanto possibile:</p>
+<ul>
+<li>vicinanza logica;</li>
+<li>intensità del traffico;</li>
+<li>vicinanza fisica.</li>
+</ul>
+<hr />
+<h2 id="7-congestione-del-routing">7. Congestione del routing<a class="headerlink" href="#7-congestione-del-routing" title="Permanent link">&para;</a></h2>
+<p>La <strong>routing congestion</strong> è uno dei problemi classici nei chip complessi.</p>
+<h2 id="71-da-cosa-dipende">7.1 Da cosa dipende<a class="headerlink" href="#71-da-cosa-dipende" title="Permanent link">&para;</a></h2>
+<p>La congestione aumenta quando:</p>
+<ul>
+<li>troppi segnali attraversano la stessa regione;</li>
+<li>molti blocchi sono densamente accorpati senza sufficiente pianificazione;</li>
+<li>il numero di connessioni globali è molto alto;</li>
+<li>si concentrano molte interfacce attorno a macro grandi;</li>
+<li>clock, reset, power e segnali dati competono per le stesse risorse fisiche.</li>
+</ul>
+<h2 id="72-effetti-della-congestione">7.2 Effetti della congestione<a class="headerlink" href="#72-effetti-della-congestione" title="Permanent link">&para;</a></h2>
+<p>La congestione può causare:</p>
+<ul>
+<li>peggioramento del timing;</li>
+<li>aumento dell'area finale;</li>
+<li>maggiore numero di buffer o ripetitori;</li>
+<li>iterazioni aggiuntive di placement e routing;</li>
+<li>rischio di non convergere fisicamente.</li>
+</ul>
+<p>Una buona architettura SoC aiuta a prevenire la congestione organizzando il sistema in sottosistemi con interazioni controllate.</p>
+<hr />
+<h2 id="8-timing-closure-e-conseguenze-architetturali">8. Timing closure e conseguenze architetturali<a class="headerlink" href="#8-timing-closure-e-conseguenze-architetturali" title="Permanent link">&para;</a></h2>
+<p>La <strong>timing closure</strong> è il processo con cui si verifica e si ottimizza il chip affinché tutti i percorsi temporali rispettino i vincoli richiesti.</p>
+<h2 id="81-perche-il-timing-dipende-dallarchitettura">8.1 Perché il timing dipende dall'architettura<a class="headerlink" href="#81-perche-il-timing-dipende-dallarchitettura" title="Permanent link">&para;</a></h2>
+<p>Il timing non dipende solo dalla qualità dell'implementazione fisica, ma anche da scelte architetturali quali:</p>
+<ul>
+<li>profondità dei datapath;</li>
+<li>presenza o assenza di pipeline;</li>
+<li>distanza tra blocchi fortemente connessi;</li>
+<li>larghezza dei bus;</li>
+<li>numero di livelli di logica;</li>
+<li>uso di clock domain multipli;</li>
+<li>collocazione delle memorie.</li>
+</ul>
+<h2 id="82-architetture-difficili-da-chiudere">8.2 Architetture difficili da chiudere<a class="headerlink" href="#82-architetture-difficili-da-chiudere" title="Permanent link">&para;</a></h2>
+<p>Sono tipicamente problematiche quelle in cui:</p>
+<ul>
+<li>troppi segnali attraversano grandi distanze;</li>
+<li>si richiede alta frequenza a blocchi poco pipeline-izzati;</li>
+<li>si impone una forte centralizzazione dell'interconnect;</li>
+<li>si moltiplicano i crossing e le dipendenze globali.</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    ARCH[Scelte architetturali]
+    DIST[Distanze e profondità logiche]
+    TIME[Timing closure]
+
+    ARCH --&gt; DIST --&gt; TIME</code></pre>
+<p>Per il progettista SoC, questo significa che prestazioni elevate non si ottengono solo aumentando la frequenza nominale, ma strutturando il sistema in modo fisicamente sostenibile.</p>
+<hr />
+<h2 id="9-clock-tree-e-scelte-soc">9. Clock tree e scelte SoC<a class="headerlink" href="#9-clock-tree-e-scelte-soc" title="Permanent link">&para;</a></h2>
+<p>I clock hanno un forte impatto fisico perché devono essere distribuiti in modo capillare e controllato.</p>
+<h2 id="91-effetti-di-molti-clock-domain">9.1 Effetti di molti clock domain<a class="headerlink" href="#91-effetti-di-molti-clock-domain" title="Permanent link">&para;</a></h2>
+<p>Avere molti clock domain può essere vantaggioso dal punto di vista funzionale o energetico, ma implica:</p>
+<ul>
+<li>clock tree più complessi;</li>
+<li>maggiore area dedicata all'infrastruttura;</li>
+<li>più crossing da gestire;</li>
+<li>maggiore effort di timing e verifica.</li>
+</ul>
+<h2 id="92-blocchi-ad-alta-frequenza">9.2 Blocchi ad alta frequenza<a class="headerlink" href="#92-blocchi-ad-alta-frequenza" title="Permanent link">&para;</a></h2>
+<p>I sottosistemi che operano ad alta frequenza richiedono generalmente:</p>
+<ul>
+<li>placement più curato;</li>
+<li>percorsi dati controllati;</li>
+<li>clock distribution più rigorosa;</li>
+<li>budgeting temporale più stretto.</li>
+</ul>
+<p>Per questo, un'architettura SoC con molti domini e alte frequenze deve essere giustificata da benefici reali.</p>
+<hr />
+<h2 id="10-power-distribution-e-architettura">10. Power distribution e architettura<a class="headerlink" href="#10-power-distribution-e-architettura" title="Permanent link">&para;</a></h2>
+<p>La distribuzione dell'alimentazione dipende fortemente da come il SoC è partizionato.</p>
+<h2 id="101-power-domain-e-implicazioni-fisiche">10.1 Power domain e implicazioni fisiche<a class="headerlink" href="#101-power-domain-e-implicazioni-fisiche" title="Permanent link">&para;</a></h2>
+<p>Ogni power domain aggiunge esigenze di:</p>
+<ul>
+<li>isolamento;</li>
+<li>retention;</li>
+<li>power switches;</li>
+<li>routing di alimentazioni dedicate;</li>
+<li>controllo di sequenziamento.</li>
+</ul>
+<h2 id="102-hot-spots-e-densita-di-potenza">10.2 Hot spots e densità di potenza<a class="headerlink" href="#102-hot-spots-e-densita-di-potenza" title="Permanent link">&para;</a></h2>
+<p>Blocchi molto attivi o molto compatti possono generare zone di alta densità di potenza, con effetti su:</p>
+<ul>
+<li>consumo;</li>
+<li>integrità del segnale;</li>
+<li>affidabilità;</li>
+<li>comportamento termico.</li>
+</ul>
+<p>Una buona physical awareness porta a evitare concentrazioni eccessive di attività intensa in regioni troppo ristrette.</p>
+<hr />
+<h2 id="11-physical-awareness-di-memorie-e-buffer">11. Physical awareness di memorie e buffer<a class="headerlink" href="#11-physical-awareness-di-memorie-e-buffer" title="Permanent link">&para;</a></h2>
+<p>Le memorie sono spesso il ponte più evidente tra architettura e implementazione fisica.</p>
+<h2 id="111-posizionamento-delle-memorie">11.1 Posizionamento delle memorie<a class="headerlink" href="#111-posizionamento-delle-memorie" title="Permanent link">&para;</a></h2>
+<p>Il posizionamento delle macro di memoria influenza:</p>
+<ul>
+<li>lunghezza dei percorsi dati;</li>
+<li>accesso della CPU o degli acceleratori;</li>
+<li>distribuzione del traffico;</li>
+<li>possibilità di creare sottosistemi compatti.</li>
+</ul>
+<h2 id="112-molte-memorie-piccole-o-poche-memorie-grandi">11.2 Molte memorie piccole o poche memorie grandi?<a class="headerlink" href="#112-molte-memorie-piccole-o-poche-memorie-grandi" title="Permanent link">&para;</a></h2>
+<p>Questa è una scelta con impatto sia architetturale sia fisico.</p>
+<h3 id="molte-memorie-piccole">Molte memorie piccole<a class="headerlink" href="#molte-memorie-piccole" title="Permanent link">&para;</a></h3>
+<ul>
+<li>maggiore località possibile;</li>
+<li>flessibilità;</li>
+<li>potenziale distribuzione del traffico.</li>
+</ul>
+<h3 id="poche-memorie-grandi">Poche memorie grandi<a class="headerlink" href="#poche-memorie-grandi" title="Permanent link">&para;</a></h3>
+<ul>
+<li>struttura più centralizzata;</li>
+<li>meno macro da gestire;</li>
+<li>possibile semplificazione di certe scelte architetturali.</li>
+</ul>
+<p>Tuttavia, entrambe le opzioni hanno costi e benefici fisici diversi in termini di floorplanning, routing e timing.</p>
+<hr />
+<h2 id="12-partizionamento-in-sottosistemi">12. Partizionamento in sottosistemi<a class="headerlink" href="#12-partizionamento-in-sottosistemi" title="Permanent link">&para;</a></h2>
+<p>Uno dei modi migliori per migliorare la physical awareness è partizionare il SoC in sottosistemi coerenti.</p>
+<p>Esempi:</p>
+<ul>
+<li>compute subsystem;</li>
+<li>memory subsystem;</li>
+<li>peripheral subsystem;</li>
+<li>always-on subsystem;</li>
+<li>security/safety subsystem.</li>
+</ul>
+<h3 id="benefici-del-partizionamento">Benefici del partizionamento<a class="headerlink" href="#benefici-del-partizionamento" title="Permanent link">&para;</a></h3>
+<ul>
+<li>gerarchia più leggibile;</li>
+<li>floorplanning più naturale;</li>
+<li>routing più controllabile;</li>
+<li>isolamento di domini funzionali;</li>
+<li>migliore manutenibilità del progetto.</li>
+</ul>
+<pre class="mermaid"><code>flowchart TB
+    subgraph Compute
+        CPU[CPU]
+        ACC[Acceleratori]
+    end
+
+    subgraph Memory
+        SRAM[SRAM]
+        MEMCTRL[Controller memoria]
+    end
+
+    subgraph Peripheral
+        UART[UART]
+        SPI[SPI]
+        GPIO[GPIO]
+    end
+
+    subgraph Control
+        PMU[Power management]
+        RST[Reset]
+        CLK[Clock manager]
+    end</code></pre>
+<p>Questa visione non serve solo alla documentazione: aiuta a costruire un SoC più implementabile.</p>
+<hr />
+<h2 id="13-physical-awareness-e-testabilita">13. Physical awareness e testabilità<a class="headerlink" href="#13-physical-awareness-e-testabilita" title="Permanent link">&para;</a></h2>
+<p>Le scelte architetturali influenzano anche la <strong>testabilità</strong> del SoC.</p>
+<h2 id="131-dft-e-accessibilita">13.1 DFT e accessibilità<a class="headerlink" href="#131-dft-e-accessibilita" title="Permanent link">&para;</a></h2>
+<p>Un chip deve poter essere testato.<br />
+Scelte come:</p>
+<ul>
+<li>forte frammentazione;</li>
+<li>molte dipendenze tra domini;</li>
+<li>reset complessi;</li>
+<li>clocking molto articolato;</li>
+<li>macro difficili da raggiungere;</li>
+</ul>
+<p>possono complicare l'inserimento o la gestione delle strutture di test.</p>
+<h2 id="132-debug-e-osservabilita">13.2 Debug e osservabilità<a class="headerlink" href="#132-debug-e-osservabilita" title="Permanent link">&para;</a></h2>
+<p>Anche il debug post-silicon è influenzato dalla physical awareness:</p>
+<ul>
+<li>segnali critici difficili da osservare;</li>
+<li>percorsi sensibili distribuiti in zone molto lontane;</li>
+<li>infrastrutture di tracing costose;</li>
+<li>dipendenza da clock e power states.</li>
+</ul>
+<p>La physical awareness spinge quindi a progettare non solo per funzionare, ma anche per essere testabili e debuggabili.</p>
+<hr />
+<h2 id="14-physical-awareness-e-verificabilita">14. Physical awareness e verificabilità<a class="headerlink" href="#14-physical-awareness-e-verificabilita" title="Permanent link">&para;</a></h2>
+<p>Una buona architettura fisicamente consapevole semplifica anche la verifica.</p>
+<p>Infatti tende a ridurre:</p>
+<ul>
+<li>interazioni inutilmente globali;</li>
+<li>crossing non necessari;</li>
+<li>dipendenze complesse di power e reset;</li>
+<li>percorsi dati troppo lunghi o fragili.</li>
+</ul>
+<p>Questo rende più lineare:</p>
+<ul>
+<li>il debug;</li>
+<li>il correlation tra problemi funzionali e fisici;</li>
+<li>la chiusura delle verifiche finali.</li>
+</ul>
+<hr />
+<h2 id="15-collaborazione-tra-architettura-soc-e-backend">15. Collaborazione tra architettura SoC e backend<a class="headerlink" href="#15-collaborazione-tra-architettura-soc-e-backend" title="Permanent link">&para;</a></h2>
+<p>La physical design awareness suggerisce che architettura e backend non debbano essere mondi completamente separati.</p>
+<p>È utile che il progettista SoC sappia almeno porsi domande come:</p>
+<ul>
+<li>dove finiranno fisicamente le memorie principali?</li>
+<li>quali blocchi devono stare vicini?</li>
+<li>quali interfacce avranno molto traffico?</li>
+<li>quanti clock domain sono davvero necessari?</li>
+<li>i power domain previsti sono sostenibili?</li>
+<li>l'interconnect scelta è coerente con la scala del progetto?</li>
+</ul>
+<p>Questa collaborazione anticipata riduce il rischio di scoprire troppo tardi problemi costosi.</p>
+<hr />
+<h2 id="16-esempi-di-segnali-dallarme-architetturali">16. Esempi di segnali d'allarme architetturali<a class="headerlink" href="#16-esempi-di-segnali-dallarme-architetturali" title="Permanent link">&para;</a></h2>
+<p>Ci sono alcuni segnali che indicano una possibile architettura fisicamente problematica:</p>
+<ul>
+<li>eccessivo numero di macro sparse;</li>
+<li>crossbar molto ampia con tanti initiator e target;</li>
+<li>grande quantità di dati che attraversa tutto il chip;</li>
+<li>troppi clock domain con interazioni dense;</li>
+<li>power domain numerosi senza una chiara strategia;</li>
+<li>sottosistemi fortemente dipendenti ma logicamente lontani;</li>
+<li>memorie centrali contese da molti blocchi.</li>
+</ul>
+<p>Questi elementi non sono necessariamente sbagliati, ma richiedono una forte giustificazione e una pianificazione accurata.</p>
+<hr />
+<h2 id="17-errori-frequenti">17. Errori frequenti<a class="headerlink" href="#17-errori-frequenti" title="Permanent link">&para;</a></h2>
+<p>Tra gli errori più comuni:</p>
+<ul>
+<li>considerare area e floorplanning solo dopo l'RTL;</li>
+<li>introdurre IP e memorie senza pensare alla loro collocazione fisica;</li>
+<li>scegliere interconnect troppo ricche per la scala del progetto;</li>
+<li>ignorare il costo fisico dei clock domain multipli;</li>
+<li>sottovalutare la congestione dovuta a traffico elevato;</li>
+<li>pensare che il backend possa "risolvere tutto" senza conseguenze;</li>
+<li>non coinvolgere abbastanza presto considerazioni di timing closure.</li>
+</ul>
+<hr />
+<h2 id="18-collegamento-con-la-sezione-asic">18. Collegamento con la sezione ASIC<a class="headerlink" href="#18-collegamento-con-la-sezione-asic" title="Permanent link">&para;</a></h2>
+<p>Questa pagina costituisce il ponte naturale tra la progettazione SoC e la progettazione <strong>ASIC</strong>.</p>
+<p>Infatti mostra che:</p>
+<ul>
+<li>una buona architettura non è solo funzionalmente elegante;</li>
+<li>le memorie non sono solo risorse logiche, ma macro fisiche;</li>
+<li>i clock domain non sono solo concetti astratti, ma reti reali da distribuire;</li>
+<li>i power domain comportano celle, routing e sequenze concrete;</li>
+<li>il floorplan e il timing dipendono già da come il sistema è stato strutturato.</li>
+</ul>
+<p>Per questo la physical awareness è uno dei punti in cui la cultura SoC si salda con quella del backend ASIC.</p>
+<hr />
+<h2 id="19-collegamento-con-fpga">19. Collegamento con FPGA<a class="headerlink" href="#19-collegamento-con-fpga" title="Permanent link">&para;</a></h2>
+<p>Nel contesto FPGA, la physical awareness è spesso meno estrema rispetto all'ASIC, ma resta comunque utile.</p>
+<p>Ad esempio aiuta a capire:</p>
+<ul>
+<li>perché alcune architetture raggiungono facilmente la frequenza richiesta e altre no;</li>
+<li>perché certe memorie o DSP vanno collocati logicamente in modo favorevole;</li>
+<li>perché alcuni bus lunghi degradano il timing;</li>
+<li>perché il partizionamento in sottosistemi aiuta anche in prototipazione.</li>
+</ul>
+<p>La FPGA costituisce quindi un ottimo ambiente didattico per sviluppare intuizione fisica prima del flusso ASIC completo.</p>
+<hr />
+<h2 id="20-esempio-di-vista-fisicamente-consapevole-di-un-soc-didattico">20. Esempio di vista fisicamente consapevole di un SoC didattico<a class="headerlink" href="#20-esempio-di-vista-fisicamente-consapevole-di-un-soc-didattico" title="Permanent link">&para;</a></h2>
+<p>Il seguente schema mostra una visione concettuale di come si possa organizzare un SoC in modo favorevole alla futura implementazione fisica.</p>
+<pre class="mermaid"><code>flowchart TB
+    subgraph Compute_Area
+        CPU[CPU]
+        ACC1[Acceleratore 1]
+        ACC2[Acceleratore 2]
+        LBUF[Buffer locali]
+    end
+
+    subgraph Memory_Area
+        SRAM[SRAM]
+        ROM[ROM]
+        MEMCTRL[Controller memoria]
+    end
+
+    subgraph Peripheral_Area
+        UART[UART]
+        SPI[SPI]
+        GPIO[GPIO]
+        TIMER[Timer]
+    end
+
+    subgraph Control_Area
+        CLK[Clock manager]
+        RST[Reset controller]
+        PMU[Power management]
+    end
+
+    CPU --&gt; SRAM
+    ACC1 --&gt; LBUF
+    ACC2 --&gt; LBUF
+    MEMCTRL --&gt; SRAM</code></pre>
+<p>In questo tipo di organizzazione:</p>
+<ul>
+<li>i blocchi con forte interazione dati sono raggruppati;</li>
+<li>il sottosistema memoria è riconoscibile e coerente;</li>
+<li>le periferiche sono raccolte in una regione dedicata;</li>
+<li>l'infrastruttura di controllo è separata ma centralmente rilevante.</li>
+</ul>
+<hr />
+<h2 id="21-in-sintesi">21. In sintesi<a class="headerlink" href="#21-in-sintesi" title="Permanent link">&para;</a></h2>
+<p>Avere physical design awareness in un SoC significa progettare con la consapevolezza che ogni scelta architetturale avrà conseguenze concrete su:</p>
+<ul>
+<li>area;</li>
+<li>floorplanning;</li>
+<li>routing;</li>
+<li>timing closure;</li>
+<li>clock distribution;</li>
+<li>power distribution;</li>
+<li>testabilità;</li>
+<li>verificabilità fisica.</li>
+</ul>
+<p>Non si tratta di trasformare il progettista SoC in un backend engineer, ma di costruire un'architettura che sia non solo corretta e performante, ma anche realisticamente implementabile.</p>
+<p>Questa consapevolezza è uno dei legami più forti tra la progettazione di sistema e la progettazione ASIC.</p>
+<hr />
+<h2 id="prossimo-passo">Prossimo passo<a class="headerlink" href="#prossimo-passo" title="Permanent link">&para;</a></h2>
+<p>Dopo questa pagina, il passo conclusivo naturale è un <strong>caso di studio SoC</strong>, in cui raccogliere i concetti introdotti nelle pagine precedenti e mostrarli in una piattaforma concreta, semplice ma completa.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

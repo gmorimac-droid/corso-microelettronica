@@ -1,0 +1,5482 @@
+
+<!doctype html>
+<html lang="it" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corso completo su HDL, verification e tool FPGA/ASIC">
+      
+      
+      
+        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/soc/memorie/">
+      
+      
+        <link rel="prev" href="../bus/">
+      
+      
+        <link rel="next" href="../periferiche/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Memorie e gerarchia - Corso di Microelettronica Digitale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#memorie-e-gerarchia-della-memoria-in-un-soc" class="md-skip">
+          Vai al contenuto
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Intestazione">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-header__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corso di Microelettronica Digitale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Memorie e gerarchia
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green"  aria-label="Passa a dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passa a dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="lime"  aria-label="Passa a light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passa a light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Cancella" aria-label="Cancella" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../00_introduzione/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Intro
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../01_fondamenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Fondamenti
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../02_vhdl/" class="md-tabs__link">
+          
+  
+  
+  VHDL
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../03_verilog/" class="md-tabs__link">
+          
+  
+  
+  Verilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../04_systemverilog_design/" class="md-tabs__link">
+          
+  
+  
+  SystemVerilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../05_verification_base/" class="md-tabs__link">
+          
+  
+  
+  Verification
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../06_uvm/" class="md-tabs__link">
+          
+  
+  
+  UVM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../07_fpga_flow/" class="md-tabs__link">
+          
+  
+  
+  FPGA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../08_asic_flow/" class="md-tabs__link">
+          
+  
+  
+  ASIC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  SoC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../09_progetti/" class="md-tabs__link">
+          
+  
+  
+  Progetti
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../10_tool_e_tcl/" class="md-tabs__link">
+          
+  
+  
+  Tool e Tcl/Tk
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../11_appendici/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Appendici
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../12_riferimenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Riferimenti
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigazione" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-nav__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Corso di Microelettronica Digitale
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00_introduzione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01_fondamenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VHDL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    VHDL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl_progettazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foglio di lavoro
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foglio di lavoro
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Tool Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/in_out/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    In and Out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/utilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/clocks_registers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocks and Registers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/state_machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/modular_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modular Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/memories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/managing_clocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Managing Clocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/io_flavors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O Flavors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A Taste of Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Rest for Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SystemVerilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_systemverilog_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_SV_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05_verification_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.chipverify.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChipVerify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verificationguide.com" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VerificationGuide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.doulos.com/knowhow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doulos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_3" id="__nav_8_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetto mini CPU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetto mini CPU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU_waveform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Waveform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_fpga_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_fpga_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_ps_axi_led/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq LED
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_4" id="__nav_9_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq FIR
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zynq FIR
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_8tap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_axi_stream_theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AXI Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_dma_interrupt_perf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DMA Interrupt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_xparameters_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    X Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Digilent/Zybo-Z7" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zybo-Z7-20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASIC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ASIC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_asic_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_asic_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_openasic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAsic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_4" id="__nav_10_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openlane2.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenLAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/kunalg123/vsdflow" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CMOS VLSI Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SoC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SoC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione ai SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architettura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di un SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interconnessioni e bus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memorie e gerarchia
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memorie e gerarchia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-perche-la-memoria-e-centrale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Perché la memoria è centrale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-il-concetto-di-gerarchia-di-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Il concetto di gerarchia di memoria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-tipologie-principali-di-memoria-in-un-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Tipologie principali di memoria in un SoC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-registri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Registri
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Cache
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-sram-on-chip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 SRAM on-chip
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-rom-o-memoria-di-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 ROM o memoria di boot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35-memoria-esterna" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Memoria esterna
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-visione-architetturale-della-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Visione architetturale della memoria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-parametri-fondamentali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Parametri fondamentali
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#51-capacita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Capacità
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52-latenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Latenza
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-banda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Banda
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Area
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55-consumi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Consumi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#56-prevedibilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6 Prevedibilità
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-cache-e-scratchpad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Cache e scratchpad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#61-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Cache
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 Cache">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svantaggi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Svantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-scratchpad-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Scratchpad memory
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 Scratchpad memory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svantaggi_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Svantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-memorie-condivise-e-memorie-locali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Memorie condivise e memorie locali
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#71-memoria-locale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Memoria locale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.1 Memoria locale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svantaggi_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Svantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72-memoria-condivisa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Memoria condivisa
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.2 Memoria condivisa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svantaggi_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Svantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-memoria-e-dma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Memoria e DMA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-controller-di-memoria-esterna" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Controller di memoria esterna
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-memory-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Memory map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-coerenza-e-sincronizzazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Coerenza e sincronizzazione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-memoria-e-software-di-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Memoria e software di sistema
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-trade-off-architetturali-tipici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Trade-off architetturali tipici
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#131-piu-sram-on-chip-o-piu-dipendenza-dalla-memoria-esterna" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Più SRAM on-chip o più dipendenza dalla memoria esterna?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#132-cache-o-scratchpad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Cache o scratchpad?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#133-buffer-locali-o-memoria-condivisa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 Buffer locali o memoria condivisa?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#134-larghezza-del-bus-e-organizzazione-dei-burst" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4 Larghezza del bus e organizzazione dei burst
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-errori-frequenti-nella-progettazione-della-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Errori frequenti nella progettazione della memoria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-collegamento-con-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Collegamento con FPGA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-collegamento-con-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Collegamento con ASIC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-esempio-di-gerarchia-di-memoria-in-un-soc-didattico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Esempio di gerarchia di memoria in un SoC didattico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../periferiche/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Periferiche e I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ip-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrazione IP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../verifica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica di sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hw-sw-codesign/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HW/SW co-design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../power-clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consumi, clock e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../safety-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Safety e Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../physical-design-awareness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physical awareness nel SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_codice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorgenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool e Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tool e Tcl/Tk
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_e_tcl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3" id="__nav_13_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.tutorialspoint.com/tcl-tk/index.htm" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.amd.com/r/en-US/ug894-vivado-tcl-scripting/Tcl-Scripting-in-Vivado" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Script Tcl in Vivado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://yosyshq.readthedocs.io/projects/yosys/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yosis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openroad.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenROAD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://gtkwave.github.io/gtkwave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GTKWave Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verilator.org/guide/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilator Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3_7" id="__nav_13_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vivado
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_13_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vivado
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug910-vivado-getting-started" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug901-vivado-synthesis" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug904-vivado-implementation" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug835-vivado-tcl-commands" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcl Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/swdocs/modelsim/modelsim_user_2024_2.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ModelSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11_appendici/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendici
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12_riferimenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Riferimenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-perche-la-memoria-e-centrale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Perché la memoria è centrale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-il-concetto-di-gerarchia-di-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Il concetto di gerarchia di memoria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-tipologie-principali-di-memoria-in-un-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Tipologie principali di memoria in un SoC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-registri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Registri
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Cache
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-sram-on-chip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 SRAM on-chip
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-rom-o-memoria-di-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 ROM o memoria di boot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35-memoria-esterna" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Memoria esterna
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-visione-architetturale-della-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Visione architetturale della memoria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-parametri-fondamentali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Parametri fondamentali
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#51-capacita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Capacità
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52-latenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Latenza
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-banda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Banda
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Area
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55-consumi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Consumi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#56-prevedibilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6 Prevedibilità
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-cache-e-scratchpad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Cache e scratchpad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#61-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Cache
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 Cache">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svantaggi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Svantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-scratchpad-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Scratchpad memory
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 Scratchpad memory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svantaggi_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Svantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-memorie-condivise-e-memorie-locali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Memorie condivise e memorie locali
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#71-memoria-locale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Memoria locale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.1 Memoria locale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svantaggi_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Svantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72-memoria-condivisa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Memoria condivisa
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.2 Memoria condivisa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svantaggi_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Svantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-memoria-e-dma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Memoria e DMA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-controller-di-memoria-esterna" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Controller di memoria esterna
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-memory-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Memory map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-coerenza-e-sincronizzazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Coerenza e sincronizzazione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-memoria-e-software-di-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Memoria e software di sistema
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-trade-off-architetturali-tipici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Trade-off architetturali tipici
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#131-piu-sram-on-chip-o-piu-dipendenza-dalla-memoria-esterna" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Più SRAM on-chip o più dipendenza dalla memoria esterna?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#132-cache-o-scratchpad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Cache o scratchpad?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#133-buffer-locali-o-memoria-condivisa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 Buffer locali o memoria condivisa?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#134-larghezza-del-bus-e-organizzazione-dei-burst" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4 Larghezza del bus e organizzazione dei burst
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-errori-frequenti-nella-progettazione-della-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Errori frequenti nella progettazione della memoria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-collegamento-con-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Collegamento con FPGA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-collegamento-con-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Collegamento con ASIC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-esempio-di-gerarchia-di-memoria-in-un-soc-didattico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Esempio di gerarchia di memoria in un SoC didattico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="memorie-e-gerarchia-della-memoria-in-un-soc">Memorie e gerarchia della memoria in un SoC<a class="headerlink" href="#memorie-e-gerarchia-della-memoria-in-un-soc" title="Permanent link">&para;</a></h1>
+<p>La memoria è uno degli elementi più importanti nella progettazione di un <strong>System on Chip (SoC)</strong>.<br />
+Anche quando il processore, il bus e gli acceleratori sono ben progettati, il sistema può risultare inefficiente se la <strong>gerarchia di memoria</strong> non è coerente con i requisiti applicativi.</p>
+<p>In un SoC, la memoria non è un blocco unico, ma un insieme di risorse con caratteristiche differenti in termini di:</p>
+<ul>
+<li>capacità;</li>
+<li>latenza;</li>
+<li>banda;</li>
+<li>area;</li>
+<li>consumi;</li>
+<li>costo;</li>
+<li>prevedibilità temporale.</li>
+</ul>
+<p>L'obiettivo della gerarchia di memoria è fornire il dato giusto, al blocco giusto, nel momento giusto, con il miglior compromesso possibile fra prestazioni ed efficienza.</p>
+<hr />
+<h2 id="1-perche-la-memoria-e-centrale">1. Perché la memoria è centrale<a class="headerlink" href="#1-perche-la-memoria-e-centrale" title="Permanent link">&para;</a></h2>
+<p>Ogni sottosistema di un SoC dipende dalla memoria:</p>
+<ul>
+<li>la <strong>CPU</strong> legge istruzioni e dati;</li>
+<li>le <strong>periferiche</strong> scambiano dati con buffer e registri;</li>
+<li>i <strong>DMA</strong> trasferiscono blocchi di dati;</li>
+<li>gli <strong>acceleratori</strong> richiedono input e producono output;</li>
+<li>il <strong>firmware di boot</strong> risiede in memorie dedicate;</li>
+<li>il <strong>software</strong> si appoggia a stack, heap e regioni di configurazione.</li>
+</ul>
+<p>Molto spesso il collo di bottiglia di un SoC non è la capacità di calcolo, ma la capacità di:</p>
+<ul>
+<li>leggere i dati abbastanza rapidamente;</li>
+<li>scriverli senza congestione;</li>
+<li>conservarli in una struttura efficiente;</li>
+<li>renderli accessibili con una latenza accettabile.</li>
+</ul>
+<hr />
+<h2 id="2-il-concetto-di-gerarchia-di-memoria">2. Il concetto di gerarchia di memoria<a class="headerlink" href="#2-il-concetto-di-gerarchia-di-memoria" title="Permanent link">&para;</a></h2>
+<p>La gerarchia di memoria nasce dal fatto che non esiste una memoria ideale che sia contemporaneamente:</p>
+<ul>
+<li>molto capiente;</li>
+<li>velocissima;</li>
+<li>poco costosa;</li>
+<li>poco energivora;</li>
+<li>semplice da integrare.</li>
+</ul>
+<p>Per questo si usano livelli diversi di memoria, ciascuno ottimizzato per uno scopo.</p>
+<pre class="mermaid"><code>flowchart TD
+    REG[Registri]
+    CACHE[Cache]
+    SRAM[SRAM on-chip]
+    ROM[ROM / Boot memory]
+    EXT[Memoria esterna: DRAM / Flash]
+
+    REG --&gt; CACHE --&gt; SRAM --&gt; EXT
+    ROM --&gt; SRAM</code></pre>
+<p>In generale:</p>
+<ul>
+<li>i livelli più vicini al processore sono più rapidi ma più piccoli;</li>
+<li>i livelli più lontani sono più capienti ma più lenti;</li>
+<li>il software e l'hardware devono cooperare per usare bene questi livelli.</li>
+</ul>
+<hr />
+<h2 id="3-tipologie-principali-di-memoria-in-un-soc">3. Tipologie principali di memoria in un SoC<a class="headerlink" href="#3-tipologie-principali-di-memoria-in-un-soc" title="Permanent link">&para;</a></h2>
+<h2 id="31-registri">3.1 Registri<a class="headerlink" href="#31-registri" title="Permanent link">&para;</a></h2>
+<p>I <strong>registri</strong> sono la forma di memoria più vicina al calcolo.</p>
+<p>Caratteristiche:</p>
+<ul>
+<li>capacità molto ridotta;</li>
+<li>latenza minima;</li>
+<li>accesso estremamente rapido;</li>
+<li>costo elevato in area per bit.</li>
+</ul>
+<p>Sono usati per:</p>
+<ul>
+<li>operandi della CPU;</li>
+<li>registri di stato;</li>
+<li>configurazione rapida;</li>
+<li>temporanei interni al datapath.</li>
+</ul>
+<h2 id="32-cache">3.2 Cache<a class="headerlink" href="#32-cache" title="Permanent link">&para;</a></h2>
+<p>Le <strong>cache</strong> sono memorie veloci che riducono il tempo medio di accesso ai dati più frequentemente usati.</p>
+<p>Caratteristiche:</p>
+<ul>
+<li>capacità limitata rispetto alla memoria principale;</li>
+<li>latenza inferiore rispetto a SRAM più grandi o DRAM esterne;</li>
+<li>gestione automatica da parte dell'hardware, in molti casi;</li>
+<li>possibile complessità per coerenza e prevedibilità.</li>
+</ul>
+<p>Sono tipiche di SoC con microprocessori o sistemi più software-intensive.</p>
+<h2 id="33-sram-on-chip">3.3 SRAM on-chip<a class="headerlink" href="#33-sram-on-chip" title="Permanent link">&para;</a></h2>
+<p>La <strong>SRAM</strong> interna è una memoria molto comune nei SoC.</p>
+<p>Caratteristiche:</p>
+<ul>
+<li>accesso relativamente rapido;</li>
+<li>buona integrazione on-chip;</li>
+<li>capacità intermedia;</li>
+<li>area significativa.</li>
+</ul>
+<p>È usata per:</p>
+<ul>
+<li>memoria dati;</li>
+<li>memoria istruzioni;</li>
+<li>buffer;</li>
+<li>scratchpad;</li>
+<li>code e strutture temporanee;</li>
+<li>regioni condivise fra CPU e acceleratori.</li>
+</ul>
+<h2 id="34-rom-o-memoria-di-boot">3.4 ROM o memoria di boot<a class="headerlink" href="#34-rom-o-memoria-di-boot" title="Permanent link">&para;</a></h2>
+<p>La memoria di boot contiene tipicamente:</p>
+<ul>
+<li>il codice iniziale di avvio;</li>
+<li>routine minime di inizializzazione;</li>
+<li>eventuali configurazioni di sicurezza;</li>
+<li>vettori di reset.</li>
+</ul>
+<p>Caratteristiche:</p>
+<ul>
+<li>contenuto stabile;</li>
+<li>capacità limitata;</li>
+<li>ruolo essenziale nel bring-up del sistema.</li>
+</ul>
+<h2 id="35-memoria-esterna">3.5 Memoria esterna<a class="headerlink" href="#35-memoria-esterna" title="Permanent link">&para;</a></h2>
+<p>Nei SoC più ricchi si usano memorie esterne, ad esempio:</p>
+<ul>
+<li>DRAM;</li>
+<li>SDRAM;</li>
+<li>DDR;</li>
+<li>flash seriale o parallela;</li>
+<li>eMMC o storage equivalenti, a livello di sistema.</li>
+</ul>
+<p>Caratteristiche:</p>
+<ul>
+<li>grande capacità;</li>
+<li>latenza superiore;</li>
+<li>controller dedicato necessario;</li>
+<li>maggiore complessità di sistema.</li>
+</ul>
+<hr />
+<h2 id="4-visione-architetturale-della-memoria">4. Visione architetturale della memoria<a class="headerlink" href="#4-visione-architetturale-della-memoria" title="Permanent link">&para;</a></h2>
+<p>Dal punto di vista del SoC, la memoria non è solo una risorsa passiva: è parte integrante dell'architettura.</p>
+<pre class="mermaid"><code>flowchart LR
+    CPU[CPU]
+    DMA[DMA]
+    ACC[Acceleratore]
+    IC[Interconnect]
+    ROM[Boot ROM]
+    SRAM[SRAM]
+    CACHE[Cache]
+    MEMCTRL[Memory Controller]
+    DDR[Memoria esterna]
+
+    CPU --&gt; CACHE
+    CACHE --&gt; IC
+    DMA --&gt; IC
+    ACC --&gt; IC
+    IC --&gt; ROM
+    IC --&gt; SRAM
+    IC --&gt; MEMCTRL
+    MEMCTRL --&gt; DDR</code></pre>
+<p>Le scelte principali riguardano:</p>
+<ul>
+<li>quali memorie integrare on-chip;</li>
+<li>quali memorie lasciare esterne;</li>
+<li>come distribuire i buffer;</li>
+<li>se usare cache o scratchpad;</li>
+<li>come collegare memoria e acceleratori;</li>
+<li>quanto traffico deve sostenere l'interconnect.</li>
+</ul>
+<hr />
+<h2 id="5-parametri-fondamentali">5. Parametri fondamentali<a class="headerlink" href="#5-parametri-fondamentali" title="Permanent link">&para;</a></h2>
+<p>Quando si progetta la memoria di un SoC occorre valutare alcuni parametri chiave.</p>
+<h2 id="51-capacita">5.1 Capacità<a class="headerlink" href="#51-capacita" title="Permanent link">&para;</a></h2>
+<p>Indica quanto dato può essere memorizzato.</p>
+<p>Una capacità maggiore consente:</p>
+<ul>
+<li>dataset più grandi;</li>
+<li>minore dipendenza da trasferimenti frequenti;</li>
+<li>più flessibilità per il software.</li>
+</ul>
+<p>Tuttavia, aumenta:</p>
+<ul>
+<li>area;</li>
+<li>costo;</li>
+<li>in molti casi consumi.</li>
+</ul>
+<h2 id="52-latenza">5.2 Latenza<a class="headerlink" href="#52-latenza" title="Permanent link">&para;</a></h2>
+<p>È il tempo necessario per ottenere il dato richiesto.</p>
+<p>La latenza è critica quando:</p>
+<ul>
+<li>la CPU ha dipendenze strette;</li>
+<li>un acceleratore richiede dati a ritmo regolare;</li>
+<li>il sistema ha vincoli real-time.</li>
+</ul>
+<h2 id="53-banda">5.3 Banda<a class="headerlink" href="#53-banda" title="Permanent link">&para;</a></h2>
+<p>È la quantità di dati trasferibili nell'unità di tempo.</p>
+<p>La banda diventa essenziale per:</p>
+<ul>
+<li>DMA;</li>
+<li>elaborazione di segnali;</li>
+<li>video;</li>
+<li>AI inference;</li>
+<li>accessi concorrenti di più blocchi.</li>
+</ul>
+<h2 id="54-area">5.4 Area<a class="headerlink" href="#54-area" title="Permanent link">&para;</a></h2>
+<p>Le memorie occupano una parte importante del chip. In molti SoC, una quota significativa dell'area è dovuta proprio a:</p>
+<ul>
+<li>SRAM;</li>
+<li>cache;</li>
+<li>buffer;</li>
+<li>macro di memoria dedicate.</li>
+</ul>
+<h2 id="55-consumi">5.5 Consumi<a class="headerlink" href="#55-consumi" title="Permanent link">&para;</a></h2>
+<p>L'accesso alla memoria può incidere molto sul consumo totale del sistema.<br />
+Non conta solo la dimensione della memoria, ma anche:</p>
+<ul>
+<li>frequenza di accesso;</li>
+<li>ampiezza dei trasferimenti;</li>
+<li>pattern di lettura e scrittura;</li>
+<li>traffico generato dai bus.</li>
+</ul>
+<h2 id="56-prevedibilita">5.6 Prevedibilità<a class="headerlink" href="#56-prevedibilita" title="Permanent link">&para;</a></h2>
+<p>In sistemi embedded e real-time non conta solo la velocità media, ma anche la <strong>deterministicità</strong>.</p>
+<p>Ad esempio:</p>
+<ul>
+<li>una cache può migliorare le prestazioni medie;</li>
+<li>ma può anche rendere meno prevedibile il worst-case timing.</li>
+</ul>
+<hr />
+<h2 id="6-cache-e-scratchpad">6. Cache e scratchpad<a class="headerlink" href="#6-cache-e-scratchpad" title="Permanent link">&para;</a></h2>
+<p>Una scelta architetturale importante è decidere se usare cache, scratchpad o una combinazione delle due.</p>
+<h2 id="61-cache">6.1 Cache<a class="headerlink" href="#61-cache" title="Permanent link">&para;</a></h2>
+<p>La cache memorizza automaticamente i dati più probabili da riutilizzare.</p>
+<h3 id="vantaggi">Vantaggi<a class="headerlink" href="#vantaggi" title="Permanent link">&para;</a></h3>
+<ul>
+<li>migliora le prestazioni medie;</li>
+<li>riduce l'impatto della memoria esterna;</li>
+<li>è molto utile per software complesso e carichi generici.</li>
+</ul>
+<h3 id="svantaggi">Svantaggi<a class="headerlink" href="#svantaggi" title="Permanent link">&para;</a></h3>
+<ul>
+<li>comportamento meno prevedibile;</li>
+<li>complessità maggiore;</li>
+<li>possibili problemi di coerenza;</li>
+<li>verifica più articolata.</li>
+</ul>
+<h2 id="62-scratchpad-memory">6.2 Scratchpad memory<a class="headerlink" href="#62-scratchpad-memory" title="Permanent link">&para;</a></h2>
+<p>La <strong>scratchpad</strong> è una memoria gestita esplicitamente dal software o da logiche dedicate.</p>
+<h3 id="vantaggi_1">Vantaggi<a class="headerlink" href="#vantaggi_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>elevata prevedibilità;</li>
+<li>controllo esplicito sui dati residenti;</li>
+<li>utile per sistemi real-time o acceleratori.</li>
+</ul>
+<h3 id="svantaggi_1">Svantaggi<a class="headerlink" href="#svantaggi_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>richiede maggiore gestione software;</li>
+<li>meno trasparente rispetto alla cache;</li>
+<li>rischio di uso inefficiente se non ben progettata.</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    CPU[CPU]
+    CACHE[Cache]
+    SPM[Scratchpad]
+    MEM[Memoria principale]
+
+    CPU --&gt; CACHE --&gt; MEM
+    CPU --&gt; SPM</code></pre>
+<p>In molti casi la scelta dipende dal tipo di applicazione:</p>
+<ul>
+<li>software general-purpose → cache molto utile;</li>
+<li>sistemi deterministici o acceleratori → scratchpad spesso preferibile.</li>
+</ul>
+<hr />
+<h2 id="7-memorie-condivise-e-memorie-locali">7. Memorie condivise e memorie locali<a class="headerlink" href="#7-memorie-condivise-e-memorie-locali" title="Permanent link">&para;</a></h2>
+<p>In un SoC i dati possono essere collocati in memorie:</p>
+<ul>
+<li><strong>locali</strong> a un sottosistema;</li>
+<li><strong>condivise</strong> fra più blocchi.</li>
+</ul>
+<h2 id="71-memoria-locale">7.1 Memoria locale<a class="headerlink" href="#71-memoria-locale" title="Permanent link">&para;</a></h2>
+<p>È vicina a uno specifico blocco, ad esempio:</p>
+<ul>
+<li>buffer interni a un acceleratore;</li>
+<li>memoria locale di un DSP;</li>
+<li>SRAM privata di una CPU.</li>
+</ul>
+<h3 id="vantaggi_2">Vantaggi<a class="headerlink" href="#vantaggi_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>latenza ridotta;</li>
+<li>traffico sull'interconnect minore;</li>
+<li>migliore isolamento funzionale.</li>
+</ul>
+<h3 id="svantaggi_2">Svantaggi<a class="headerlink" href="#svantaggi_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>duplicazione dei dati possibile;</li>
+<li>minore flessibilità;</li>
+<li>complessità nella sincronizzazione.</li>
+</ul>
+<h2 id="72-memoria-condivisa">7.2 Memoria condivisa<a class="headerlink" href="#72-memoria-condivisa" title="Permanent link">&para;</a></h2>
+<p>È accessibile da più initiator, ad esempio:</p>
+<ul>
+<li>CPU;</li>
+<li>DMA;</li>
+<li>acceleratori;</li>
+<li>sottosistemi di I/O.</li>
+</ul>
+<h3 id="vantaggi_3">Vantaggi<a class="headerlink" href="#vantaggi_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>facilita lo scambio dati;</li>
+<li>riduce copie inutili;</li>
+<li>semplifica alcune architetture software.</li>
+</ul>
+<h3 id="svantaggi_3">Svantaggi<a class="headerlink" href="#svantaggi_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>aumenta la contesa;</li>
+<li>richiede arbitraggio;</li>
+<li>può introdurre problemi di coerenza o sincronizzazione.</li>
+</ul>
+<hr />
+<h2 id="8-memoria-e-dma">8. Memoria e DMA<a class="headerlink" href="#8-memoria-e-dma" title="Permanent link">&para;</a></h2>
+<p>Il <strong>Direct Memory Access (DMA)</strong> ha un ruolo centrale nella gestione efficiente dei dati.</p>
+<p>Senza DMA:</p>
+<ul>
+<li>la CPU deve leggere e scrivere direttamente i dati;</li>
+<li>aumenta il carico di elaborazione;</li>
+<li>peggiorano prestazioni e consumi.</li>
+</ul>
+<p>Con DMA:</p>
+<ul>
+<li>i blocchi di dati vengono trasferiti automaticamente;</li>
+<li>la CPU si occupa solo di configurazione e sincronizzazione;</li>
+<li>l'uso della banda di memoria può essere più efficiente.</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    CPU[CPU]
+    DMA[DMA]
+    MEM[SRAM / DRAM]
+    PER[Periferica o acceleratore]
+
+    CPU --&gt;|configura| DMA
+    DMA --&gt;|legge/scrive| MEM
+    DMA --&gt;|trasferisce| PER
+    DMA --&gt;|interrupt fine trasferimento| CPU</code></pre>
+<p>La presenza del DMA influisce sulla gerarchia di memoria perché:</p>
+<ul>
+<li>aumenta il numero di master che accedono alla memoria;</li>
+<li>richiede banda sostenuta;</li>
+<li>può introdurre contesa con la CPU.</li>
+</ul>
+<hr />
+<h2 id="9-controller-di-memoria-esterna">9. Controller di memoria esterna<a class="headerlink" href="#9-controller-di-memoria-esterna" title="Permanent link">&para;</a></h2>
+<p>Quando il SoC usa DRAM o altre memorie esterne, serve un <strong>memory controller</strong> dedicato.</p>
+<p>Questo blocco si occupa di:</p>
+<ul>
+<li>tradurre le richieste del bus interno;</li>
+<li>gestire il protocollo della memoria esterna;</li>
+<li>ottimizzare scheduling e accessi;</li>
+<li>gestire timing, burst e inizializzazione.</li>
+</ul>
+<p>Il controller di memoria è spesso un punto critico del SoC perché condiziona:</p>
+<ul>
+<li>throughput complessivo;</li>
+<li>latenza media;</li>
+<li>efficienza dell'uso della memoria esterna.</li>
+</ul>
+<hr />
+<h2 id="10-memory-map">10. Memory map<a class="headerlink" href="#10-memory-map" title="Permanent link">&para;</a></h2>
+<p>In molti SoC, memorie e periferiche sono collocate in uno <strong>spazio di indirizzamento unificato</strong>.</p>
+<p>Esempio semplificato:</p>
+<table>
+<thead>
+<tr>
+<th>Intervallo indirizzi</th>
+<th>Risorsa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0x0000_0000 - 0x0000_FFFF</code></td>
+<td>Boot ROM</td>
+</tr>
+<tr>
+<td><code>0x1000_0000 - 0x1001_FFFF</code></td>
+<td>SRAM interna</td>
+</tr>
+<tr>
+<td><code>0x2000_0000 - 0x2000_0FFF</code></td>
+<td>GPIO</td>
+</tr>
+<tr>
+<td><code>0x2000_1000 - 0x2000_1FFF</code></td>
+<td>UART</td>
+</tr>
+<tr>
+<td><code>0x3000_0000 - 0x300F_FFFF</code></td>
+<td>Scratchpad / buffer condivisi</td>
+</tr>
+<tr>
+<td><code>0x4000_0000 - 0x4FFF_FFFF</code></td>
+<td>Memoria esterna</td>
+</tr>
+</tbody>
+</table>
+<p>Una buona memory map deve essere:</p>
+<ul>
+<li>ordinata;</li>
+<li>estendibile;</li>
+<li>ben documentata;</li>
+<li>allineata con i driver software;</li>
+<li>coerente con la segmentazione del sistema.</li>
+</ul>
+<hr />
+<h2 id="11-coerenza-e-sincronizzazione">11. Coerenza e sincronizzazione<a class="headerlink" href="#11-coerenza-e-sincronizzazione" title="Permanent link">&para;</a></h2>
+<p>Quando più blocchi accedono agli stessi dati, occorre prestare attenzione a:</p>
+<ul>
+<li>ordine degli accessi;</li>
+<li>aggiornamento dei buffer;</li>
+<li>dati vecchi o non ancora scritti;</li>
+<li>invalidazione di copie locali;</li>
+<li>interazione fra cache e DMA.</li>
+</ul>
+<p>In sistemi semplici questo può essere gestito con:</p>
+<ul>
+<li>polling;</li>
+<li>interrupt;</li>
+<li>barriere software;</li>
+<li>protocolli di handshake.</li>
+</ul>
+<p>In sistemi più avanzati entrano in gioco anche meccanismi di coerenza hardware.</p>
+<p>Per una trattazione introduttiva è sufficiente sottolineare che <strong>la condivisione della memoria richiede sempre una strategia di sincronizzazione chiara</strong>.</p>
+<hr />
+<h2 id="12-memoria-e-software-di-sistema">12. Memoria e software di sistema<a class="headerlink" href="#12-memoria-e-software-di-sistema" title="Permanent link">&para;</a></h2>
+<p>La gerarchia di memoria è fortemente legata al software.</p>
+<p>Il firmware e il sistema operativo devono sapere, almeno concettualmente:</p>
+<ul>
+<li>dove risiede il codice di boot;</li>
+<li>dove collocare stack e heap;</li>
+<li>quali regioni sono usate dalle periferiche;</li>
+<li>dove si trovano i buffer DMA;</li>
+<li>quali memorie sono cacheabili e quali no;</li>
+<li>quali regioni devono essere protette o isolate.</li>
+</ul>
+<p>Per questo la progettazione della memoria non può essere separata dal <strong>co-design hardware/software</strong>.</p>
+<hr />
+<h2 id="13-trade-off-architetturali-tipici">13. Trade-off architetturali tipici<a class="headerlink" href="#13-trade-off-architetturali-tipici" title="Permanent link">&para;</a></h2>
+<p>La progettazione della memoria è sempre una questione di compromessi.</p>
+<h2 id="131-piu-sram-on-chip-o-piu-dipendenza-dalla-memoria-esterna">13.1 Più SRAM on-chip o più dipendenza dalla memoria esterna?<a class="headerlink" href="#131-piu-sram-on-chip-o-piu-dipendenza-dalla-memoria-esterna" title="Permanent link">&para;</a></h2>
+<p>Più SRAM interna significa:</p>
+<ul>
+<li>latenza minore;</li>
+<li>maggiore autonomia;</li>
+<li>prestazioni migliori.</li>
+</ul>
+<p>Ma significa anche:</p>
+<ul>
+<li>più area;</li>
+<li>più costo di integrazione.</li>
+</ul>
+<h2 id="132-cache-o-scratchpad">13.2 Cache o scratchpad?<a class="headerlink" href="#132-cache-o-scratchpad" title="Permanent link">&para;</a></h2>
+<ul>
+<li>cache: migliore trasparenza e prestazioni medie;</li>
+<li>scratchpad: maggiore controllo e prevedibilità.</li>
+</ul>
+<h2 id="133-buffer-locali-o-memoria-condivisa">13.3 Buffer locali o memoria condivisa?<a class="headerlink" href="#133-buffer-locali-o-memoria-condivisa" title="Permanent link">&para;</a></h2>
+<ul>
+<li>buffer locali: più efficienza locale;</li>
+<li>memoria condivisa: maggiore flessibilità di sistema.</li>
+</ul>
+<h2 id="134-larghezza-del-bus-e-organizzazione-dei-burst">13.4 Larghezza del bus e organizzazione dei burst<a class="headerlink" href="#134-larghezza-del-bus-e-organizzazione-dei-burst" title="Permanent link">&para;</a></h2>
+<p>Bus più larghi e burst più lunghi possono migliorare il throughput, ma aumentano:</p>
+<ul>
+<li>area;</li>
+<li>consumo;</li>
+<li>complessità del controller;</li>
+<li>impatto su contesa e fairness.</li>
+</ul>
+<hr />
+<h2 id="14-errori-frequenti-nella-progettazione-della-memoria">14. Errori frequenti nella progettazione della memoria<a class="headerlink" href="#14-errori-frequenti-nella-progettazione-della-memoria" title="Permanent link">&para;</a></h2>
+<p>Tra gli errori più comuni:</p>
+<ul>
+<li>sottostimare il fabbisogno di banda;</li>
+<li>affidarsi troppo alla memoria esterna;</li>
+<li>inserire cache senza considerare la prevedibilità;</li>
+<li>non pianificare i buffer per DMA e acceleratori;</li>
+<li>rendere la memory map poco chiara;</li>
+<li>ignorare la contesa fra CPU, DMA e acceleratori;</li>
+<li>non considerare abbastanza presto i consumi dovuti agli accessi.</li>
+</ul>
+<hr />
+<h2 id="15-collegamento-con-fpga">15. Collegamento con FPGA<a class="headerlink" href="#15-collegamento-con-fpga" title="Permanent link">&para;</a></h2>
+<p>Nel contesto FPGA, il tema delle memorie emerge in modo molto concreto:</p>
+<ul>
+<li>block RAM;</li>
+<li>distributed RAM;</li>
+<li>buffer per stream;</li>
+<li>memorie esterne collegate alla scheda;</li>
+<li>prototipazione di architetture con processore softcore o hard processor.</li>
+</ul>
+<p>La FPGA è utile per verificare:</p>
+<ul>
+<li>dimensionamento dei buffer;</li>
+<li>compatibilità con il software;</li>
+<li>comportamento dei DMA;</li>
+<li>impatto di diverse scelte di memoria sul throughput.</li>
+</ul>
+<hr />
+<h2 id="16-collegamento-con-asic">16. Collegamento con ASIC<a class="headerlink" href="#16-collegamento-con-asic" title="Permanent link">&para;</a></h2>
+<p>Nel contesto ASIC, la memoria incide profondamente su:</p>
+<ul>
+<li>area totale del chip;</li>
+<li>floorplanning;</li>
+<li>consumo dinamico;</li>
+<li>distribuzione del clock;</li>
+<li>congestione del routing;</li>
+<li>tempi di accesso e chiusura temporale.</li>
+</ul>
+<p>Per questo la scelta delle memorie deve essere fatta molto presto e con piena consapevolezza delle conseguenze fisiche.</p>
+<hr />
+<h2 id="17-esempio-di-gerarchia-di-memoria-in-un-soc-didattico">17. Esempio di gerarchia di memoria in un SoC didattico<a class="headerlink" href="#17-esempio-di-gerarchia-di-memoria-in-un-soc-didattico" title="Permanent link">&para;</a></h2>
+<p>Un SoC didattico potrebbe essere organizzato così:</p>
+<pre class="mermaid"><code>flowchart TB
+    CPU[CPU]
+    IC[Interconnect]
+    ROM[Boot ROM]
+    SRAM[SRAM interna]
+    SPM[Scratchpad condivisa]
+    DMA[DMA]
+    ACC[Acceleratore]
+    MEMCTRL[Controller memoria esterna]
+    DDR[DDR / DRAM]
+    PER[Periferiche]
+
+    CPU --&gt; IC
+    DMA --&gt; IC
+    ACC --&gt; IC
+    IC --&gt; ROM
+    IC --&gt; SRAM
+    IC --&gt; SPM
+    IC --&gt; MEMCTRL
+    MEMCTRL --&gt; DDR
+    IC --&gt; PER</code></pre>
+<p>In questo esempio:</p>
+<ul>
+<li>la <strong>ROM</strong> contiene il codice di boot;</li>
+<li>la <strong>SRAM</strong> serve per dati e codice iniziale;</li>
+<li>la <strong>scratchpad</strong> è una regione condivisa per acceleratori o DMA;</li>
+<li>la <strong>memoria esterna</strong> offre capacità elevata;</li>
+<li>l'<strong>interconnect</strong> coordina tutti gli accessi.</li>
+</ul>
+<hr />
+<h2 id="18-in-sintesi">18. In sintesi<a class="headerlink" href="#18-in-sintesi" title="Permanent link">&para;</a></h2>
+<p>La memoria in un SoC non è soltanto un supporto per i dati: è una parte essenziale dell'architettura di sistema.<br />
+Una buona gerarchia di memoria deve bilanciare:</p>
+<ul>
+<li>capacità;</li>
+<li>latenza;</li>
+<li>banda;</li>
+<li>area;</li>
+<li>consumi;</li>
+<li>prevedibilità.</li>
+</ul>
+<p>Le scelte fra ROM, SRAM, cache, scratchpad e memoria esterna devono sempre essere fatte considerando insieme:</p>
+<ul>
+<li>requisiti applicativi;</li>
+<li>architettura del SoC;</li>
+<li>software di sistema;</li>
+<li>implementazione fisica.</li>
+</ul>
+<hr />
+<h2 id="prossimo-passo">Prossimo passo<a class="headerlink" href="#prossimo-passo" title="Permanent link">&para;</a></h2>
+<p>Dopo aver visto dove risiedono i dati e come sono organizzati, il passo successivo naturale è studiare le <strong>periferiche e l'I/O</strong>, cioè il modo in cui il SoC interagisce con il mondo esterno e con i sottosistemi di controllo.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

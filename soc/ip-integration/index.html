@@ -1,0 +1,5687 @@
+
+<!doctype html>
+<html lang="it" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corso completo su HDL, verification e tool FPGA/ASIC">
+      
+      
+      
+        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/soc/ip-integration/">
+      
+      
+        <link rel="prev" href="../periferiche/">
+      
+      
+        <link rel="next" href="../verifica/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Integrazione IP - Corso di Microelettronica Digitale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#integrazione-ip-in-un-soc" class="md-skip">
+          Vai al contenuto
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Intestazione">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-header__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corso di Microelettronica Digitale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Integrazione IP
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green"  aria-label="Passa a dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passa a dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="lime"  aria-label="Passa a light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passa a light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Cancella" aria-label="Cancella" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../00_introduzione/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Intro
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../01_fondamenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Fondamenti
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../02_vhdl/" class="md-tabs__link">
+          
+  
+  
+  VHDL
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../03_verilog/" class="md-tabs__link">
+          
+  
+  
+  Verilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../04_systemverilog_design/" class="md-tabs__link">
+          
+  
+  
+  SystemVerilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../05_verification_base/" class="md-tabs__link">
+          
+  
+  
+  Verification
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../06_uvm/" class="md-tabs__link">
+          
+  
+  
+  UVM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../07_fpga_flow/" class="md-tabs__link">
+          
+  
+  
+  FPGA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../08_asic_flow/" class="md-tabs__link">
+          
+  
+  
+  ASIC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  SoC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../09_progetti/" class="md-tabs__link">
+          
+  
+  
+  Progetti
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../10_tool_e_tcl/" class="md-tabs__link">
+          
+  
+  
+  Tool e Tcl/Tk
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../11_appendici/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Appendici
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../12_riferimenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Riferimenti
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigazione" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-nav__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Corso di Microelettronica Digitale
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00_introduzione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01_fondamenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VHDL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    VHDL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl_progettazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foglio di lavoro
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foglio di lavoro
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Tool Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/in_out/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    In and Out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/utilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/clocks_registers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocks and Registers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/state_machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/modular_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modular Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/memories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/managing_clocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Managing Clocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/io_flavors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O Flavors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A Taste of Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Rest for Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SystemVerilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_systemverilog_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_SV_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05_verification_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.chipverify.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChipVerify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verificationguide.com" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VerificationGuide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.doulos.com/knowhow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doulos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_3" id="__nav_8_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetto mini CPU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetto mini CPU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU_waveform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Waveform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_fpga_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_fpga_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_ps_axi_led/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq LED
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_4" id="__nav_9_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq FIR
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zynq FIR
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_8tap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_axi_stream_theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AXI Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_dma_interrupt_perf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DMA Interrupt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_xparameters_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    X Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Digilent/Zybo-Z7" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zybo-Z7-20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASIC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ASIC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_asic_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_asic_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_openasic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAsic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_4" id="__nav_10_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openlane2.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenLAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/kunalg123/vsdflow" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CMOS VLSI Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SoC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SoC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione ai SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architettura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di un SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interconnessioni e bus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../memorie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memorie e gerarchia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../periferiche/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Periferiche e I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrazione IP
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrazione IP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-che-cosa-si-intende-per-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Che cosa si intende per IP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-perche-usare-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Perché usare IP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Perché usare IP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi-principali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi principali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#possibili-criticita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Possibili criticità
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-tipologie-di-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Tipologie di IP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-ip-soft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 IP soft
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 IP soft">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svantaggi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Svantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-ip-hard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 IP hard
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 IP hard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svantaggi_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Svantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-ip-firm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 IP firm
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-provenienza-degli-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Provenienza degli IP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-ip-sviluppati-internamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 IP sviluppati internamente
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 IP sviluppati internamente">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svantaggi_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Svantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-ip-di-terze-parti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 IP di terze parti
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 IP di terze parti">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svantaggi_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Svantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-ip-open-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 IP open-source
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 IP open-source">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svantaggi_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Svantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-attivita-principali-nellintegrazione-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Attività principali nell'integrazione IP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-analisi-preliminare-di-un-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Analisi preliminare di un IP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-wrapping-e-adattamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Wrapping e adattamento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#71-funzioni-tipiche-di-un-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Funzioni tipiche di un wrapper
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72-perche-il-wrapper-e-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Perché il wrapper è utile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-adattamento-delle-interfacce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Adattamento delle interfacce
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#81-compatibilita-di-protocollo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Compatibilità di protocollo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82-compatibilita-di-ampiezza-dati" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Compatibilità di ampiezza dati
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#83-compatibilita-temporale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Compatibilità temporale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-integrazione-nella-memory-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Integrazione nella memory map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-clock-reset-e-power-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Clock, reset e power integration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#101-clock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Clock
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#102-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Reset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#103-power" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Power
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-interrupt-eventi-e-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Interrupt, eventi e status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-integrazione-con-il-software" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Integrazione con il software
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-parametrizzazione-e-configurabilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Parametrizzazione e configurabilità
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Parametrizzazione e configurabilità">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi-della-parametrizzazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi della parametrizzazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rischi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rischi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-versioning-e-configurazione-di-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Versioning e configurazione di sistema
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-documentazione-di-integrazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Documentazione di integrazione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-verifica-dellintegrazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Verifica dell'integrazione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#161-obiettivi-della-verifica-di-integrazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 Obiettivi della verifica di integrazione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#162-casi-tipici-da-testare" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.2 Casi tipici da testare
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#163-perche-la-verifica-di-integrazione-e-diversa-dalla-verifica-dellip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.3 Perché la verifica di integrazione è diversa dalla verifica dell'IP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-rischi-frequenti-nellintegrazione-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Rischi frequenti nell'integrazione IP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-esempio-di-flusso-di-integrazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Esempio di flusso di integrazione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-collegamento-con-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Collegamento con FPGA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-collegamento-con-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Collegamento con ASIC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../verifica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica di sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hw-sw-codesign/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HW/SW co-design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../power-clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consumi, clock e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../safety-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Safety e Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../physical-design-awareness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physical awareness nel SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_codice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorgenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool e Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tool e Tcl/Tk
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_e_tcl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3" id="__nav_13_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.tutorialspoint.com/tcl-tk/index.htm" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.amd.com/r/en-US/ug894-vivado-tcl-scripting/Tcl-Scripting-in-Vivado" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Script Tcl in Vivado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://yosyshq.readthedocs.io/projects/yosys/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yosis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openroad.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenROAD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://gtkwave.github.io/gtkwave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GTKWave Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verilator.org/guide/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilator Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3_7" id="__nav_13_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vivado
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_13_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vivado
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug910-vivado-getting-started" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug901-vivado-synthesis" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug904-vivado-implementation" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug835-vivado-tcl-commands" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcl Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/swdocs/modelsim/modelsim_user_2024_2.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ModelSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11_appendici/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendici
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12_riferimenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Riferimenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-che-cosa-si-intende-per-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Che cosa si intende per IP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-perche-usare-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Perché usare IP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Perché usare IP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi-principali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi principali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#possibili-criticita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Possibili criticità
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-tipologie-di-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Tipologie di IP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-ip-soft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 IP soft
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 IP soft">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svantaggi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Svantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-ip-hard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 IP hard
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 IP hard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svantaggi_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Svantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-ip-firm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 IP firm
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-provenienza-degli-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Provenienza degli IP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-ip-sviluppati-internamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 IP sviluppati internamente
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 IP sviluppati internamente">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svantaggi_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Svantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-ip-di-terze-parti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 IP di terze parti
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 IP di terze parti">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svantaggi_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Svantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-ip-open-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 IP open-source
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 IP open-source">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svantaggi_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Svantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-attivita-principali-nellintegrazione-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Attività principali nell'integrazione IP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-analisi-preliminare-di-un-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Analisi preliminare di un IP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-wrapping-e-adattamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Wrapping e adattamento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#71-funzioni-tipiche-di-un-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Funzioni tipiche di un wrapper
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72-perche-il-wrapper-e-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Perché il wrapper è utile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-adattamento-delle-interfacce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Adattamento delle interfacce
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#81-compatibilita-di-protocollo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Compatibilità di protocollo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82-compatibilita-di-ampiezza-dati" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Compatibilità di ampiezza dati
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#83-compatibilita-temporale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Compatibilità temporale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-integrazione-nella-memory-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Integrazione nella memory map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-clock-reset-e-power-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Clock, reset e power integration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#101-clock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Clock
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#102-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Reset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#103-power" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Power
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-interrupt-eventi-e-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Interrupt, eventi e status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-integrazione-con-il-software" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Integrazione con il software
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-parametrizzazione-e-configurabilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Parametrizzazione e configurabilità
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Parametrizzazione e configurabilità">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vantaggi-della-parametrizzazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vantaggi della parametrizzazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rischi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rischi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-versioning-e-configurazione-di-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Versioning e configurazione di sistema
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-documentazione-di-integrazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Documentazione di integrazione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-verifica-dellintegrazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Verifica dell'integrazione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#161-obiettivi-della-verifica-di-integrazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 Obiettivi della verifica di integrazione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#162-casi-tipici-da-testare" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.2 Casi tipici da testare
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#163-perche-la-verifica-di-integrazione-e-diversa-dalla-verifica-dellip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.3 Perché la verifica di integrazione è diversa dalla verifica dell'IP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-rischi-frequenti-nellintegrazione-ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Rischi frequenti nell'integrazione IP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-esempio-di-flusso-di-integrazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Esempio di flusso di integrazione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-collegamento-con-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Collegamento con FPGA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-collegamento-con-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Collegamento con ASIC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="integrazione-ip-in-un-soc">Integrazione IP in un SoC<a class="headerlink" href="#integrazione-ip-in-un-soc" title="Permanent link">&para;</a></h1>
+<p>La progettazione di un <strong>System on Chip (SoC)</strong> raramente parte da zero.<br />
+Nella pratica, un SoC viene costruito integrando una serie di <strong>IP block</strong> (<em>Intellectual Property blocks</em>), cioè moduli riusabili che implementano funzioni già progettate, verificate e spesso riutilizzate in più progetti.</p>
+<p>Questi IP possono includere:</p>
+<ul>
+<li>core di processore;</li>
+<li>controller di memoria;</li>
+<li>periferiche standard;</li>
+<li>moduli di sicurezza;</li>
+<li>DMA;</li>
+<li>acceleratori hardware;</li>
+<li>blocchi custom sviluppati internamente;</li>
+<li>IP di terze parti.</li>
+</ul>
+<p>L'integrazione degli IP è quindi una delle attività più importanti nella progettazione SoC, perché il valore del sistema non dipende solo dalla qualità dei singoli blocchi, ma soprattutto dalla capacità di farli lavorare insieme in modo corretto, efficiente e verificabile.</p>
+<hr />
+<h2 id="1-che-cosa-si-intende-per-ip">1. Che cosa si intende per IP<a class="headerlink" href="#1-che-cosa-si-intende-per-ip" title="Permanent link">&para;</a></h2>
+<p>Un <strong>IP block</strong> è un blocco funzionale progettato per essere riutilizzato.<br />
+Può essere consegnato in forme diverse:</p>
+<ul>
+<li>RTL sintetizzabile;</li>
+<li>netlist;</li>
+<li>macro fisica;</li>
+<li>modello comportamentale;</li>
+<li>blocco parametrico;</li>
+<li>subsystem già composto da più moduli.</li>
+</ul>
+<p>Dal punto di vista del progettista SoC, un IP è un componente con:</p>
+<ul>
+<li>una funzione precisa;</li>
+<li>un'interfaccia definita;</li>
+<li>vincoli di integrazione;</li>
+<li>requisiti di clock, reset e power;</li>
+<li>documentazione tecnica;</li>
+<li>modalità di verifica raccomandate.</li>
+</ul>
+<hr />
+<h2 id="2-perche-usare-ip">2. Perché usare IP<a class="headerlink" href="#2-perche-usare-ip" title="Permanent link">&para;</a></h2>
+<p>L'uso degli IP è fondamentale per ridurre:</p>
+<ul>
+<li>tempi di sviluppo;</li>
+<li>rischio progettuale;</li>
+<li>costo di implementazione;</li>
+<li>sforzo di validazione di funzioni standard.</li>
+</ul>
+<p>Invece di riprogettare da zero una UART, un controller SPI o un DMA, si preferisce riutilizzare blocchi consolidati.</p>
+<h3 id="vantaggi-principali">Vantaggi principali<a class="headerlink" href="#vantaggi-principali" title="Permanent link">&para;</a></h3>
+<ul>
+<li>maggiore velocità di sviluppo;</li>
+<li>riuso di componenti già verificati;</li>
+<li>standardizzazione delle funzioni di base;</li>
+<li>possibilità di concentrarsi sui blocchi davvero differenzianti;</li>
+<li>migliore scalabilità dei progetti.</li>
+</ul>
+<h3 id="possibili-criticita">Possibili criticità<a class="headerlink" href="#possibili-criticita" title="Permanent link">&para;</a></h3>
+<ul>
+<li>interfacce non perfettamente allineate;</li>
+<li>documentazione incompleta;</li>
+<li>requisiti nascosti;</li>
+<li>problemi di versione;</li>
+<li>qualità eterogenea fra IP diversi;</li>
+<li>difficoltà di verifica a livello di sistema.</li>
+</ul>
+<hr />
+<h2 id="3-tipologie-di-ip">3. Tipologie di IP<a class="headerlink" href="#3-tipologie-di-ip" title="Permanent link">&para;</a></h2>
+<p>Gli IP possono essere classificati secondo diversi criteri. Una distinzione molto utile è la seguente.</p>
+<h2 id="31-ip-soft">3.1 IP soft<a class="headerlink" href="#31-ip-soft" title="Permanent link">&para;</a></h2>
+<p>Sono forniti tipicamente come RTL sintetizzabile.</p>
+<h3 id="vantaggi">Vantaggi<a class="headerlink" href="#vantaggi" title="Permanent link">&para;</a></h3>
+<ul>
+<li>maggiore flessibilità;</li>
+<li>possibilità di adattamento;</li>
+<li>facilità di porting tra tecnologie diverse;</li>
+<li>maggiore osservabilità in verifica.</li>
+</ul>
+<h3 id="svantaggi">Svantaggi<a class="headerlink" href="#svantaggi" title="Permanent link">&para;</a></h3>
+<ul>
+<li>qualità finale dipendente dal flusso di sintesi e implementazione;</li>
+<li>possibile maggiore effort di integrazione;</li>
+<li>performance fisiche non sempre predicibili a priori.</li>
+</ul>
+<h2 id="32-ip-hard">3.2 IP hard<a class="headerlink" href="#32-ip-hard" title="Permanent link">&para;</a></h2>
+<p>Sono forniti come macro fisiche o implementazioni già ottimizzate.</p>
+<p>Esempi:</p>
+<ul>
+<li>macro di memoria;</li>
+<li>PLL;</li>
+<li>PHY;</li>
+<li>blocchi analogici o mixed-signal;</li>
+<li>serializer/deserializer.</li>
+</ul>
+<h3 id="vantaggi_1">Vantaggi<a class="headerlink" href="#vantaggi_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>prestazioni note e spesso ottimizzate;</li>
+<li>comportamento fisico più controllato;</li>
+<li>indispensabili per alcune funzioni.</li>
+</ul>
+<h3 id="svantaggi_1">Svantaggi<a class="headerlink" href="#svantaggi_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>minore flessibilità;</li>
+<li>forti vincoli di integrazione fisica;</li>
+<li>dipendenza da tecnologia e processo.</li>
+</ul>
+<h2 id="33-ip-firm">3.3 IP firm<a class="headerlink" href="#33-ip-firm" title="Permanent link">&para;</a></h2>
+<p>Sono una via intermedia: non completamente astratti come un soft IP, ma non rigidamente definiti come un hard IP.</p>
+<hr />
+<h2 id="4-provenienza-degli-ip">4. Provenienza degli IP<a class="headerlink" href="#4-provenienza-degli-ip" title="Permanent link">&para;</a></h2>
+<p>Dal punto di vista organizzativo, gli IP possono provenire da fonti diverse.</p>
+<h2 id="41-ip-sviluppati-internamente">4.1 IP sviluppati internamente<a class="headerlink" href="#41-ip-sviluppati-internamente" title="Permanent link">&para;</a></h2>
+<p>Sono blocchi creati all'interno dell'organizzazione.</p>
+<h3 id="vantaggi_2">Vantaggi<a class="headerlink" href="#vantaggi_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>conoscenza diretta del design;</li>
+<li>maggiore controllo su modifiche ed evoluzioni;</li>
+<li>accesso al team che li ha sviluppati.</li>
+</ul>
+<h3 id="svantaggi_2">Svantaggi<a class="headerlink" href="#svantaggi_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>qualità dipendente dalla maturità interna;</li>
+<li>possibile documentazione non uniforme;</li>
+<li>supporto variabile nel tempo.</li>
+</ul>
+<h2 id="42-ip-di-terze-parti">4.2 IP di terze parti<a class="headerlink" href="#42-ip-di-terze-parti" title="Permanent link">&para;</a></h2>
+<p>Provengono da fornitori esterni.</p>
+<h3 id="vantaggi_3">Vantaggi<a class="headerlink" href="#vantaggi_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>alta specializzazione;</li>
+<li>disponibilità di funzioni complesse già pronte;</li>
+<li>spesso lunga esperienza d'uso.</li>
+</ul>
+<h3 id="svantaggi_3">Svantaggi<a class="headerlink" href="#svantaggi_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>minore visibilità interna sul funzionamento;</li>
+<li>limitazioni di licenza;</li>
+<li>debugging più difficile;</li>
+<li>dipendenza dal fornitore.</li>
+</ul>
+<h2 id="43-ip-open-source">4.3 IP open-source<a class="headerlink" href="#43-ip-open-source" title="Permanent link">&para;</a></h2>
+<p>Sono sempre più presenti in alcuni flussi, soprattutto didattici o di ricerca.</p>
+<h3 id="vantaggi_4">Vantaggi<a class="headerlink" href="#vantaggi_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>accessibilità;</li>
+<li>ispezionabilità;</li>
+<li>forte utilità didattica;</li>
+<li>facilità di sperimentazione.</li>
+</ul>
+<h3 id="svantaggi_4">Svantaggi<a class="headerlink" href="#svantaggi_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>qualità variabile;</li>
+<li>supporto non garantito;</li>
+<li>copertura di verifica non sempre chiara;</li>
+<li>documentazione talvolta limitata.</li>
+</ul>
+<hr />
+<h2 id="5-attivita-principali-nellintegrazione-ip">5. Attività principali nell'integrazione IP<a class="headerlink" href="#5-attivita-principali-nellintegrazione-ip" title="Permanent link">&para;</a></h2>
+<p>Integrare un IP non significa soltanto "collegarlo ai segnali".<br />
+Le attività tipiche comprendono:</p>
+<ul>
+<li>analisi dell'interfaccia;</li>
+<li>adattamento al bus o all'interconnect;</li>
+<li>integrazione nella memory map;</li>
+<li>collegamento di clock e reset;</li>
+<li>gestione dei domini di alimentazione;</li>
+<li>definizione dei registri e del software associato;</li>
+<li>verifica funzionale;</li>
+<li>eventuale wrapping;</li>
+<li>validazione delle assunzioni del blocco nel contesto reale.</li>
+</ul>
+<hr />
+<h2 id="6-analisi-preliminare-di-un-ip">6. Analisi preliminare di un IP<a class="headerlink" href="#6-analisi-preliminare-di-un-ip" title="Permanent link">&para;</a></h2>
+<p>Prima di integrare un blocco è necessario capirne bene le caratteristiche.</p>
+<p>Una checklist minima dovrebbe includere:</p>
+<ul>
+<li>funzione del blocco;</li>
+<li>interfacce dati e controllo;</li>
+<li>protocollo bus usato;</li>
+<li>clock domain richiesti;</li>
+<li>reset richiesti;</li>
+<li>interrupt prodotti;</li>
+<li>eventuale supporto DMA;</li>
+<li>dipendenze da altri blocchi;</li>
+<li>vincoli temporali;</li>
+<li>note di integrazione e limitazioni note.</li>
+</ul>
+<pre class="mermaid"><code>flowchart TD
+    IP[IP block]
+    IF[Interfacce]
+    CLK[Clock / Reset]
+    MM[Memory map]
+    IRQ[Interrupt]
+    DMA[Supporto DMA]
+    VER[Requisiti di verifica]
+    DOC[Documentazione]
+
+    IP --&gt; IF
+    IP --&gt; CLK
+    IP --&gt; MM
+    IP --&gt; IRQ
+    IP --&gt; DMA
+    IP --&gt; VER
+    IP --&gt; DOC</code></pre>
+<p>Questa fase è fondamentale per evitare errori che emergerebbero solo in fasi più costose del progetto.</p>
+<hr />
+<h2 id="7-wrapping-e-adattamento">7. Wrapping e adattamento<a class="headerlink" href="#7-wrapping-e-adattamento" title="Permanent link">&para;</a></h2>
+<p>Molto spesso un IP non può essere inserito direttamente nel SoC così com'è.<br />
+È necessario introdurre un <strong>wrapper</strong>, cioè un blocco di adattamento che renda l'IP compatibile con il contesto del sistema.</p>
+<h2 id="71-funzioni-tipiche-di-un-wrapper">7.1 Funzioni tipiche di un wrapper<a class="headerlink" href="#71-funzioni-tipiche-di-un-wrapper" title="Permanent link">&para;</a></h2>
+<p>Un wrapper può servire a:</p>
+<ul>
+<li>adattare un protocollo bus;</li>
+<li>rinominare o riorganizzare segnali;</li>
+<li>uniformare la gestione di reset e clock;</li>
+<li>aggiungere registri di configurazione;</li>
+<li>gestire interrupt;</li>
+<li>isolare dettagli implementativi;</li>
+<li>integrare controlli di sicurezza o monitoraggio.</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    BUS[Bus di sistema]
+    WR[Wrapper]
+    IP[IP block]
+    IRQ[Interrupt / status]
+    CLK[Clock / Reset]
+
+    BUS --&gt; WR --&gt; IP
+    IP --&gt; WR --&gt; IRQ
+    CLK --&gt; WR --&gt; IP</code></pre>
+<h2 id="72-perche-il-wrapper-e-utile">7.2 Perché il wrapper è utile<a class="headerlink" href="#72-perche-il-wrapper-e-utile" title="Permanent link">&para;</a></h2>
+<p>Il wrapper permette di:</p>
+<ul>
+<li>mantenere pulita l'architettura SoC;</li>
+<li>non modificare direttamente l'IP originale;</li>
+<li>semplificare la sostituzione di una versione futura;</li>
+<li>centralizzare adattamenti e controlli.</li>
+</ul>
+<p>Dal punto di vista metodologico, è spesso una buona pratica evitare modifiche invasive all'IP e concentrare l'adattamento nel wrapper.</p>
+<hr />
+<h2 id="8-adattamento-delle-interfacce">8. Adattamento delle interfacce<a class="headerlink" href="#8-adattamento-delle-interfacce" title="Permanent link">&para;</a></h2>
+<p>Gli IP possono differire su molti aspetti di interfaccia:</p>
+<ul>
+<li>protocollo bus;</li>
+<li>ampiezza dei dati;</li>
+<li>tipi di handshake;</li>
+<li>convenzioni di reset;</li>
+<li>semantica dei registri;</li>
+<li>gestione degli errori;</li>
+<li>interrupt level-based o pulse-based.</li>
+</ul>
+<p>L'integrazione richiede quindi di verificare la compatibilità su più livelli.</p>
+<h2 id="81-compatibilita-di-protocollo">8.1 Compatibilità di protocollo<a class="headerlink" href="#81-compatibilita-di-protocollo" title="Permanent link">&para;</a></h2>
+<p>Ad esempio:</p>
+<ul>
+<li>un IP può esporre un'interfaccia semplice a registri;</li>
+<li>il SoC può richiedere un'interfaccia APB o AXI-lite;</li>
+<li>un acceleratore può richiedere stream o handshake specializzati.</li>
+</ul>
+<h2 id="82-compatibilita-di-ampiezza-dati">8.2 Compatibilità di ampiezza dati<a class="headerlink" href="#82-compatibilita-di-ampiezza-dati" title="Permanent link">&para;</a></h2>
+<p>Un blocco può lavorare a:</p>
+<ul>
+<li>8 bit;</li>
+<li>16 bit;</li>
+<li>32 bit;</li>
+<li>64 bit o più.</li>
+</ul>
+<p>L'interconnect del SoC potrebbe avere una larghezza differente, richiedendo adattamento o allineamento.</p>
+<h2 id="83-compatibilita-temporale">8.3 Compatibilità temporale<a class="headerlink" href="#83-compatibilita-temporale" title="Permanent link">&para;</a></h2>
+<p>Un IP può aspettarsi:</p>
+<ul>
+<li>accessi sincroni;</li>
+<li>latenze limitate;</li>
+<li>segnali stabili per più cicli;</li>
+<li>politiche di reset specifiche.</li>
+</ul>
+<p>Questi aspetti devono essere verificati con cura.</p>
+<hr />
+<h2 id="9-integrazione-nella-memory-map">9. Integrazione nella memory map<a class="headerlink" href="#9-integrazione-nella-memory-map" title="Permanent link">&para;</a></h2>
+<p>Gli IP memory-mapped devono essere collocati in modo ordinato nello spazio di indirizzamento.</p>
+<p>Questo comporta:</p>
+<ul>
+<li>assegnazione di un range di indirizzi;</li>
+<li>allineamento corretto dei registri;</li>
+<li>definizione di accessi consentiti;</li>
+<li>documentazione per il software;</li>
+<li>prevenzione di conflitti con altri blocchi.</li>
+</ul>
+<p>Esempio semplificato:</p>
+<table>
+<thead>
+<tr>
+<th>Base address</th>
+<th>Dimensione</th>
+<th>IP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0x2000_0000</code></td>
+<td><code>4 KB</code></td>
+<td>GPIO</td>
+</tr>
+<tr>
+<td><code>0x2000_1000</code></td>
+<td><code>4 KB</code></td>
+<td>UART</td>
+</tr>
+<tr>
+<td><code>0x2000_2000</code></td>
+<td><code>4 KB</code></td>
+<td>Timer</td>
+</tr>
+<tr>
+<td><code>0x2000_3000</code></td>
+<td><code>4 KB</code></td>
+<td>IP custom</td>
+</tr>
+</tbody>
+</table>
+<p>La memory map deve rimanere:</p>
+<ul>
+<li>leggibile;</li>
+<li>estendibile;</li>
+<li>coerente con il software di basso livello;</li>
+<li>stabile, per quanto possibile, fra versioni successive.</li>
+</ul>
+<hr />
+<h2 id="10-clock-reset-e-power-integration">10. Clock, reset e power integration<a class="headerlink" href="#10-clock-reset-e-power-integration" title="Permanent link">&para;</a></h2>
+<p>Molti problemi di integrazione nascono non dall'interfaccia funzionale, ma da segnali di infrastruttura.</p>
+<h2 id="101-clock">10.1 Clock<a class="headerlink" href="#101-clock" title="Permanent link">&para;</a></h2>
+<p>Occorre verificare:</p>
+<ul>
+<li>frequenza richiesta;</li>
+<li>dominio di clock di appartenenza;</li>
+<li>presenza di segnali enable;</li>
+<li>necessità di crossing fra domini differenti.</li>
+</ul>
+<h2 id="102-reset">10.2 Reset<a class="headerlink" href="#102-reset" title="Permanent link">&para;</a></h2>
+<p>È importante chiarire:</p>
+<ul>
+<li>reset sincrono o asincrono;</li>
+<li>polarità attiva;</li>
+<li>ordine di rilascio;</li>
+<li>dipendenze da altri blocchi;</li>
+<li>comportamento durante warm reset o soft reset.</li>
+</ul>
+<h2 id="103-power">10.3 Power<a class="headerlink" href="#103-power" title="Permanent link">&para;</a></h2>
+<p>Nei SoC più complessi è necessario valutare:</p>
+<ul>
+<li>dominio di alimentazione dell'IP;</li>
+<li>necessità di isolation;</li>
+<li>retention dei registri;</li>
+<li>sequenze di accensione e spegnimento;</li>
+<li>stato del blocco quando il dominio non è attivo.</li>
+</ul>
+<pre class="mermaid"><code>flowchart TD
+    PWR[Power domain]
+    CLK[Clock domain]
+    RST[Reset controller]
+    WR[Wrapper]
+    IP[IP block]
+
+    PWR --&gt; WR
+    CLK --&gt; WR
+    RST --&gt; WR
+    WR --&gt; IP</code></pre>
+<hr />
+<h2 id="11-interrupt-eventi-e-status">11. Interrupt, eventi e status<a class="headerlink" href="#11-interrupt-eventi-e-status" title="Permanent link">&para;</a></h2>
+<p>Un IP può generare:</p>
+<ul>
+<li>interrupt verso la CPU;</li>
+<li>segnali di stato;</li>
+<li>segnalazioni di errore;</li>
+<li>trigger verso DMA o altri blocchi.</li>
+</ul>
+<p>Durante l'integrazione bisogna definire:</p>
+<ul>
+<li>dove collegare gli interrupt;</li>
+<li>come mascherarli;</li>
+<li>come renderli visibili al software;</li>
+<li>come pulire gli eventi pendenti;</li>
+<li>come trattare gli errori persistenti.</li>
+</ul>
+<p>Una gestione poco chiara di interrupt e status è una delle cause più comuni di bug in bring-up.</p>
+<hr />
+<h2 id="12-integrazione-con-il-software">12. Integrazione con il software<a class="headerlink" href="#12-integrazione-con-il-software" title="Permanent link">&para;</a></h2>
+<p>Un IP integrato correttamente a livello hardware non è ancora veramente "integrato" finché non esiste una strategia software coerente.</p>
+<p>Servono tipicamente:</p>
+<ul>
+<li>definizione dei registri accessibili;</li>
+<li>header o descrizione dei registri;</li>
+<li>driver bare-metal o supporto firmware;</li>
+<li>eventuali test di bring-up;</li>
+<li>gestione degli interrupt;</li>
+<li>documentazione delle sequenze di inizializzazione.</li>
+</ul>
+<p>Dal punto di vista didattico, questo è un punto chiave: l'integrazione IP è sempre anche un'attività di <strong>co-design hardware/software</strong>.</p>
+<hr />
+<h2 id="13-parametrizzazione-e-configurabilita">13. Parametrizzazione e configurabilità<a class="headerlink" href="#13-parametrizzazione-e-configurabilita" title="Permanent link">&para;</a></h2>
+<p>Molti IP moderni sono <strong>parametrici</strong>.<br />
+Ad esempio, possono essere configurati per:</p>
+<ul>
+<li>larghezza dati;</li>
+<li>profondità delle FIFO;</li>
+<li>numero di canali;</li>
+<li>presenza o assenza di interrupt;</li>
+<li>supporto DMA;</li>
+<li>ampiezza degli indirizzi;</li>
+<li>modalità operative.</li>
+</ul>
+<h3 id="vantaggi-della-parametrizzazione">Vantaggi della parametrizzazione<a class="headerlink" href="#vantaggi-della-parametrizzazione" title="Permanent link">&para;</a></h3>
+<ul>
+<li>riuso più efficace;</li>
+<li>adattamento a progetti diversi;</li>
+<li>ottimizzazione dell'area o delle prestazioni.</li>
+</ul>
+<h3 id="rischi">Rischi<a class="headerlink" href="#rischi" title="Permanent link">&para;</a></h3>
+<ul>
+<li>esplosione delle combinazioni da verificare;</li>
+<li>documentazione più difficile;</li>
+<li>configurazioni formalmente ammesse ma poco testate;</li>
+<li>maggiore rischio di mismatch fra hardware e software.</li>
+</ul>
+<p>Per questo è importante limitare e controllare le configurazioni realmente supportate nel progetto SoC.</p>
+<hr />
+<h2 id="14-versioning-e-configurazione-di-sistema">14. Versioning e configurazione di sistema<a class="headerlink" href="#14-versioning-e-configurazione-di-sistema" title="Permanent link">&para;</a></h2>
+<p>In un SoC reale non basta sapere "quale IP" è presente: bisogna sapere <strong>quale versione</strong>, con <strong>quali parametri</strong> e in <strong>quale configurazione</strong>.</p>
+<p>Occorre quindi tenere traccia di:</p>
+<ul>
+<li>revisione dell'IP;</li>
+<li>patch applicate;</li>
+<li>parametri scelti;</li>
+<li>wrapper associato;</li>
+<li>note di integrazione;</li>
+<li>eventuali bug noti;</li>
+<li>stato di verifica.</li>
+</ul>
+<p>Questo è essenziale per:</p>
+<ul>
+<li>reproducibility del progetto;</li>
+<li>debug;</li>
+<li>regression testing;</li>
+<li>manutenzione nel tempo.</li>
+</ul>
+<hr />
+<h2 id="15-documentazione-di-integrazione">15. Documentazione di integrazione<a class="headerlink" href="#15-documentazione-di-integrazione" title="Permanent link">&para;</a></h2>
+<p>Ogni IP dovrebbe essere accompagnato da una documentazione minima di integrazione.</p>
+<p>Un documento utile dovrebbe includere:</p>
+<ul>
+<li>scopo del blocco;</li>
+<li>versione;</li>
+<li>interfacce;</li>
+<li>clock e reset;</li>
+<li>memory map;</li>
+<li>registri;</li>
+<li>interrupt;</li>
+<li>dipendenze;</li>
+<li>flussi di inizializzazione;</li>
+<li>limitazioni note;</li>
+<li>test o casi d'uso raccomandati.</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    SPEC[Specifica IP]
+    INTEG[Guida di integrazione]
+    REG[Documentazione registri]
+    DRV[Indicazioni per driver]
+    TEST[Test di riferimento]
+
+    SPEC --&gt; INTEG
+    INTEG --&gt; REG
+    INTEG --&gt; DRV
+    INTEG --&gt; TEST</code></pre>
+<p>Una documentazione scarsa aumenta drasticamente il rischio di errori, anche se l'IP in sé è corretto.</p>
+<hr />
+<h2 id="16-verifica-dellintegrazione">16. Verifica dell'integrazione<a class="headerlink" href="#16-verifica-dellintegrazione" title="Permanent link">&para;</a></h2>
+<p>Anche un IP già verificato può fallire quando viene inserito nel SoC.<br />
+Per questo serve una fase specifica di <strong>integrazione e verifica di sistema</strong>.</p>
+<h2 id="161-obiettivi-della-verifica-di-integrazione">16.1 Obiettivi della verifica di integrazione<a class="headerlink" href="#161-obiettivi-della-verifica-di-integrazione" title="Permanent link">&para;</a></h2>
+<p>Verificare che:</p>
+<ul>
+<li>i collegamenti siano corretti;</li>
+<li>i registri siano accessibili;</li>
+<li>clock e reset funzionino come atteso;</li>
+<li>interrupt e DMA siano coerenti;</li>
+<li>il software riesca a inizializzare il blocco;</li>
+<li>i casi d'uso principali siano operativi.</li>
+</ul>
+<h2 id="162-casi-tipici-da-testare">16.2 Casi tipici da testare<a class="headerlink" href="#162-casi-tipici-da-testare" title="Permanent link">&para;</a></h2>
+<ul>
+<li>reset e uscita dal reset;</li>
+<li>accessi base ai registri;</li>
+<li>configurazione nominale;</li>
+<li>gestione errori;</li>
+<li>traffico concorrente;</li>
+<li>sequenze di power on/off, se applicabili;</li>
+<li>interazione con driver software.</li>
+</ul>
+<h2 id="163-perche-la-verifica-di-integrazione-e-diversa-dalla-verifica-dellip">16.3 Perché la verifica di integrazione è diversa dalla verifica dell'IP<a class="headerlink" href="#163-perche-la-verifica-di-integrazione-e-diversa-dalla-verifica-dellip" title="Permanent link">&para;</a></h2>
+<p>La verifica del singolo IP dimostra che il blocco funziona <strong>in un contesto controllato</strong>.<br />
+La verifica di integrazione dimostra che il blocco funziona <strong>nel contesto reale del SoC</strong>, dove esistono:</p>
+<ul>
+<li>contesa sul bus;</li>
+<li>clock domain multipli;</li>
+<li>reset complessi;</li>
+<li>software concorrente;</li>
+<li>dipendenze da altri sottosistemi.</li>
+</ul>
+<hr />
+<h2 id="17-rischi-frequenti-nellintegrazione-ip">17. Rischi frequenti nell'integrazione IP<a class="headerlink" href="#17-rischi-frequenti-nellintegrazione-ip" title="Permanent link">&para;</a></h2>
+<p>Tra i problemi più comuni:</p>
+<ul>
+<li>mismatch fra protocollo previsto e protocollo reale del bus;</li>
+<li>errata gestione di reset;</li>
+<li>registri mappati male;</li>
+<li>interrupt non puliti correttamente;</li>
+<li>clock domain crossing non gestiti;</li>
+<li>documentazione incompleta;</li>
+<li>differenze tra versione attesa e versione integrata;</li>
+<li>parametri inconsistenti con il software;</li>
+<li>assunzioni implicite dell'IP non rispettate dal SoC.</li>
+</ul>
+<p>Molti di questi errori non emergono immediatamente, ma durante bring-up o test di sistema.</p>
+<hr />
+<h2 id="18-esempio-di-flusso-di-integrazione">18. Esempio di flusso di integrazione<a class="headerlink" href="#18-esempio-di-flusso-di-integrazione" title="Permanent link">&para;</a></h2>
+<p>Un flusso semplificato di integrazione IP può essere il seguente:</p>
+<pre class="mermaid"><code>flowchart TD
+    SEL[Selezione IP]
+    ANA[Analisi specifica]
+    WRAP[Definizione wrapper]
+    MAP[Assegnazione memory map]
+    INF[Clock / reset / interrupt / power]
+    SW[Supporto software]
+    VER[Verifica integrazione]
+    SYS[Integrazione nel SoC]
+
+    SEL --&gt; ANA --&gt; WRAP --&gt; MAP --&gt; INF --&gt; SW --&gt; VER --&gt; SYS</code></pre>
+<p>Questo schema evidenzia che l'integrazione non è un singolo passo, ma una sequenza metodica di attività.</p>
+<hr />
+<h2 id="19-collegamento-con-fpga">19. Collegamento con FPGA<a class="headerlink" href="#19-collegamento-con-fpga" title="Permanent link">&para;</a></h2>
+<p>Nel contesto FPGA, l'integrazione IP è una pratica quotidiana:</p>
+<ul>
+<li>IP standard di comunicazione;</li>
+<li>controller memoria;</li>
+<li>softcore processor;</li>
+<li>blocchi custom memory-mapped;</li>
+<li>IP di vendor per clocking o debug.</li>
+</ul>
+<p>La FPGA è molto utile per:</p>
+<ul>
+<li>validare i wrapper;</li>
+<li>verificare mappe registri;</li>
+<li>sviluppare i driver;</li>
+<li>fare bring-up rapido;</li>
+<li>osservare problemi di integrazione prima del tape-out ASIC.</li>
+</ul>
+<hr />
+<h2 id="20-collegamento-con-asic">20. Collegamento con ASIC<a class="headerlink" href="#20-collegamento-con-asic" title="Permanent link">&para;</a></h2>
+<p>Nel contesto ASIC, l'integrazione IP ha implicazioni ancora più ampie:</p>
+<ul>
+<li>vincoli fisici degli hard macro;</li>
+<li>floorplanning;</li>
+<li>distribuzione clock e reset;</li>
+<li>power domains;</li>
+<li>verifiche fisiche e timing;</li>
+<li>DFT e testabilità.</li>
+</ul>
+<p>Per questo l'integrazione degli IP è una disciplina che collega direttamente architettura, RTL, verifica e physical design.</p>
+<hr />
+<h2 id="21-in-sintesi">21. In sintesi<a class="headerlink" href="#21-in-sintesi" title="Permanent link">&para;</a></h2>
+<p>L'integrazione IP è il processo attraverso cui blocchi riusabili, spesso eterogenei, vengono trasformati in un sottosistema coerente all'interno del SoC.<br />
+Per farlo bene è necessario controllare con attenzione:</p>
+<ul>
+<li>interfacce;</li>
+<li>wrapper;</li>
+<li>memory map;</li>
+<li>clock, reset e power;</li>
+<li>interrupt e DMA;</li>
+<li>software di supporto;</li>
+<li>documentazione;</li>
+<li>verifica di integrazione.</li>
+</ul>
+<p>Un SoC robusto non nasce solo da buoni IP, ma da una metodologia di integrazione chiara, disciplinata e ben documentata.</p>
+<hr />
+<h2 id="prossimo-passo">Prossimo passo<a class="headerlink" href="#prossimo-passo" title="Permanent link">&para;</a></h2>
+<p>Dopo l'integrazione dei blocchi, il passo successivo naturale è affrontare la <strong>verifica di sistema</strong>, cioè il modo in cui si dimostra che l'intero SoC funziona correttamente come insieme e non soltanto a livello di singoli moduli.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
