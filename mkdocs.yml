@@ -74,8 +74,31 @@ nav:
           - I/O Flavors: Libro_Verilog/io_flavors.md
           - A Taste of Simulation: Libro_Verilog/simulation.md
           - The Rest for Reference: Libro_Verilog/reference.md
-  - SystemVerilog: 
-    - Overview: 04_systemverilog_design.md
+  - SystemVerilog:
+    - Introduzione: systemverilog/index.md
+    - Fondamenti del linguaggio: systemverilog/language-basics.md
+    - Costrutti RTL: systemverilog/rtl-constructs.md
+    - Blocchi procedurali: systemverilog/procedural-blocks.md
+    - Logica combinatoria e sequenziale: systemverilog/combinational-vs-sequential.md
+    - Macchine a stati finiti (FSM): systemverilog/fsm.md
+    - Codifica degli stati: systemverilog/state-encoding.md
+    - Datapath e controllo: systemverilog/datapath-and-control.md
+    - Pipeline e pipelining: systemverilog/pipelining.md
+    - Interfacce e handshake: systemverilog/interfaces-and-handshake.md
+    - Le interface in SystemVerilog: systemverilog/systemverilog-interfaces.md
+    - Package e typedef: systemverilog/packages-and-typedefs.md
+    - Array e generate: systemverilog/arrays-and-generate.md
+    - Parametri e configurazione: systemverilog/parameters-and-configuration.md
+    - Latenza e throughput: systemverilog/latency-and-throughput.md
+    - Stile di codifica RTL: systemverilog/coding-style-rtl.md
+    - Fondamenti di verifica: systemverilog/verification-basics.md
+    - Struttura di un testbench: systemverilog/testbench-structure.md
+    - Fondamenti di assertion: systemverilog/assertions-basics.md
+    - Flusso di simulazione RTL: systemverilog/simulation-workflow.md
+    - Fondamenti di coverage: systemverilog/coverage-basics.md
+    - Strategie di reset: systemverilog/reset-strategies.md
+    - Clock Domain Crossing (CDC): systemverilog/clock-domain-crossing.md
+    - Caso di studio: systemverilog/case-study-systemverilog.md
     - Flowchart: 04_SV_flow_chart.md
   - Verification: 
     - Overview: 05_verification_base.md
