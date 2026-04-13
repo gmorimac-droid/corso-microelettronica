@@ -1,0 +1,7868 @@
+
+<!doctype html>
+<html lang="it" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corso completo su HDL, verification e tool FPGA/ASIC">
+      
+      
+      
+        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/latency-and-throughput/">
+      
+      
+        <link rel="prev" href="../parameters-and-configuration/">
+      
+      
+        <link rel="next" href="../coding-style-rtl/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Latenza e throughput - Corso di Microelettronica Digitale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#latenza-e-throughput" class="md-skip">
+          Vai al contenuto
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Intestazione">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-header__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corso di Microelettronica Digitale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Latenza e throughput
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green"  aria-label="Passa a dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passa a dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="lime"  aria-label="Passa a light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passa a light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Cancella" aria-label="Cancella" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../00_introduzione/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Intro
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../01_fondamenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Fondamenti
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../02_vhdl/" class="md-tabs__link">
+          
+  
+  
+  VHDL
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../03_verilog/" class="md-tabs__link">
+          
+  
+  
+  Verilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  SystemVerilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../05_verification_base/" class="md-tabs__link">
+          
+  
+  
+  Verification
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../06_uvm/" class="md-tabs__link">
+          
+  
+  
+  UVM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../fpga/" class="md-tabs__link">
+          
+  
+  
+  FPGA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../asic/" class="md-tabs__link">
+          
+  
+  
+  ASIC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../soc/" class="md-tabs__link">
+          
+  
+  
+  SoC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../09_progetti/" class="md-tabs__link">
+          
+  
+  
+  Progetti
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../10_tool_e_tcl/" class="md-tabs__link">
+          
+  
+  
+  Tool e Tcl/Tk
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../11_appendici/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Appendici
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../12_riferimenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Riferimenti
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigazione" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-nav__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Corso di Microelettronica Digitale
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00_introduzione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01_fondamenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VHDL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    VHDL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl_progettazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foglio di lavoro
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foglio di lavoro
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Tool Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/in_out/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    In and Out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/utilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/clocks_registers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocks and Registers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/state_machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/modular_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modular Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/memories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/managing_clocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Managing Clocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/io_flavors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O Flavors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A Taste of Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Rest for Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SystemVerilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../language-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti del linguaggio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rtl-constructs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Costrutti RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../procedural-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocchi procedurali
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../combinational-vs-sequential/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logica combinatoria e sequenziale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fsm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Macchine a stati finiti (FSM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../state-encoding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codifica degli stati
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datapath-and-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datapath e controllo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pipelining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline e pipelining
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interfaces-and-handshake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfacce e handshake
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../systemverilog-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Le interface in SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../packages-and-typedefs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Package e typedef
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arrays-and-generate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Array e generate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parameters-and-configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parametri e configurazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Latenza e throughput
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Latenza e throughput
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-perche-distinguere-tra-latenza-e-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Perché distinguere tra latenza e throughput
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Perché distinguere tra latenza e throughput">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-due-domande-diverse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Due domande diverse
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-perche-conta-davvero" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Perché conta davvero
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-impatto-metodologico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Impatto metodologico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-che-cose-la-latenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Che cos’è la latenza
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Che cos’è la latenza">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-significato-intuitivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Significato intuitivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-come-puo-essere-espressa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Come può essere espressa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-visione-architetturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Visione architetturale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-che-cose-il-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Che cos’è il throughput
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Che cos’è il throughput">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-significato-intuitivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Significato intuitivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-come-puo-essere-espresso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Come può essere espresso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-visione-architetturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Visione architetturale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-latenza-e-throughput-non-sono-la-stessa-cosa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Latenza e throughput non sono la stessa cosa
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Latenza e throughput non sono la stessa cosa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-un-blocco-puo-avere" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Un blocco può avere:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-esempio-concettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Esempio concettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-conseguenza-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Conseguenza progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-latenza-in-cicli-e-latenza-in-tempo-assoluto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Latenza in cicli e latenza in tempo assoluto
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Latenza in cicli e latenza in tempo assoluto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-latenza-in-cicli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Latenza in cicli
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-latenza-in-tempo-assoluto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Latenza in tempo assoluto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-perche-la-distinzione-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Perché la distinzione è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-throughput-e-frequenza-di-clock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Throughput e frequenza di clock
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Throughput e frequenza di clock">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-throughput-per-ciclo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Throughput per ciclo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-throughput-nel-tempo-reale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Throughput nel tempo reale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-collegamento-con-il-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Collegamento con il timing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-effetto-della-pipeline-sulla-latenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Effetto della pipeline sulla latenza
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Effetto della pipeline sulla latenza">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-piu-stadi-piu-cicli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Più stadi, più cicli
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-effetto-naturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Effetto naturale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-collegamento-con-il-controllo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Collegamento con il controllo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-effetto-della-pipeline-sul-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Effetto della pipeline sul throughput
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Effetto della pipeline sul throughput">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-perche-migliora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Perché migliora
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-collegamento-con-la-frequenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Collegamento con la frequenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-distinzione-centrale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Distinzione centrale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-parallelismo-e-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Parallelismo e throughput
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Parallelismo e throughput">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-parallelismo-strutturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Parallelismo strutturale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-effetto-sul-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Effetto sul throughput
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-effetto-sulla-latenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Effetto sulla latenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-costo-del-parallelismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 Costo del parallelismo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-buffering-code-e-decoupling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Buffering, code e decoupling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Buffering, code e decoupling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-perche-serve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Perché serve
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-effetto-sulla-latenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Effetto sulla latenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-effetto-sul-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Effetto sul throughput
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-visione-sistemica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 Visione sistemica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-handshake-e-limiti-di-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Handshake e limiti di throughput
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Handshake e limiti di throughput">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-valid-ready" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 valid / ready
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-backpressure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Backpressure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-start-done" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 start / done
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114-conseguenza-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.4 Conseguenza pratica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-latenza-throughput-e-datapath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Latenza, throughput e datapath
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Latenza, throughput e datapath">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-latenza-del-datapath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Latenza del datapath
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-throughput-del-datapath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Throughput del datapath
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-collegamento-con-il-controllo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Collegamento con il controllo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-latenza-throughput-e-controllo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Latenza, throughput e controllo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Latenza, throughput e controllo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-controllo-troppo-rigido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Controllo troppo rigido
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-controllo-pipeline-aware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Controllo pipeline-aware
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-latenza-di-controllo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 Latenza di controllo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-implicazioni-per-la-verifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Implicazioni per la verifica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Implicazioni per la verifica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-verifica-della-latenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Verifica della latenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-verifica-del-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Verifica del throughput
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-casi-limite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 Casi limite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#144-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.4 Debug
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-implicazioni-per-il-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Implicazioni per il timing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Implicazioni per il timing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-throughput-e-fmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Throughput e Fmax
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-latenza-e-registrazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 Latenza e registrazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-compromesso-fondamentale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Compromesso fondamentale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#154-valutazione-corretta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.4 Valutazione corretta
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-impatto-su-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Impatto su FPGA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. Impatto su FPGA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-pipeline-favorevole" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 Pipeline favorevole
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-parallelismo-configurabile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.2 Parallelismo configurabile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163-lettura-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.3 Lettura pratica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-impatto-su-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Impatto su ASIC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17. Impatto su ASIC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171-pipeline-e-frequenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1 Pipeline e frequenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172-parallelismo-e-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.2 Parallelismo e area
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#173-buffering-e-traffico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3 Buffering e traffico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#174-visione-da-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4 Visione da backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-errori-comuni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Errori comuni
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. Errori comuni">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#181-confondere-i-due-concetti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.1 Confondere i due concetti
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#182-valutare-solo-i-cicli-e-non-il-clock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.2 Valutare solo i cicli e non il clock
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#183-ignorare-linterfaccia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.3 Ignorare l’interfaccia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#184-guardare-solo-il-blocco-isolato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4 Guardare solo il blocco isolato
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#185-non-allineare-controllo-e-datapath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5 Non allineare controllo e datapath
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-buone-pratiche-di-modellazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Buone pratiche di modellazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="19. Buone pratiche di modellazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#191-esplicitare-il-requisito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.1 Esplicitare il requisito
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#192-documentare-la-latenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.2 Documentare la latenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#193-capire-il-throughput-sostenibile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.3 Capire il throughput sostenibile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#194-progettare-il-controllo-in-modo-coerente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.4 Progettare il controllo in modo coerente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#195-misurare-sulle-configurazioni-reali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.5 Misurare sulle configurazioni reali
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-collegamento-con-il-resto-della-sezione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Collegamento con il resto della sezione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coding-style-rtl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stile di codifica RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../verification-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di verifica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testbench-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Struttura di un testbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assertions-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di assertion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simulation-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di simulazione RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coverage-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di coverage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reset-strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strategie di reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clock-domain-crossing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clock Domain Crossing (CDC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case-study-systemverilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_SV_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05_verification_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.chipverify.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChipVerify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verificationguide.com" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VerificationGuide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.doulos.com/knowhow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doulos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_3" id="__nav_8_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetto mini CPU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetto mini CPU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU_waveform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Waveform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione alle FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di una FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/rtl-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTL design per FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/constraints-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/synthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse dedicate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocking e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/place-route/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Placement, routing e timing closure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica e test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/debug/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debug su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/prototyping-soc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prototipazione di sistemi e SoC su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/fpga-vs-asic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA vs ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_fpga_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_ps_axi_led/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq LED
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_17" id="__nav_9_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq FIR
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zynq FIR
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_8tap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_axi_stream_theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AXI Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_dma_interrupt_perf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DMA Interrupt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_xparameters_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    X Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Digilent/Zybo-Z7" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zybo-Z7-20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASIC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ASIC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione agli ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/spec-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specifiche e architettura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/rtl-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTL design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/constraints-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/synthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DFT e testabilità
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/floorplanning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Floorplanning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/place-route/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Place and Route
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/cts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clock Tree Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/signoff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Signoff fisico e temporale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power analysis e low-power design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica funzionale e equivalenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/libraries-pdk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Librerie standard cell e PDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/tapeout-fabrication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tape-out e fabbricazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_asic_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_openasic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAsic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_19" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_19" id="__nav_10_19_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_19">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openlane2.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenLAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/kunalg123/vsdflow" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CMOS VLSI Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SoC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SoC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione ai SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/architettura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di un SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/bus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interconnessioni e bus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/memorie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memorie e gerarchia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/periferiche/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Periferiche e I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/ip-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrazione IP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/verifica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica di sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/hw-sw-codesign/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HW/SW co-design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/power-clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consumi, clock e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/safety-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Safety e Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/physical-design-awareness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physical awareness nel SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_codice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorgenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool e Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tool e Tcl/Tk
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_e_tcl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3" id="__nav_13_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.tutorialspoint.com/tcl-tk/index.htm" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.amd.com/r/en-US/ug894-vivado-tcl-scripting/Tcl-Scripting-in-Vivado" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Script Tcl in Vivado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://yosyshq.readthedocs.io/projects/yosys/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yosis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openroad.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenROAD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://gtkwave.github.io/gtkwave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GTKWave Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verilator.org/guide/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilator Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3_7" id="__nav_13_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vivado
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_13_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vivado
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug910-vivado-getting-started" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug901-vivado-synthesis" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug904-vivado-implementation" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug835-vivado-tcl-commands" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcl Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/swdocs/modelsim/modelsim_user_2024_2.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ModelSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11_appendici/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendici
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12_riferimenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Riferimenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-perche-distinguere-tra-latenza-e-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Perché distinguere tra latenza e throughput
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Perché distinguere tra latenza e throughput">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-due-domande-diverse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Due domande diverse
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-perche-conta-davvero" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Perché conta davvero
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-impatto-metodologico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Impatto metodologico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-che-cose-la-latenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Che cos’è la latenza
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Che cos’è la latenza">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-significato-intuitivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Significato intuitivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-come-puo-essere-espressa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Come può essere espressa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-visione-architetturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Visione architetturale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-che-cose-il-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Che cos’è il throughput
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Che cos’è il throughput">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-significato-intuitivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Significato intuitivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-come-puo-essere-espresso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Come può essere espresso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-visione-architetturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Visione architetturale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-latenza-e-throughput-non-sono-la-stessa-cosa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Latenza e throughput non sono la stessa cosa
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Latenza e throughput non sono la stessa cosa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-un-blocco-puo-avere" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Un blocco può avere:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-esempio-concettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Esempio concettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-conseguenza-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Conseguenza progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-latenza-in-cicli-e-latenza-in-tempo-assoluto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Latenza in cicli e latenza in tempo assoluto
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Latenza in cicli e latenza in tempo assoluto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-latenza-in-cicli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Latenza in cicli
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-latenza-in-tempo-assoluto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Latenza in tempo assoluto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-perche-la-distinzione-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Perché la distinzione è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-throughput-e-frequenza-di-clock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Throughput e frequenza di clock
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Throughput e frequenza di clock">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-throughput-per-ciclo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Throughput per ciclo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-throughput-nel-tempo-reale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Throughput nel tempo reale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-collegamento-con-il-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Collegamento con il timing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-effetto-della-pipeline-sulla-latenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Effetto della pipeline sulla latenza
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Effetto della pipeline sulla latenza">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-piu-stadi-piu-cicli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Più stadi, più cicli
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-effetto-naturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Effetto naturale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-collegamento-con-il-controllo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Collegamento con il controllo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-effetto-della-pipeline-sul-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Effetto della pipeline sul throughput
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Effetto della pipeline sul throughput">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-perche-migliora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Perché migliora
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-collegamento-con-la-frequenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Collegamento con la frequenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-distinzione-centrale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Distinzione centrale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-parallelismo-e-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Parallelismo e throughput
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Parallelismo e throughput">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-parallelismo-strutturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Parallelismo strutturale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-effetto-sul-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Effetto sul throughput
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-effetto-sulla-latenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Effetto sulla latenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-costo-del-parallelismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 Costo del parallelismo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-buffering-code-e-decoupling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Buffering, code e decoupling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Buffering, code e decoupling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-perche-serve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Perché serve
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-effetto-sulla-latenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Effetto sulla latenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-effetto-sul-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Effetto sul throughput
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-visione-sistemica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 Visione sistemica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-handshake-e-limiti-di-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Handshake e limiti di throughput
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Handshake e limiti di throughput">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-valid-ready" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 valid / ready
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-backpressure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Backpressure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-start-done" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 start / done
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114-conseguenza-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.4 Conseguenza pratica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-latenza-throughput-e-datapath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Latenza, throughput e datapath
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Latenza, throughput e datapath">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-latenza-del-datapath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Latenza del datapath
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-throughput-del-datapath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Throughput del datapath
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-collegamento-con-il-controllo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Collegamento con il controllo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-latenza-throughput-e-controllo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Latenza, throughput e controllo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Latenza, throughput e controllo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-controllo-troppo-rigido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Controllo troppo rigido
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-controllo-pipeline-aware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Controllo pipeline-aware
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-latenza-di-controllo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 Latenza di controllo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-implicazioni-per-la-verifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Implicazioni per la verifica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Implicazioni per la verifica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-verifica-della-latenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Verifica della latenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-verifica-del-throughput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Verifica del throughput
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-casi-limite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 Casi limite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#144-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.4 Debug
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-implicazioni-per-il-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Implicazioni per il timing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Implicazioni per il timing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-throughput-e-fmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Throughput e Fmax
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-latenza-e-registrazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 Latenza e registrazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-compromesso-fondamentale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Compromesso fondamentale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#154-valutazione-corretta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.4 Valutazione corretta
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-impatto-su-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Impatto su FPGA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. Impatto su FPGA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-pipeline-favorevole" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 Pipeline favorevole
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-parallelismo-configurabile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.2 Parallelismo configurabile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163-lettura-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.3 Lettura pratica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-impatto-su-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Impatto su ASIC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17. Impatto su ASIC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171-pipeline-e-frequenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1 Pipeline e frequenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172-parallelismo-e-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.2 Parallelismo e area
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#173-buffering-e-traffico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3 Buffering e traffico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#174-visione-da-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4 Visione da backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-errori-comuni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Errori comuni
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. Errori comuni">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#181-confondere-i-due-concetti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.1 Confondere i due concetti
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#182-valutare-solo-i-cicli-e-non-il-clock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.2 Valutare solo i cicli e non il clock
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#183-ignorare-linterfaccia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.3 Ignorare l’interfaccia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#184-guardare-solo-il-blocco-isolato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4 Guardare solo il blocco isolato
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#185-non-allineare-controllo-e-datapath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5 Non allineare controllo e datapath
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-buone-pratiche-di-modellazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Buone pratiche di modellazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="19. Buone pratiche di modellazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#191-esplicitare-il-requisito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.1 Esplicitare il requisito
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#192-documentare-la-latenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.2 Documentare la latenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#193-capire-il-throughput-sostenibile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.3 Capire il throughput sostenibile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#194-progettare-il-controllo-in-modo-coerente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.4 Progettare il controllo in modo coerente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#195-misurare-sulle-configurazioni-reali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.5 Misurare sulle configurazioni reali
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-collegamento-con-il-resto-della-sezione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Collegamento con il resto della sezione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="latenza-e-throughput">Latenza e throughput<a class="headerlink" href="#latenza-e-throughput" title="Permanent link">&para;</a></h1>
+<p>Dopo aver introdotto <strong>pipeline</strong>, <strong>interfacce con handshake</strong>, <strong>datapath e controllo</strong>, e i meccanismi di <strong>parametrizzazione</strong> della RTL, il passo successivo naturale è consolidare due concetti che ricorrono continuamente nella progettazione hardware: <strong>latenza</strong> e <strong>throughput</strong>.</p>
+<p>Questi due termini vengono spesso usati insieme, e a volte confusi, ma rappresentano aspetti diversi delle prestazioni di un blocco digitale. Capirne bene la differenza è fondamentale perché molte decisioni architetturali — come introdurre pipeline, aumentare il parallelismo, aggiungere buffering o modificare il protocollo di interfaccia — migliorano uno di questi aspetti al prezzo di cambiare l’altro.</p>
+<p>Dal punto di vista progettuale, latenza e throughput sono il punto in cui si incontrano in modo molto diretto:
+- architettura;
+- RTL;
+- timing;
+- pipeline;
+- handshake;
+- buffering;
+- implementazione FPGA;
+- implementazione ASIC.</p>
+<p>Questa pagina introduce i due concetti con un taglio sistematico e progettuale, mettendo in evidenza il loro ruolo nella costruzione di blocchi hardware reali e nelle scelte di compromesso che accompagnano tutto il flusso di sviluppo.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Scelte architetturali] --&gt; B[Latenza]
+    A --&gt; C[Throughput]
+    B --&gt; D[Tempo di risposta]
+    C --&gt; E[Ritmo di elaborazione]
+    D --&gt; F[Esperienza del blocco a transazione]
+    E --&gt; G[Prestazioni di sistema]
+    A --&gt; H[Pipeline]
+    A --&gt; I[Parallelismo]
+    A --&gt; J[Buffering]
+    H --&gt; B
+    H --&gt; C
+    I --&gt; B
+    I --&gt; C
+    J --&gt; B
+    J --&gt; C
+
+    style B fill:#eef6ff,stroke:#1f6feb
+    style C fill:#eefbf0,stroke:#22863a</code></pre>
+<h2 id="1-perche-distinguere-tra-latenza-e-throughput">1. Perché distinguere tra latenza e throughput<a class="headerlink" href="#1-perche-distinguere-tra-latenza-e-throughput" title="Permanent link">&para;</a></h2>
+<p>In un blocco hardware reale non basta dire che “è veloce” o “è lento”. Bisogna capire <strong>in che senso</strong> lo è.</p>
+<h3 id="11-due-domande-diverse">1.1 Due domande diverse<a class="headerlink" href="#11-due-domande-diverse" title="Permanent link">&para;</a></h3>
+<p>Le due domande corrette sono:
+- quanto tempo impiega un singolo dato o una singola richiesta per attraversare il blocco?
+- quanti dati o quante richieste il blocco può elaborare in un certo intervallo di tempo?</p>
+<p>La prima domanda riguarda la <strong>latenza</strong>.<br />
+La seconda riguarda il <strong>throughput</strong>.</p>
+<h3 id="12-perche-conta-davvero">1.2 Perché conta davvero<a class="headerlink" href="#12-perche-conta-davvero" title="Permanent link">&para;</a></h3>
+<p>Molte scelte progettuali ottimizzano uno dei due aspetti senza migliorare automaticamente l’altro. Per esempio:
+- una pipeline può aumentare la frequenza e il throughput, ma aumentare la latenza;
+- un’architettura molto parallela può aumentare il throughput, ma non necessariamente ridurre il tempo di risposta di una singola operazione;
+- un buffering può migliorare la fluidità del trasferimento, ma introdurre ritardo aggiuntivo.</p>
+<h3 id="13-impatto-metodologico">1.3 Impatto metodologico<a class="headerlink" href="#13-impatto-metodologico" title="Permanent link">&para;</a></h3>
+<p>Capire bene questa distinzione aiuta a:
+- formulare correttamente i requisiti;
+- leggere meglio i risultati di sintesi e integrazione;
+- scegliere la struttura del datapath;
+- valutare compromessi di area, timing e complessità di controllo.</p>
+<h2 id="2-che-cose-la-latenza">2. Che cos’è la latenza<a class="headerlink" href="#2-che-cose-la-latenza" title="Permanent link">&para;</a></h2>
+<p>La <strong>latenza</strong> è il tempo necessario affinché un ingresso, una richiesta o un dato producano l’effetto o il risultato atteso all’uscita del blocco.</p>
+<h3 id="21-significato-intuitivo">2.1 Significato intuitivo<a class="headerlink" href="#21-significato-intuitivo" title="Permanent link">&para;</a></h3>
+<p>La latenza risponde alla domanda:
+- “quanto devo aspettare prima di vedere il risultato?”</p>
+<h3 id="22-come-puo-essere-espressa">2.2 Come può essere espressa<a class="headerlink" href="#22-come-puo-essere-espressa" title="Permanent link">&para;</a></h3>
+<p>La latenza può essere espressa in:
+- numero di cicli di clock;
+- tempo assoluto;
+- numero di stadi attraversati;
+- distanza temporale tra accettazione dell’ingresso e validità dell’uscita.</p>
+<h3 id="23-visione-architetturale">2.3 Visione architetturale<a class="headerlink" href="#23-visione-architetturale" title="Permanent link">&para;</a></h3>
+<p>Dal punto di vista dell’architettura, la latenza misura il tempo di attraversamento del blocco. È particolarmente importante quando:
+- il risultato serve per una decisione successiva;
+- il blocco è parte di una catena di controllo;
+- una risposta rapida è più importante del massimo ritmo di elaborazione;
+- il sistema ha vincoli sul tempo di reazione.</p>
+<h2 id="3-che-cose-il-throughput">3. Che cos’è il throughput<a class="headerlink" href="#3-che-cose-il-throughput" title="Permanent link">&para;</a></h2>
+<p>Il <strong>throughput</strong> misura la quantità di lavoro che il blocco riesce a completare in una certa unità di tempo.</p>
+<h3 id="31-significato-intuitivo">3.1 Significato intuitivo<a class="headerlink" href="#31-significato-intuitivo" title="Permanent link">&para;</a></h3>
+<p>Il throughput risponde alla domanda:
+- “con quale frequenza il blocco può accettare o produrre nuovi dati?”</p>
+<h3 id="32-come-puo-essere-espresso">3.2 Come può essere espresso<a class="headerlink" href="#32-come-puo-essere-espresso" title="Permanent link">&para;</a></h3>
+<p>Può essere espresso, per esempio, come:
+- risultati per ciclo;
+- transazioni per secondo;
+- parole per ciclo;
+- operazioni per unità di tempo.</p>
+<h3 id="33-visione-architetturale">3.3 Visione architetturale<a class="headerlink" href="#33-visione-architetturale" title="Permanent link">&para;</a></h3>
+<p>Il throughput è cruciale quando interessa il rendimento globale del sistema, per esempio:
+- elaborazione continua di stream di dati;
+- canali di comunicazione;
+- acceleratori numerici;
+- pipeline profonde;
+- blocchi che devono sostenere un certo ritmo di traffico.</p>
+<h2 id="4-latenza-e-throughput-non-sono-la-stessa-cosa">4. Latenza e throughput non sono la stessa cosa<a class="headerlink" href="#4-latenza-e-throughput-non-sono-la-stessa-cosa" title="Permanent link">&para;</a></h2>
+<p>Uno dei punti più importanti da fissare è che latenza e throughput non coincidono.</p>
+<h3 id="41-un-blocco-puo-avere">4.1 Un blocco può avere:<a class="headerlink" href="#41-un-blocco-puo-avere" title="Permanent link">&para;</a></h3>
+<ul>
+<li>bassa latenza e basso throughput;</li>
+<li>alta latenza e alto throughput;</li>
+<li>bassa latenza e alto throughput;</li>
+<li>alta latenza e basso throughput.</li>
+</ul>
+<h3 id="42-esempio-concettuale">4.2 Esempio concettuale<a class="headerlink" href="#42-esempio-concettuale" title="Permanent link">&para;</a></h3>
+<p>Un blocco semplice che esegue una piccola operazione in un ciclo può avere:
+- latenza molto bassa;
+- throughput limitato se non riesce ad accettare un nuovo dato a ogni ciclo o se il clock massimo è basso.</p>
+<p>Una pipeline profonda può avere:
+- latenza più alta;
+- throughput molto alto una volta riempita.</p>
+<h3 id="43-conseguenza-progettuale">4.3 Conseguenza progettuale<a class="headerlink" href="#43-conseguenza-progettuale" title="Permanent link">&para;</a></h3>
+<p>Non basta chiedere “quanto è veloce?”. Bisogna chiedere:
+- serve una risposta rapida per il singolo dato?
+- oppure serve sostenere una grande quantità di dati nel tempo?</p>
+<pre class="mermaid"><code>flowchart TD
+    A[Prestazioni del blocco] --&gt; B[Latenza]
+    A --&gt; C[Throughput]
+
+    B --&gt; D[Tempo di risposta del singolo dato]
+    C --&gt; E[Ritmo di elaborazione continuo]</code></pre>
+<h2 id="5-latenza-in-cicli-e-latenza-in-tempo-assoluto">5. Latenza in cicli e latenza in tempo assoluto<a class="headerlink" href="#5-latenza-in-cicli-e-latenza-in-tempo-assoluto" title="Permanent link">&para;</a></h2>
+<p>Nella progettazione RTL è utile distinguere due modi di leggere la latenza.</p>
+<h3 id="51-latenza-in-cicli">5.1 Latenza in cicli<a class="headerlink" href="#51-latenza-in-cicli" title="Permanent link">&para;</a></h3>
+<p>Questa misura dice quanti cicli passano tra:
+- accettazione dell’ingresso;
+- disponibilità del risultato.</p>
+<p>È molto naturale in RTL, perché la struttura del blocco è spesso scandita da clock, registri e pipeline stage.</p>
+<h3 id="52-latenza-in-tempo-assoluto">5.2 Latenza in tempo assoluto<a class="headerlink" href="#52-latenza-in-tempo-assoluto" title="Permanent link">&para;</a></h3>
+<p>Questa misura dipende anche dal periodo di clock. Un blocco con più cicli di latenza può comunque avere un tempo assoluto competitivo se opera a frequenza molto più alta.</p>
+<h3 id="53-perche-la-distinzione-e-importante">5.3 Perché la distinzione è importante<a class="headerlink" href="#53-perche-la-distinzione-e-importante" title="Permanent link">&para;</a></h3>
+<p>Due architetture possono avere:
+- latenza diversa in cicli;
+- latenza simile o diversa in tempo reale;
+- throughput molto diverso.</p>
+<p>Per questo, il numero di cicli da solo non basta sempre a valutare il comportamento del blocco.</p>
+<h2 id="6-throughput-e-frequenza-di-clock">6. Throughput e frequenza di clock<a class="headerlink" href="#6-throughput-e-frequenza-di-clock" title="Permanent link">&para;</a></h2>
+<p>Anche il throughput non dipende solo dalla struttura logica, ma anche dalla frequenza a cui il blocco può operare.</p>
+<h3 id="61-throughput-per-ciclo">6.1 Throughput per ciclo<a class="headerlink" href="#61-throughput-per-ciclo" title="Permanent link">&para;</a></h3>
+<p>Un blocco può accettare:
+- un dato ogni ciclo;
+- un dato ogni due cicli;
+- più dati per ciclo;
+- un dato solo quando una certa risorsa è libera.</p>
+<h3 id="62-throughput-nel-tempo-reale">6.2 Throughput nel tempo reale<a class="headerlink" href="#62-throughput-nel-tempo-reale" title="Permanent link">&para;</a></h3>
+<p>Il throughput effettivo dipende anche dalla frequenza di clock raggiungibile. Un blocco che accetta un dato per ciclo ma a frequenza bassa può risultare meno performante di un blocco con struttura diversa ma clock più alto.</p>
+<h3 id="63-collegamento-con-il-timing">6.3 Collegamento con il timing<a class="headerlink" href="#63-collegamento-con-il-timing" title="Permanent link">&para;</a></h3>
+<p>Per questo throughput e timing closure sono strettamente legati:
+- migliorare la Fmax può aumentare il throughput reale;
+- introdurre pipeline può aiutare a raggiungere frequenze superiori;
+- il protocollo di interfaccia può limitare la cadenza di trasferimento.</p>
+<h2 id="7-effetto-della-pipeline-sulla-latenza">7. Effetto della pipeline sulla latenza<a class="headerlink" href="#7-effetto-della-pipeline-sulla-latenza" title="Permanent link">&para;</a></h2>
+<p>La pipeline è uno dei casi più didatticamente importanti per capire la latenza.</p>
+<h3 id="71-piu-stadi-piu-cicli">7.1 Più stadi, più cicli<a class="headerlink" href="#71-piu-stadi-piu-cicli" title="Permanent link">&para;</a></h3>
+<p>Quando un’elaborazione viene suddivisa in più stadi:
+- il dato deve attraversare più registri;
+- il risultato arriva dopo più cicli;
+- la latenza aumenta.</p>
+<h3 id="72-effetto-naturale">7.2 Effetto naturale<a class="headerlink" href="#72-effetto-naturale" title="Permanent link">&para;</a></h3>
+<p>Questo aumento non è un errore: è il risultato naturale del fatto che il blocco è stato segmentato temporalmente.</p>
+<h3 id="73-collegamento-con-il-controllo">7.3 Collegamento con il controllo<a class="headerlink" href="#73-collegamento-con-il-controllo" title="Permanent link">&para;</a></h3>
+<p>Quando si introduce pipeline, il controllo deve essere consapevole della nuova latenza, perché:
+- il risultato non è più immediato;
+- i segnali di validità devono avanzare insieme al dato;
+- il sistema deve sapere dopo quanti cicli aspettarsi l’uscita.</p>
+<h2 id="8-effetto-della-pipeline-sul-throughput">8. Effetto della pipeline sul throughput<a class="headerlink" href="#8-effetto-della-pipeline-sul-throughput" title="Permanent link">&para;</a></h2>
+<p>Se la latenza aumenta con la pipeline, il throughput spesso migliora.</p>
+<h3 id="81-perche-migliora">8.1 Perché migliora<a class="headerlink" href="#81-perche-migliora" title="Permanent link">&para;</a></h3>
+<p>Una volta riempita la pipeline:
+- diversi dati si trovano contemporaneamente in stadi diversi;
+- il blocco può produrre risultati con ritmo più elevato;
+- il lavoro complessivo del sistema viene distribuito meglio nel tempo.</p>
+<h3 id="82-collegamento-con-la-frequenza">8.2 Collegamento con la frequenza<a class="headerlink" href="#82-collegamento-con-la-frequenza" title="Permanent link">&para;</a></h3>
+<p>Poiché la pipeline riduce il cammino critico per stadio, spesso permette anche di aumentare la frequenza di clock. Questo rafforza ulteriormente il throughput.</p>
+<h3 id="83-distinzione-centrale">8.3 Distinzione centrale<a class="headerlink" href="#83-distinzione-centrale" title="Permanent link">&para;</a></h3>
+<p>Questo è uno dei compromessi più classici dell’architettura digitale:
+- <strong>più latenza</strong>
+- <strong>più throughput</strong>
+- <strong>migliore timing closure</strong></p>
+<pre class="mermaid"><code>flowchart LR
+    A[Pipelining] --&gt; B[Più stadi]
+    B --&gt; C[Latenza maggiore]
+    B --&gt; D[Cammini critici più corti]
+    D --&gt; E[Frequenza più alta]
+    E --&gt; F[Throughput maggiore]</code></pre>
+<h2 id="9-parallelismo-e-throughput">9. Parallelismo e throughput<a class="headerlink" href="#9-parallelismo-e-throughput" title="Permanent link">&para;</a></h2>
+<p>Oltre alla pipeline, un altro modo per migliorare il throughput è aumentare il <strong>parallelismo</strong>.</p>
+<h3 id="91-parallelismo-strutturale">9.1 Parallelismo strutturale<a class="headerlink" href="#91-parallelismo-strutturale" title="Permanent link">&para;</a></h3>
+<p>Si possono introdurre:
+- più lane;
+- più canali;
+- più unità di elaborazione;
+- più istanze replicate.</p>
+<h3 id="92-effetto-sul-throughput">9.2 Effetto sul throughput<a class="headerlink" href="#92-effetto-sul-throughput" title="Permanent link">&para;</a></h3>
+<p>Il blocco può così elaborare più dati nello stesso intervallo di tempo.</p>
+<h3 id="93-effetto-sulla-latenza">9.3 Effetto sulla latenza<a class="headerlink" href="#93-effetto-sulla-latenza" title="Permanent link">&para;</a></h3>
+<p>Il parallelismo non riduce necessariamente la latenza del singolo dato. Spesso migliora soprattutto il throughput globale.</p>
+<h3 id="94-costo-del-parallelismo">9.4 Costo del parallelismo<a class="headerlink" href="#94-costo-del-parallelismo" title="Permanent link">&para;</a></h3>
+<p>Aumentare il parallelismo comporta:
+- maggiore area;
+- maggiore complessità del controllo;
+- maggiore pressione sul routing;
+- fanout più elevato;
+- consumi più alti.</p>
+<p>Per questo, anche il parallelismo è una leva architetturale da valutare con attenzione.</p>
+<h2 id="10-buffering-code-e-decoupling">10. Buffering, code e decoupling<a class="headerlink" href="#10-buffering-code-e-decoupling" title="Permanent link">&para;</a></h2>
+<p>Il buffering è un altro elemento importante nel rapporto tra latenza e throughput.</p>
+<h3 id="101-perche-serve">10.1 Perché serve<a class="headerlink" href="#101-perche-serve" title="Permanent link">&para;</a></h3>
+<p>Un buffer o una coda possono:
+- assorbire differenze di ritmo tra produttore e consumatore;
+- ridurre stalli;
+- migliorare l’utilizzo medio delle risorse;
+- aumentare la fluidità del traffico.</p>
+<h3 id="102-effetto-sulla-latenza">10.2 Effetto sulla latenza<a class="headerlink" href="#102-effetto-sulla-latenza" title="Permanent link">&para;</a></h3>
+<p>L’inserimento di buffering può però aggiungere ritardo nel percorso del dato, quindi aumentare la latenza.</p>
+<h3 id="103-effetto-sul-throughput">10.3 Effetto sul throughput<a class="headerlink" href="#103-effetto-sul-throughput" title="Permanent link">&para;</a></h3>
+<p>Se il buffer evita blocchi frequenti, il throughput globale del sistema può migliorare anche in modo significativo.</p>
+<h3 id="104-visione-sistemica">10.4 Visione sistemica<a class="headerlink" href="#104-visione-sistemica" title="Permanent link">&para;</a></h3>
+<p>Questo è un altro caso in cui il sistema nel suo insieme può beneficiare di una scelta che non riduce il tempo di risposta del singolo elemento.</p>
+<h2 id="11-handshake-e-limiti-di-throughput">11. Handshake e limiti di throughput<a class="headerlink" href="#11-handshake-e-limiti-di-throughput" title="Permanent link">&para;</a></h2>
+<p>Il throughput teorico di un blocco può essere diverso dal throughput effettivo raggiunto in sistema, a causa del protocollo di handshake.</p>
+<h3 id="111-valid-ready">11.1 <code>valid</code> / <code>ready</code><a class="headerlink" href="#111-valid-ready" title="Permanent link">&para;</a></h3>
+<p>Con un canale <code>valid</code> / <code>ready</code>, il trasferimento può avvenire a ogni ciclo solo se:
+- il produttore presenta dati validi;
+- il consumatore è pronto.</p>
+<h3 id="112-backpressure">11.2 Backpressure<a class="headerlink" href="#112-backpressure" title="Permanent link">&para;</a></h3>
+<p>Se il ricevente applica backpressure:
+- alcuni trasferimenti vengono ritardati;
+- il throughput effettivo si riduce;
+- la pipeline può introdurre bolle o stalli.</p>
+<h3 id="113-start-done">11.3 <code>start</code> / <code>done</code><a class="headerlink" href="#113-start-done" title="Permanent link">&para;</a></h3>
+<p>In modelli a transazione, il throughput può essere limitato dal fatto che una nuova operazione può iniziare solo dopo certe condizioni di completamento o disponibilità interna.</p>
+<h3 id="114-conseguenza-pratica">11.4 Conseguenza pratica<a class="headerlink" href="#114-conseguenza-pratica" title="Permanent link">&para;</a></h3>
+<p>Non basta valutare il throughput interno del blocco. Bisogna considerare anche:
+- l’interfaccia;
+- la presenza di backpressure;
+- la latenza interna;
+- eventuali vincoli sulle richieste concorrenti.</p>
+<h2 id="12-latenza-throughput-e-datapath">12. Latenza, throughput e datapath<a class="headerlink" href="#12-latenza-throughput-e-datapath" title="Permanent link">&para;</a></h2>
+<p>Nel datapath, questi due concetti si riflettono in modo molto concreto.</p>
+<h3 id="121-latenza-del-datapath">12.1 Latenza del datapath<a class="headerlink" href="#121-latenza-del-datapath" title="Permanent link">&para;</a></h3>
+<p>Dipende da:
+- numero di registri attraversati;
+- profondità della pipeline;
+- presenza di buffering;
+- numero di fasi dell’algoritmo.</p>
+<h3 id="122-throughput-del-datapath">12.2 Throughput del datapath<a class="headerlink" href="#122-throughput-del-datapath" title="Permanent link">&para;</a></h3>
+<p>Dipende da:
+- capacità di accettare nuovi dati;
+- frequenza di clock;
+- grado di parallelismo;
+- assenza o presenza di stalli;
+- struttura del controllo.</p>
+<h3 id="123-collegamento-con-il-controllo">12.3 Collegamento con il controllo<a class="headerlink" href="#123-collegamento-con-il-controllo" title="Permanent link">&para;</a></h3>
+<p>Il controllo deve essere costruito in modo coerente con:
+- tempo di propagazione delle informazioni;
+- cadenza di accettazione del dato;
+- validità delle uscite;
+- gestione degli arresti temporanei.</p>
+<h2 id="13-latenza-throughput-e-controllo">13. Latenza, throughput e controllo<a class="headerlink" href="#13-latenza-throughput-e-controllo" title="Permanent link">&para;</a></h2>
+<p>Anche il controllo ha un ruolo decisivo.</p>
+<h3 id="131-controllo-troppo-rigido">13.1 Controllo troppo rigido<a class="headerlink" href="#131-controllo-troppo-rigido" title="Permanent link">&para;</a></h3>
+<p>Un controllo che accetta nuove operazioni solo dopo il completamento della precedente può limitare il throughput, anche se il datapath potrebbe supportare un ritmo più alto.</p>
+<h3 id="132-controllo-pipeline-aware">13.2 Controllo pipeline-aware<a class="headerlink" href="#132-controllo-pipeline-aware" title="Permanent link">&para;</a></h3>
+<p>Un controllo capace di seguire dati in volo e più transazioni contemporanee può aumentare il throughput, ma introduce maggiore complessità.</p>
+<h3 id="133-latenza-di-controllo">13.3 Latenza di controllo<a class="headerlink" href="#133-latenza-di-controllo" title="Permanent link">&para;</a></h3>
+<p>In alcuni casi, anche il percorso decisionale del controllo incide sulla latenza percepita del blocco, specialmente nelle operazioni multi-ciclo o nei protocolli request/response.</p>
+<h2 id="14-implicazioni-per-la-verifica">14. Implicazioni per la verifica<a class="headerlink" href="#14-implicazioni-per-la-verifica" title="Permanent link">&para;</a></h2>
+<p>Latenza e throughput devono essere verificati in modo esplicito.</p>
+<h3 id="141-verifica-della-latenza">14.1 Verifica della latenza<a class="headerlink" href="#141-verifica-della-latenza" title="Permanent link">&para;</a></h3>
+<p>Bisogna controllare che:
+- il risultato arrivi dopo il numero corretto di cicli;
+- i segnali di validità siano allineati;
+- eventuali stall o flush modifichino la latenza nel modo previsto.</p>
+<h3 id="142-verifica-del-throughput">14.2 Verifica del throughput<a class="headerlink" href="#142-verifica-del-throughput" title="Permanent link">&para;</a></h3>
+<p>Bisogna osservare se il blocco:
+- accetta dati al ritmo atteso;
+- mantiene la cadenza prevista in regime;
+- degrada correttamente in presenza di backpressure o conflitti;
+- non perde o duplica trasferimenti.</p>
+<h3 id="143-casi-limite">14.3 Casi limite<a class="headerlink" href="#143-casi-limite" title="Permanent link">&para;</a></h3>
+<p>È importante verificare:
+- pipeline vuota;
+- pipeline piena;
+- burst di richieste;
+- rallentamento del consumatore;
+- operazioni consecutive;
+- cambi di configurazione o reset.</p>
+<h3 id="144-debug">14.4 Debug<a class="headerlink" href="#144-debug" title="Permanent link">&para;</a></h3>
+<p>Una buona osservabilità della latenza e del throughput richiede waveform leggibili, segnali di validità chiari e visibilità dei punti in cui il dato entra, si ferma o viene accettato.</p>
+<h2 id="15-implicazioni-per-il-timing">15. Implicazioni per il timing<a class="headerlink" href="#15-implicazioni-per-il-timing" title="Permanent link">&para;</a></h2>
+<p>Dal punto di vista del timing, latenza e throughput non vanno letti separatamente dalla struttura fisica del blocco.</p>
+<h3 id="151-throughput-e-fmax">15.1 Throughput e Fmax<a class="headerlink" href="#151-throughput-e-fmax" title="Permanent link">&para;</a></h3>
+<p>Aumentare il throughput reale spesso richiede:
+- frequenza più alta;
+- cammini critici più corti;
+- migliore organizzazione della pipeline.</p>
+<h3 id="152-latenza-e-registrazione">15.2 Latenza e registrazione<a class="headerlink" href="#152-latenza-e-registrazione" title="Permanent link">&para;</a></h3>
+<p>Aumentare il numero di registri può migliorare il timing ma aggiunge cicli alla latenza.</p>
+<h3 id="153-compromesso-fondamentale">15.3 Compromesso fondamentale<a class="headerlink" href="#153-compromesso-fondamentale" title="Permanent link">&para;</a></h3>
+<p>Molto spesso il progetto deve scegliere tra:
+- meno stadi e meno latenza;
+- più stadi e maggiore throughput;
+- migliore timing closure al prezzo di risposta più lunga.</p>
+<h3 id="154-valutazione-corretta">15.4 Valutazione corretta<a class="headerlink" href="#154-valutazione-corretta" title="Permanent link">&para;</a></h3>
+<p>La soluzione migliore dipende dai requisiti del sistema, non da una preferenza astratta.</p>
+<h2 id="16-impatto-su-fpga">16. Impatto su FPGA<a class="headerlink" href="#16-impatto-su-fpga" title="Permanent link">&para;</a></h2>
+<p>Su FPGA, latenza e throughput sono strettamente legati alla disponibilità di pipeline, registri distribuiti e risorse dedicate.</p>
+<h3 id="161-pipeline-favorevole">16.1 Pipeline favorevole<a class="headerlink" href="#161-pipeline-favorevole" title="Permanent link">&para;</a></h3>
+<p>In molti casi, introdurre pipeline è una tecnica molto efficace per:
+- aumentare la frequenza;
+- sfruttare meglio DSP e carry chain;
+- ridurre la difficoltà del routing.</p>
+<h3 id="162-parallelismo-configurabile">16.2 Parallelismo configurabile<a class="headerlink" href="#162-parallelismo-configurabile" title="Permanent link">&para;</a></h3>
+<p>Replicare canali o lane può aumentare molto il throughput, ma va confrontato con:
+- utilizzo di LUT;
+- utilizzo di flip-flop;
+- consumo di DSP e BRAM;
+- qualità del placement e del routing.</p>
+<h3 id="163-lettura-pratica">16.3 Lettura pratica<a class="headerlink" href="#163-lettura-pratica" title="Permanent link">&para;</a></h3>
+<p>Su FPGA, la soluzione migliore emerge spesso dal confronto tra:
+- report di timing;
+- risorse usate;
+- throughput desiderato;
+- latenza accettabile.</p>
+<h2 id="17-impatto-su-asic">17. Impatto su ASIC<a class="headerlink" href="#17-impatto-su-asic" title="Permanent link">&para;</a></h2>
+<p>Anche in ASIC il compromesso tra latenza e throughput è centrale.</p>
+<h3 id="171-pipeline-e-frequenza">17.1 Pipeline e frequenza<a class="headerlink" href="#171-pipeline-e-frequenza" title="Permanent link">&para;</a></h3>
+<p>Per raggiungere frequenze elevate è spesso necessario introdurre pipeline, anche a costo di aumentare la latenza.</p>
+<h3 id="172-parallelismo-e-area">17.2 Parallelismo e area<a class="headerlink" href="#172-parallelismo-e-area" title="Permanent link">&para;</a></h3>
+<p>Aumentare il throughput con più unità parallele può avere un costo importante in:
+- area;
+- clock tree load;
+- potenza dinamica;
+- complessità del floorplanning.</p>
+<h3 id="173-buffering-e-traffico">17.3 Buffering e traffico<a class="headerlink" href="#173-buffering-e-traffico" title="Permanent link">&para;</a></h3>
+<p>Nelle interconnessioni e nei sottosistemi, buffering e code possono migliorare il throughput sistemico ma vanno valutati rispetto a:
+- area;
+- latenza;
+- verificabilità;
+- backpressure.</p>
+<h3 id="174-visione-da-backend">17.4 Visione da backend<a class="headerlink" href="#174-visione-da-backend" title="Permanent link">&para;</a></h3>
+<p>Nel flusso ASIC, queste scelte si riflettono su:
+- sintesi;
+- floorplanning;
+- PnR;
+- CTS;
+- signoff.</p>
+<h2 id="18-errori-comuni">18. Errori comuni<a class="headerlink" href="#18-errori-comuni" title="Permanent link">&para;</a></h2>
+<p>Alcuni errori ricorrenti rendono difficile ragionare correttamente su latenza e throughput.</p>
+<h3 id="181-confondere-i-due-concetti">18.1 Confondere i due concetti<a class="headerlink" href="#181-confondere-i-due-concetti" title="Permanent link">&para;</a></h3>
+<p>È l’errore più comune: assumere che migliorare uno significhi migliorare anche l’altro.</p>
+<h3 id="182-valutare-solo-i-cicli-e-non-il-clock">18.2 Valutare solo i cicli e non il clock<a class="headerlink" href="#182-valutare-solo-i-cicli-e-non-il-clock" title="Permanent link">&para;</a></h3>
+<p>Una latenza minore in cicli non implica sempre una risposta più rapida in tempo assoluto.</p>
+<h3 id="183-ignorare-linterfaccia">18.3 Ignorare l’interfaccia<a class="headerlink" href="#183-ignorare-linterfaccia" title="Permanent link">&para;</a></h3>
+<p>Un blocco internamente veloce può avere throughput limitato dall’handshake o dal backpressure.</p>
+<h3 id="184-guardare-solo-il-blocco-isolato">18.4 Guardare solo il blocco isolato<a class="headerlink" href="#184-guardare-solo-il-blocco-isolato" title="Permanent link">&para;</a></h3>
+<p>In sistema, buffering, consumatore, produttore e traffico reale possono cambiare molto le prestazioni percepite.</p>
+<h3 id="185-non-allineare-controllo-e-datapath">18.5 Non allineare controllo e datapath<a class="headerlink" href="#185-non-allineare-controllo-e-datapath" title="Permanent link">&para;</a></h3>
+<p>Una pipeline ben fatta nel datapath può essere penalizzata da un controllo che non supporta il ritmo desiderato.</p>
+<h2 id="19-buone-pratiche-di-modellazione">19. Buone pratiche di modellazione<a class="headerlink" href="#19-buone-pratiche-di-modellazione" title="Permanent link">&para;</a></h2>
+<p>Per trattare bene latenza e throughput nella progettazione RTL, alcune pratiche sono particolarmente efficaci.</p>
+<h3 id="191-esplicitare-il-requisito">19.1 Esplicitare il requisito<a class="headerlink" href="#191-esplicitare-il-requisito" title="Permanent link">&para;</a></h3>
+<p>Bisogna chiarire se il blocco è guidato soprattutto da:
+- tempo di risposta;
+- ritmo di elaborazione;
+- equilibrio tra i due.</p>
+<h3 id="192-documentare-la-latenza">19.2 Documentare la latenza<a class="headerlink" href="#192-documentare-la-latenza" title="Permanent link">&para;</a></h3>
+<p>La latenza del blocco dovrebbe essere chiara:
+- in cicli;
+- rispetto ai punti di ingresso e uscita;
+- nelle diverse condizioni operative.</p>
+<h3 id="193-capire-il-throughput-sostenibile">19.3 Capire il throughput sostenibile<a class="headerlink" href="#193-capire-il-throughput-sostenibile" title="Permanent link">&para;</a></h3>
+<p>Occorre definire se il blocco può accettare:
+- un dato per ciclo;
+- un dato ogni N cicli;
+- burst seguiti da stalli;
+- più dati in parallelo.</p>
+<h3 id="194-progettare-il-controllo-in-modo-coerente">19.4 Progettare il controllo in modo coerente<a class="headerlink" href="#194-progettare-il-controllo-in-modo-coerente" title="Permanent link">&para;</a></h3>
+<p>Interfaccia, handshake, buffering e controllo devono essere allineati con l’obiettivo prestazionale.</p>
+<h3 id="195-misurare-sulle-configurazioni-reali">19.5 Misurare sulle configurazioni reali<a class="headerlink" href="#195-misurare-sulle-configurazioni-reali" title="Permanent link">&para;</a></h3>
+<p>La valutazione finale deve avvenire su:
+- configurazioni RTL realmente usate;
+- report di timing;
+- simulazioni con traffico significativo;
+- scenari di integrazione realistici.</p>
+<h2 id="20-collegamento-con-il-resto-della-sezione">20. Collegamento con il resto della sezione<a class="headerlink" href="#20-collegamento-con-il-resto-della-sezione" title="Permanent link">&para;</a></h2>
+<p>Questa pagina raccoglie e organizza molti concetti già emersi:
+- <strong><code>pipelining.md</code></strong> ha mostrato il legame tra stadi, latenza e ritmo di elaborazione;
+- <strong><code>interfaces-and-handshake.md</code></strong> ha introdotto il ruolo dei protocolli nel determinare il throughput effettivo;
+- <strong><code>datapath-and-control.md</code></strong> ha evidenziato la necessità di coordinare elaborazione e controllo nel tempo;
+- <strong><code>parameters-and-configuration.md</code></strong> ha mostrato che parallelismo e profondità sono scelte configurabili;
+- <strong><code>arrays-and-generate.md</code></strong> ha fornito gli strumenti per costruire strutture scalabili che incidono direttamente sulle prestazioni.</p>
+<p>Latenza e throughput sono quindi il punto di sintesi naturale tra scelte architetturali e implementazione RTL.</p>
+<h2 id="21-in-sintesi">21. In sintesi<a class="headerlink" href="#21-in-sintesi" title="Permanent link">&para;</a></h2>
+<p>Latenza e throughput sono due misure diverse e complementari delle prestazioni di un blocco hardware. La latenza descrive il tempo di risposta del singolo dato o della singola operazione; il throughput descrive il ritmo con cui il blocco può elaborare dati nel tempo.</p>
+<p>Molte delle scelte più importanti della progettazione digitale — pipeline, parallelismo, buffering, handshake, organizzazione del controllo — influenzano questi due aspetti in modo diverso. Per questo motivo, un progetto RTL maturo deve sempre chiedersi:
+- quanto velocemente arriva il risultato?
+- con quale ritmo il blocco può lavorare in modo sostenibile?</p>
+<p>Rispondere bene a queste domande significa costruire un’architettura più consapevole, una RTL più corretta e un percorso più solido verso sintesi, timing closure e integrazione di sistema su FPGA o ASIC.</p>
+<h2 id="prossimo-passo">Prossimo passo<a class="headerlink" href="#prossimo-passo" title="Permanent link">&para;</a></h2>
+<p>Il passo più naturale ora è <strong><code>coding-style-rtl.md</code></strong>, perché dopo aver consolidato i concetti strutturali e prestazionali conviene aprire il ramo metodologico dedicato a:
+- convenzioni di scrittura
+- leggibilità
+- nomi dei segnali
+- separazione delle responsabilità
+- stile coerente per moduli, FSM, pipeline e interfacce
+- qualità complessiva della RTL SystemVerilog</p>
+<p>In alternativa, un altro passo molto naturale è <strong><code>verification-basics.md</code></strong>, se vuoi iniziare il ramo dedicato alla verifica dei moduli SystemVerilog.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

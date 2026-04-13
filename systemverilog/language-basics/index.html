@@ -10,31 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/04_systemverilog_design/">
+        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/language-basics/">
       
       
-        <link rel="prev" href="../Libro_Verilog/reference/">
+        <link rel="prev" href="../">
       
       
-        <link rel="next" href="../04_SV_flow_chart/">
+        <link rel="next" href="../rtl-constructs/">
       
       
         
       
       
-      <link rel="icon" href="../assets/favicon.png">
+      <link rel="icon" href="../../assets/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Overview - Corso di Microelettronica Digitale</title>
+        <title>Fondamenti del linguaggio - Corso di Microelettronica Digitale</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,7 +53,7 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#04-systemverilog-design" class="md-skip">
+        <a href="#fondamenti-del-linguaggio-systemverilog" class="md-skip">
           Vai al contenuto
         </a>
       
@@ -92,9 +92,9 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Intestazione">
-    <a href=".." title="Corso di Microelettronica Digitale" class="md-header__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-header__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
       
-  <img src="../assets/logo.png" alt="logo">
+  <img src="../../assets/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overview
+              Fondamenti del linguaggio
             
           </span>
         </div>
@@ -212,7 +212,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -231,7 +231,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../00_introduzione/" class="md-tabs__link">
+      <a href="../../00_introduzione/" class="md-tabs__link">
         
   
   
@@ -250,7 +250,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../01_fondamenti/" class="md-tabs__link">
+      <a href="../../01_fondamenti/" class="md-tabs__link">
         
   
   
@@ -271,7 +271,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../02_vhdl/" class="md-tabs__link">
+        <a href="../../02_vhdl/" class="md-tabs__link">
           
   
   
@@ -291,7 +291,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../03_verilog/" class="md-tabs__link">
+        <a href="../../03_verilog/" class="md-tabs__link">
           
   
   
@@ -313,7 +313,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -333,7 +333,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../05_verification_base/" class="md-tabs__link">
+        <a href="../../05_verification_base/" class="md-tabs__link">
           
   
   
@@ -353,7 +353,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../06_uvm/" class="md-tabs__link">
+        <a href="../../06_uvm/" class="md-tabs__link">
           
   
   
@@ -373,7 +373,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../fpga/" class="md-tabs__link">
+        <a href="../../fpga/" class="md-tabs__link">
           
   
   
@@ -393,7 +393,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../asic/" class="md-tabs__link">
+        <a href="../../asic/" class="md-tabs__link">
           
   
   
@@ -413,7 +413,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../soc/" class="md-tabs__link">
+        <a href="../../soc/" class="md-tabs__link">
           
   
   
@@ -433,7 +433,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../09_progetti/" class="md-tabs__link">
+        <a href="../../09_progetti/" class="md-tabs__link">
           
   
   
@@ -453,7 +453,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../10_tool_e_tcl/" class="md-tabs__link">
+        <a href="../../10_tool_e_tcl/" class="md-tabs__link">
           
   
   
@@ -471,7 +471,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../11_appendici/" class="md-tabs__link">
+      <a href="../../11_appendici/" class="md-tabs__link">
         
   
   
@@ -490,7 +490,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../12_riferimenti/" class="md-tabs__link">
+      <a href="../../12_riferimenti/" class="md-tabs__link">
         
   
   
@@ -525,9 +525,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigazione" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Corso di Microelettronica Digitale" class="md-nav__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-nav__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
       
-  <img src="../assets/logo.png" alt="logo">
+  <img src="../../assets/logo.png" alt="logo">
 
     </a>
     Corso di Microelettronica Digitale
@@ -542,7 +542,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -569,7 +569,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../00_introduzione/" class="md-nav__link">
+      <a href="../../00_introduzione/" class="md-nav__link">
         
   
   
@@ -596,7 +596,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../01_fondamenti/" class="md-nav__link">
+      <a href="../../01_fondamenti/" class="md-nav__link">
         
   
   
@@ -677,7 +677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02_vhdl/" class="md-nav__link">
+      <a href="../../02_vhdl/" class="md-nav__link">
         
   
   
@@ -705,7 +705,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02_vhdl_progettazione/" class="md-nav__link">
+      <a href="../../02_vhdl_progettazione/" class="md-nav__link">
         
   
   
@@ -794,7 +794,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03_verilog/" class="md-nav__link">
+      <a href="../../03_verilog/" class="md-nav__link">
         
   
   
@@ -822,7 +822,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03_verilog_flow_chart/" class="md-nav__link">
+      <a href="../../03_verilog_flow_chart/" class="md-nav__link">
         
   
   
@@ -904,7 +904,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Libro_Verilog/" class="md-nav__link">
+      <a href="../../Libro_Verilog/" class="md-nav__link">
         
   
   
@@ -932,7 +932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Libro_Verilog/tool_flow/" class="md-nav__link">
+      <a href="../../Libro_Verilog/tool_flow/" class="md-nav__link">
         
   
   
@@ -960,7 +960,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Libro_Verilog/in_out/" class="md-nav__link">
+      <a href="../../Libro_Verilog/in_out/" class="md-nav__link">
         
   
   
@@ -988,7 +988,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Libro_Verilog/utilities/" class="md-nav__link">
+      <a href="../../Libro_Verilog/utilities/" class="md-nav__link">
         
   
   
@@ -1016,7 +1016,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Libro_Verilog/clocks_registers/" class="md-nav__link">
+      <a href="../../Libro_Verilog/clocks_registers/" class="md-nav__link">
         
   
   
@@ -1044,7 +1044,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Libro_Verilog/state_machines/" class="md-nav__link">
+      <a href="../../Libro_Verilog/state_machines/" class="md-nav__link">
         
   
   
@@ -1072,7 +1072,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Libro_Verilog/modular_design/" class="md-nav__link">
+      <a href="../../Libro_Verilog/modular_design/" class="md-nav__link">
         
   
   
@@ -1100,7 +1100,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Libro_Verilog/memories/" class="md-nav__link">
+      <a href="../../Libro_Verilog/memories/" class="md-nav__link">
         
   
   
@@ -1128,7 +1128,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Libro_Verilog/managing_clocks/" class="md-nav__link">
+      <a href="../../Libro_Verilog/managing_clocks/" class="md-nav__link">
         
   
   
@@ -1156,7 +1156,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Libro_Verilog/io_flavors/" class="md-nav__link">
+      <a href="../../Libro_Verilog/io_flavors/" class="md-nav__link">
         
   
   
@@ -1184,7 +1184,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Libro_Verilog/simulation/" class="md-nav__link">
+      <a href="../../Libro_Verilog/simulation/" class="md-nav__link">
         
   
   
@@ -1212,7 +1212,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Libro_Verilog/reference/" class="md-nav__link">
+      <a href="../../Libro_Verilog/reference/" class="md-nav__link">
         
   
   
@@ -1309,6 +1309,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1328,7 +1356,7 @@
   <span class="md-ellipsis">
     
   
-    Overview
+    Fondamenti del linguaggio
   
 
     
@@ -1346,7 +1374,7 @@
   <span class="md-ellipsis">
     
   
-    Overview
+    Fondamenti del linguaggio
   
 
     
@@ -1372,10 +1400,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#objectives" class="md-nav__link">
+  <a href="#1-il-ruolo-di-systemverilog-nella-progettazione-digitale" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🎯 Objectives
+        1. Il ruolo di SystemVerilog nella progettazione digitale
       
     </span>
   </a>
@@ -1383,10 +1411,260 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-systemverilog-in-design-flow" class="md-nav__link">
+  <a href="#2-moduli-porte-e-gerarchia" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧠 1. SystemVerilog in Design Flow
+        2. Moduli, porte e gerarchia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Moduli, porte e gerarchia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-interfaccia-del-modulo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Interfaccia del modulo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-gerarchia-del-progetto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Gerarchia del progetto
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-tipi-di-dati-e-rappresentazione-del-segnale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Tipi di dati e rappresentazione del segnale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Tipi di dati e rappresentazione del segnale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-il-tipo-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Il tipo logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-vettori-e-larghezza-dei-dati" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Vettori e larghezza dei dati
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-array-packed-e-unpacked" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Array, packed e unpacked
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-enum-struct-e-typedef" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 enum, struct e typedef
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-assegnamenti-e-logica-combinatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Assegnamenti e logica combinatoria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Assegnamenti e logica combinatoria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-assegnamento-continuo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Assegnamento continuo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-blocco-always_comb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Blocco always_comb
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-espressioni-e-operatori" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Espressioni e operatori
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-logica-sequenziale-e-registri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Logica sequenziale e registri
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Logica sequenziale e registri">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-il-blocco-always_ff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Il blocco always_ff
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-clock-e-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Clock e reset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-non-blocking-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Non-blocking assignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-controllo-del-flusso-e-strutture-procedurali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Controllo del flusso e strutture procedurali
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Controllo del flusso e strutture procedurali">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-if-case-e-priorita-logica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 if, case e priorità logica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-cicli-e-generazione-di-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Cicli e generazione di hardware
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-generate-e-parametrizzazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 generate e parametrizzazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-costanti-parametri-e-riuso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Costanti, parametri e riuso
       
     </span>
   </a>
@@ -1394,10 +1672,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-logic-type" class="md-nav__link">
+  <a href="#8-dal-linguaggio-alla-rtl-sintetizzabile" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔧 2. logic Type
+        8. Dal linguaggio alla RTL sintetizzabile
       
     </span>
   </a>
@@ -1405,10 +1683,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-sequential-logic-always_ff" class="md-nav__link">
+  <a href="#9-buone-pratiche-di-base" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔁 3. Sequential Logic — always_ff
+        9. Buone pratiche di base
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Buone pratiche di base">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-separare-chiaramente-combinatorio-e-sequenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Separare chiaramente combinatorio e sequenziale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-usare-tipi-leggibili-e-semanticamente-coerenti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Usare tipi leggibili e semanticamente coerenti
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-evitare-ambiguita-sintetiche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Evitare ambiguità sintetiche
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-scrivere-pensando-a-verifica-e-implementazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 Scrivere pensando a verifica e implementazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-collegamento-con-fpga-asic-e-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Collegamento con FPGA, ASIC e SoC
       
     </span>
   </a>
@@ -1416,10 +1755,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-combinational-logic-always_comb" class="md-nav__link">
+  <a href="#in-sintesi" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔄 4. Combinational Logic — always_comb
+        In sintesi
       
     </span>
   </a>
@@ -1427,76 +1766,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-fsm-enum" class="md-nav__link">
+  <a href="#prossimo-passo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔷 5. FSM — enum
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-struct" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧩 6. Struct
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-interface" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔗 7. Interface
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-counter" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔢 8. Counter
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9-timing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📊 9. Timing
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#10-pitfalls" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ⚠️ 10. Pitfalls
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#next" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Next
+        Prossimo passo
       
     </span>
   </a>
@@ -1519,7 +1792,623 @@
   
   
     <li class="md-nav__item">
-      <a href="../04_SV_flow_chart/" class="md-nav__link">
+      <a href="../rtl-constructs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Costrutti RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../procedural-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocchi procedurali
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../combinational-vs-sequential/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logica combinatoria e sequenziale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fsm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Macchine a stati finiti (FSM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../state-encoding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codifica degli stati
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datapath-and-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datapath e controllo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pipelining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline e pipelining
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interfaces-and-handshake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfacce e handshake
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../systemverilog-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Le interface in SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../packages-and-typedefs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Package e typedef
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arrays-and-generate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Array e generate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parameters-and-configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parametri e configurazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../latency-and-throughput/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Latenza e throughput
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coding-style-rtl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stile di codifica RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../verification-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di verifica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testbench-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Struttura di un testbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assertions-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di assertion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simulation-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di simulazione RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coverage-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di coverage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reset-strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strategie di reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clock-domain-crossing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clock Domain Crossing (CDC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case-study-systemverilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_SV_flow_chart/" class="md-nav__link">
         
   
   
@@ -1608,7 +2497,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../05_verification_base/" class="md-nav__link">
+      <a href="../../05_verification_base/" class="md-nav__link">
         
   
   
@@ -1843,7 +2732,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06_uvm/" class="md-nav__link">
+      <a href="../../06_uvm/" class="md-nav__link">
         
   
   
@@ -1871,7 +2760,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06_uvm_flow_chart/" class="md-nav__link">
+      <a href="../../06_uvm_flow_chart/" class="md-nav__link">
         
   
   
@@ -1953,7 +2842,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06_mini_CPU/" class="md-nav__link">
+      <a href="../../06_mini_CPU/" class="md-nav__link">
         
   
   
@@ -1981,7 +2870,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06_mini_CPU_waveform/" class="md-nav__link">
+      <a href="../../06_mini_CPU_waveform/" class="md-nav__link">
         
   
   
@@ -2078,7 +2967,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fpga/" class="md-nav__link">
+      <a href="../../fpga/" class="md-nav__link">
         
   
   
@@ -2106,7 +2995,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fpga/architecture/" class="md-nav__link">
+      <a href="../../fpga/architecture/" class="md-nav__link">
         
   
   
@@ -2134,7 +3023,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fpga/flow/" class="md-nav__link">
+      <a href="../../fpga/flow/" class="md-nav__link">
         
   
   
@@ -2162,7 +3051,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fpga/rtl-design/" class="md-nav__link">
+      <a href="../../fpga/rtl-design/" class="md-nav__link">
         
   
   
@@ -2190,7 +3079,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fpga/constraints-timing/" class="md-nav__link">
+      <a href="../../fpga/constraints-timing/" class="md-nav__link">
         
   
   
@@ -2218,7 +3107,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fpga/synthesis/" class="md-nav__link">
+      <a href="../../fpga/synthesis/" class="md-nav__link">
         
   
   
@@ -2246,7 +3135,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fpga/resources/" class="md-nav__link">
+      <a href="../../fpga/resources/" class="md-nav__link">
         
   
   
@@ -2274,7 +3163,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fpga/clock-reset/" class="md-nav__link">
+      <a href="../../fpga/clock-reset/" class="md-nav__link">
         
   
   
@@ -2302,7 +3191,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fpga/place-route/" class="md-nav__link">
+      <a href="../../fpga/place-route/" class="md-nav__link">
         
   
   
@@ -2330,7 +3219,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fpga/verification/" class="md-nav__link">
+      <a href="../../fpga/verification/" class="md-nav__link">
         
   
   
@@ -2358,7 +3247,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fpga/debug/" class="md-nav__link">
+      <a href="../../fpga/debug/" class="md-nav__link">
         
   
   
@@ -2386,7 +3275,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fpga/prototyping-soc/" class="md-nav__link">
+      <a href="../../fpga/prototyping-soc/" class="md-nav__link">
         
   
   
@@ -2414,7 +3303,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fpga/fpga-vs-asic/" class="md-nav__link">
+      <a href="../../fpga/fpga-vs-asic/" class="md-nav__link">
         
   
   
@@ -2442,7 +3331,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fpga/case-study/" class="md-nav__link">
+      <a href="../../fpga/case-study/" class="md-nav__link">
         
   
   
@@ -2470,7 +3359,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../07_fpga_flow_chart/" class="md-nav__link">
+      <a href="../../07_fpga_flow_chart/" class="md-nav__link">
         
   
   
@@ -2498,7 +3387,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../07_zynq_ps_axi_led/" class="md-nav__link">
+      <a href="../../07_zynq_ps_axi_led/" class="md-nav__link">
         
   
   
@@ -2580,7 +3469,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../07_zynq_fir_dma_8tap/" class="md-nav__link">
+      <a href="../../07_zynq_fir_dma_8tap/" class="md-nav__link">
         
   
   
@@ -2608,7 +3497,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../07_zynq_fir_dma_files/" class="md-nav__link">
+      <a href="../../07_zynq_fir_dma_files/" class="md-nav__link">
         
   
   
@@ -2636,7 +3525,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../07_zynq_axi_stream_theory/" class="md-nav__link">
+      <a href="../../07_zynq_axi_stream_theory/" class="md-nav__link">
         
   
   
@@ -2664,7 +3553,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../07_zynq_dma_interrupt_perf/" class="md-nav__link">
+      <a href="../../07_zynq_dma_interrupt_perf/" class="md-nav__link">
         
   
   
@@ -2692,7 +3581,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../07_zynq_xparameters_guide/" class="md-nav__link">
+      <a href="../../07_zynq_xparameters_guide/" class="md-nav__link">
         
   
   
@@ -2845,7 +3734,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../asic/" class="md-nav__link">
+      <a href="../../asic/" class="md-nav__link">
         
   
   
@@ -2873,7 +3762,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../asic/flow/" class="md-nav__link">
+      <a href="../../asic/flow/" class="md-nav__link">
         
   
   
@@ -2901,7 +3790,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../asic/spec-architecture/" class="md-nav__link">
+      <a href="../../asic/spec-architecture/" class="md-nav__link">
         
   
   
@@ -2929,7 +3818,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../asic/rtl-design/" class="md-nav__link">
+      <a href="../../asic/rtl-design/" class="md-nav__link">
         
   
   
@@ -2957,7 +3846,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../asic/constraints-timing/" class="md-nav__link">
+      <a href="../../asic/constraints-timing/" class="md-nav__link">
         
   
   
@@ -2985,7 +3874,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../asic/synthesis/" class="md-nav__link">
+      <a href="../../asic/synthesis/" class="md-nav__link">
         
   
   
@@ -3013,7 +3902,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../asic/dft/" class="md-nav__link">
+      <a href="../../asic/dft/" class="md-nav__link">
         
   
   
@@ -3041,7 +3930,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../asic/floorplanning/" class="md-nav__link">
+      <a href="../../asic/floorplanning/" class="md-nav__link">
         
   
   
@@ -3069,7 +3958,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../asic/place-route/" class="md-nav__link">
+      <a href="../../asic/place-route/" class="md-nav__link">
         
   
   
@@ -3097,7 +3986,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../asic/cts/" class="md-nav__link">
+      <a href="../../asic/cts/" class="md-nav__link">
         
   
   
@@ -3125,7 +4014,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../asic/signoff/" class="md-nav__link">
+      <a href="../../asic/signoff/" class="md-nav__link">
         
   
   
@@ -3153,7 +4042,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../asic/power/" class="md-nav__link">
+      <a href="../../asic/power/" class="md-nav__link">
         
   
   
@@ -3181,7 +4070,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../asic/verification/" class="md-nav__link">
+      <a href="../../asic/verification/" class="md-nav__link">
         
   
   
@@ -3209,7 +4098,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../asic/libraries-pdk/" class="md-nav__link">
+      <a href="../../asic/libraries-pdk/" class="md-nav__link">
         
   
   
@@ -3237,7 +4126,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../asic/tapeout-fabrication/" class="md-nav__link">
+      <a href="../../asic/tapeout-fabrication/" class="md-nav__link">
         
   
   
@@ -3265,7 +4154,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../asic/case-study/" class="md-nav__link">
+      <a href="../../asic/case-study/" class="md-nav__link">
         
   
   
@@ -3293,7 +4182,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../08_asic_flow_chart/" class="md-nav__link">
+      <a href="../../08_asic_flow_chart/" class="md-nav__link">
         
   
   
@@ -3321,7 +4210,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../08_openasic/" class="md-nav__link">
+      <a href="../../08_openasic/" class="md-nav__link">
         
   
   
@@ -3556,7 +4445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../soc/" class="md-nav__link">
+      <a href="../../soc/" class="md-nav__link">
         
   
   
@@ -3584,7 +4473,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../soc/architettura/" class="md-nav__link">
+      <a href="../../soc/architettura/" class="md-nav__link">
         
   
   
@@ -3612,7 +4501,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../soc/bus/" class="md-nav__link">
+      <a href="../../soc/bus/" class="md-nav__link">
         
   
   
@@ -3640,7 +4529,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../soc/memorie/" class="md-nav__link">
+      <a href="../../soc/memorie/" class="md-nav__link">
         
   
   
@@ -3668,7 +4557,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../soc/periferiche/" class="md-nav__link">
+      <a href="../../soc/periferiche/" class="md-nav__link">
         
   
   
@@ -3696,7 +4585,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../soc/ip-integration/" class="md-nav__link">
+      <a href="../../soc/ip-integration/" class="md-nav__link">
         
   
   
@@ -3724,7 +4613,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../soc/verifica/" class="md-nav__link">
+      <a href="../../soc/verifica/" class="md-nav__link">
         
   
   
@@ -3752,7 +4641,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../soc/hw-sw-codesign/" class="md-nav__link">
+      <a href="../../soc/hw-sw-codesign/" class="md-nav__link">
         
   
   
@@ -3780,7 +4669,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../soc/power-clock-reset/" class="md-nav__link">
+      <a href="../../soc/power-clock-reset/" class="md-nav__link">
         
   
   
@@ -3808,7 +4697,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../soc/safety-security/" class="md-nav__link">
+      <a href="../../soc/safety-security/" class="md-nav__link">
         
   
   
@@ -3836,7 +4725,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../soc/physical-design-awareness/" class="md-nav__link">
+      <a href="../../soc/physical-design-awareness/" class="md-nav__link">
         
   
   
@@ -3864,7 +4753,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../soc/case-study/" class="md-nav__link">
+      <a href="../../soc/case-study/" class="md-nav__link">
         
   
   
@@ -3953,7 +4842,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../09_progetti/" class="md-nav__link">
+      <a href="../../09_progetti/" class="md-nav__link">
         
   
   
@@ -3981,7 +4870,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../09_codice/" class="md-nav__link">
+      <a href="../../09_codice/" class="md-nav__link">
         
   
   
@@ -4070,7 +4959,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../10_tool_e_tcl/" class="md-nav__link">
+      <a href="../../10_tool_e_tcl/" class="md-nav__link">
         
   
   
@@ -4098,7 +4987,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../10_tcl_progetti/" class="md-nav__link">
+      <a href="../../10_tcl_progetti/" class="md-nav__link">
         
   
   
@@ -4558,7 +5447,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../10_tcl_flow_chart/" class="md-nav__link">
+      <a href="../../10_tcl_flow_chart/" class="md-nav__link">
         
   
   
@@ -4586,7 +5475,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../10_tool_flow/" class="md-nav__link">
+      <a href="../../10_tool_flow/" class="md-nav__link">
         
   
   
@@ -4621,7 +5510,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../11_appendici/" class="md-nav__link">
+      <a href="../../11_appendici/" class="md-nav__link">
         
   
   
@@ -4648,7 +5537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../12_riferimenti/" class="md-nav__link">
+      <a href="../../12_riferimenti/" class="md-nav__link">
         
   
   
@@ -4695,10 +5584,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#objectives" class="md-nav__link">
+  <a href="#1-il-ruolo-di-systemverilog-nella-progettazione-digitale" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🎯 Objectives
+        1. Il ruolo di SystemVerilog nella progettazione digitale
       
     </span>
   </a>
@@ -4706,10 +5595,260 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-systemverilog-in-design-flow" class="md-nav__link">
+  <a href="#2-moduli-porte-e-gerarchia" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧠 1. SystemVerilog in Design Flow
+        2. Moduli, porte e gerarchia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Moduli, porte e gerarchia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-interfaccia-del-modulo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Interfaccia del modulo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-gerarchia-del-progetto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Gerarchia del progetto
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-tipi-di-dati-e-rappresentazione-del-segnale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Tipi di dati e rappresentazione del segnale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Tipi di dati e rappresentazione del segnale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-il-tipo-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Il tipo logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-vettori-e-larghezza-dei-dati" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Vettori e larghezza dei dati
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-array-packed-e-unpacked" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Array, packed e unpacked
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-enum-struct-e-typedef" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 enum, struct e typedef
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-assegnamenti-e-logica-combinatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Assegnamenti e logica combinatoria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Assegnamenti e logica combinatoria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-assegnamento-continuo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Assegnamento continuo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-blocco-always_comb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Blocco always_comb
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-espressioni-e-operatori" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Espressioni e operatori
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-logica-sequenziale-e-registri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Logica sequenziale e registri
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Logica sequenziale e registri">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-il-blocco-always_ff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Il blocco always_ff
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-clock-e-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Clock e reset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-non-blocking-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Non-blocking assignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-controllo-del-flusso-e-strutture-procedurali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Controllo del flusso e strutture procedurali
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Controllo del flusso e strutture procedurali">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-if-case-e-priorita-logica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 if, case e priorità logica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-cicli-e-generazione-di-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Cicli e generazione di hardware
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-generate-e-parametrizzazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 generate e parametrizzazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-costanti-parametri-e-riuso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Costanti, parametri e riuso
       
     </span>
   </a>
@@ -4717,10 +5856,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-logic-type" class="md-nav__link">
+  <a href="#8-dal-linguaggio-alla-rtl-sintetizzabile" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔧 2. logic Type
+        8. Dal linguaggio alla RTL sintetizzabile
       
     </span>
   </a>
@@ -4728,10 +5867,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-sequential-logic-always_ff" class="md-nav__link">
+  <a href="#9-buone-pratiche-di-base" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔁 3. Sequential Logic — always_ff
+        9. Buone pratiche di base
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Buone pratiche di base">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-separare-chiaramente-combinatorio-e-sequenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Separare chiaramente combinatorio e sequenziale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-usare-tipi-leggibili-e-semanticamente-coerenti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Usare tipi leggibili e semanticamente coerenti
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-evitare-ambiguita-sintetiche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Evitare ambiguità sintetiche
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-scrivere-pensando-a-verifica-e-implementazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 Scrivere pensando a verifica e implementazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-collegamento-con-fpga-asic-e-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Collegamento con FPGA, ASIC e SoC
       
     </span>
   </a>
@@ -4739,10 +5939,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-combinational-logic-always_comb" class="md-nav__link">
+  <a href="#in-sintesi" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔄 4. Combinational Logic — always_comb
+        In sintesi
       
     </span>
   </a>
@@ -4750,76 +5950,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-fsm-enum" class="md-nav__link">
+  <a href="#prossimo-passo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔷 5. FSM — enum
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-struct" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧩 6. Struct
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-interface" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔗 7. Interface
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-counter" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔢 8. Counter
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9-timing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📊 9. Timing
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#10-pitfalls" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ⚠️ 10. Pitfalls
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#next" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Next
+        Prossimo passo
       
     </span>
   </a>
@@ -4843,102 +5977,190 @@
 
 
 
-<h1 id="04-systemverilog-design">04 — SystemVerilog (Design)<a class="headerlink" href="#04-systemverilog-design" title="Permanent link">&para;</a></h1>
-<h2 id="objectives">🎯 Objectives<a class="headerlink" href="#objectives" title="Permanent link">&para;</a></h2>
-<p>This module introduces SystemVerilog as a <strong>modern RTL design language</strong> for FPGA and ASIC development.</p>
-<p>By the end, you will:
-- Use <strong>SystemVerilog constructs for safer RTL</strong>
-- Improve <strong>readability and maintainability</strong>
-- Reduce common <strong>Verilog design errors</strong>
-- Write <strong>synthesis-friendly and timing-aware code</strong></p>
-<hr />
-<h2 id="1-systemverilog-in-design-flow">🧠 1. SystemVerilog in Design Flow<a class="headerlink" href="#1-systemverilog-in-design-flow" title="Permanent link">&para;</a></h2>
-<p>SystemVerilog extends Verilog with:
-- safer RTL constructs
-- better type system
-- advanced verification features</p>
-<p>RTL → Synthesis → Netlist → Place &amp; Route → Bitstream</p>
-<p>👉 Stronger guarantees than Verilog for RTL correctness</p>
-<hr />
-<h2 id="2-logic-type">🔧 2. <code>logic</code> Type<a class="headerlink" href="#2-logic-type" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="kt">logic</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
-<span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
-</code></pre></div>
-<p>✔ replaces wire/reg<br />
-✔ reduces ambiguity  </p>
-<hr />
-<h2 id="3-sequential-logic-always_ff">🔁 3. Sequential Logic — <code>always_ff</code><a class="headerlink" href="#3-sequential-logic-always_ff" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="k">always_ff</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
-<span class="w">  </span><span class="n">q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
-<span class="k">end</span>
-</code></pre></div>
+<h1 id="fondamenti-del-linguaggio-systemverilog">Fondamenti del linguaggio SystemVerilog<a class="headerlink" href="#fondamenti-del-linguaggio-systemverilog" title="Permanent link">&para;</a></h1>
+<p>SystemVerilog è un linguaggio ampio, nato come estensione di Verilog, che oggi viene usato in due direzioni principali: da un lato per la <strong>descrizione hardware RTL</strong>, dall’altro per la <strong>verifica</strong> di sistemi digitali complessi. In una documentazione orientata a microelettronica e progettazione digitale, è importante trattarlo prima di tutto come strumento per rappresentare in modo chiaro e rigoroso il comportamento e la struttura di un circuito.</p>
+<p>Nel contesto di un progetto reale, SystemVerilog non è semplicemente una sintassi più moderna di Verilog. Le sue primitive di tipizzazione, i costrutti procedurali, la distinzione tra logica combinatoria e sequenziale, e la possibilità di organizzare meglio le interfacce rendono il codice più leggibile, più verificabile e più robusto rispetto agli errori di modellazione. Questo è particolarmente rilevante sia nei flussi <strong>FPGA</strong>, dove il ciclo iterativo è rapido e il debug è frequente, sia nei flussi <strong>ASIC</strong>, dove la qualità della RTL incide direttamente su sintesi, timing, DFT e implementazione fisica.</p>
+<p>Questa pagina introduce gli elementi fondamentali del linguaggio dal punto di vista progettuale: non come elenco esaustivo di costrutti, ma come base per scrivere RTL corretta, comprensibile e coerente con il resto del flusso di sviluppo.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Requisiti funzionali] --&gt; B[Modellazione in SystemVerilog]
+    B --&gt; C[RTL sintetizzabile]
+    C --&gt; D[Simulazione e verifica]
+    C --&gt; E[Sintesi]
+    E --&gt; F[Implementazione FPGA o ASIC]
+    D --&gt; G[Correzioni e raffinamento]
+    G --&gt; B</code></pre>
+<h2 id="1-il-ruolo-di-systemverilog-nella-progettazione-digitale">1. Il ruolo di SystemVerilog nella progettazione digitale<a class="headerlink" href="#1-il-ruolo-di-systemverilog-nella-progettazione-digitale" title="Permanent link">&para;</a></h2>
+<p>Quando si parla di SystemVerilog in ambito hardware, è utile distinguere subito tre livelli concettuali.</p>
+<p>Il primo è il livello <strong>strutturale</strong>, in cui il progetto è descritto come composizione di moduli e connessioni. Qui il linguaggio serve a rappresentare blocchi funzionali, gerarchie e interfacce.</p>
+<p>Il secondo è il livello <strong>comportamentale RTL</strong>, in cui si descrive come i registri si aggiornano a ogni fronte di clock e come la logica combinatoria elabora gli ingressi. Questo è il livello centrale per la sintesi.</p>
+<p>Il terzo è il livello <strong>di verifica</strong>, in cui SystemVerilog offre costrutti aggiuntivi per testbench, assertion, randomizzazione e copertura. Sebbene questa pagina sia focalizzata soprattutto sulle basi del linguaggio per la progettazione RTL, è importante ricordare che la stessa famiglia linguistica copre entrambe le esigenze.</p>
+<p>In pratica, SystemVerilog diventa il punto di contatto tra:
+- <strong>architettura</strong>, perché traduce i blocchi concettuali in moduli concreti
+- <strong>RTL</strong>, perché formalizza datapath, controllo e interfacce
+- <strong>timing</strong>, perché la separazione tra combinatorio e sequenziale influenza direttamente la chiusura temporale
+- <strong>verifica</strong>, perché consente simulazione, controlli e proprietà formali
+- <strong>implementazione</strong>, perché la qualità della descrizione condiziona sintesi, mapping e PnR</p>
+<h2 id="2-moduli-porte-e-gerarchia">2. Moduli, porte e gerarchia<a class="headerlink" href="#2-moduli-porte-e-gerarchia" title="Permanent link">&para;</a></h2>
+<p>L’unità di base di una descrizione hardware in SystemVerilog è il <strong>modulo</strong>. Un modulo rappresenta un blocco funzionale con un insieme di porte di ingresso e uscita, e può contenere sia logica interna sia istanze di altri moduli.</p>
+<p>Dal punto di vista progettuale, il modulo è l’elemento che collega l’idea architetturale alla realizzazione RTL. Una buona decomposizione in moduli migliora la leggibilità del progetto, favorisce il riuso e semplifica la verifica.</p>
+<h3 id="21-interfaccia-del-modulo">2.1 Interfaccia del modulo<a class="headerlink" href="#21-interfaccia-del-modulo" title="Permanent link">&para;</a></h3>
+<p>L’interfaccia definisce ciò che il blocco espone verso l’esterno. In una buona progettazione, le porte devono riflettere chiaramente il ruolo del blocco: dati, segnali di controllo, clock, reset, handshake e stati osservabili.</p>
+<p>In SystemVerilog, la dichiarazione delle porte è più espressiva rispetto a Verilog tradizionale, perché permette di specificare direttamente il tipo e la direzione in modo più pulito.</p>
+<pre class="mermaid"><code>flowchart TD
+    A[Modulo top] --&gt; B[Datapath]
+    A --&gt; C[Controller]
+    A --&gt; D[Interfaccia esterna]
+    B --&gt; E[Registri]
+    B --&gt; F[ALU o logica combinatoria]
+    C --&gt; G[FSM]</code></pre>
+<h3 id="22-gerarchia-del-progetto">2.2 Gerarchia del progetto<a class="headerlink" href="#22-gerarchia-del-progetto" title="Permanent link">&para;</a></h3>
+<p>I sistemi digitali reali non vengono costruiti come un unico blocco monolitico. La gerarchia permette di suddividere il progetto in sottoblocchi con responsabilità precise. Questa organizzazione ha diversi vantaggi:</p>
 <ul>
-<li>Generates flip-flops  </li>
-<li>Defines pipeline stage  </li>
+<li>rende l’architettura più comprensibile</li>
+<li>facilita il debug e la simulazione modulare</li>
+<li>favorisce la separazione tra controllo e datapath</li>
+<li>consente di riutilizzare blocchi in progetti diversi</li>
+<li>permette vincoli e analisi più ordinati nei flussi FPGA e ASIC</li>
 </ul>
-<hr />
-<h2 id="4-combinational-logic-always_comb">🔄 4. Combinational Logic — <code>always_comb</code><a class="headerlink" href="#4-combinational-logic-always_comb" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="k">always_comb</span><span class="w"> </span><span class="k">begin</span>
-<span class="w">  </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
-<span class="k">end</span>
-</code></pre></div>
-<p>✔ automatic sensitivity<br />
-✔ avoids latch  </p>
-<hr />
-<h2 id="5-fsm-enum">🔷 5. FSM — <code>enum</code><a class="headerlink" href="#5-fsm-enum" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">IDLE</span><span class="p">,</span>
-<span class="w">  </span><span class="n">RUN</span><span class="p">,</span>
-<span class="w">  </span><span class="n">STOP</span>
-<span class="p">}</span><span class="w"> </span><span class="n">state_t</span><span class="p">;</span>
-</code></pre></div>
-<p>✔ safer FSM<br />
-✔ better debug  </p>
-<hr />
-<h2 id="6-struct">🧩 6. Struct<a class="headerlink" href="#6-struct" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">7</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">logic</span><span class="w"> </span><span class="n">valid</span><span class="p">;</span>
-<span class="p">}</span><span class="w"> </span><span class="n">packet_t</span><span class="p">;</span>
-</code></pre></div>
-<hr />
-<h2 id="7-interface">🔗 7. Interface<a class="headerlink" href="#7-interface" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="k">interface</span><span class="w"> </span><span class="n">bus_if</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">logic</span><span class="w"> </span><span class="n">clk</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">7</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
-<span class="k">endinterface</span>
-</code></pre></div>
-<hr />
-<h2 id="8-counter">🔢 8. Counter<a class="headerlink" href="#8-counter" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="p">(</span>
-<span class="w">  </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w"> </span><span class="n">clk</span><span class="p">,</span>
-<span class="w">  </span><span class="k">input</span><span class="w">  </span><span class="kt">logic</span><span class="w"> </span><span class="n">reset</span><span class="p">,</span>
-<span class="w">  </span><span class="k">output</span><span class="w"> </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">q</span>
-<span class="p">);</span>
-
-<span class="k">always_ff</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">posedge</span><span class="w"> </span><span class="n">reset</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">reset</span><span class="p">)</span>
-<span class="w">    </span><span class="n">q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">  </span><span class="k">else</span>
-<span class="w">    </span><span class="n">q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="k">end</span>
-
-<span class="k">endmodule</span>
-</code></pre></div>
-<hr />
-<h2 id="9-timing">📊 9. Timing<a class="headerlink" href="#9-timing" title="Permanent link">&para;</a></h2>
-<p>FF → Logic → FF</p>
-<p>✔ pipeline improves frequency  </p>
-<hr />
-<h2 id="10-pitfalls">⚠️ 10. Pitfalls<a class="headerlink" href="#10-pitfalls" title="Permanent link">&para;</a></h2>
-<ul>
-<li>using always instead of always_ff  </li>
-<li>mixing logic types  </li>
-<li>poor structuring  </li>
-</ul>
-<hr />
-<h2 id="next">🚀 Next<a class="headerlink" href="#next" title="Permanent link">&para;</a></h2>
-<p>Verification Base</p>
+<p>In un progetto <strong>FPGA</strong>, una gerarchia chiara aiuta a correlare la RTL con le risorse del dispositivo e con il risultato del place and route. In un progetto <strong>ASIC</strong>, la gerarchia è utile anche per sintesi gerarchica, floorplanning, partizionamento e strategie di integrazione.</p>
+<h2 id="3-tipi-di-dati-e-rappresentazione-del-segnale">3. Tipi di dati e rappresentazione del segnale<a class="headerlink" href="#3-tipi-di-dati-e-rappresentazione-del-segnale" title="Permanent link">&para;</a></h2>
+<p>Uno degli aspetti che distingue SystemVerilog da Verilog classico è la presenza di una tipizzazione più moderna e più rigorosa. Questo migliora la qualità del codice e riduce ambiguità che, in hardware, possono tradursi in errori funzionali o in mismatch tra simulazione e sintesi.</p>
+<h3 id="31-il-tipo-logic">3.1 Il tipo <code>logic</code><a class="headerlink" href="#31-il-tipo-logic" title="Permanent link">&para;</a></h3>
+<p>Per la maggior parte della RTL sintetizzabile, il tipo più usato è <strong><code>logic</code></strong>. Dal punto di vista pratico, <code>logic</code> rappresenta un segnale a quattro stati ed è il sostituto naturale della distinzione storica tra <code>wire</code> e <code>reg</code> in molti casi comuni.</p>
+<p>L’uso di <code>logic</code> aiuta a scrivere codice più uniforme. Tuttavia, è importante ricordare che la natura fisica del segnale dipende ancora da <strong>come viene pilotato</strong>:
+- se è assegnato in modo continuo, si comporta come una connessione combinatoria
+- se è assegnato in un blocco sequenziale, rappresenta tipicamente un registro</p>
+<p>Il tipo non sostituisce quindi il significato architetturale del segnale, ma rende più chiara la sua dichiarazione.</p>
+<h3 id="32-vettori-e-larghezza-dei-dati">3.2 Vettori e larghezza dei dati<a class="headerlink" href="#32-vettori-e-larghezza-dei-dati" title="Permanent link">&para;</a></h3>
+<p>La progettazione digitale lavora quasi sempre con bus multi-bit. Per questo la larghezza dei segnali è un aspetto centrale. Un dato a 8 bit, un indirizzo a 32 bit o una word a 128 bit non sono semplici dettagli sintattici: influiscono su area, timing, throughput e interfacciamento.</p>
+<p>In SystemVerilog i vettori possono rappresentare:
+- bus dati
+- indirizzi
+- campi di controllo
+- maschere
+- codifiche di stato</p>
+<p>Una buona pratica consiste nel dichiarare larghezze in modo coerente con l’architettura, evitando costanti “magiche” sparse nel codice. Questo rende il progetto più parametrico e meno fragile alle modifiche.</p>
+<h3 id="33-array-packed-e-unpacked">3.3 Array, packed e unpacked<a class="headerlink" href="#33-array-packed-e-unpacked" title="Permanent link">&para;</a></h3>
+<p>SystemVerilog distingue in modo più preciso tra diversi tipi di aggregati. Dal punto di vista concettuale:
+- un <strong>packed array</strong> rappresenta una parola di bit trattata come un vettore compatto
+- un <strong>unpacked array</strong> rappresenta una collezione di elementi separati</p>
+<p>Questa distinzione diventa importante quando si modellano memorie, matrici di registri, buffer e interfacce complesse. Comprendere la differenza evita errori di indicizzazione e chiarisce come il dato viene interpretato dalla sintesi e dalla simulazione.</p>
+<h3 id="34-enum-struct-e-typedef">3.4 <code>enum</code>, <code>struct</code> e <code>typedef</code><a class="headerlink" href="#34-enum-struct-e-typedef" title="Permanent link">&para;</a></h3>
+<p>SystemVerilog introduce costrutti molto utili per descrivere strutture complesse in modo più leggibile.</p>
+<p>Gli <strong>enumerated type</strong> (<code>enum</code>) sono particolarmente adatti per rappresentare stati di una FSM o codifiche simboliche. Invece di usare valori numerici poco leggibili, è possibile associare un nome ai diversi stati logici del controllo.</p>
+<p>Le <strong>struct</strong> permettono di raggruppare campi correlati, per esempio quando si vuole descrivere un pacchetto di segnali che viaggiano insieme in una pipeline o in un’interfaccia interna.</p>
+<p>Il costrutto <strong><code>typedef</code></strong> consente di definire alias di tipo, utile per evitare ripetizioni e standardizzare la rappresentazione di bus, stati, indirizzi o record.</p>
+<p>Questi strumenti non cambiano solo l’estetica del codice: aiutano a mantenere la corrispondenza tra la rappresentazione RTL e l’intenzione architetturale.</p>
+<h2 id="4-assegnamenti-e-logica-combinatoria">4. Assegnamenti e logica combinatoria<a class="headerlink" href="#4-assegnamenti-e-logica-combinatoria" title="Permanent link">&para;</a></h2>
+<p>La logica combinatoria rappresenta la parte del circuito in cui le uscite dipendono soltanto dagli ingressi attuali. In RTL, questa porzione deve essere descritta con particolare attenzione, perché è direttamente collegata a ritardi logici, profondità critica e chiusura temporale.</p>
+<h3 id="41-assegnamento-continuo">4.1 Assegnamento continuo<a class="headerlink" href="#41-assegnamento-continuo" title="Permanent link">&para;</a></h3>
+<p>L’assegnamento continuo descrive una relazione combinatoria permanente tra segnali. È una forma naturale per esprimere collegamenti semplici, mux elementari, operazioni aritmetiche immediate o wiring tra blocchi.</p>
+<p>Dal punto di vista progettuale, è utile per esprimere logica semplice e direttamente osservabile. Quando la complessità cresce, può essere preferibile passare a un blocco combinatorio esplicito per migliorare leggibilità e controllo.</p>
+<h3 id="42-blocco-always_comb">4.2 Blocco <code>always_comb</code><a class="headerlink" href="#42-blocco-always_comb" title="Permanent link">&para;</a></h3>
+<p>Il costrutto <strong><code>always_comb</code></strong> è pensato per modellare logica combinatoria in modo esplicito e sicuro. È preferibile al vecchio <code>always @(*)</code> perché esprime meglio l’intenzione del progettista e impone regole più rigorose.</p>
+<p>Usarlo correttamente significa:
+- assegnare sempre un valore alle uscite in ogni cammino logico
+- evitare dipendenze implicite o memoria accidentale
+- mantenere una separazione chiara dalla logica sequenziale</p>
+<p>Se in un blocco combinatorio non vengono coperte tutte le condizioni, il rischio è inferire <strong>latch</strong> indesiderati. Questo è quasi sempre un problema, sia in FPGA sia in ASIC, perché complica timing, verifica e implementazione.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Ingressi correnti] --&gt; B[Logica combinatoria]
+    B --&gt; C[Uscite combinatorie]
+    B --&gt; D[Ingressi ai registri]
+    E[Clock] --&gt; F[Aggiornamento registri]
+    D --&gt; F
+    F --&gt; G[Stato successivo osservabile]</code></pre>
+<h3 id="43-espressioni-e-operatori">4.3 Espressioni e operatori<a class="headerlink" href="#43-espressioni-e-operatori" title="Permanent link">&para;</a></h3>
+<p>SystemVerilog mette a disposizione operatori aritmetici, logici, bitwise, relazionali e di riduzione. Il loro impiego deve però essere guidato dal significato hardware.</p>
+<p>Un’operazione apparentemente semplice a livello sintattico può tradursi in:
+- una rete combinatoria ridotta
+- un comparatore largo
+- una catena di propagazione del carry
+- un albero di riduzione
+- una struttura critica per il timing</p>
+<p>Per questo motivo, nella scrittura RTL è importante non fermarsi al “cosa” dell’espressione, ma considerare anche il “come” verrà implementata.</p>
+<h2 id="5-logica-sequenziale-e-registri">5. Logica sequenziale e registri<a class="headerlink" href="#5-logica-sequenziale-e-registri" title="Permanent link">&para;</a></h2>
+<p>La logica sequenziale è il cuore della RTL sincronizzata. Qui SystemVerilog descrive il comportamento dei registri, cioè degli elementi che memorizzano stato e che separano temporalmente le varie fasi di elaborazione.</p>
+<h3 id="51-il-blocco-always_ff">5.1 Il blocco <code>always_ff</code><a class="headerlink" href="#51-il-blocco-always_ff" title="Permanent link">&para;</a></h3>
+<p>Il costrutto <strong><code>always_ff</code></strong> è usato per descrivere logica sequenziale sincrona. Il suo scopo è rendere esplicito che il blocco rappresenta aggiornamento di registri, tipicamente al fronte di clock e, se necessario, con reset associato.</p>
+<p>Questo costrutto migliora la leggibilità e riduce l’ambiguità del codice. In un progetto ben organizzato, la distinzione è netta:
+- <code>always_ff</code> per i registri
+- <code>always_comb</code> per la logica combinatoria
+- eventuali assegnamenti continui per collegamenti semplici</p>
+<p>Questa separazione è importante non solo per chiarezza, ma anche per strumenti di analisi, linting, simulazione e sintesi.</p>
+<h3 id="52-clock-e-reset">5.2 Clock e reset<a class="headerlink" href="#52-clock-e-reset" title="Permanent link">&para;</a></h3>
+<p>Clock e reset non sono semplici segnali di servizio. Definiscono il comportamento temporale dell’intero sistema. La loro modellazione in SystemVerilog deve essere coerente con l’architettura e con la destinazione implementativa.</p>
+<p>Un reset può essere:
+- <strong>sincrono</strong>, se campionato al clock
+- <strong>asincrono</strong>, se agisce indipendentemente dal fronte di clock</p>
+<p>La scelta ha conseguenze concrete su robustezza, timing, strategia di rilascio del reset e integrazione fisica. In FPGA, alcune famiglie e tool favoriscono specifici stili di reset. In ASIC, la scelta è influenzata anche da librerie standard cell, DFT, distribuzione del reset e signoff.</p>
+<h3 id="53-non-blocking-assignment">5.3 Non-blocking assignment<a class="headerlink" href="#53-non-blocking-assignment" title="Permanent link">&para;</a></h3>
+<p>Nella logica sequenziale, l’assegnamento non bloccante è il modello concettualmente corretto per rappresentare l’aggiornamento simultaneo dei registri al fronte di clock. Questo aiuta a mantenere la corrispondenza tra simulazione RTL e comportamento dell’hardware reale.</p>
+<p>Confondere assegnamenti bloccanti e non bloccanti può introdurre comportamenti non intuitivi, dipendenze artificiali e mismatch tra intenzione architetturale e simulazione.</p>
+<h2 id="6-controllo-del-flusso-e-strutture-procedurali">6. Controllo del flusso e strutture procedurali<a class="headerlink" href="#6-controllo-del-flusso-e-strutture-procedurali" title="Permanent link">&para;</a></h2>
+<p>Oltre ai tipi e agli assegnamenti, SystemVerilog offre costrutti procedurali utili per descrivere decisioni, selezione di casi e iterazioni. Questi elementi devono essere usati con attenzione, perché ogni scelta sintattica si traduce in una struttura hardware specifica.</p>
+<h3 id="61-if-case-e-priorita-logica">6.1 <code>if</code>, <code>case</code> e priorità logica<a class="headerlink" href="#61-if-case-e-priorita-logica" title="Permanent link">&para;</a></h3>
+<p>I costrutti condizionali sono fondamentali per descrivere mux, decodifiche e logica di controllo. Tuttavia, la forma con cui vengono scritti influenza la struttura del circuito.</p>
+<p>Ad esempio, una catena di <code>if</code> può implicare una priorità, mentre un <code>case</code> ben definito esprime più chiaramente una selezione mutuamente esclusiva. In una FSM o in un decoder di controllo, questa distinzione è importante sia per leggibilità sia per qualità della sintesi.</p>
+<p>SystemVerilog mette anche a disposizione forme come <code>unique</code> e <code>priority</code>, che permettono di esplicitare meglio l’intenzione del progettista e aiutano gli strumenti a rilevare situazioni anomale.</p>
+<h3 id="62-cicli-e-generazione-di-hardware">6.2 Cicli e generazione di hardware<a class="headerlink" href="#62-cicli-e-generazione-di-hardware" title="Permanent link">&para;</a></h3>
+<p>I cicli come <code>for</code> non devono essere interpretati come in un linguaggio software tradizionale. In RTL sintetizzabile, un ciclo rappresenta tipicamente <strong>replicazione strutturale</strong> o descrizione regolare di logica.</p>
+<p>Questo significa che un costrutto iterativo può generare:
+- più assegnamenti in parallelo
+- più istanze di logica simile
+- strutture ripetitive di datapath o registri</p>
+<p>La nozione di tempo di esecuzione, tipica del software, va quindi sostituita con una nozione di espansione strutturale in fase di elaborazione e sintesi.</p>
+<h3 id="63-generate-e-parametrizzazione">6.3 <code>generate</code> e parametrizzazione<a class="headerlink" href="#63-generate-e-parametrizzazione" title="Permanent link">&para;</a></h3>
+<p>Il costrutto <code>generate</code> è particolarmente utile quando si vogliono creare architetture scalabili, condizionali o ripetitive. È un elemento importante per costruire blocchi riutilizzabili, soprattutto quando la stessa RTL deve adattarsi a larghezze di dato, numero di canali o configurazioni differenti.</p>
+<p>La parametrizzazione è molto preziosa sia in FPGA sia in ASIC:
+- in <strong>FPGA</strong> consente di adattare il progetto a famiglie diverse o a target con risorse differenti
+- in <strong>ASIC</strong> permette di riusare IP e blocchi architetturali in diverse integrazioni o versioni del chip</p>
+<h2 id="7-costanti-parametri-e-riuso">7. Costanti, parametri e riuso<a class="headerlink" href="#7-costanti-parametri-e-riuso" title="Permanent link">&para;</a></h2>
+<p>Una base solida di SystemVerilog non può prescindere da una corretta gestione delle costanti e dei parametri. Un progetto rigido, pieno di numeri fissati localmente, è difficile da mantenere e più incline agli errori.</p>
+<p>I <strong>parametri</strong> consentono di definire moduli configurabili, mentre le costanti locali permettono di chiarire significati numerici che altrimenti resterebbero opachi.</p>
+<p>Dal punto di vista metodologico, questa pratica migliora:
+- riuso del codice
+- coerenza dimensionale
+- leggibilità dell’architettura
+- facilità di manutenzione
+- adattamento a varianti di implementazione</p>
+<p>Per esempio, una stessa struttura parametrica può essere impiegata in una piattaforma di prototipazione FPGA e, con adeguate modifiche e vincoli, in un contesto ASIC più strutturato.</p>
+<h2 id="8-dal-linguaggio-alla-rtl-sintetizzabile">8. Dal linguaggio alla RTL sintetizzabile<a class="headerlink" href="#8-dal-linguaggio-alla-rtl-sintetizzabile" title="Permanent link">&para;</a></h2>
+<p>Non tutto ciò che è esprimibile in SystemVerilog è automaticamente adatto alla sintesi. Questa distinzione è fondamentale. Il linguaggio comprende sia costrutti pensati per l’hardware sintetizzabile sia costrutti orientati alla simulazione o alla verifica.</p>
+<p>Dal punto di vista progettuale, scrivere buona RTL significa usare SystemVerilog in modo disciplinato, con attenzione a:
+- corrispondenza tra descrizione e hardware risultante
+- prevedibilità della sintesi
+- chiarezza temporale del comportamento
+- assenza di ambiguità tra combinatorio e sequenziale
+- facilità di verifica e debug</p>
+<pre class="mermaid"><code>flowchart TD
+    A[Costrutti SystemVerilog] --&gt; B{Uso previsto}
+    B --&gt;|RTL sintetizzabile| C[Registri, mux, ALU, FSM, interfacce]
+    B --&gt;|Verifica e simulazione| D[Testbench, assertion, coverage, randomizzazione]
+    C --&gt; E[Sintesi e implementazione]
+    D --&gt; F[Validazione del progetto]</code></pre>
+<p>In un flusso <strong>FPGA</strong>, una RTL ben scritta porta a risultati più stabili in sintesi, placement, routing e debug on-chip. In un flusso <strong>ASIC</strong>, la qualità della RTL ha impatti ancora più ampi: influenza area, potenza, timing, testabilità, integrazione DFT, floorplanning e probabilità di chiusura al signoff.</p>
+<h2 id="9-buone-pratiche-di-base">9. Buone pratiche di base<a class="headerlink" href="#9-buone-pratiche-di-base" title="Permanent link">&para;</a></h2>
+<p>Prima di passare a temi più avanzati, vale la pena fissare alcune pratiche fondamentali.</p>
+<h3 id="91-separare-chiaramente-combinatorio-e-sequenziale">9.1 Separare chiaramente combinatorio e sequenziale<a class="headerlink" href="#91-separare-chiaramente-combinatorio-e-sequenziale" title="Permanent link">&para;</a></h3>
+<p>Una buona RTL rende evidente dove si genera il prossimo stato e dove esso viene registrato. Questa separazione riduce gli errori e semplifica sia la revisione del codice sia il debug.</p>
+<h3 id="92-usare-tipi-leggibili-e-semanticamente-coerenti">9.2 Usare tipi leggibili e semanticamente coerenti<a class="headerlink" href="#92-usare-tipi-leggibili-e-semanticamente-coerenti" title="Permanent link">&para;</a></h3>
+<p>Quando possibile, è meglio preferire <code>logic</code>, <code>enum</code>, <code>struct</code> e <code>typedef</code> per riflettere l’intenzione architetturale. Il codice diventa più autoesplicativo e meno dipendente da convenzioni implicite.</p>
+<h3 id="93-evitare-ambiguita-sintetiche">9.3 Evitare ambiguità sintetiche<a class="headerlink" href="#93-evitare-ambiguita-sintetiche" title="Permanent link">&para;</a></h3>
+<p>Latch involontari, assegnamenti incompleti, mix improprio di stili procedurali o uso poco chiaro dei reset generano problemi che spesso emergono solo più avanti, quando timing, debug o implementazione diventano più costosi da correggere.</p>
+<h3 id="94-scrivere-pensando-a-verifica-e-implementazione">9.4 Scrivere pensando a verifica e implementazione<a class="headerlink" href="#94-scrivere-pensando-a-verifica-e-implementazione" title="Permanent link">&para;</a></h3>
+<p>La RTL non vive isolata. Un buon codice SystemVerilog deve essere facile da simulare, tracciare, vincolare e implementare. Questo vale sempre, ma è ancora più importante nei progetti grandi, dove il costo di ogni ambiguità cresce rapidamente.</p>
+<h2 id="10-collegamento-con-fpga-asic-e-soc">10. Collegamento con FPGA, ASIC e SoC<a class="headerlink" href="#10-collegamento-con-fpga-asic-e-soc" title="Permanent link">&para;</a></h2>
+<p>SystemVerilog è uno dei punti di unione più forti tra le principali aree della progettazione digitale.</p>
+<p>Nel mondo <strong>FPGA</strong>, è il linguaggio con cui si descrivono datapath, interfacce, pipeline, controlli e moduli parametrizzabili da mappare sulle risorse del dispositivo.</p>
+<p>Nel mondo <strong>ASIC</strong>, la stessa RTL rappresenta l’ingresso del flusso di sintesi e deve poi convivere con vincoli di timing, power intent, DFT, floorplanning, CTS, place and route e signoff.</p>
+<p>Nel mondo <strong>SoC</strong>, SystemVerilog è il mezzo con cui si integrano sottoblocchi eterogenei, bus, periferiche, interfacce di memoria e logiche di coordinamento tra IP.</p>
+<p>Per questo motivo, studiare le basi del linguaggio non serve soltanto a “scrivere codice”, ma a comprendere come l’architettura viene trasformata in una descrizione eseguibile, verificabile e implementabile.</p>
+<h2 id="in-sintesi">In sintesi<a class="headerlink" href="#in-sintesi" title="Permanent link">&para;</a></h2>
+<p>SystemVerilog fornisce una base moderna e robusta per descrivere sistemi digitali, sia sul piano della progettazione RTL sia su quello della verifica. Le sue caratteristiche principali — moduli ben definiti, tipizzazione più espressiva, separazione chiara tra logica combinatoria e sequenziale, supporto a strutture dati più ricche e possibilità di parametrizzazione — aiutano a costruire descrizioni hardware più leggibili e più affidabili.</p>
+<p>Dal punto di vista metodologico, il suo valore emerge soprattutto quando il linguaggio viene usato come ponte tra architettura, RTL, verifica e implementazione. Una buona comprensione dei fondamenti permette di scrivere codice che non sia soltanto corretto in simulazione, ma anche coerente con la sintesi, sostenibile nel debug e adatto a chiudere il flusso su FPGA o ASIC.</p>
+<h2 id="prossimo-passo">Prossimo passo<a class="headerlink" href="#prossimo-passo" title="Permanent link">&para;</a></h2>
+<p>Il passo più naturale è approfondire come questi fondamenti si traducono in <strong>costrutti RTL sintetizzabili</strong>, distinguendo con precisione tra ciò che appartiene alla descrizione hardware e ciò che invece è destinato alla simulazione o alla verifica. Per questo, la prossima pagina consigliata è <strong><code>rtl-constructs.md</code></strong>.</p>
 
 
 
@@ -4988,10 +6210,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

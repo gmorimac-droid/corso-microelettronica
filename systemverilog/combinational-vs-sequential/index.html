@@ -1,0 +1,7376 @@
+
+<!doctype html>
+<html lang="it" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corso completo su HDL, verification e tool FPGA/ASIC">
+      
+      
+      
+        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/combinational-vs-sequential/">
+      
+      
+        <link rel="prev" href="../procedural-blocks/">
+      
+      
+        <link rel="next" href="../fsm/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Logica combinatoria e sequenziale - Corso di Microelettronica Digitale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#logica-combinatoria-e-logica-sequenziale" class="md-skip">
+          Vai al contenuto
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Intestazione">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-header__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corso di Microelettronica Digitale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Logica combinatoria e sequenziale
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green"  aria-label="Passa a dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passa a dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="lime"  aria-label="Passa a light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passa a light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Cancella" aria-label="Cancella" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../00_introduzione/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Intro
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../01_fondamenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Fondamenti
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../02_vhdl/" class="md-tabs__link">
+          
+  
+  
+  VHDL
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../03_verilog/" class="md-tabs__link">
+          
+  
+  
+  Verilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  SystemVerilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../05_verification_base/" class="md-tabs__link">
+          
+  
+  
+  Verification
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../06_uvm/" class="md-tabs__link">
+          
+  
+  
+  UVM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../fpga/" class="md-tabs__link">
+          
+  
+  
+  FPGA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../asic/" class="md-tabs__link">
+          
+  
+  
+  ASIC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../soc/" class="md-tabs__link">
+          
+  
+  
+  SoC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../09_progetti/" class="md-tabs__link">
+          
+  
+  
+  Progetti
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../10_tool_e_tcl/" class="md-tabs__link">
+          
+  
+  
+  Tool e Tcl/Tk
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../11_appendici/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Appendici
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../12_riferimenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Riferimenti
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigazione" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-nav__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Corso di Microelettronica Digitale
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00_introduzione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01_fondamenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VHDL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    VHDL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl_progettazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foglio di lavoro
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foglio di lavoro
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Tool Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/in_out/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    In and Out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/utilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/clocks_registers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocks and Registers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/state_machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/modular_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modular Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/memories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/managing_clocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Managing Clocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/io_flavors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O Flavors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A Taste of Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Rest for Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SystemVerilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../language-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti del linguaggio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rtl-constructs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Costrutti RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../procedural-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocchi procedurali
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logica combinatoria e sequenziale
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logica combinatoria e sequenziale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-perche-questa-distinzione-e-fondamentale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Perché questa distinzione è fondamentale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-che-cose-la-logica-combinatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Che cos’è la logica combinatoria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Che cos’è la logica combinatoria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-proprieta-fondamentali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Proprietà fondamentali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-esempi-tipici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Esempi tipici
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-aspetto-concettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Aspetto concettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-che-cose-la-logica-sequenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Che cos’è la logica sequenziale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Che cos’è la logica sequenziale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-proprieta-fondamentali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Proprietà fondamentali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-elementi-tipici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Elementi tipici
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-aspetto-concettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Aspetto concettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-il-ruolo-del-clock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Il ruolo del clock
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Il ruolo del clock">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-combinatoria-e-clock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Combinatoria e clock
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-sequenziale-e-clock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Sequenziale e clock
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-visione-sistemica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Visione sistemica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-come-si-riflette-in-systemverilog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Come si riflette in SystemVerilog
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Come si riflette in SystemVerilog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-descrizione-della-combinatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Descrizione della combinatoria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-descrizione-della-sequenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Descrizione della sequenziale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-perche-conta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Perché conta
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-combinatoria-come-calcolo-tra-registri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Combinatoria come calcolo tra registri
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Combinatoria come calcolo tra registri">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-schema-concettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Schema concettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-punto-di-vista-temporale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Punto di vista temporale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-stato-memoria-e-comportamento-nel-tempo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Stato, memoria e comportamento nel tempo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Stato, memoria e comportamento nel tempo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-che-cose-lo-stato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Che cos’è lo stato
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-perche-la-combinatoria-non-basta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Perché la combinatoria non basta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-la-sequenziale-come-memoria-controllata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 La sequenziale come memoria controllata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-esempi-concettuali-di-differenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Esempi concettuali di differenza
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Esempi concettuali di differenza">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-mux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Mux
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-registro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Registro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-contatore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Contatore
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-calcolo-del-next-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Calcolo del next-state
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-stato-corrente-di-una-fsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 Stato corrente di una FSM
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-latch-flip-flop-e-ambiguita-di-modellazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Latch, flip-flop e ambiguità di modellazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Latch, flip-flop e ambiguità di modellazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-latch-involontari" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Latch involontari
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-perche-e-un-problema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Perché è un problema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-regola-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Regola pratica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-percorsi-di-timing-e-cammino-critico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Percorsi di timing e cammino critico
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Percorsi di timing e cammino critico">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-cammino-tipico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Cammino tipico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-cammino-critico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Cammino critico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-implicazioni-progettuali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Implicazioni progettuali
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-pipeline-organizzare-la-relazione-tra-combinatoria-e-sequenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Pipeline: organizzare la relazione tra combinatoria e sequenziale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Pipeline: organizzare la relazione tra combinatoria e sequenziale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-idea-di-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Idea di base
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-effetto-architetturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Effetto architetturale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-visione-rtl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Visione RTL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114-collegamento-a-fpga-e-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.4 Collegamento a FPGA e ASIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-fsm-combinatoria-e-sequenziale-lavorano-insieme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. FSM: combinatoria e sequenziale lavorano insieme
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. FSM: combinatoria e sequenziale lavorano insieme">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-stato-memorizzato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Stato memorizzato
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-calcolo-delle-transizioni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Calcolo delle transizioni
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-uscite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Uscite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-perche-e-un-buon-esempio-didattico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4 Perché è un buon esempio didattico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-effetti-sulla-verifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Effetti sulla verifica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Effetti sulla verifica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-osservabilita-del-comportamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Osservabilità del comportamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-assertion-e-controlli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Assertion e controlli
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-diagnosi-degli-errori" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 Diagnosi degli errori
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-effetti-sulla-sintesi-e-sullimplementazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Effetti sulla sintesi e sull’implementazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Effetti sulla sintesi e sull’implementazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-sintesi-della-combinatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Sintesi della combinatoria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-sintesi-della-sequenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Sintesi della sequenziale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-qualita-della-descrizione-rtl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 Qualità della descrizione RTL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#144-collegamento-con-il-backend-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.4 Collegamento con il backend ASIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-errori-progettuali-ricorrenti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Errori progettuali ricorrenti
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Errori progettuali ricorrenti">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-trattare-segnali-registrati-come-se-fossero-immediati" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Trattare segnali registrati come se fossero immediati
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-scrivere-combinatoria-incompleta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 Scrivere combinatoria incompleta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-concentrarsi-solo-sulla-funzione-e-non-sul-tempo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Concentrarsi solo sulla funzione e non sul tempo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#154-non-pensare-al-percorso-tra-registri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.4 Non pensare al percorso tra registri
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-buone-pratiche-di-modellazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Buone pratiche di modellazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. Buone pratiche di modellazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-rendere-esplicito-dove-si-trova-lo-stato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 Rendere esplicito dove si trova lo stato
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-usare-la-combinatoria-per-il-calcolo-non-per-la-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.2 Usare la combinatoria per il calcolo, non per la memoria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163-separare-calcolo-e-aggiornamento-temporale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.3 Separare calcolo e aggiornamento temporale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#164-progettare-pensando-al-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.4 Progettare pensando al timing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#165-verificare-la-corrispondenza-tra-intento-e-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.5 Verificare la corrispondenza tra intento e hardware
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-collegamento-con-il-resto-della-sezione-systemverilog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Collegamento con il resto della sezione SystemVerilog
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fsm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Macchine a stati finiti (FSM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../state-encoding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codifica degli stati
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datapath-and-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datapath e controllo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pipelining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline e pipelining
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interfaces-and-handshake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfacce e handshake
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../systemverilog-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Le interface in SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../packages-and-typedefs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Package e typedef
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arrays-and-generate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Array e generate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parameters-and-configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parametri e configurazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../latency-and-throughput/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Latenza e throughput
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coding-style-rtl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stile di codifica RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../verification-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di verifica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testbench-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Struttura di un testbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assertions-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di assertion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simulation-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di simulazione RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coverage-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di coverage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reset-strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strategie di reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clock-domain-crossing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clock Domain Crossing (CDC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case-study-systemverilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_SV_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05_verification_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.chipverify.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChipVerify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verificationguide.com" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VerificationGuide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.doulos.com/knowhow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doulos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_3" id="__nav_8_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetto mini CPU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetto mini CPU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU_waveform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Waveform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione alle FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di una FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/rtl-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTL design per FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/constraints-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/synthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse dedicate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocking e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/place-route/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Placement, routing e timing closure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica e test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/debug/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debug su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/prototyping-soc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prototipazione di sistemi e SoC su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/fpga-vs-asic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA vs ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_fpga_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_ps_axi_led/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq LED
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_17" id="__nav_9_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq FIR
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zynq FIR
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_8tap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_axi_stream_theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AXI Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_dma_interrupt_perf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DMA Interrupt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_xparameters_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    X Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Digilent/Zybo-Z7" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zybo-Z7-20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASIC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ASIC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione agli ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/spec-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specifiche e architettura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/rtl-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTL design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/constraints-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/synthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DFT e testabilità
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/floorplanning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Floorplanning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/place-route/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Place and Route
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/cts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clock Tree Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/signoff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Signoff fisico e temporale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power analysis e low-power design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica funzionale e equivalenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/libraries-pdk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Librerie standard cell e PDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/tapeout-fabrication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tape-out e fabbricazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_asic_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_openasic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAsic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_19" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_19" id="__nav_10_19_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_19">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openlane2.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenLAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/kunalg123/vsdflow" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CMOS VLSI Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SoC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SoC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione ai SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/architettura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di un SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/bus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interconnessioni e bus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/memorie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memorie e gerarchia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/periferiche/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Periferiche e I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/ip-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrazione IP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/verifica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica di sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/hw-sw-codesign/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HW/SW co-design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/power-clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consumi, clock e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/safety-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Safety e Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/physical-design-awareness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physical awareness nel SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_codice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorgenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool e Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tool e Tcl/Tk
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_e_tcl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3" id="__nav_13_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.tutorialspoint.com/tcl-tk/index.htm" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.amd.com/r/en-US/ug894-vivado-tcl-scripting/Tcl-Scripting-in-Vivado" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Script Tcl in Vivado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://yosyshq.readthedocs.io/projects/yosys/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yosis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openroad.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenROAD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://gtkwave.github.io/gtkwave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GTKWave Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verilator.org/guide/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilator Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3_7" id="__nav_13_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vivado
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_13_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vivado
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug910-vivado-getting-started" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug901-vivado-synthesis" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug904-vivado-implementation" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug835-vivado-tcl-commands" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcl Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/swdocs/modelsim/modelsim_user_2024_2.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ModelSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11_appendici/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendici
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12_riferimenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Riferimenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-perche-questa-distinzione-e-fondamentale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Perché questa distinzione è fondamentale
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-che-cose-la-logica-combinatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Che cos’è la logica combinatoria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Che cos’è la logica combinatoria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-proprieta-fondamentali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Proprietà fondamentali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-esempi-tipici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Esempi tipici
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-aspetto-concettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Aspetto concettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-che-cose-la-logica-sequenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Che cos’è la logica sequenziale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Che cos’è la logica sequenziale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-proprieta-fondamentali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Proprietà fondamentali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-elementi-tipici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Elementi tipici
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-aspetto-concettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Aspetto concettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-il-ruolo-del-clock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Il ruolo del clock
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Il ruolo del clock">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-combinatoria-e-clock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Combinatoria e clock
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-sequenziale-e-clock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Sequenziale e clock
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-visione-sistemica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Visione sistemica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-come-si-riflette-in-systemverilog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Come si riflette in SystemVerilog
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Come si riflette in SystemVerilog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-descrizione-della-combinatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Descrizione della combinatoria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-descrizione-della-sequenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Descrizione della sequenziale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-perche-conta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Perché conta
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-combinatoria-come-calcolo-tra-registri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Combinatoria come calcolo tra registri
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Combinatoria come calcolo tra registri">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-schema-concettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Schema concettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-punto-di-vista-temporale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Punto di vista temporale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-stato-memoria-e-comportamento-nel-tempo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Stato, memoria e comportamento nel tempo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Stato, memoria e comportamento nel tempo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-che-cose-lo-stato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Che cos’è lo stato
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-perche-la-combinatoria-non-basta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Perché la combinatoria non basta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-la-sequenziale-come-memoria-controllata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 La sequenziale come memoria controllata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-esempi-concettuali-di-differenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Esempi concettuali di differenza
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Esempi concettuali di differenza">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-mux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Mux
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-registro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Registro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-contatore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Contatore
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-calcolo-del-next-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Calcolo del next-state
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-stato-corrente-di-una-fsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 Stato corrente di una FSM
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-latch-flip-flop-e-ambiguita-di-modellazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Latch, flip-flop e ambiguità di modellazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Latch, flip-flop e ambiguità di modellazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-latch-involontari" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Latch involontari
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-perche-e-un-problema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Perché è un problema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-regola-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Regola pratica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-percorsi-di-timing-e-cammino-critico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Percorsi di timing e cammino critico
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Percorsi di timing e cammino critico">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-cammino-tipico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Cammino tipico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-cammino-critico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Cammino critico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-implicazioni-progettuali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Implicazioni progettuali
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-pipeline-organizzare-la-relazione-tra-combinatoria-e-sequenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Pipeline: organizzare la relazione tra combinatoria e sequenziale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Pipeline: organizzare la relazione tra combinatoria e sequenziale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-idea-di-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Idea di base
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-effetto-architetturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Effetto architetturale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-visione-rtl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Visione RTL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114-collegamento-a-fpga-e-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.4 Collegamento a FPGA e ASIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-fsm-combinatoria-e-sequenziale-lavorano-insieme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. FSM: combinatoria e sequenziale lavorano insieme
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. FSM: combinatoria e sequenziale lavorano insieme">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-stato-memorizzato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Stato memorizzato
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-calcolo-delle-transizioni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Calcolo delle transizioni
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-uscite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Uscite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-perche-e-un-buon-esempio-didattico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4 Perché è un buon esempio didattico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-effetti-sulla-verifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Effetti sulla verifica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Effetti sulla verifica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-osservabilita-del-comportamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Osservabilità del comportamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-assertion-e-controlli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Assertion e controlli
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-diagnosi-degli-errori" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 Diagnosi degli errori
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-effetti-sulla-sintesi-e-sullimplementazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Effetti sulla sintesi e sull’implementazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Effetti sulla sintesi e sull’implementazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-sintesi-della-combinatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Sintesi della combinatoria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-sintesi-della-sequenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Sintesi della sequenziale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-qualita-della-descrizione-rtl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 Qualità della descrizione RTL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#144-collegamento-con-il-backend-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.4 Collegamento con il backend ASIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-errori-progettuali-ricorrenti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Errori progettuali ricorrenti
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Errori progettuali ricorrenti">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-trattare-segnali-registrati-come-se-fossero-immediati" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Trattare segnali registrati come se fossero immediati
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-scrivere-combinatoria-incompleta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 Scrivere combinatoria incompleta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-concentrarsi-solo-sulla-funzione-e-non-sul-tempo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Concentrarsi solo sulla funzione e non sul tempo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#154-non-pensare-al-percorso-tra-registri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.4 Non pensare al percorso tra registri
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-buone-pratiche-di-modellazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Buone pratiche di modellazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. Buone pratiche di modellazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-rendere-esplicito-dove-si-trova-lo-stato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 Rendere esplicito dove si trova lo stato
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-usare-la-combinatoria-per-il-calcolo-non-per-la-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.2 Usare la combinatoria per il calcolo, non per la memoria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163-separare-calcolo-e-aggiornamento-temporale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.3 Separare calcolo e aggiornamento temporale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#164-progettare-pensando-al-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.4 Progettare pensando al timing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#165-verificare-la-corrispondenza-tra-intento-e-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.5 Verificare la corrispondenza tra intento e hardware
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-collegamento-con-il-resto-della-sezione-systemverilog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Collegamento con il resto della sezione SystemVerilog
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="logica-combinatoria-e-logica-sequenziale">Logica combinatoria e logica sequenziale<a class="headerlink" href="#logica-combinatoria-e-logica-sequenziale" title="Permanent link">&para;</a></h1>
+<p>Una delle distinzioni più importanti in tutta la progettazione digitale è quella tra <strong>logica combinatoria</strong> e <strong>logica sequenziale</strong>. In SystemVerilog, questa differenza non è soltanto teorica: guida il modo in cui si scrive l’RTL, determina il tipo di hardware inferito dai tool e influenza in modo diretto sintesi, timing, verifica e implementazione su <strong>FPGA</strong> o <strong>ASIC</strong>.</p>
+<p>Capire bene questa separazione è fondamentale perché quasi ogni blocco hardware reale nasce dalla loro combinazione:
+- la logica combinatoria elabora i valori correnti;
+- la logica sequenziale conserva lo stato nel tempo;
+- l’insieme dei due costruisce datapath, pipeline, controlli e macchine a stati.</p>
+<p>Questa pagina chiarisce il significato dei due concetti, il loro ruolo nella descrizione RTL e il loro impatto lungo il flusso di progetto.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Ingressi correnti] --&gt; B[Logica combinatoria]
+    B --&gt; C[Uscite combinatorie / next-state]
+    C --&gt; D[Logica sequenziale&lt;br/&gt;registri e flip-flop]
+    D --&gt; E[Stato corrente aggiornato]
+    E --&gt; B
+
+    CLK[Clock] --&gt; D
+
+    style B fill:#eef6ff,stroke:#1f6feb
+    style D fill:#eefbf0,stroke:#22863a</code></pre>
+<h2 id="1-perche-questa-distinzione-e-fondamentale">1. Perché questa distinzione è fondamentale<a class="headerlink" href="#1-perche-questa-distinzione-e-fondamentale" title="Permanent link">&para;</a></h2>
+<p>Quando si osserva un circuito digitale a livello architetturale, quasi tutto può essere ricondotto a due domande:
+- quali segnali sono il risultato immediato degli ingressi e dello stato corrente;
+- quali segnali devono essere memorizzati e aggiornati nel tempo.</p>
+<p>La prima domanda riguarda la <strong>combinatoria</strong>. La seconda riguarda la <strong>sequenziale</strong>.</p>
+<p>Questa distinzione è importante perché:
+- rende leggibile la struttura del circuito;
+- aiuta a prevedere l’hardware che verrà sintetizzato;
+- semplifica la verifica;
+- rende più controllabile il timing;
+- permette di progettare pipeline e controllo in modo ordinato.</p>
+<p>In pratica, un buon progetto RTL cerca sempre di rendere evidente:
+- dove si trova lo stato;
+- dove avviene il calcolo combinatorio;
+- come i due livelli interagiscono.</p>
+<h2 id="2-che-cose-la-logica-combinatoria">2. Che cos’è la logica combinatoria<a class="headerlink" href="#2-che-cose-la-logica-combinatoria" title="Permanent link">&para;</a></h2>
+<p>La logica combinatoria è una logica il cui valore di uscita dipende <strong>solo</strong> dai valori correnti degli ingressi. Non contiene memoria esplicita dello stato passato.</p>
+<h3 id="21-proprieta-fondamentali">2.1 Proprietà fondamentali<a class="headerlink" href="#21-proprieta-fondamentali" title="Permanent link">&para;</a></h3>
+<p>Un blocco combinatorio:
+- non ha stato interno memorizzato in flip-flop;
+- reagisce ai cambiamenti degli ingressi;
+- produce un’uscita determinata dalla funzione implementata;
+- non richiede il clock per definire il proprio valore logico.</p>
+<h3 id="22-esempi-tipici">2.2 Esempi tipici<a class="headerlink" href="#22-esempi-tipici" title="Permanent link">&para;</a></h3>
+<p>Rientrano nella logica combinatoria:
+- mux;
+- decoder;
+- comparatori;
+- operatori aritmetici;
+- logiche di abilitazione;
+- calcolo di segnali di controllo;
+- calcolo del next-state di una FSM.</p>
+<h3 id="23-aspetto-concettuale">2.3 Aspetto concettuale<a class="headerlink" href="#23-aspetto-concettuale" title="Permanent link">&para;</a></h3>
+<p>Dal punto di vista funzionale, la logica combinatoria è una trasformazione:
+- ingresso → uscita
+oppure:
+- stato corrente + ingressi → prossimo valore da registrare</p>
+<p>Questo significa che la combinatoria è spesso il “motore di calcolo” tra due banchi di registri.</p>
+<h2 id="3-che-cose-la-logica-sequenziale">3. Che cos’è la logica sequenziale<a class="headerlink" href="#3-che-cose-la-logica-sequenziale" title="Permanent link">&para;</a></h2>
+<p>La logica sequenziale è una logica il cui comportamento dipende non solo dagli ingressi correnti, ma anche da uno <strong>stato memorizzato</strong> nel tempo.</p>
+<h3 id="31-proprieta-fondamentali">3.1 Proprietà fondamentali<a class="headerlink" href="#31-proprieta-fondamentali" title="Permanent link">&para;</a></h3>
+<p>Un blocco sequenziale:
+- contiene o rappresenta elementi di memoria;
+- conserva informazione tra un istante e il successivo;
+- aggiorna il proprio stato in base a eventi temporali, di solito il clock;
+- consente di costruire registri, contatori, pipeline e macchine a stati.</p>
+<h3 id="32-elementi-tipici">3.2 Elementi tipici<a class="headerlink" href="#32-elementi-tipici" title="Permanent link">&para;</a></h3>
+<p>La logica sequenziale comprende:
+- flip-flop;
+- registri;
+- contatori;
+- shift register;
+- registri di pipeline;
+- stato corrente di una FSM.</p>
+<h3 id="33-aspetto-concettuale">3.3 Aspetto concettuale<a class="headerlink" href="#33-aspetto-concettuale" title="Permanent link">&para;</a></h3>
+<p>Dal punto di vista del modello, la logica sequenziale implementa:
+- stato corrente → stato successivo al clock</p>
+<p>In altre parole, la logica sequenziale è ciò che permette a un circuito di “ricordare” informazioni e quindi di avere un comportamento esteso nel tempo.</p>
+<h2 id="4-il-ruolo-del-clock">4. Il ruolo del clock<a class="headerlink" href="#4-il-ruolo-del-clock" title="Permanent link">&para;</a></h2>
+<p>La differenza tra combinatoria e sequenziale diventa particolarmente chiara quando si introduce il clock.</p>
+<h3 id="41-combinatoria-e-clock">4.1 Combinatoria e clock<a class="headerlink" href="#41-combinatoria-e-clock" title="Permanent link">&para;</a></h3>
+<p>La logica combinatoria, in senso stretto, non ha bisogno del clock per definire il proprio risultato. Le sue uscite cambiano quando cambiano gli ingressi.</p>
+<h3 id="42-sequenziale-e-clock">4.2 Sequenziale e clock<a class="headerlink" href="#42-sequenziale-e-clock" title="Permanent link">&para;</a></h3>
+<p>La logica sequenziale, invece, usa il clock come riferimento temporale per stabilire quando aggiornare lo stato. Questo consente di:
+- sincronizzare i trasferimenti;
+- controllare l’evoluzione temporale del circuito;
+- segmentare il datapath;
+- costruire pipeline;
+- analizzare il timing tra registri.</p>
+<h3 id="43-visione-sistemica">4.3 Visione sistemica<a class="headerlink" href="#43-visione-sistemica" title="Permanent link">&para;</a></h3>
+<p>In un sistema sincrono, il clock organizza il comportamento globale:
+- la combinatoria calcola;
+- la sequenziale cattura;
+- il processo si ripete a ogni ciclo.</p>
+<pre class="mermaid"><code>flowchart TD
+    A[Stato corrente nei registri] --&gt; B[Logica combinatoria]
+    B --&gt; C[Dati pronti prima del fronte attivo]
+    C --&gt; D[Flip-flop campionano]
+    D --&gt; E[Nuovo stato]
+    E --&gt; B</code></pre>
+<h2 id="5-come-si-riflette-in-systemverilog">5. Come si riflette in SystemVerilog<a class="headerlink" href="#5-come-si-riflette-in-systemverilog" title="Permanent link">&para;</a></h2>
+<p>In SystemVerilog, la distinzione tra logica combinatoria e sequenziale si traduce direttamente nei blocchi RTL usati per descriverla.</p>
+<h3 id="51-descrizione-della-combinatoria">5.1 Descrizione della combinatoria<a class="headerlink" href="#51-descrizione-della-combinatoria" title="Permanent link">&para;</a></h3>
+<p>La logica combinatoria viene descritta tipicamente con:
+- <code>assign</code>
+- <code>always_comb</code></p>
+<p>Questo esprime che il valore dipende dagli ingressi correnti e non rappresenta uno stato memorizzato.</p>
+<h3 id="52-descrizione-della-sequenziale">5.2 Descrizione della sequenziale<a class="headerlink" href="#52-descrizione-della-sequenziale" title="Permanent link">&para;</a></h3>
+<p>La logica sequenziale viene descritta tipicamente con:
+- <code>always_ff</code></p>
+<p>Questo esprime che il segnale rappresenta registri o stato aggiornato su eventi di clock.</p>
+<h3 id="53-perche-conta">5.3 Perché conta<a class="headerlink" href="#53-perche-conta" title="Permanent link">&para;</a></h3>
+<p>La scelta del blocco corretto non è soltanto una questione sintattica. Permette ai tool e ai lettori del codice di capire subito:
+- che tipo di hardware si vuole inferire;
+- se il segnale è combinatorio o registrato;
+- come interpretare il comportamento nella simulazione;
+- quali verifiche fare nella review del codice.</p>
+<h2 id="6-combinatoria-come-calcolo-tra-registri">6. Combinatoria come calcolo tra registri<a class="headerlink" href="#6-combinatoria-come-calcolo-tra-registri" title="Permanent link">&para;</a></h2>
+<p>Nella maggior parte dei datapath reali, la logica combinatoria si trova <strong>tra</strong> elementi sequenziali. Questo è il modello classico dei sistemi sincroni.</p>
+<h3 id="61-schema-concettuale">6.1 Schema concettuale<a class="headerlink" href="#61-schema-concettuale" title="Permanent link">&para;</a></h3>
+<p>Il pattern generale è:
+- un insieme di registri fornisce lo stato corrente;
+- la logica combinatoria elabora dati e controllo;
+- il risultato viene catturato da altri registri al clock successivo.</p>
+<h3 id="62-perche-e-importante">6.2 Perché è importante<a class="headerlink" href="#62-perche-e-importante" title="Permanent link">&para;</a></h3>
+<p>Questa struttura è alla base di:
+- pipeline;
+- elaborazione numerica;
+- unità di controllo;
+- bus e interfacce;
+- percorsi dati ad alte prestazioni.</p>
+<h3 id="63-punto-di-vista-temporale">6.3 Punto di vista temporale<a class="headerlink" href="#63-punto-di-vista-temporale" title="Permanent link">&para;</a></h3>
+<p>Il timing viene analizzato proprio lungo questo cammino:
+- uscita di un registro;
+- attraversamento della combinatoria;
+- arrivo all’ingresso del registro successivo.</p>
+<p>Per questo motivo, quando si parla di timing closure, si parla quasi sempre della qualità dei percorsi tra elementi sequenziali separati da logica combinatoria.</p>
+<h2 id="7-stato-memoria-e-comportamento-nel-tempo">7. Stato, memoria e comportamento nel tempo<a class="headerlink" href="#7-stato-memoria-e-comportamento-nel-tempo" title="Permanent link">&para;</a></h2>
+<p>Il concetto di <strong>stato</strong> è la chiave per capire la logica sequenziale.</p>
+<h3 id="71-che-cose-lo-stato">7.1 Che cos’è lo stato<a class="headerlink" href="#71-che-cose-lo-stato" title="Permanent link">&para;</a></h3>
+<p>Lo stato è l’informazione memorizzata che consente al circuito di comportarsi in modo dipendente dalla storia precedente.</p>
+<h3 id="72-perche-la-combinatoria-non-basta">7.2 Perché la combinatoria non basta<a class="headerlink" href="#72-perche-la-combinatoria-non-basta" title="Permanent link">&para;</a></h3>
+<p>Con sola logica combinatoria si possono costruire funzioni istantanee, ma non:
+- contare eventi;
+- ricordare un dato;
+- gestire protocolli multi-ciclo;
+- costruire FSM;
+- attraversare una pipeline con più stadi temporali.</p>
+<h3 id="73-la-sequenziale-come-memoria-controllata">7.3 La sequenziale come memoria controllata<a class="headerlink" href="#73-la-sequenziale-come-memoria-controllata" title="Permanent link">&para;</a></h3>
+<p>La logica sequenziale fornisce una memoria sincronizzata, che permette di:
+- definire fasi di elaborazione;
+- segmentare il flusso dei dati;
+- implementare controllo temporale;
+- disaccoppiare calcolo e avanzamento temporale.</p>
+<h2 id="8-esempi-concettuali-di-differenza">8. Esempi concettuali di differenza<a class="headerlink" href="#8-esempi-concettuali-di-differenza" title="Permanent link">&para;</a></h2>
+<p>Anche senza entrare nel dettaglio di codice HDL, alcuni esempi rendono subito chiara la distinzione.</p>
+<h3 id="81-mux">8.1 Mux<a class="headerlink" href="#81-mux" title="Permanent link">&para;</a></h3>
+<p>Un mux è combinatorio: seleziona in modo immediato uno degli ingressi in base a un selettore.</p>
+<h3 id="82-registro">8.2 Registro<a class="headerlink" href="#82-registro" title="Permanent link">&para;</a></h3>
+<p>Un registro è sequenziale: memorizza un valore e lo aggiorna solo al fronte di clock.</p>
+<h3 id="83-contatore">8.3 Contatore<a class="headerlink" href="#83-contatore" title="Permanent link">&para;</a></h3>
+<p>Un contatore è sequenziale perché il valore successivo dipende dal valore precedente, che viene memorizzato.</p>
+<h3 id="84-calcolo-del-next-state">8.4 Calcolo del next-state<a class="headerlink" href="#84-calcolo-del-next-state" title="Permanent link">&para;</a></h3>
+<p>Il next-state di una FSM è in genere combinatorio: viene calcolato a partire da stato corrente e ingressi.</p>
+<h3 id="85-stato-corrente-di-una-fsm">8.5 Stato corrente di una FSM<a class="headerlink" href="#85-stato-corrente-di-una-fsm" title="Permanent link">&para;</a></h3>
+<p>Lo stato corrente è sequenziale: viene memorizzato in registri e aggiornato sul clock.</p>
+<h2 id="9-latch-flip-flop-e-ambiguita-di-modellazione">9. Latch, flip-flop e ambiguità di modellazione<a class="headerlink" href="#9-latch-flip-flop-e-ambiguita-di-modellazione" title="Permanent link">&para;</a></h2>
+<p>Quando si scrive RTL, un errore comune è confondere una logica combinatoria incompleta con una vera logica sequenziale.</p>
+<h3 id="91-latch-involontari">9.1 Latch involontari<a class="headerlink" href="#91-latch-involontari" title="Permanent link">&para;</a></h3>
+<p>Se in una descrizione combinatoria un segnale non riceve assegnazione in tutte le condizioni, il tool può inferire un latch. In quel caso:
+- il segnale conserva memoria;
+- il circuito non è più puramente combinatorio;
+- il timing diventa più complesso;
+- la verifica si complica.</p>
+<h3 id="92-perche-e-un-problema">9.2 Perché è un problema<a class="headerlink" href="#92-perche-e-un-problema" title="Permanent link">&para;</a></h3>
+<p>Nella maggior parte dei design ordinati:
+- si vuole che la combinatoria sia davvero combinatoria;
+- si vuole che la memoria sia esplicitamente modellata con registri;
+- si vogliono evitare elementi di stato impliciti e poco controllabili.</p>
+<h3 id="93-regola-pratica">9.3 Regola pratica<a class="headerlink" href="#93-regola-pratica" title="Permanent link">&para;</a></h3>
+<p>La separazione chiara tra:
+- <code>always_comb</code> per logica combinatoria;
+- <code>always_ff</code> per logica sequenziale
+riduce molto il rischio di inferenze accidentali.</p>
+<h2 id="10-percorsi-di-timing-e-cammino-critico">10. Percorsi di timing e cammino critico<a class="headerlink" href="#10-percorsi-di-timing-e-cammino-critico" title="Permanent link">&para;</a></h2>
+<p>Il legame tra logica combinatoria e sequenziale è al centro dell’analisi temporale.</p>
+<h3 id="101-cammino-tipico">10.1 Cammino tipico<a class="headerlink" href="#101-cammino-tipico" title="Permanent link">&para;</a></h3>
+<p>Un percorso sincrono tipico è:
+- uscita di un flip-flop sorgente;
+- logica combinatoria intermedia;
+- ingresso di un flip-flop destinazione.</p>
+<h3 id="102-cammino-critico">10.2 Cammino critico<a class="headerlink" href="#102-cammino-critico" title="Permanent link">&para;</a></h3>
+<p>Il cammino critico è il percorso che richiede il tempo maggiore. Nella pratica, è spesso dominato dalla quantità e dalla struttura della logica combinatoria tra due registri.</p>
+<h3 id="103-implicazioni-progettuali">10.3 Implicazioni progettuali<a class="headerlink" href="#103-implicazioni-progettuali" title="Permanent link">&para;</a></h3>
+<p>Se la combinatoria è troppo profonda:
+- la frequenza massima diminuisce;
+- diventa necessario introdurre pipeline;
+- la chiusura del timing si complica;
+- l’implementazione fisica diventa più critica.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Registro sorgente] --&gt; B[Logica combinatoria]
+    B --&gt; C[Registro destinazione]
+
+    B --&gt; D[Profondità logica]
+    B --&gt; E[Fanout]
+    B --&gt; F[Mux e priorità]
+    B --&gt; G[Operazioni aritmetiche]
+
+    D --&gt; H[Impatto su Fmax]
+    E --&gt; H
+    F --&gt; H
+    G --&gt; H</code></pre>
+<h2 id="11-pipeline-organizzare-la-relazione-tra-combinatoria-e-sequenziale">11. Pipeline: organizzare la relazione tra combinatoria e sequenziale<a class="headerlink" href="#11-pipeline-organizzare-la-relazione-tra-combinatoria-e-sequenziale" title="Permanent link">&para;</a></h2>
+<p>La pipeline è uno dei concetti più importanti che nascono dalla combinazione ordinata di logica combinatoria e sequenziale.</p>
+<h3 id="111-idea-di-base">11.1 Idea di base<a class="headerlink" href="#111-idea-di-base" title="Permanent link">&para;</a></h3>
+<p>Invece di concentrare troppo calcolo combinatorio tra due registri, si inseriscono registri intermedi che suddividono il percorso in più stadi.</p>
+<h3 id="112-effetto-architetturale">11.2 Effetto architetturale<a class="headerlink" href="#112-effetto-architetturale" title="Permanent link">&para;</a></h3>
+<p>Questo comporta:
+- minore profondità logica per stadio;
+- maggiore frequenza massima;
+- aumento della latenza;
+- maggiore complessità di controllo e validazione.</p>
+<h3 id="113-visione-rtl">11.3 Visione RTL<a class="headerlink" href="#113-visione-rtl" title="Permanent link">&para;</a></h3>
+<p>Dal punto di vista RTL:
+- la combinatoria definisce il lavoro di ogni stadio;
+- la sequenziale delimita i confini temporali tra stadi.</p>
+<h3 id="114-collegamento-a-fpga-e-asic">11.4 Collegamento a FPGA e ASIC<a class="headerlink" href="#114-collegamento-a-fpga-e-asic" title="Permanent link">&para;</a></h3>
+<ul>
+<li>In <strong>FPGA</strong>, la pipeline è spesso essenziale per sfruttare bene LUT, DSP e routing.</li>
+<li>In <strong>ASIC</strong>, è uno strumento centrale per timing closure, floorplanning e controllo del cammino critico.</li>
+</ul>
+<h2 id="12-fsm-combinatoria-e-sequenziale-lavorano-insieme">12. FSM: combinatoria e sequenziale lavorano insieme<a class="headerlink" href="#12-fsm-combinatoria-e-sequenziale-lavorano-insieme" title="Permanent link">&para;</a></h2>
+<p>Le macchine a stati finiti sono un caso esemplare di cooperazione tra combinatoria e sequenziale.</p>
+<h3 id="121-stato-memorizzato">12.1 Stato memorizzato<a class="headerlink" href="#121-stato-memorizzato" title="Permanent link">&para;</a></h3>
+<p>Lo stato corrente è sequenziale.</p>
+<h3 id="122-calcolo-delle-transizioni">12.2 Calcolo delle transizioni<a class="headerlink" href="#122-calcolo-delle-transizioni" title="Permanent link">&para;</a></h3>
+<p>Il next-state è combinatorio.</p>
+<h3 id="123-uscite">12.3 Uscite<a class="headerlink" href="#123-uscite" title="Permanent link">&para;</a></h3>
+<p>Le uscite possono essere:
+- derivate solo dallo stato;
+- derivate da stato e ingressi.</p>
+<h3 id="124-perche-e-un-buon-esempio-didattico">12.4 Perché è un buon esempio didattico<a class="headerlink" href="#124-perche-e-un-buon-esempio-didattico" title="Permanent link">&para;</a></h3>
+<p>Le FSM mostrano con grande chiarezza che:
+- la sequenziale conserva l’informazione;
+- la combinatoria decide l’evoluzione del comportamento;
+- il clock scandisce il passaggio da una configurazione alla successiva.</p>
+<h2 id="13-effetti-sulla-verifica">13. Effetti sulla verifica<a class="headerlink" href="#13-effetti-sulla-verifica" title="Permanent link">&para;</a></h2>
+<p>La distinzione tra combinatoria e sequenziale è molto utile anche in verifica.</p>
+<h3 id="131-osservabilita-del-comportamento">13.1 Osservabilità del comportamento<a class="headerlink" href="#131-osservabilita-del-comportamento" title="Permanent link">&para;</a></h3>
+<p>In simulazione, è importante capire:
+- quali segnali devono reagire immediatamente;
+- quali invece cambiano solo al clock.</p>
+<p>Questa differenza aiuta a leggere waveform e debug.</p>
+<h3 id="132-assertion-e-controlli">13.2 Assertion e controlli<a class="headerlink" href="#132-assertion-e-controlli" title="Permanent link">&para;</a></h3>
+<p>Molte assertion si basano proprio su questa distinzione:
+- controlli combinatori su relazioni istantanee;
+- controlli sequenziali su evoluzioni da ciclo a ciclo.</p>
+<h3 id="133-diagnosi-degli-errori">13.3 Diagnosi degli errori<a class="headerlink" href="#133-diagnosi-degli-errori" title="Permanent link">&para;</a></h3>
+<p>Se un segnale cambia in un momento inatteso, la prima domanda spesso è:
+- doveva essere combinatorio o registrato?</p>
+<p>Capire questa risposta accelera la diagnosi del problema.</p>
+<h2 id="14-effetti-sulla-sintesi-e-sullimplementazione">14. Effetti sulla sintesi e sull’implementazione<a class="headerlink" href="#14-effetti-sulla-sintesi-e-sullimplementazione" title="Permanent link">&para;</a></h2>
+<p>La sintesi interpreta la combinatoria e la sequenziale in modo diverso e questo si riflette nell’hardware finale.</p>
+<h3 id="141-sintesi-della-combinatoria">14.1 Sintesi della combinatoria<a class="headerlink" href="#141-sintesi-della-combinatoria" title="Permanent link">&para;</a></h3>
+<p>La logica combinatoria viene mappata in:
+- LUT, carry chain e reti di mux su FPGA;
+- celle combinatorie standard su ASIC.</p>
+<h3 id="142-sintesi-della-sequenziale">14.2 Sintesi della sequenziale<a class="headerlink" href="#142-sintesi-della-sequenziale" title="Permanent link">&para;</a></h3>
+<p>La logica sequenziale viene mappata in:
+- flip-flop e registri distribuiti o dedicati su FPGA;
+- flip-flop standard cell o strutture equivalenti su ASIC.</p>
+<h3 id="143-qualita-della-descrizione-rtl">14.3 Qualità della descrizione RTL<a class="headerlink" href="#143-qualita-della-descrizione-rtl" title="Permanent link">&para;</a></h3>
+<p>Una descrizione chiara:
+- migliora la prevedibilità della netlist;
+- riduce inferenze inattese;
+- facilita l’ottimizzazione da parte del tool;
+- rende più coerente il passaggio a implementazione fisica.</p>
+<h3 id="144-collegamento-con-il-backend-asic">14.4 Collegamento con il backend ASIC<a class="headerlink" href="#144-collegamento-con-il-backend-asic" title="Permanent link">&para;</a></h3>
+<p>In ASIC, la buona separazione tra combinatoria e sequenziale supporta:
+- sintesi più controllabile;
+- inserzione DFT più ordinata;
+- floorplanning più ragionato;
+- PnR più prevedibile;
+- CTS e signoff più gestibili.</p>
+<h2 id="15-errori-progettuali-ricorrenti">15. Errori progettuali ricorrenti<a class="headerlink" href="#15-errori-progettuali-ricorrenti" title="Permanent link">&para;</a></h2>
+<p>Molti problemi nelle prime fasi di apprendimento derivano proprio da una separazione insufficiente tra i due mondi.</p>
+<h3 id="151-trattare-segnali-registrati-come-se-fossero-immediati">15.1 Trattare segnali registrati come se fossero immediati<a class="headerlink" href="#151-trattare-segnali-registrati-come-se-fossero-immediati" title="Permanent link">&para;</a></h3>
+<p>Questo porta a errori di comprensione del comportamento ciclo per ciclo.</p>
+<h3 id="152-scrivere-combinatoria-incompleta">15.2 Scrivere combinatoria incompleta<a class="headerlink" href="#152-scrivere-combinatoria-incompleta" title="Permanent link">&para;</a></h3>
+<p>Può introdurre latch involontari e stato implicito.</p>
+<h3 id="153-concentrarsi-solo-sulla-funzione-e-non-sul-tempo">15.3 Concentrarsi solo sulla funzione e non sul tempo<a class="headerlink" href="#153-concentrarsi-solo-sulla-funzione-e-non-sul-tempo" title="Permanent link">&para;</a></h3>
+<p>Un circuito digitale non è solo una trasformazione logica: è una trasformazione che avviene secondo vincoli temporali.</p>
+<h3 id="154-non-pensare-al-percorso-tra-registri">15.4 Non pensare al percorso tra registri<a class="headerlink" href="#154-non-pensare-al-percorso-tra-registri" title="Permanent link">&para;</a></h3>
+<p>Questo rende più difficile chiudere il timing e progettare pipeline efficaci.</p>
+<h2 id="16-buone-pratiche-di-modellazione">16. Buone pratiche di modellazione<a class="headerlink" href="#16-buone-pratiche-di-modellazione" title="Permanent link">&para;</a></h2>
+<p>Per mantenere la distinzione chiara in SystemVerilog RTL, alcune pratiche sono particolarmente efficaci.</p>
+<h3 id="161-rendere-esplicito-dove-si-trova-lo-stato">16.1 Rendere esplicito dove si trova lo stato<a class="headerlink" href="#161-rendere-esplicito-dove-si-trova-lo-stato" title="Permanent link">&para;</a></h3>
+<p>I segnali che rappresentano memoria devono essere chiaramente riconoscibili come registri.</p>
+<h3 id="162-usare-la-combinatoria-per-il-calcolo-non-per-la-memoria">16.2 Usare la combinatoria per il calcolo, non per la memoria<a class="headerlink" href="#162-usare-la-combinatoria-per-il-calcolo-non-per-la-memoria" title="Permanent link">&para;</a></h3>
+<p>La logica combinatoria deve rimanere completa e priva di stato implicito.</p>
+<h3 id="163-separare-calcolo-e-aggiornamento-temporale">16.3 Separare calcolo e aggiornamento temporale<a class="headerlink" href="#163-separare-calcolo-e-aggiornamento-temporale" title="Permanent link">&para;</a></h3>
+<p>Il next-state si calcola in combinatoria, lo stato si aggiorna in sequenziale.</p>
+<h3 id="164-progettare-pensando-al-timing">16.4 Progettare pensando al timing<a class="headerlink" href="#164-progettare-pensando-al-timing" title="Permanent link">&para;</a></h3>
+<p>Ogni blocco combinatorio dovrebbe essere letto anche come potenziale cammino critico.</p>
+<h3 id="165-verificare-la-corrispondenza-tra-intento-e-hardware">16.5 Verificare la corrispondenza tra intento e hardware<a class="headerlink" href="#165-verificare-la-corrispondenza-tra-intento-e-hardware" title="Permanent link">&para;</a></h3>
+<p>La domanda corretta non è solo “funziona in simulazione?”, ma anche:
+- che hardware verrà generato;
+- quali registri saranno inferiti;
+- dove si troverà il percorso più lungo;
+- come si comporterà il blocco in integrazione.</p>
+<h2 id="17-collegamento-con-il-resto-della-sezione-systemverilog">17. Collegamento con il resto della sezione SystemVerilog<a class="headerlink" href="#17-collegamento-con-il-resto-della-sezione-systemverilog" title="Permanent link">&para;</a></h2>
+<p>Questa pagina consolida quanto introdotto nelle pagine precedenti:
+- <strong><code>language-basics.md</code></strong> ha introdotto i costrutti di base del linguaggio;
+- <strong><code>rtl-constructs.md</code></strong> ha definito il sottoinsieme RTL sintetizzabile;
+- <strong><code>procedural-blocks.md</code></strong> ha spiegato il ruolo di <code>always_comb</code>, <code>always_ff</code> e <code>always_latch</code>;
+- qui la distinzione tra combinatoria e sequenziale viene letta anche dal punto di vista architetturale e temporale.</p>
+<p>Questo rende la pagina particolarmente importante perché collega direttamente la sintassi del linguaggio alla struttura reale dell’hardware.</p>
+<h2 id="18-in-sintesi">18. In sintesi<a class="headerlink" href="#18-in-sintesi" title="Permanent link">&para;</a></h2>
+<p>La logica combinatoria e la logica sequenziale sono i due pilastri della progettazione digitale. La prima calcola, la seconda memorizza. La prima reagisce ai valori correnti, la seconda scandisce il comportamento nel tempo attraverso il clock.</p>
+<p>In SystemVerilog, questa distinzione diventa una disciplina di progettazione:
+- la combinatoria si descrive in modo completo e senza memoria implicita;
+- la sequenziale rende esplicito lo stato e il suo aggiornamento;
+- il loro rapporto determina datapath, pipeline, controllo, timing e verificabilità.</p>
+<p>Comprendere bene questa separazione significa scrivere RTL più chiara, più robusta e più vicina all’hardware reale, con benefici concreti lungo tutto il flusso, dalla simulazione alla sintesi, fino all’implementazione su FPGA o al backend ASIC.</p>
+<h2 id="prossimo-passo">Prossimo passo<a class="headerlink" href="#prossimo-passo" title="Permanent link">&para;</a></h2>
+<p>Il passo più naturale ora è <strong><code>fsm.md</code></strong>, perché le macchine a stati finiti rappresentano l’applicazione più chiara e didatticamente efficace dell’interazione tra:
+- logica combinatoria;
+- logica sequenziale;
+- stato;
+- clock;
+- controllo del comportamento nel tempo.</p>
+<p>In alternativa, un altro passo molto naturale è <strong><code>data-types-rtl.md</code></strong>, se vuoi consolidare prima il ruolo dei tipi SystemVerilog nella modellazione RTL ordinata.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

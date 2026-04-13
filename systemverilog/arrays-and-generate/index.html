@@ -1,0 +1,7588 @@
+
+<!doctype html>
+<html lang="it" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corso completo su HDL, verification e tool FPGA/ASIC">
+      
+      
+      
+        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/arrays-and-generate/">
+      
+      
+        <link rel="prev" href="../packages-and-typedefs/">
+      
+      
+        <link rel="next" href="../parameters-and-configuration/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Array e generate - Corso di Microelettronica Digitale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#array-e-generate-in-systemverilog" class="md-skip">
+          Vai al contenuto
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Intestazione">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-header__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corso di Microelettronica Digitale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Array e generate
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green"  aria-label="Passa a dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passa a dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="lime"  aria-label="Passa a light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passa a light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Cancella" aria-label="Cancella" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../00_introduzione/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Intro
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../01_fondamenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Fondamenti
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../02_vhdl/" class="md-tabs__link">
+          
+  
+  
+  VHDL
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../03_verilog/" class="md-tabs__link">
+          
+  
+  
+  Verilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  SystemVerilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../05_verification_base/" class="md-tabs__link">
+          
+  
+  
+  Verification
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../06_uvm/" class="md-tabs__link">
+          
+  
+  
+  UVM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../fpga/" class="md-tabs__link">
+          
+  
+  
+  FPGA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../asic/" class="md-tabs__link">
+          
+  
+  
+  ASIC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../soc/" class="md-tabs__link">
+          
+  
+  
+  SoC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../09_progetti/" class="md-tabs__link">
+          
+  
+  
+  Progetti
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../10_tool_e_tcl/" class="md-tabs__link">
+          
+  
+  
+  Tool e Tcl/Tk
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../11_appendici/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Appendici
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../12_riferimenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Riferimenti
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigazione" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-nav__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Corso di Microelettronica Digitale
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00_introduzione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01_fondamenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VHDL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    VHDL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl_progettazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foglio di lavoro
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foglio di lavoro
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Tool Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/in_out/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    In and Out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/utilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/clocks_registers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocks and Registers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/state_machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/modular_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modular Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/memories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/managing_clocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Managing Clocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/io_flavors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O Flavors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A Taste of Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Rest for Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SystemVerilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../language-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti del linguaggio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rtl-constructs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Costrutti RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../procedural-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocchi procedurali
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../combinational-vs-sequential/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logica combinatoria e sequenziale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fsm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Macchine a stati finiti (FSM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../state-encoding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codifica degli stati
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datapath-and-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datapath e controllo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pipelining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline e pipelining
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interfaces-and-handshake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfacce e handshake
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../systemverilog-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Le interface in SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../packages-and-typedefs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Package e typedef
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Array e generate
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Array e generate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-perche-servono-array-e-generate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Perché servono array e generate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Perché servono array e generate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-problemi-della-duplicazione-manuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Problemi della duplicazione manuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-obiettivo-della-scalabilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Obiettivo della scalabilità
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-collegamento-con-larchitettura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Collegamento con l’architettura
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-che-cosa-sono-gli-array-in-systemverilog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Che cosa sono gli array in SystemVerilog
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Che cosa sono gli array in SystemVerilog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-cosa-possono-rappresentare" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Cosa possono rappresentare
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-significato-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Significato progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-oltre-la-compattezza-sintattica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Oltre la compattezza sintattica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-packed-e-unpacked-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Packed e unpacked array
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Packed e unpacked array">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-packed-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Packed array
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 Packed array">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#significato-concettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Significato concettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-unpacked-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Unpacked array
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Unpacked array">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#significato-concettuale_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Significato concettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-perche-la-distinzione-conta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Perché la distinzione conta
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-array-come-rappresentazione-di-strutture-rtl-ripetitive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Array come rappresentazione di strutture RTL ripetitive
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Array come rappresentazione di strutture RTL ripetitive">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-banchi-di-registri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Banchi di registri
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-collezioni-di-segnali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Collezioni di segnali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-canali-paralleli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Canali paralleli
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-pipeline-e-stadi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Pipeline e stadi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-array-di-tipi-definiti-dallutente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Array di tipi definiti dall’utente
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Array di tipi definiti dall’utente">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-array-di-enum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Array di enum
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-array-di-struct" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Array di struct
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-beneficio-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Beneficio progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-indicizzazione-e-significato-architetturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Indicizzazione e significato architetturale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Indicizzazione e significato architetturale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-lindice-non-e-solo-un-numero" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 L’indice non è solo un numero
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-buona-disciplina" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Buona disciplina
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-che-cose-generate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Che cos’è generate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Che cos’è generate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-significato-fondamentale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Significato fondamentale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-quando-serve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Quando serve
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-differenza-rispetto-ai-costrutti-procedurali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Differenza rispetto ai costrutti procedurali
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-for-generate-e-replicazione-strutturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. for generate e replicazione strutturale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. for generate e replicazione strutturale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-idea-di-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Idea di base
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-esempi-concettuali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Esempi concettuali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-vantaggi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-attenzione-metodologica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Attenzione metodologica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-if-generate-e-configurazione-strutturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. if generate e configurazione strutturale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. if generate e configurazione strutturale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-quando-e-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Quando è utile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-vantaggio-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Vantaggio progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-collegamento-con-il-riuso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Collegamento con il riuso
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-parametri-array-e-generate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Parametri, array e generate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Parametri, array e generate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-parametri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Parametri
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Array
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-generate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Generate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-visione-completa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 Visione completa
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-impatto-su-sintesi-e-hardware-risultante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Impatto su sintesi e hardware risultante
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Impatto su sintesi e hardware risultante">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-generate-come-descrizione-strutturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Generate come descrizione strutturale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-array-e-inferenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Array e inferenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-effetto-sulla-leggibilita-della-netlist-e-del-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Effetto sulla leggibilità della netlist e del debug
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114-effetto-sulla-manutenzione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.4 Effetto sulla manutenzione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-impatto-sul-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Impatto sul timing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Impatto sul timing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-replicazione-e-fanout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Replicazione e fanout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-strutture-regolari" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Strutture regolari
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-parametrizzazione-consapevole" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Parametrizzazione consapevole
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-collegamento-con-pipeline-e-controllo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4 Collegamento con pipeline e controllo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-impatto-sulla-verifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Impatto sulla verifica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Impatto sulla verifica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-verifica-di-strutture-replicate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Verifica di strutture replicate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-scalabilita-della-verifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Scalabilità della verifica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-osservabilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 Osservabilità
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#134-beneficio-sistemico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4 Beneficio sistemico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-impatto-su-fpga-e-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Impatto su FPGA e ASIC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Impatto su FPGA e ASIC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-su-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Su FPGA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-su-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Su ASIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-nessuna-astrazione-gratuita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 Nessuna astrazione gratuita
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-errori-comuni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Errori comuni
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Errori comuni">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-usare-array-senza-significato-chiaro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Usare array senza significato chiaro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-parametrizzare-troppo-presto-o-senza-controllo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 Parametrizzare troppo presto o senza controllo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-replicare-hardware-senza-valutare-limpatto-fisico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Replicare hardware senza valutare l’impatto fisico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#154-usare-generate-per-nascondere-complessita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.4 Usare generate per nascondere complessità
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#155-non-allineare-array-tipi-e-interfacce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.5 Non allineare array, tipi e interfacce
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-buone-pratiche-di-modellazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Buone pratiche di modellazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. Buone pratiche di modellazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-dare-significato-architetturale-agli-indici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 Dare significato architetturale agli indici
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-parametrizzare-cio-che-ha-davvero-senso-scalare" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.2 Parametrizzare ciò che ha davvero senso scalare
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163-usare-typedef-e-struct-per-mantenere-leggibilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.3 Usare typedef e struct per mantenere leggibilità
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#164-tenere-visibile-la-struttura-risultante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.4 Tenere visibile la struttura risultante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#165-verificare-le-configurazioni-reali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.5 Verificare le configurazioni reali
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-collegamento-con-il-resto-della-sezione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Collegamento con il resto della sezione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parameters-and-configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parametri e configurazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../latency-and-throughput/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Latenza e throughput
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coding-style-rtl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stile di codifica RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../verification-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di verifica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testbench-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Struttura di un testbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assertions-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di assertion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simulation-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di simulazione RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coverage-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di coverage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reset-strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strategie di reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clock-domain-crossing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clock Domain Crossing (CDC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case-study-systemverilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_SV_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05_verification_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.chipverify.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChipVerify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verificationguide.com" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VerificationGuide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.doulos.com/knowhow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doulos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_3" id="__nav_8_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetto mini CPU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetto mini CPU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU_waveform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Waveform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione alle FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di una FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/rtl-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTL design per FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/constraints-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/synthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse dedicate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocking e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/place-route/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Placement, routing e timing closure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica e test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/debug/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debug su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/prototyping-soc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prototipazione di sistemi e SoC su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/fpga-vs-asic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA vs ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_fpga_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_ps_axi_led/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq LED
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_17" id="__nav_9_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq FIR
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zynq FIR
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_8tap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_axi_stream_theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AXI Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_dma_interrupt_perf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DMA Interrupt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_xparameters_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    X Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Digilent/Zybo-Z7" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zybo-Z7-20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASIC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ASIC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione agli ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/spec-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specifiche e architettura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/rtl-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTL design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/constraints-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/synthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DFT e testabilità
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/floorplanning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Floorplanning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/place-route/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Place and Route
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/cts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clock Tree Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/signoff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Signoff fisico e temporale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power analysis e low-power design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica funzionale e equivalenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/libraries-pdk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Librerie standard cell e PDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/tapeout-fabrication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tape-out e fabbricazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_asic_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_openasic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAsic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_19" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_19" id="__nav_10_19_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_19">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openlane2.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenLAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/kunalg123/vsdflow" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CMOS VLSI Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SoC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SoC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione ai SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/architettura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di un SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/bus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interconnessioni e bus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/memorie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memorie e gerarchia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/periferiche/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Periferiche e I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/ip-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrazione IP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/verifica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica di sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/hw-sw-codesign/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HW/SW co-design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/power-clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consumi, clock e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/safety-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Safety e Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/physical-design-awareness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physical awareness nel SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_codice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorgenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool e Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tool e Tcl/Tk
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_e_tcl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3" id="__nav_13_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.tutorialspoint.com/tcl-tk/index.htm" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.amd.com/r/en-US/ug894-vivado-tcl-scripting/Tcl-Scripting-in-Vivado" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Script Tcl in Vivado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://yosyshq.readthedocs.io/projects/yosys/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yosis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openroad.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenROAD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://gtkwave.github.io/gtkwave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GTKWave Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verilator.org/guide/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilator Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3_7" id="__nav_13_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vivado
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_13_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vivado
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug910-vivado-getting-started" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug901-vivado-synthesis" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug904-vivado-implementation" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug835-vivado-tcl-commands" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcl Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/swdocs/modelsim/modelsim_user_2024_2.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ModelSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11_appendici/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendici
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12_riferimenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Riferimenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-perche-servono-array-e-generate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Perché servono array e generate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Perché servono array e generate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-problemi-della-duplicazione-manuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Problemi della duplicazione manuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-obiettivo-della-scalabilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Obiettivo della scalabilità
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-collegamento-con-larchitettura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Collegamento con l’architettura
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-che-cosa-sono-gli-array-in-systemverilog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Che cosa sono gli array in SystemVerilog
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Che cosa sono gli array in SystemVerilog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-cosa-possono-rappresentare" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Cosa possono rappresentare
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-significato-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Significato progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-oltre-la-compattezza-sintattica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Oltre la compattezza sintattica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-packed-e-unpacked-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Packed e unpacked array
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Packed e unpacked array">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-packed-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Packed array
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 Packed array">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#significato-concettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Significato concettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-unpacked-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Unpacked array
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Unpacked array">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#significato-concettuale_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Significato concettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-perche-la-distinzione-conta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Perché la distinzione conta
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-array-come-rappresentazione-di-strutture-rtl-ripetitive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Array come rappresentazione di strutture RTL ripetitive
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Array come rappresentazione di strutture RTL ripetitive">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-banchi-di-registri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Banchi di registri
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-collezioni-di-segnali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Collezioni di segnali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-canali-paralleli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Canali paralleli
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-pipeline-e-stadi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Pipeline e stadi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-array-di-tipi-definiti-dallutente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Array di tipi definiti dall’utente
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Array di tipi definiti dall’utente">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-array-di-enum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Array di enum
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-array-di-struct" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Array di struct
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-beneficio-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Beneficio progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-indicizzazione-e-significato-architetturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Indicizzazione e significato architetturale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Indicizzazione e significato architetturale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-lindice-non-e-solo-un-numero" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 L’indice non è solo un numero
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-buona-disciplina" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Buona disciplina
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-che-cose-generate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Che cos’è generate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Che cos’è generate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-significato-fondamentale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Significato fondamentale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-quando-serve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Quando serve
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-differenza-rispetto-ai-costrutti-procedurali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Differenza rispetto ai costrutti procedurali
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-for-generate-e-replicazione-strutturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. for generate e replicazione strutturale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. for generate e replicazione strutturale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-idea-di-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Idea di base
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-esempi-concettuali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Esempi concettuali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-vantaggi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Vantaggi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-attenzione-metodologica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Attenzione metodologica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-if-generate-e-configurazione-strutturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. if generate e configurazione strutturale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. if generate e configurazione strutturale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-quando-e-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Quando è utile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-vantaggio-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Vantaggio progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-collegamento-con-il-riuso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Collegamento con il riuso
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-parametri-array-e-generate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Parametri, array e generate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Parametri, array e generate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-parametri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Parametri
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Array
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-generate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Generate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-visione-completa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 Visione completa
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-impatto-su-sintesi-e-hardware-risultante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Impatto su sintesi e hardware risultante
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Impatto su sintesi e hardware risultante">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-generate-come-descrizione-strutturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Generate come descrizione strutturale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-array-e-inferenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Array e inferenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-effetto-sulla-leggibilita-della-netlist-e-del-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Effetto sulla leggibilità della netlist e del debug
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114-effetto-sulla-manutenzione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.4 Effetto sulla manutenzione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-impatto-sul-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Impatto sul timing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Impatto sul timing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-replicazione-e-fanout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Replicazione e fanout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-strutture-regolari" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Strutture regolari
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-parametrizzazione-consapevole" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Parametrizzazione consapevole
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-collegamento-con-pipeline-e-controllo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4 Collegamento con pipeline e controllo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-impatto-sulla-verifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Impatto sulla verifica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Impatto sulla verifica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-verifica-di-strutture-replicate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Verifica di strutture replicate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-scalabilita-della-verifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Scalabilità della verifica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-osservabilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 Osservabilità
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#134-beneficio-sistemico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4 Beneficio sistemico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-impatto-su-fpga-e-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Impatto su FPGA e ASIC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Impatto su FPGA e ASIC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-su-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Su FPGA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-su-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Su ASIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-nessuna-astrazione-gratuita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 Nessuna astrazione gratuita
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-errori-comuni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Errori comuni
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Errori comuni">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-usare-array-senza-significato-chiaro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Usare array senza significato chiaro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-parametrizzare-troppo-presto-o-senza-controllo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 Parametrizzare troppo presto o senza controllo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-replicare-hardware-senza-valutare-limpatto-fisico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Replicare hardware senza valutare l’impatto fisico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#154-usare-generate-per-nascondere-complessita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.4 Usare generate per nascondere complessità
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#155-non-allineare-array-tipi-e-interfacce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.5 Non allineare array, tipi e interfacce
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-buone-pratiche-di-modellazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Buone pratiche di modellazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. Buone pratiche di modellazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-dare-significato-architetturale-agli-indici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 Dare significato architetturale agli indici
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-parametrizzare-cio-che-ha-davvero-senso-scalare" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.2 Parametrizzare ciò che ha davvero senso scalare
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163-usare-typedef-e-struct-per-mantenere-leggibilita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.3 Usare typedef e struct per mantenere leggibilità
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#164-tenere-visibile-la-struttura-risultante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.4 Tenere visibile la struttura risultante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#165-verificare-le-configurazioni-reali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.5 Verificare le configurazioni reali
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-collegamento-con-il-resto-della-sezione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Collegamento con il resto della sezione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="array-e-generate-in-systemverilog">Array e <code>generate</code> in SystemVerilog<a class="headerlink" href="#array-e-generate-in-systemverilog" title="Permanent link">&para;</a></h1>
+<p>Dopo aver introdotto <strong>package</strong>, <strong>typedef</strong> e l’organizzazione dei tipi condivisi, il passo successivo naturale è affrontare gli strumenti che permettono di rendere un progetto RTL più <strong>scalabile</strong>, <strong>configurabile</strong> e <strong>riusabile</strong>. In SystemVerilog, due famiglie di costrutti sono particolarmente importanti per questo scopo:
+- gli <strong>array</strong>
+- i costrutti <strong><code>generate</code></strong></p>
+<p>Questi strumenti non servono soltanto a scrivere meno codice. Il loro vero valore è permettere di descrivere in modo ordinato strutture hardware ripetitive o parametrizzabili, mantenendo leggibilità e coerenza tra:
+- architettura;
+- RTL;
+- sintesi;
+- timing;
+- verifica;
+- implementazione su FPGA e ASIC.</p>
+<p>In un progetto reale, infatti, è molto comune dover descrivere:
+- banchi di registri;
+- vettori di canali;
+- gruppi di moduli identici;
+- pipeline con stadi ripetuti;
+- bus e bundle di segnali in più copie;
+- strutture configurabili per numero di bit, porte o unità parallele.</p>
+<p>Questa pagina introduce il ruolo di array e <code>generate</code> con un taglio progettuale, mettendo in evidenza non solo la sintassi del linguaggio, ma soprattutto il loro impatto sul modo in cui si costruiscono architetture RTL robuste e scalabili.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Descrizione astratta] --&gt; B[Parametri]
+    B --&gt; C[Array]
+    B --&gt; D[generate]
+    C --&gt; E[Strutture scalabili]
+    D --&gt; E
+    E --&gt; F[RTL sintetizzabile]
+    F --&gt; G[Implementazione FPGA / ASIC]
+
+    style C fill:#eef6ff,stroke:#1f6feb
+    style D fill:#eefbf0,stroke:#22863a</code></pre>
+<h2 id="1-perche-servono-array-e-generate">1. Perché servono array e <code>generate</code><a class="headerlink" href="#1-perche-servono-array-e-generate" title="Permanent link">&para;</a></h2>
+<p>Quando un progetto è molto semplice, può essere accettabile descrivere manualmente ogni segnale o ogni istanza. Ma appena la struttura cresce, questo approccio diventa rapidamente poco sostenibile.</p>
+<h3 id="11-problemi-della-duplicazione-manuale">1.1 Problemi della duplicazione manuale<a class="headerlink" href="#11-problemi-della-duplicazione-manuale" title="Permanent link">&para;</a></h3>
+<p>Descrivere a mano strutture ripetitive può portare a:
+- codice lungo e rumoroso;
+- maggiore probabilità di errori;
+- difficoltà di manutenzione;
+- scarsa leggibilità;
+- minore riusabilità.</p>
+<h3 id="12-obiettivo-della-scalabilita">1.2 Obiettivo della scalabilità<a class="headerlink" href="#12-obiettivo-della-scalabilita" title="Permanent link">&para;</a></h3>
+<p>Array e <code>generate</code> permettono di descrivere:
+- collezioni di elementi simili;
+- connessioni organizzate;
+- replicazione di hardware;
+- configurazioni adattabili tramite parametri.</p>
+<h3 id="13-collegamento-con-larchitettura">1.3 Collegamento con l’architettura<a class="headerlink" href="#13-collegamento-con-larchitettura" title="Permanent link">&para;</a></h3>
+<p>Questi costrutti sono particolarmente importanti quando l’architettura stessa prevede:
+- parallelismo;
+- profondità configurabile;
+- più canali dello stesso tipo;
+- moduli ripetuti;
+- interconnessioni regolari.</p>
+<p>In questi casi, la RTL deve poter riflettere la ripetizione strutturale senza degenerare in una lunga sequenza di copie manuali.</p>
+<h2 id="2-che-cosa-sono-gli-array-in-systemverilog">2. Che cosa sono gli array in SystemVerilog<a class="headerlink" href="#2-che-cosa-sono-gli-array-in-systemverilog" title="Permanent link">&para;</a></h2>
+<p>In SystemVerilog, un array è una collezione ordinata di elementi dello stesso tipo. Gli array sono fondamentali per rappresentare gruppi di segnali o strutture dati ripetute.</p>
+<h3 id="21-cosa-possono-rappresentare">2.1 Cosa possono rappresentare<a class="headerlink" href="#21-cosa-possono-rappresentare" title="Permanent link">&para;</a></h3>
+<p>Gli array possono modellare:
+- vettori di bit;
+- collezioni di registri;
+- array di strutture;
+- array di interfacce;
+- banchi di stato;
+- insiemi di canali;
+- memorie astratte o piccoli storage strutturati.</p>
+<h3 id="22-significato-progettuale">2.2 Significato progettuale<a class="headerlink" href="#22-significato-progettuale" title="Permanent link">&para;</a></h3>
+<p>Dal punto di vista RTL, un array è spesso il modo naturale per dire:
+- “ho N elementi equivalenti”
+- “ho una collezione di segnali correlati”
+- “ho una struttura ripetuta che voglio trattare in modo uniforme”</p>
+<h3 id="23-oltre-la-compattezza-sintattica">2.3 Oltre la compattezza sintattica<a class="headerlink" href="#23-oltre-la-compattezza-sintattica" title="Permanent link">&para;</a></h3>
+<p>Usare un array non significa soltanto scrivere meno. Significa esprimere esplicitamente che gli elementi fanno parte di un insieme omogeneo, con una struttura ordinata e riconoscibile.</p>
+<h2 id="3-packed-e-unpacked-array">3. Packed e unpacked array<a class="headerlink" href="#3-packed-e-unpacked-array" title="Permanent link">&para;</a></h2>
+<p>Uno dei temi più importanti in SystemVerilog è la distinzione tra <strong>packed array</strong> e <strong>unpacked array</strong>. Questa distinzione non è solo sintattica: riflette modi diversi di organizzare i dati.</p>
+<h3 id="31-packed-array">3.1 Packed array<a class="headerlink" href="#31-packed-array" title="Permanent link">&para;</a></h3>
+<p>Un packed array rappresenta una collezione di bit contigua, trattabile come un vettore unico dal punto di vista logico.</p>
+<h4 id="significato-concettuale">Significato concettuale<a class="headerlink" href="#significato-concettuale" title="Permanent link">&para;</a></h4>
+<p>È adatto quando i bit fanno parte di:
+- una parola dati;
+- un campo;
+- una codifica;
+- un bus trattato come entità compatta.</p>
+<h3 id="32-unpacked-array">3.2 Unpacked array<a class="headerlink" href="#32-unpacked-array" title="Permanent link">&para;</a></h3>
+<p>Un unpacked array rappresenta una collezione di elementi distinti, ciascuno dei quali può a sua volta essere un vettore, una struttura o un altro tipo.</p>
+<h4 id="significato-concettuale_1">Significato concettuale<a class="headerlink" href="#significato-concettuale_1" title="Permanent link">&para;</a></h4>
+<p>È adatto quando si vuole rappresentare:
+- un insieme di registri;
+- una serie di canali;
+- un vettore di payload;
+- una collezione di oggetti omogenei.</p>
+<h3 id="33-perche-la-distinzione-conta">3.3 Perché la distinzione conta<a class="headerlink" href="#33-perche-la-distinzione-conta" title="Permanent link">&para;</a></h3>
+<p>Capire bene questa differenza è importante perché:
+- cambia il modo in cui si ragiona sul dato;
+- influisce sulla leggibilità del codice;
+- influisce sul modo in cui i campi vengono raggruppati o indicizzati;
+- aiuta a mantenere una modellazione coerente con l’hardware.</p>
+<pre class="mermaid"><code>flowchart TD
+    A[Array in SystemVerilog] --&gt; B[Packed]
+    A --&gt; C[Unpacked]
+
+    B --&gt; D[Vettore contiguo di bit]
+    C --&gt; E[Collezione di elementi distinti]</code></pre>
+<h2 id="4-array-come-rappresentazione-di-strutture-rtl-ripetitive">4. Array come rappresentazione di strutture RTL ripetitive<a class="headerlink" href="#4-array-come-rappresentazione-di-strutture-rtl-ripetitive" title="Permanent link">&para;</a></h2>
+<p>In un progetto RTL, gli array non sono un costrutto astratto: sono il modo naturale per descrivere strutture fisicamente ripetute.</p>
+<h3 id="41-banchi-di-registri">4.1 Banchi di registri<a class="headerlink" href="#41-banchi-di-registri" title="Permanent link">&para;</a></h3>
+<p>Un array può rappresentare un insieme di registri della stessa larghezza.</p>
+<h3 id="42-collezioni-di-segnali">4.2 Collezioni di segnali<a class="headerlink" href="#42-collezioni-di-segnali" title="Permanent link">&para;</a></h3>
+<p>Può rappresentare:
+- più ingressi o più uscite dello stesso tipo;
+- più segnali di validità;
+- più flag di stato;
+- più porte di un blocco parametrico.</p>
+<h3 id="43-canali-paralleli">4.3 Canali paralleli<a class="headerlink" href="#43-canali-paralleli" title="Permanent link">&para;</a></h3>
+<p>Un sistema con più canali dati paralleli può essere modellato in modo molto più leggibile usando array piuttosto che porte o segnali replicati a mano.</p>
+<h3 id="44-pipeline-e-stadi">4.4 Pipeline e stadi<a class="headerlink" href="#44-pipeline-e-stadi" title="Permanent link">&para;</a></h3>
+<p>Anche certi aspetti di una pipeline possono essere rappresentati come collezioni indicizzate di stadi o segnali per stadio.</p>
+<h2 id="5-array-di-tipi-definiti-dallutente">5. Array di tipi definiti dall’utente<a class="headerlink" href="#5-array-di-tipi-definiti-dallutente" title="Permanent link">&para;</a></h2>
+<p>Dopo aver introdotto <code>typedef</code>, è importante evidenziare che gli array diventano ancora più utili quando gli elementi non sono semplici vettori anonimi, ma tipi semantici ben definiti.</p>
+<h3 id="51-array-di-enum">5.1 Array di <code>enum</code><a class="headerlink" href="#51-array-di-enum" title="Permanent link">&para;</a></h3>
+<p>Possono rappresentare, per esempio:
+- stato di più canali;
+- categorie di operazione per più unità;
+- stato locale di elementi replicati.</p>
+<h3 id="52-array-di-struct">5.2 Array di <code>struct</code><a class="headerlink" href="#52-array-di-struct" title="Permanent link">&para;</a></h3>
+<p>Sono molto utili per modellare:
+- più payload dello stesso tipo;
+- più entry di una coda;
+- gruppi di segnali dati + metadati;
+- più contesti operativi paralleli.</p>
+<h3 id="53-beneficio-progettuale">5.3 Beneficio progettuale<a class="headerlink" href="#53-beneficio-progettuale" title="Permanent link">&para;</a></h3>
+<p>Quando array e <code>typedef struct</code> vengono usati insieme:
+- la leggibilità cresce molto;
+- la struttura del progetto rispecchia meglio l’architettura;
+- l’integrazione tra moduli diventa più ordinata;
+- la verifica beneficia di bundle più coerenti.</p>
+<h2 id="6-indicizzazione-e-significato-architetturale">6. Indicizzazione e significato architetturale<a class="headerlink" href="#6-indicizzazione-e-significato-architetturale" title="Permanent link">&para;</a></h2>
+<p>Ogni volta che si usa un array, è importante chiedersi che cosa rappresenti davvero l’indice.</p>
+<h3 id="61-lindice-non-e-solo-un-numero">6.1 L’indice non è solo un numero<a class="headerlink" href="#61-lindice-non-e-solo-un-numero" title="Permanent link">&para;</a></h3>
+<p>L’indice può rappresentare:
+- un canale;
+- una porta;
+- uno stadio di pipeline;
+- una entry di storage;
+- una unità di elaborazione;
+- un lane di parallelismo.</p>
+<h3 id="62-perche-e-importante">6.2 Perché è importante<a class="headerlink" href="#62-perche-e-importante" title="Permanent link">&para;</a></h3>
+<p>Se l’indice ha un significato architetturale chiaro:
+- il codice è più leggibile;
+- il debug è più semplice;
+- la documentazione implicita migliora;
+- la review del progetto è più efficace.</p>
+<h3 id="63-buona-disciplina">6.3 Buona disciplina<a class="headerlink" href="#63-buona-disciplina" title="Permanent link">&para;</a></h3>
+<p>Un array non dovrebbe essere usato per “nascondere” complessità senza chiarirne la semantica. Al contrario, dovrebbe rendere più evidente la regolarità strutturale del blocco.</p>
+<h2 id="7-che-cose-generate">7. Che cos’è <code>generate</code><a class="headerlink" href="#7-che-cose-generate" title="Permanent link">&para;</a></h2>
+<p><code>generate</code> è il meccanismo del linguaggio che permette di costruire strutture hardware in modo parametrico e ripetitivo <strong>a tempo di elaborazione</strong>, cioè prima della sintesi vera e propria.</p>
+<h3 id="71-significato-fondamentale">7.1 Significato fondamentale<a class="headerlink" href="#71-significato-fondamentale" title="Permanent link">&para;</a></h3>
+<p>Con <code>generate</code>, il progettista non descrive un comportamento dinamico del circuito, ma una <strong>regola di costruzione della struttura hardware</strong>.</p>
+<h3 id="72-quando-serve">7.2 Quando serve<a class="headerlink" href="#72-quando-serve" title="Permanent link">&para;</a></h3>
+<p>È particolarmente utile quando si vuole:
+- replicare istanze di moduli;
+- includere o escludere blocchi in base a parametri;
+- costruire interconnessioni regolari;
+- scalare l’architettura a partire da configurazioni diverse.</p>
+<h3 id="73-differenza-rispetto-ai-costrutti-procedurali">7.3 Differenza rispetto ai costrutti procedurali<a class="headerlink" href="#73-differenza-rispetto-ai-costrutti-procedurali" title="Permanent link">&para;</a></h3>
+<p><code>generate</code> non appartiene alla logica eseguita in simulazione ciclo per ciclo come un <code>always_comb</code> o <code>always_ff</code>. Serve invece a definire la forma dell’hardware che verrà creato.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Parametri di configurazione] --&gt; B[generate]
+    B --&gt; C[Numero di istanze]
+    B --&gt; D[Connessioni strutturali]
+    B --&gt; E[Inclusioni condizionali]
+    C --&gt; F[Hardware risultante]
+    D --&gt; F
+    E --&gt; F</code></pre>
+<h2 id="8-for-generate-e-replicazione-strutturale">8. <code>for generate</code> e replicazione strutturale<a class="headerlink" href="#8-for-generate-e-replicazione-strutturale" title="Permanent link">&para;</a></h2>
+<p>Uno degli usi più comuni di <code>generate</code> è la replicazione tramite <code>for generate</code>.</p>
+<h3 id="81-idea-di-base">8.1 Idea di base<a class="headerlink" href="#81-idea-di-base" title="Permanent link">&para;</a></h3>
+<p>Quando si ha una struttura composta da più copie simili di uno stesso blocco, il <code>for generate</code> permette di descriverla in modo regolare.</p>
+<h3 id="82-esempi-concettuali">8.2 Esempi concettuali<a class="headerlink" href="#82-esempi-concettuali" title="Permanent link">&para;</a></h3>
+<p>Può essere usato per costruire:
+- più canali paralleli;
+- più istanze di una stessa unità;
+- catene di moduli;
+- ripetizione di blocchi di pipeline;
+- strutture bit-slice o lane-based.</p>
+<h3 id="83-vantaggi">8.3 Vantaggi<a class="headerlink" href="#83-vantaggi" title="Permanent link">&para;</a></h3>
+<p>I vantaggi principali sono:
+- eliminazione della duplicazione manuale;
+- maggiore regolarità del codice;
+- migliore adattabilità al numero di copie desiderato;
+- maggiore coerenza tra architettura e implementazione.</p>
+<h3 id="84-attenzione-metodologica">8.4 Attenzione metodologica<a class="headerlink" href="#84-attenzione-metodologica" title="Permanent link">&para;</a></h3>
+<p>La replicazione deve restare leggibile. Se il pattern strutturale non è chiaro, anche un <code>generate</code> può diventare difficile da mantenere.</p>
+<h2 id="9-if-generate-e-configurazione-strutturale">9. <code>if generate</code> e configurazione strutturale<a class="headerlink" href="#9-if-generate-e-configurazione-strutturale" title="Permanent link">&para;</a></h2>
+<p>Oltre alla replicazione, <code>generate</code> permette anche di selezionare strutture diverse in funzione di parametri.</p>
+<h3 id="91-quando-e-utile">9.1 Quando è utile<a class="headerlink" href="#91-quando-e-utile" title="Permanent link">&para;</a></h3>
+<p><code>if generate</code> è utile quando:
+- una certa funzione è opzionale;
+- si vuole includere o escludere un blocco;
+- la struttura cambia tra configurazioni diverse;
+- esistono versioni leggere o estese della stessa architettura.</p>
+<h3 id="92-vantaggio-progettuale">9.2 Vantaggio progettuale<a class="headerlink" href="#92-vantaggio-progettuale" title="Permanent link">&para;</a></h3>
+<p>Questo rende possibile una configurazione architetturale controllata senza dover mantenere più versioni separate dello stesso modulo.</p>
+<h3 id="93-collegamento-con-il-riuso">9.3 Collegamento con il riuso<a class="headerlink" href="#93-collegamento-con-il-riuso" title="Permanent link">&para;</a></h3>
+<p>La combinazione tra parametri e <code>if generate</code> rende i moduli più riusabili, perché possono essere adattati a contesti diversi senza riscrivere la struttura di base.</p>
+<h2 id="10-parametri-array-e-generate">10. Parametri, array e <code>generate</code><a class="headerlink" href="#10-parametri-array-e-generate" title="Permanent link">&para;</a></h2>
+<p>Il vero potenziale di questi costrutti emerge quando vengono usati insieme.</p>
+<h3 id="101-parametri">10.1 Parametri<a class="headerlink" href="#101-parametri" title="Permanent link">&para;</a></h3>
+<p>I parametri definiscono:
+- larghezze;
+- numero di canali;
+- numero di stadi;
+- profondità di una struttura;
+- modalità architetturali.</p>
+<h3 id="102-array">10.2 Array<a class="headerlink" href="#102-array" title="Permanent link">&para;</a></h3>
+<p>Gli array rappresentano gli insiemi di elementi corrispondenti a quella configurazione.</p>
+<h3 id="103-generate">10.3 Generate<a class="headerlink" href="#103-generate" title="Permanent link">&para;</a></h3>
+<p><code>generate</code> costruisce materialmente la struttura risultante:
+- istanze;
+- connessioni;
+- versioni condizionali del blocco.</p>
+<h3 id="104-visione-completa">10.4 Visione completa<a class="headerlink" href="#104-visione-completa" title="Permanent link">&para;</a></h3>
+<p>Insieme, questi strumenti permettono di passare da:
+- una descrizione fissa e poco flessibile
+a:
+- una descrizione strutturale adattabile e riusabile.</p>
+<p>Questa è una delle chiavi di una RTL matura.</p>
+<h2 id="11-impatto-su-sintesi-e-hardware-risultante">11. Impatto su sintesi e hardware risultante<a class="headerlink" href="#11-impatto-su-sintesi-e-hardware-risultante" title="Permanent link">&para;</a></h2>
+<p>Array e <code>generate</code> influiscono direttamente sul modo in cui l’hardware viene costruito.</p>
+<h3 id="111-generate-come-descrizione-strutturale">11.1 Generate come descrizione strutturale<a class="headerlink" href="#111-generate-come-descrizione-strutturale" title="Permanent link">&para;</a></h3>
+<p>Il risultato del <code>generate</code> è hardware reale replicato o configurato. Non è un’astrazione che “sparisce”: diventa parte della netlist e quindi del circuito.</p>
+<h3 id="112-array-e-inferenza">11.2 Array e inferenza<a class="headerlink" href="#112-array-e-inferenza" title="Permanent link">&para;</a></h3>
+<p>Gli array possono essere interpretati come:
+- gruppi di registri;
+- reti di segnali;
+- banchi strutturati;
+- elementi di memoria, a seconda della modalità d’uso.</p>
+<h3 id="113-effetto-sulla-leggibilita-della-netlist-e-del-debug">11.3 Effetto sulla leggibilità della netlist e del debug<a class="headerlink" href="#113-effetto-sulla-leggibilita-della-netlist-e-del-debug" title="Permanent link">&para;</a></h3>
+<p>Una struttura ben organizzata con array e <code>generate</code> aiuta anche a mantenere più comprensibile:
+- la gerarchia del progetto;
+- la corrispondenza tra RTL e hardware;
+- la lettura delle waveform.</p>
+<h3 id="114-effetto-sulla-manutenzione">11.4 Effetto sulla manutenzione<a class="headerlink" href="#114-effetto-sulla-manutenzione" title="Permanent link">&para;</a></h3>
+<p>Se il numero di canali o la dimensione della struttura cambiano, una descrizione parametrica riduce il rischio di errori rispetto a una riscrittura manuale.</p>
+<h2 id="12-impatto-sul-timing">12. Impatto sul timing<a class="headerlink" href="#12-impatto-sul-timing" title="Permanent link">&para;</a></h2>
+<p>L’uso di array e <code>generate</code> non migliora automaticamente il timing, ma influisce sul modo in cui il progetto cresce e quindi sul comportamento temporale del blocco.</p>
+<h3 id="121-replicazione-e-fanout">12.1 Replicazione e fanout<a class="headerlink" href="#121-replicazione-e-fanout" title="Permanent link">&para;</a></h3>
+<p>Replicare canali o unità può aumentare:
+- fanout di segnali comuni;
+- complessità di controllo;
+- pressione sul routing.</p>
+<h3 id="122-strutture-regolari">12.2 Strutture regolari<a class="headerlink" href="#122-strutture-regolari" title="Permanent link">&para;</a></h3>
+<p>Una struttura regolare può però facilitare:
+- floorplanning;
+- analisi dei percorsi;
+- organizzazione del datapath;
+- bilanciamento tra canali.</p>
+<h3 id="123-parametrizzazione-consapevole">12.3 Parametrizzazione consapevole<a class="headerlink" href="#123-parametrizzazione-consapevole" title="Permanent link">&para;</a></h3>
+<p>Rendere una struttura configurabile significa anche dover verificare che diverse configurazioni restino compatibili con gli obiettivi di timing.</p>
+<h3 id="124-collegamento-con-pipeline-e-controllo">12.4 Collegamento con pipeline e controllo<a class="headerlink" href="#124-collegamento-con-pipeline-e-controllo" title="Permanent link">&para;</a></h3>
+<p>Quando array e <code>generate</code> vengono usati per costruire pipeline o canali multipli, il timing va valutato anche in termini di:
+- allineamento tra stadi;
+- distribuzione del controllo;
+- latenza per canale;
+- percorsi condivisi.</p>
+<h2 id="13-impatto-sulla-verifica">13. Impatto sulla verifica<a class="headerlink" href="#13-impatto-sulla-verifica" title="Permanent link">&para;</a></h2>
+<p>Array e <code>generate</code> sono molto utili anche in verifica, ma richiedono disciplina.</p>
+<h3 id="131-verifica-di-strutture-replicate">13.1 Verifica di strutture replicate<a class="headerlink" href="#131-verifica-di-strutture-replicate" title="Permanent link">&para;</a></h3>
+<p>Quando un blocco viene replicato più volte, è importante verificare:
+- che ogni copia sia connessa correttamente;
+- che il comportamento sia uniforme dove previsto;
+- che eventuali differenze per indice siano coerenti con l’architettura.</p>
+<h3 id="132-scalabilita-della-verifica">13.2 Scalabilità della verifica<a class="headerlink" href="#132-scalabilita-della-verifica" title="Permanent link">&para;</a></h3>
+<p>Una struttura parametrica richiede una verifica capace di adattarsi a:
+- diverse larghezze;
+- diversi numeri di istanze;
+- diverse configurazioni strutturali.</p>
+<h3 id="133-osservabilita">13.3 Osservabilità<a class="headerlink" href="#133-osservabilita" title="Permanent link">&para;</a></h3>
+<p>Array e strutture generate devono restare osservabili e comprensibili nelle waveform e nei report, altrimenti il debug può diventare più difficile.</p>
+<h3 id="134-beneficio-sistemico">13.4 Beneficio sistemico<a class="headerlink" href="#134-beneficio-sistemico" title="Permanent link">&para;</a></h3>
+<p>Quando il progetto è ben organizzato, la verifica beneficia molto del fatto che:
+- i pattern strutturali sono regolari;
+- le istanze seguono una logica chiara;
+- i tipi condivisi mantengono coerenza tra le copie.</p>
+<h2 id="14-impatto-su-fpga-e-asic">14. Impatto su FPGA e ASIC<a class="headerlink" href="#14-impatto-su-fpga-e-asic" title="Permanent link">&para;</a></h2>
+<p>Le scelte legate ad array e <code>generate</code> hanno effetti pratici diversi a seconda del target.</p>
+<h3 id="141-su-fpga">14.1 Su FPGA<a class="headerlink" href="#141-su-fpga" title="Permanent link">&para;</a></h3>
+<p>Su FPGA, questi costrutti sono particolarmente utili per:
+- costruire canali paralleli;
+- replicare blocchi che sfruttano LUT, DSP o BRAM;
+- adattare la larghezza di datapath o il numero di lane;
+- mantenere una struttura gerarchica leggibile in integrazione e debug.</p>
+<h3 id="142-su-asic">14.2 Su ASIC<a class="headerlink" href="#142-su-asic" title="Permanent link">&para;</a></h3>
+<p>Su ASIC:
+- aiutano a mantenere l’RTL riusabile e scalabile;
+- facilitano la descrizione di strutture ripetitive regolari;
+- rendono più semplice adattare macro-architettura e parallelismo;
+- richiedono però attenzione a fanout, area e conseguenze fisiche della replicazione.</p>
+<h3 id="143-nessuna-astrazione-gratuita">14.3 Nessuna astrazione gratuita<a class="headerlink" href="#143-nessuna-astrazione-gratuita" title="Permanent link">&para;</a></h3>
+<p>Ogni scelta parametrica o replicativa ha conseguenze reali su:
+- area;
+- timing;
+- potenza;
+- complessità del backend.</p>
+<p>Per questo array e <code>generate</code> devono essere usati come strumenti architetturali consapevoli.</p>
+<h2 id="15-errori-comuni">15. Errori comuni<a class="headerlink" href="#15-errori-comuni" title="Permanent link">&para;</a></h2>
+<p>Alcune difficoltà ricorrenti meritano attenzione.</p>
+<h3 id="151-usare-array-senza-significato-chiaro">15.1 Usare array senza significato chiaro<a class="headerlink" href="#151-usare-array-senza-significato-chiaro" title="Permanent link">&para;</a></h3>
+<p>Se non è evidente che cosa rappresenti l’indice, il codice diventa più difficile da capire.</p>
+<h3 id="152-parametrizzare-troppo-presto-o-senza-controllo">15.2 Parametrizzare troppo presto o senza controllo<a class="headerlink" href="#152-parametrizzare-troppo-presto-o-senza-controllo" title="Permanent link">&para;</a></h3>
+<p>Una parametrizzazione eccessiva può complicare inutilmente sia la RTL sia la verifica.</p>
+<h3 id="153-replicare-hardware-senza-valutare-limpatto-fisico">15.3 Replicare hardware senza valutare l’impatto fisico<a class="headerlink" href="#153-replicare-hardware-senza-valutare-limpatto-fisico" title="Permanent link">&para;</a></h3>
+<p>Una struttura elegantemente parametrica può comunque diventare pesante o difficile da temporizzare.</p>
+<h3 id="154-usare-generate-per-nascondere-complessita">15.4 Usare <code>generate</code> per nascondere complessità<a class="headerlink" href="#154-usare-generate-per-nascondere-complessita" title="Permanent link">&para;</a></h3>
+<p>Il fatto che una struttura sia generata non deve impedire al progettista di capire chiaramente l’hardware risultante.</p>
+<h3 id="155-non-allineare-array-tipi-e-interfacce">15.5 Non allineare array, tipi e interfacce<a class="headerlink" href="#155-non-allineare-array-tipi-e-interfacce" title="Permanent link">&para;</a></h3>
+<p>Se array, <code>typedef</code>, <code>struct</code> e <code>interface</code> non sono progettati in modo coerente, il risultato può diventare più confuso invece che più ordinato.</p>
+<h2 id="16-buone-pratiche-di-modellazione">16. Buone pratiche di modellazione<a class="headerlink" href="#16-buone-pratiche-di-modellazione" title="Permanent link">&para;</a></h2>
+<p>Per usare bene array e <code>generate</code> in SystemVerilog, alcune pratiche sono particolarmente efficaci.</p>
+<h3 id="161-dare-significato-architetturale-agli-indici">16.1 Dare significato architetturale agli indici<a class="headerlink" href="#161-dare-significato-architetturale-agli-indici" title="Permanent link">&para;</a></h3>
+<p>L’indice dovrebbe corrispondere a una nozione reale del progetto: canale, stadio, porta, lane, entry.</p>
+<h3 id="162-parametrizzare-cio-che-ha-davvero-senso-scalare">16.2 Parametrizzare ciò che ha davvero senso scalare<a class="headerlink" href="#162-parametrizzare-cio-che-ha-davvero-senso-scalare" title="Permanent link">&para;</a></h3>
+<p>Conviene rendere configurabili gli aspetti che rappresentano vere varianti architetturali.</p>
+<h3 id="163-usare-typedef-e-struct-per-mantenere-leggibilita">16.3 Usare <code>typedef</code> e <code>struct</code> per mantenere leggibilità<a class="headerlink" href="#163-usare-typedef-e-struct-per-mantenere-leggibilita" title="Permanent link">&para;</a></h3>
+<p>Array di tipi ben definiti risultano molto più chiari di array di segnali anonimi.</p>
+<h3 id="164-tenere-visibile-la-struttura-risultante">16.4 Tenere visibile la struttura risultante<a class="headerlink" href="#164-tenere-visibile-la-struttura-risultante" title="Permanent link">&para;</a></h3>
+<p>Quando si usa <code>generate</code>, bisogna poter ancora leggere mentalmente l’hardware che verrà creato.</p>
+<h3 id="165-verificare-le-configurazioni-reali">16.5 Verificare le configurazioni reali<a class="headerlink" href="#165-verificare-le-configurazioni-reali" title="Permanent link">&para;</a></h3>
+<p>Una struttura parametrica è utile solo se le configurazioni usate nel progetto vengono davvero verificate e valutate rispetto a timing, area e correttezza funzionale.</p>
+<h2 id="17-collegamento-con-il-resto-della-sezione">17. Collegamento con il resto della sezione<a class="headerlink" href="#17-collegamento-con-il-resto-della-sezione" title="Permanent link">&para;</a></h2>
+<p>Questa pagina si collega direttamente ai temi già introdotti:
+- <strong><code>packages-and-typedefs.md</code></strong> ha fornito i tipi condivisi che possono diventare elementi di array;
+- <strong><code>systemverilog-interfaces.md</code></strong> ha mostrato come organizzare collegamenti strutturati tra moduli;
+- <strong><code>datapath-and-control.md</code></strong> e <strong><code>pipelining.md</code></strong> hanno introdotto strutture che spesso richiedono replicazione o indicizzazione;
+- <strong><code>fsm.md</code></strong> e <strong><code>state-encoding.md</code></strong> hanno mostrato casi in cui più canali o più controllori potrebbero essere replicati.</p>
+<p>Array e <code>generate</code> sono quindi lo strumento naturale per trasformare questi concetti in strutture parametrizzabili e riusabili.</p>
+<h2 id="18-in-sintesi">18. In sintesi<a class="headerlink" href="#18-in-sintesi" title="Permanent link">&para;</a></h2>
+<p>Array e <code>generate</code> sono strumenti fondamentali per costruire una RTL scalabile e ordinata. Gli array permettono di rappresentare insiemi di elementi omogenei con significato architetturale chiaro; <code>generate</code> permette di costruire strutture hardware ripetitive o configurabili a partire da parametri.</p>
+<p>Usati bene, questi costrutti:
+- riducono duplicazioni;
+- migliorano leggibilità e riuso;
+- rendono più chiara la struttura dell’hardware;
+- aiutano a mantenere coerenza tra architettura, RTL e verifica;
+- supportano la costruzione di datapath e controlli più flessibili su FPGA e ASIC.</p>
+<p>Il loro valore più grande non è scrivere meno codice, ma descrivere meglio il fatto che il progetto contiene <strong>regolarità strutturale</strong>.</p>
+<h2 id="prossimo-passo">Prossimo passo<a class="headerlink" href="#prossimo-passo" title="Permanent link">&para;</a></h2>
+<p>Il passo più naturale ora è <strong><code>parameters-and-configuration.md</code></strong>, perché dopo aver introdotto array e <code>generate</code> conviene approfondire in modo specifico:
+- <code>parameter</code>
+- <code>localparam</code>
+- configurazione strutturale
+- ampiezze e dimensionamento
+- controllo delle varianti architetturali
+- equilibrio tra riuso, leggibilità e verificabilità</p>
+<p>In alternativa, un altro passo molto naturale è <strong><code>latency-and-throughput.md</code></strong>, se vuoi tornare sul ramo architetturale e prestazionale collegato a pipeline e parallelismo.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

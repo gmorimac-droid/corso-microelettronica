@@ -1,0 +1,7772 @@
+
+<!doctype html>
+<html lang="it" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corso completo su HDL, verification e tool FPGA/ASIC">
+      
+      
+      
+        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/simulation-workflow/">
+      
+      
+        <link rel="prev" href="../assertions-basics/">
+      
+      
+        <link rel="next" href="../coverage-basics/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Flusso di simulazione RTL - Corso di Microelettronica Digitale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#flusso-di-simulazione-rtl" class="md-skip">
+          Vai al contenuto
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Intestazione">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-header__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corso di Microelettronica Digitale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Flusso di simulazione RTL
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green"  aria-label="Passa a dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passa a dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="lime"  aria-label="Passa a light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passa a light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Cancella" aria-label="Cancella" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../00_introduzione/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Intro
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../01_fondamenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Fondamenti
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../02_vhdl/" class="md-tabs__link">
+          
+  
+  
+  VHDL
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../03_verilog/" class="md-tabs__link">
+          
+  
+  
+  Verilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  SystemVerilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../05_verification_base/" class="md-tabs__link">
+          
+  
+  
+  Verification
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../06_uvm/" class="md-tabs__link">
+          
+  
+  
+  UVM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../fpga/" class="md-tabs__link">
+          
+  
+  
+  FPGA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../asic/" class="md-tabs__link">
+          
+  
+  
+  ASIC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../soc/" class="md-tabs__link">
+          
+  
+  
+  SoC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../09_progetti/" class="md-tabs__link">
+          
+  
+  
+  Progetti
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../10_tool_e_tcl/" class="md-tabs__link">
+          
+  
+  
+  Tool e Tcl/Tk
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../11_appendici/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Appendici
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../12_riferimenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Riferimenti
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigazione" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-nav__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Corso di Microelettronica Digitale
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00_introduzione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01_fondamenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VHDL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    VHDL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl_progettazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foglio di lavoro
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foglio di lavoro
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Tool Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/in_out/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    In and Out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/utilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/clocks_registers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocks and Registers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/state_machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/modular_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modular Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/memories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/managing_clocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Managing Clocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/io_flavors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O Flavors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A Taste of Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Rest for Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SystemVerilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../language-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti del linguaggio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rtl-constructs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Costrutti RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../procedural-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocchi procedurali
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../combinational-vs-sequential/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logica combinatoria e sequenziale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fsm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Macchine a stati finiti (FSM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../state-encoding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codifica degli stati
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datapath-and-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datapath e controllo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pipelining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline e pipelining
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interfaces-and-handshake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfacce e handshake
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../systemverilog-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Le interface in SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../packages-and-typedefs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Package e typedef
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arrays-and-generate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Array e generate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parameters-and-configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parametri e configurazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../latency-and-throughput/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Latenza e throughput
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coding-style-rtl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stile di codifica RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../verification-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di verifica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testbench-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Struttura di un testbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assertions-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di assertion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di simulazione RTL
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di simulazione RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-perche-serve-un-flusso-di-simulazione-ordinato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Perché serve un flusso di simulazione ordinato
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Perché serve un flusso di simulazione ordinato">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-il-problema-di-una-verifica-improvvisata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Il problema di una verifica improvvisata
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-vantaggio-di-un-flusso-chiaro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Vantaggio di un flusso chiaro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-simulazione-come-ciclo-di-apprendimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Simulazione come ciclo di apprendimento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-punto-di-partenza-dut-testbench-e-proprieta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Punto di partenza: DUT, testbench e proprietà
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Punto di partenza: DUT, testbench e proprietà">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-dut" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 DUT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-testbench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Testbench
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-assertion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Assertion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-configurazione-del-caso-di-prova" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Configurazione del caso di prova
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-fase-di-compilazione-o-elaborazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Fase di compilazione o elaborazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Fase di compilazione o elaborazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-scopo-della-fase-iniziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Scopo della fase iniziale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-perche-e-gia-una-fase-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Perché è già una fase utile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-valore-metodologico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Valore metodologico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-avvio-della-simulazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Avvio della simulazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Avvio della simulazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-che-cosa-accade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Che cosa accade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-che-cosa-si-osserva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Che cosa si osserva
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-valore-del-primo-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Valore del primo run
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-ruolo-di-clock-e-reset-nel-flusso-di-simulazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Ruolo di clock e reset nel flusso di simulazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Ruolo di clock e reset nel flusso di simulazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-clock-come-riferimento-temporale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Clock come riferimento temporale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-reset-come-riferimento-di-validita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Reset come riferimento di validità
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-buona-disciplina" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Buona disciplina
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-log-della-simulazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Log della simulazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Log della simulazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-perche-i-log-sono-utili" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Perché i log sono utili
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-cosa-dovrebbero-contenere" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Cosa dovrebbero contenere
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-perche-servono-log-leggibili" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Perché servono log leggibili
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-ruolo-delle-assertion-nel-flusso-operativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Ruolo delle assertion nel flusso operativo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Ruolo delle assertion nel flusso operativo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-assertion-come-sensori" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Assertion come sensori
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-perche-aiutano-tanto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Perché aiutano tanto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-integrazione-con-log-e-waveform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Integrazione con log e waveform
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-waveform-vedere-il-comportamento-nel-tempo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Waveform: vedere il comportamento nel tempo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Waveform: vedere il comportamento nel tempo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-perche-sono-importanti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Perché sono importanti
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-segnali-tipicamente-utili" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Segnali tipicamente utili
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-waveform-come-strumento-di-spiegazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Waveform come strumento di spiegazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-dalla-violazione-al-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Dalla violazione al debug
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Dalla violazione al debug">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-punto-di-ingresso-del-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Punto di ingresso del debug
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-domande-giuste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Domande giuste
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-procedere-per-livelli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Procedere per livelli
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-dut-o-testbench-distinguere-la-causa-del-problema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. DUT o testbench? distinguere la causa del problema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. DUT o testbench? distinguere la causa del problema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-bug-del-dut" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Bug del DUT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-bug-del-testbench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Bug del testbench
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-perche-e-una-distinzione-cruciale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Perché è una distinzione cruciale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-correzione-e-rerun" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Correzione e rerun
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Correzione e rerun">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-correzione-locale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Correzione locale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-importanza-del-rerun" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Importanza del rerun
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-disciplina-delliterazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Disciplina dell’iterazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-regressione-non-verificare-solo-lultimo-bug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Regressione: non verificare solo l’ultimo bug
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Regressione: non verificare solo l’ultimo bug">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-che-cose-una-regressione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Che cos’è una regressione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-perche-e-fondamentale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Perché è fondamentale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-beneficio-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Beneficio progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-organizzare-i-casi-di-simulazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Organizzare i casi di simulazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Organizzare i casi di simulazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-dai-casi-semplici-a-quelli-complessi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Dai casi semplici a quelli complessi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-vantaggio-di-una-libreria-di-scenari" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Vantaggio di una libreria di scenari
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-collegamento-con-la-manutenzione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 Collegamento con la manutenzione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-flusso-di-simulazione-e-verifica-incrementale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Flusso di simulazione e verifica incrementale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Flusso di simulazione e verifica incrementale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-primo-livello" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Primo livello
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-secondo-livello" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Secondo livello
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-perche-questo-approccio-funziona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 Perché questo approccio funziona
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-ruolo-dello-stile-rtl-nel-flusso-di-simulazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Ruolo dello stile RTL nel flusso di simulazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Ruolo dello stile RTL nel flusso di simulazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-rtl-leggibile-debug-piu-rapido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 RTL leggibile, debug più rapido
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-rtl-confusa-debug-lento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 RTL confusa, debug lento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-verificabilita-come-proprieta-del-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Verificabilità come proprietà del design
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-ruolo-delle-configurazioni-e-dei-parametri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Ruolo delle configurazioni e dei parametri
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. Ruolo delle configurazioni e dei parametri">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-configurazione-simulata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 Configurazione simulata
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163-strategia-realistica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.3 Strategia realistica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-collegamento-con-fpga-e-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Collegamento con FPGA e ASIC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17. Collegamento con FPGA e ASIC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171-su-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1 Su FPGA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172-su-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.2 Su ASIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#173-visione-comune" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3 Visione comune
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-errori-comuni-nel-flusso-di-simulazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Errori comuni nel flusso di simulazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. Errori comuni nel flusso di simulazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#181-simulare-senza-obiettivi-chiari" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.1 Simulare senza obiettivi chiari
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#182-non-distinguere-sintomo-e-causa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.2 Non distinguere sintomo e causa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#183-fare-debug-solo-sulle-waveform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.3 Fare debug solo sulle waveform
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#184-non-regredire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4 Non regredire
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#185-testbench-poco-chiaro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5 Testbench poco chiaro
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-buone-pratiche-operative" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Buone pratiche operative
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="19. Buone pratiche operative">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#191-partire-da-test-piccoli-e-ripetibili" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.1 Partire da test piccoli e ripetibili
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#192-rendere-i-fallimenti-informativi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.2 Rendere i fallimenti informativi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#193-usare-le-waveform-come-strumento-di-ricostruzione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.3 Usare le waveform come strumento di ricostruzione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#194-iterare-in-modo-disciplinato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.4 Iterare in modo disciplinato
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#195-mantenere-allineati-dut-testbench-e-proprieta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.5 Mantenere allineati DUT, testbench e proprietà
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-collegamento-con-il-resto-della-sezione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Collegamento con il resto della sezione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coverage-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di coverage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reset-strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strategie di reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clock-domain-crossing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clock Domain Crossing (CDC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case-study-systemverilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_SV_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05_verification_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.chipverify.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChipVerify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verificationguide.com" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VerificationGuide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.doulos.com/knowhow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doulos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_3" id="__nav_8_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetto mini CPU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetto mini CPU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU_waveform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Waveform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione alle FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di una FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/rtl-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTL design per FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/constraints-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/synthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse dedicate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocking e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/place-route/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Placement, routing e timing closure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica e test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/debug/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debug su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/prototyping-soc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prototipazione di sistemi e SoC su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/fpga-vs-asic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA vs ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_fpga_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_ps_axi_led/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq LED
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_17" id="__nav_9_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq FIR
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zynq FIR
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_8tap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_axi_stream_theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AXI Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_dma_interrupt_perf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DMA Interrupt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_xparameters_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    X Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Digilent/Zybo-Z7" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zybo-Z7-20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASIC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ASIC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione agli ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/spec-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specifiche e architettura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/rtl-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTL design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/constraints-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/synthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DFT e testabilità
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/floorplanning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Floorplanning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/place-route/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Place and Route
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/cts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clock Tree Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/signoff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Signoff fisico e temporale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power analysis e low-power design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica funzionale e equivalenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/libraries-pdk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Librerie standard cell e PDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/tapeout-fabrication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tape-out e fabbricazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_asic_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_openasic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAsic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_19" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_19" id="__nav_10_19_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_19">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openlane2.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenLAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/kunalg123/vsdflow" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CMOS VLSI Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SoC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SoC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione ai SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/architettura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di un SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/bus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interconnessioni e bus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/memorie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memorie e gerarchia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/periferiche/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Periferiche e I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/ip-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrazione IP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/verifica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica di sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/hw-sw-codesign/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HW/SW co-design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/power-clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consumi, clock e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/safety-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Safety e Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/physical-design-awareness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physical awareness nel SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_codice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorgenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool e Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tool e Tcl/Tk
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_e_tcl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3" id="__nav_13_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.tutorialspoint.com/tcl-tk/index.htm" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.amd.com/r/en-US/ug894-vivado-tcl-scripting/Tcl-Scripting-in-Vivado" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Script Tcl in Vivado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://yosyshq.readthedocs.io/projects/yosys/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yosis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openroad.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenROAD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://gtkwave.github.io/gtkwave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GTKWave Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verilator.org/guide/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilator Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3_7" id="__nav_13_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vivado
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_13_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vivado
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug910-vivado-getting-started" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug901-vivado-synthesis" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug904-vivado-implementation" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug835-vivado-tcl-commands" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcl Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/swdocs/modelsim/modelsim_user_2024_2.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ModelSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11_appendici/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendici
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12_riferimenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Riferimenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-perche-serve-un-flusso-di-simulazione-ordinato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Perché serve un flusso di simulazione ordinato
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Perché serve un flusso di simulazione ordinato">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-il-problema-di-una-verifica-improvvisata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Il problema di una verifica improvvisata
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-vantaggio-di-un-flusso-chiaro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Vantaggio di un flusso chiaro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-simulazione-come-ciclo-di-apprendimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Simulazione come ciclo di apprendimento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-punto-di-partenza-dut-testbench-e-proprieta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Punto di partenza: DUT, testbench e proprietà
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Punto di partenza: DUT, testbench e proprietà">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-dut" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 DUT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-testbench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Testbench
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-assertion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Assertion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-configurazione-del-caso-di-prova" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Configurazione del caso di prova
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-fase-di-compilazione-o-elaborazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Fase di compilazione o elaborazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Fase di compilazione o elaborazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-scopo-della-fase-iniziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Scopo della fase iniziale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-perche-e-gia-una-fase-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Perché è già una fase utile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-valore-metodologico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Valore metodologico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-avvio-della-simulazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Avvio della simulazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Avvio della simulazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-che-cosa-accade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Che cosa accade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-che-cosa-si-osserva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Che cosa si osserva
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-valore-del-primo-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Valore del primo run
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-ruolo-di-clock-e-reset-nel-flusso-di-simulazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Ruolo di clock e reset nel flusso di simulazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Ruolo di clock e reset nel flusso di simulazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-clock-come-riferimento-temporale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Clock come riferimento temporale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-reset-come-riferimento-di-validita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Reset come riferimento di validità
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-buona-disciplina" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Buona disciplina
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-log-della-simulazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Log della simulazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Log della simulazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-perche-i-log-sono-utili" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Perché i log sono utili
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-cosa-dovrebbero-contenere" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Cosa dovrebbero contenere
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-perche-servono-log-leggibili" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Perché servono log leggibili
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-ruolo-delle-assertion-nel-flusso-operativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Ruolo delle assertion nel flusso operativo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Ruolo delle assertion nel flusso operativo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-assertion-come-sensori" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Assertion come sensori
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-perche-aiutano-tanto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Perché aiutano tanto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-integrazione-con-log-e-waveform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Integrazione con log e waveform
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-waveform-vedere-il-comportamento-nel-tempo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Waveform: vedere il comportamento nel tempo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Waveform: vedere il comportamento nel tempo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-perche-sono-importanti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Perché sono importanti
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-segnali-tipicamente-utili" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Segnali tipicamente utili
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-waveform-come-strumento-di-spiegazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Waveform come strumento di spiegazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-dalla-violazione-al-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Dalla violazione al debug
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Dalla violazione al debug">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-punto-di-ingresso-del-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Punto di ingresso del debug
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-domande-giuste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Domande giuste
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-procedere-per-livelli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Procedere per livelli
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-dut-o-testbench-distinguere-la-causa-del-problema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. DUT o testbench? distinguere la causa del problema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. DUT o testbench? distinguere la causa del problema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-bug-del-dut" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Bug del DUT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-bug-del-testbench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Bug del testbench
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-perche-e-una-distinzione-cruciale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Perché è una distinzione cruciale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-correzione-e-rerun" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Correzione e rerun
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Correzione e rerun">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-correzione-locale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Correzione locale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-importanza-del-rerun" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Importanza del rerun
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-disciplina-delliterazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Disciplina dell’iterazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-regressione-non-verificare-solo-lultimo-bug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Regressione: non verificare solo l’ultimo bug
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Regressione: non verificare solo l’ultimo bug">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-che-cose-una-regressione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Che cos’è una regressione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-perche-e-fondamentale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Perché è fondamentale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-beneficio-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Beneficio progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-organizzare-i-casi-di-simulazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Organizzare i casi di simulazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Organizzare i casi di simulazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-dai-casi-semplici-a-quelli-complessi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Dai casi semplici a quelli complessi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-vantaggio-di-una-libreria-di-scenari" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Vantaggio di una libreria di scenari
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-collegamento-con-la-manutenzione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 Collegamento con la manutenzione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-flusso-di-simulazione-e-verifica-incrementale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Flusso di simulazione e verifica incrementale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Flusso di simulazione e verifica incrementale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-primo-livello" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Primo livello
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-secondo-livello" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Secondo livello
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-perche-questo-approccio-funziona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 Perché questo approccio funziona
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-ruolo-dello-stile-rtl-nel-flusso-di-simulazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Ruolo dello stile RTL nel flusso di simulazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Ruolo dello stile RTL nel flusso di simulazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-rtl-leggibile-debug-piu-rapido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 RTL leggibile, debug più rapido
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-rtl-confusa-debug-lento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 RTL confusa, debug lento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-verificabilita-come-proprieta-del-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Verificabilità come proprietà del design
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-ruolo-delle-configurazioni-e-dei-parametri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Ruolo delle configurazioni e dei parametri
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. Ruolo delle configurazioni e dei parametri">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-configurazione-simulata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 Configurazione simulata
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163-strategia-realistica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.3 Strategia realistica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-collegamento-con-fpga-e-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Collegamento con FPGA e ASIC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17. Collegamento con FPGA e ASIC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171-su-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1 Su FPGA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172-su-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.2 Su ASIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#173-visione-comune" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3 Visione comune
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-errori-comuni-nel-flusso-di-simulazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Errori comuni nel flusso di simulazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. Errori comuni nel flusso di simulazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#181-simulare-senza-obiettivi-chiari" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.1 Simulare senza obiettivi chiari
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#182-non-distinguere-sintomo-e-causa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.2 Non distinguere sintomo e causa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#183-fare-debug-solo-sulle-waveform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.3 Fare debug solo sulle waveform
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#184-non-regredire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4 Non regredire
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#185-testbench-poco-chiaro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5 Testbench poco chiaro
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-buone-pratiche-operative" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Buone pratiche operative
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="19. Buone pratiche operative">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#191-partire-da-test-piccoli-e-ripetibili" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.1 Partire da test piccoli e ripetibili
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#192-rendere-i-fallimenti-informativi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.2 Rendere i fallimenti informativi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#193-usare-le-waveform-come-strumento-di-ricostruzione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.3 Usare le waveform come strumento di ricostruzione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#194-iterare-in-modo-disciplinato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.4 Iterare in modo disciplinato
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#195-mantenere-allineati-dut-testbench-e-proprieta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.5 Mantenere allineati DUT, testbench e proprietà
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-collegamento-con-il-resto-della-sezione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Collegamento con il resto della sezione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="flusso-di-simulazione-rtl">Flusso di simulazione RTL<a class="headerlink" href="#flusso-di-simulazione-rtl" title="Permanent link">&para;</a></h1>
+<p>Dopo aver introdotto i <strong>fondamenti della verifica</strong>, la <strong>struttura del testbench</strong> e il ruolo delle <strong>assertion</strong>, il passo successivo naturale è descrivere il <strong>flusso operativo</strong> con cui una verifica RTL viene effettivamente eseguita. In altre parole: una volta scritto il DUT, costruito il testbench e definite le proprietà più importanti, come si procede in pratica per simulare, osservare, correggere e consolidare il comportamento del progetto?</p>
+<p>Questa domanda è molto importante perché la qualità della verifica non dipende soltanto dalla bontà del singolo test, ma anche dal modo in cui l’intero ciclo di lavoro viene organizzato. Un flusso di simulazione ordinato aiuta a:
+- trovare gli errori più rapidamente;
+- distinguere tra bug del DUT e bug del testbench;
+- rendere i risultati ripetibili;
+- costruire regressioni affidabili;
+- migliorare progressivamente la qualità del progetto.</p>
+<p>Dal punto di vista metodologico, il flusso di simulazione è il punto in cui si incontrano in modo molto diretto:
+- architettura;
+- RTL;
+- testbench;
+- assertion;
+- waveform;
+- debug;
+- iterazione progettuale.</p>
+<p>Questa pagina affronta il tema con un taglio volutamente pratico ma concettuale: non entra in dettagli tool-specifici, ma descrive il processo generale che vale nella maggior parte dei flussi di verifica RTL seri, sia in contesti accademici sia in contesti professionali.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[RTL + testbench] --&gt; B[Compilazione / elaborazione]
+    B --&gt; C[Simulazione]
+    C --&gt; D[Log e assertion]
+    C --&gt; E[Waveform]
+    D --&gt; F[Analisi del risultato]
+    E --&gt; F
+    F --&gt; G[Debug]
+    G --&gt; H[Correzione RTL o testbench]
+    H --&gt; B
+    F --&gt; I[Regressione]
+    I --&gt; C
+
+    style C fill:#eef6ff,stroke:#1f6feb
+    style G fill:#eefbf0,stroke:#22863a</code></pre>
+<h2 id="1-perche-serve-un-flusso-di-simulazione-ordinato">1. Perché serve un flusso di simulazione ordinato<a class="headerlink" href="#1-perche-serve-un-flusso-di-simulazione-ordinato" title="Permanent link">&para;</a></h2>
+<p>La simulazione RTL non è un singolo comando lanciato una volta. È un processo iterativo che accompagna gran parte della vita del blocco.</p>
+<h3 id="11-il-problema-di-una-verifica-improvvisata">1.1 Il problema di una verifica improvvisata<a class="headerlink" href="#11-il-problema-di-una-verifica-improvvisata" title="Permanent link">&para;</a></h3>
+<p>Se la simulazione viene eseguita in modo disordinato, si rischia di:
+- non sapere quali casi siano stati davvero verificati;
+- non riuscire a riprodurre un errore;
+- confondere fallimenti del DUT con fallimenti del testbench;
+- correggere un bug introducendone altri;
+- perdere tempo in debug non strutturato.</p>
+<h3 id="12-vantaggio-di-un-flusso-chiaro">1.2 Vantaggio di un flusso chiaro<a class="headerlink" href="#12-vantaggio-di-un-flusso-chiaro" title="Permanent link">&para;</a></h3>
+<p>Un flusso ordinato permette di:
+- partire da casi piccoli e ripetibili;
+- estendere progressivamente la copertura;
+- capire da dove nasce una violazione;
+- consolidare il comportamento dopo ogni correzione;
+- costruire fiducia nel design.</p>
+<h3 id="13-simulazione-come-ciclo-di-apprendimento">1.3 Simulazione come ciclo di apprendimento<a class="headerlink" href="#13-simulazione-come-ciclo-di-apprendimento" title="Permanent link">&para;</a></h3>
+<p>Ogni simulazione produce informazione utile:
+- conferma che qualcosa funziona;
+- evidenzia una discrepanza;
+- chiarisce una latenza;
+- mostra una violazione di protocollo;
+- suggerisce dove la RTL o il testbench vanno migliorati.</p>
+<h2 id="2-punto-di-partenza-dut-testbench-e-proprieta">2. Punto di partenza: DUT, testbench e proprietà<a class="headerlink" href="#2-punto-di-partenza-dut-testbench-e-proprieta" title="Permanent link">&para;</a></h2>
+<p>Prima di simulare, bisogna avere chiaro che cosa si sta effettivamente eseguendo.</p>
+<h3 id="21-dut">2.1 DUT<a class="headerlink" href="#21-dut" title="Permanent link">&para;</a></h3>
+<p>Il DUT è il modulo o sottosistema che si vuole verificare.</p>
+<h3 id="22-testbench">2.2 Testbench<a class="headerlink" href="#22-testbench" title="Permanent link">&para;</a></h3>
+<p>Il testbench fornisce:
+- clock e reset;
+- stimoli;
+- monitor;
+- checking;
+- contesto temporale e funzionale.</p>
+<h3 id="23-assertion">2.3 Assertion<a class="headerlink" href="#23-assertion" title="Permanent link">&para;</a></h3>
+<p>Le assertion trasformano regole del design in controlli espliciti durante la simulazione.</p>
+<h3 id="24-configurazione-del-caso-di-prova">2.4 Configurazione del caso di prova<a class="headerlink" href="#24-configurazione-del-caso-di-prova" title="Permanent link">&para;</a></h3>
+<p>È importante sapere:
+- quale configurazione parametrica del DUT si sta simulando;
+- quale scenario il testbench sta esercitando;
+- quale risultato o proprietà ci si aspetta.</p>
+<p>Questa chiarezza iniziale rende tutto il flusso successivo molto più solido.</p>
+<h2 id="3-fase-di-compilazione-o-elaborazione">3. Fase di compilazione o elaborazione<a class="headerlink" href="#3-fase-di-compilazione-o-elaborazione" title="Permanent link">&para;</a></h2>
+<p>Prima che la simulazione possa partire, RTL e testbench devono essere elaborati dal simulatore.</p>
+<h3 id="31-scopo-della-fase-iniziale">3.1 Scopo della fase iniziale<a class="headerlink" href="#31-scopo-della-fase-iniziale" title="Permanent link">&para;</a></h3>
+<p>In questa fase si controlla che:
+- i file siano coerenti;
+- i moduli siano collegati correttamente;
+- package, typedef e interfacce siano risolti;
+- non ci siano errori sintattici o incompatibilità immediate.</p>
+<h3 id="32-perche-e-gia-una-fase-utile">3.2 Perché è già una fase utile<a class="headerlink" href="#32-perche-e-gia-una-fase-utile" title="Permanent link">&para;</a></h3>
+<p>Molti problemi vengono intercettati qui:
+- porte non coerenti;
+- nomi mancanti;
+- tipi incompatibili;
+- uso scorretto di costrutti del linguaggio;
+- dipendenze non risolte.</p>
+<h3 id="33-valore-metodologico">3.3 Valore metodologico<a class="headerlink" href="#33-valore-metodologico" title="Permanent link">&para;</a></h3>
+<p>Anche se non è ancora simulazione funzionale, questa fase è già parte della qualità del flusso, perché impone coerenza strutturale al progetto.</p>
+<h2 id="4-avvio-della-simulazione">4. Avvio della simulazione<a class="headerlink" href="#4-avvio-della-simulazione" title="Permanent link">&para;</a></h2>
+<p>Una volta preparato l’ambiente, la simulazione può essere eseguita.</p>
+<h3 id="41-che-cosa-accade">4.1 Che cosa accade<a class="headerlink" href="#41-che-cosa-accade" title="Permanent link">&para;</a></h3>
+<p>Il simulatore esegue il comportamento combinatorio e sequenziale del DUT nel tempo, sotto gli stimoli prodotti dal testbench.</p>
+<h3 id="42-che-cosa-si-osserva">4.2 Che cosa si osserva<a class="headerlink" href="#42-che-cosa-si-osserva" title="Permanent link">&para;</a></h3>
+<p>Durante l’esecuzione si possono osservare:
+- messaggi del testbench;
+- successi o fallimenti di checking;
+- violazioni di assertion;
+- waveform;
+- eventi di protocollo;
+- avanzamento degli stati e della pipeline.</p>
+<h3 id="43-valore-del-primo-run">4.3 Valore del primo run<a class="headerlink" href="#43-valore-del-primo-run" title="Permanent link">&para;</a></h3>
+<p>Il primo run di un caso di test serve spesso a verificare che:
+- il banco di prova parta correttamente;
+- il reset sia coerente;
+- i segnali principali si muovano come previsto;
+- lo scenario abbia senso prima di aumentare la complessità.</p>
+<h2 id="5-ruolo-di-clock-e-reset-nel-flusso-di-simulazione">5. Ruolo di clock e reset nel flusso di simulazione<a class="headerlink" href="#5-ruolo-di-clock-e-reset-nel-flusso-di-simulazione" title="Permanent link">&para;</a></h2>
+<p>Clock e reset non sono solo dettagli del testbench: sono la base su cui si interpreta l’intera simulazione.</p>
+<h3 id="51-clock-come-riferimento-temporale">5.1 Clock come riferimento temporale<a class="headerlink" href="#51-clock-come-riferimento-temporale" title="Permanent link">&para;</a></h3>
+<p>La lettura dei risultati avviene quasi sempre in relazione ai cicli di clock:
+- quando un input viene accettato;
+- quando lo stato cambia;
+- quando l’output diventa valido;
+- quando una assertion temporale deve valere.</p>
+<h3 id="52-reset-come-riferimento-di-validita">5.2 Reset come riferimento di validità<a class="headerlink" href="#52-reset-come-riferimento-di-validita" title="Permanent link">&para;</a></h3>
+<p>Molti test e molte proprietà hanno significato solo:
+- durante il reset;
+- immediatamente dopo il reset;
+- dopo che il DUT è entrato in regime normale.</p>
+<h3 id="53-buona-disciplina">5.3 Buona disciplina<a class="headerlink" href="#53-buona-disciplina" title="Permanent link">&para;</a></h3>
+<p>Un flusso ordinato rende sempre chiaro:
+- quando il DUT è in reset;
+- da quando i dati sono significativi;
+- in quali fasi i risultati devono essere interpretati come validi.</p>
+<h2 id="6-log-della-simulazione">6. Log della simulazione<a class="headerlink" href="#6-log-della-simulazione" title="Permanent link">&para;</a></h2>
+<p>Una parte molto importante del flusso è rappresentata dai messaggi generati durante la simulazione.</p>
+<h3 id="61-perche-i-log-sono-utili">6.1 Perché i log sono utili<a class="headerlink" href="#61-perche-i-log-sono-utili" title="Permanent link">&para;</a></h3>
+<p>I log permettono di capire senza aprire subito le waveform:
+- quale test è stato eseguito;
+- in quale scenario si è verificato un problema;
+- se una assertion è fallita;
+- se il checking ha trovato una discrepanza;
+- in quale ciclo o condizione.</p>
+<h3 id="62-cosa-dovrebbero-contenere">6.2 Cosa dovrebbero contenere<a class="headerlink" href="#62-cosa-dovrebbero-contenere" title="Permanent link">&para;</a></h3>
+<p>Un log utile tende a riportare:
+- nome del caso di prova;
+- momento della simulazione o ciclo;
+- descrizione del problema;
+- valori o stato rilevanti;
+- differenza tra atteso e osservato.</p>
+<h3 id="63-perche-servono-log-leggibili">6.3 Perché servono log leggibili<a class="headerlink" href="#63-perche-servono-log-leggibili" title="Permanent link">&para;</a></h3>
+<p>Se i log sono troppo poveri, il debug rallenta. Se sono troppo rumorosi, si perde il segnale nel rumore. Il flusso di simulazione funziona meglio quando i messaggi sono informativi ma selettivi.</p>
+<h2 id="7-ruolo-delle-assertion-nel-flusso-operativo">7. Ruolo delle assertion nel flusso operativo<a class="headerlink" href="#7-ruolo-delle-assertion-nel-flusso-operativo" title="Permanent link">&para;</a></h2>
+<p>Le assertion diventano parte attiva del flusso di simulazione.</p>
+<h3 id="71-assertion-come-sensori">7.1 Assertion come sensori<a class="headerlink" href="#71-assertion-come-sensori" title="Permanent link">&para;</a></h3>
+<p>Durante il run, le assertion sorvegliano:
+- protocolli;
+- invarianti;
+- condizioni di stato;
+- relazioni temporali;
+- latenza;
+- stabilità del dato;
+- handshake.</p>
+<h3 id="72-perche-aiutano-tanto">7.2 Perché aiutano tanto<a class="headerlink" href="#72-perche-aiutano-tanto" title="Permanent link">&para;</a></h3>
+<p>Quando una assertion fallisce, spesso:
+- il problema viene rilevato vicino alla sua origine;
+- la proprietà violata è già esplicita;
+- il debug inizia da un’informazione più forte rispetto a un semplice output sbagliato a fine sequenza.</p>
+<h3 id="73-integrazione-con-log-e-waveform">7.3 Integrazione con log e waveform<a class="headerlink" href="#73-integrazione-con-log-e-waveform" title="Permanent link">&para;</a></h3>
+<p>Il valore massimo si ottiene quando:
+- la assertion segnala il problema;
+- il log lo contestualizza;
+- la waveform permette di ricostruire il comportamento nel dettaglio.</p>
+<h2 id="8-waveform-vedere-il-comportamento-nel-tempo">8. Waveform: vedere il comportamento nel tempo<a class="headerlink" href="#8-waveform-vedere-il-comportamento-nel-tempo" title="Permanent link">&para;</a></h2>
+<p>Le waveform sono uno degli strumenti centrali del debug RTL.</p>
+<h3 id="81-perche-sono-importanti">8.1 Perché sono importanti<a class="headerlink" href="#81-perche-sono-importanti" title="Permanent link">&para;</a></h3>
+<p>Molti errori hardware non si capiscono guardando solo un risultato finale. Serve vedere:
+- come si sono mossi i segnali nel tempo;
+- in quale ordine sono avvenuti gli eventi;
+- quali condizioni erano attive in ogni ciclo;
+- come si sono comportati stato, pipeline e handshake.</p>
+<h3 id="82-segnali-tipicamente-utili">8.2 Segnali tipicamente utili<a class="headerlink" href="#82-segnali-tipicamente-utili" title="Permanent link">&para;</a></h3>
+<p>È spesso utile osservare:
+- clock e reset;
+- ingressi principali;
+- uscite principali;
+- valid e ready;
+- stato e next-state;
+- registri di pipeline;
+- enable e select;
+- segnali di stall o flush.</p>
+<h3 id="83-waveform-come-strumento-di-spiegazione">8.3 Waveform come strumento di spiegazione<a class="headerlink" href="#83-waveform-come-strumento-di-spiegazione" title="Permanent link">&para;</a></h3>
+<p>La waveform non serve solo a “vedere qualcosa che si muove”, ma a costruire una spiegazione del comportamento:
+- perché il dato non è avanzato;
+- perché una transizione non è avvenuta;
+- perché un risultato è arrivato in ritardo;
+- perché un protocollo si è bloccato.</p>
+<h2 id="9-dalla-violazione-al-debug">9. Dalla violazione al debug<a class="headerlink" href="#9-dalla-violazione-al-debug" title="Permanent link">&para;</a></h2>
+<p>Quando qualcosa fallisce, il flusso corretto porta dal sintomo alla causa.</p>
+<h3 id="91-punto-di-ingresso-del-debug">9.1 Punto di ingresso del debug<a class="headerlink" href="#91-punto-di-ingresso-del-debug" title="Permanent link">&para;</a></h3>
+<p>Il debug può iniziare da:
+- una assertion fallita;
+- un mismatch nel checking;
+- un timeout;
+- un output mancante;
+- una waveform anomala.</p>
+<h3 id="92-domande-giuste">9.2 Domande giuste<a class="headerlink" href="#92-domande-giuste" title="Permanent link">&para;</a></h3>
+<p>Le prime domande utili sono:
+- il problema è nel DUT o nel testbench?
+- l’ingresso è stato applicato correttamente?
+- il protocollo è stato rispettato?
+- il reset è stato gestito bene?
+- il comportamento atteso era formulato correttamente?
+- l’errore nasce nella logica combinatoria, nel controllo, nella pipeline o nell’interfaccia?</p>
+<h3 id="93-procedere-per-livelli">9.3 Procedere per livelli<a class="headerlink" href="#93-procedere-per-livelli" title="Permanent link">&para;</a></h3>
+<p>Un buon debug cerca di:
+1. localizzare il ciclo in cui il comportamento devia;
+2. capire il primo segnale che diventa incoerente;
+3. distinguere effetto e causa;
+4. verificare se il bug è strutturale o legato a un caso specifico.</p>
+<pre class="mermaid"><code>flowchart TD
+    A[Fallimento] --&gt; B[Log / assertion]
+    B --&gt; C[Waveform]
+    C --&gt; D[Primo segnale incoerente]
+    D --&gt; E[Identificazione della causa]
+    E --&gt; F[Correzione]</code></pre>
+<h2 id="10-dut-o-testbench-distinguere-la-causa-del-problema">10. DUT o testbench? distinguere la causa del problema<a class="headerlink" href="#10-dut-o-testbench-distinguere-la-causa-del-problema" title="Permanent link">&para;</a></h2>
+<p>Uno degli aspetti più importanti del flusso di simulazione è capire se il bug è nel design o nell’ambiente di verifica.</p>
+<h3 id="101-bug-del-dut">10.1 Bug del DUT<a class="headerlink" href="#101-bug-del-dut" title="Permanent link">&para;</a></h3>
+<p>Esempi tipici:
+- transizione di stato errata;
+- output combinatorio non corretto;
+- pipeline disallineata;
+- protocollo non rispettato;
+- reset incompleto.</p>
+<h3 id="102-bug-del-testbench">10.2 Bug del testbench<a class="headerlink" href="#102-bug-del-testbench" title="Permanent link">&para;</a></h3>
+<p>Esempi tipici:
+- stimolo applicato nel ciclo sbagliato;
+- aspettativa temporale errata;
+- checker troppo rigido o scritto male;
+- interpretazione scorretta del protocollo;
+- errore nella generazione del reset.</p>
+<h3 id="103-perche-e-una-distinzione-cruciale">10.3 Perché è una distinzione cruciale<a class="headerlink" href="#103-perche-e-una-distinzione-cruciale" title="Permanent link">&para;</a></h3>
+<p>Se si corregge il DUT per compensare un testbench errato, il progetto peggiora. Se si corregge il testbench quando il bug è nel DUT, si rischia di nascondere un difetto reale. Il flusso di simulazione deve quindi aiutare a distinguere chiaramente i due casi.</p>
+<h2 id="11-correzione-e-rerun">11. Correzione e rerun<a class="headerlink" href="#11-correzione-e-rerun" title="Permanent link">&para;</a></h2>
+<p>Una volta identificata la causa del problema, il ciclo continua con la correzione e una nuova simulazione.</p>
+<h3 id="111-correzione-locale">11.1 Correzione locale<a class="headerlink" href="#111-correzione-locale" title="Permanent link">&para;</a></h3>
+<p>La correzione può riguardare:
+- RTL del DUT;
+- assertion;
+- checker;
+- testbench;
+- definizione della latenza attesa;
+- gestione del reset o del protocollo.</p>
+<h3 id="112-importanza-del-rerun">11.2 Importanza del rerun<a class="headerlink" href="#112-importanza-del-rerun" title="Permanent link">&para;</a></h3>
+<p>Dopo ogni correzione, conviene:
+- rieseguire il caso che ha fallito;
+- verificare che il problema sia davvero sparito;
+- controllare che non siano comparsi nuovi fallimenti correlati.</p>
+<h3 id="113-disciplina-delliterazione">11.3 Disciplina dell’iterazione<a class="headerlink" href="#113-disciplina-delliterazione" title="Permanent link">&para;</a></h3>
+<p>Il ciclo corretto è:
+- osserva il problema;
+- capisci la causa;
+- correggi;
+- riesegui;
+- consolida.</p>
+<p>Questo approccio è molto più affidabile di modifiche multiple fatte senza controllo.</p>
+<h2 id="12-regressione-non-verificare-solo-lultimo-bug">12. Regressione: non verificare solo l’ultimo bug<a class="headerlink" href="#12-regressione-non-verificare-solo-lultimo-bug" title="Permanent link">&para;</a></h2>
+<p>Quando il progetto cresce, non basta più verificare il solo caso appena corretto.</p>
+<h3 id="121-che-cose-una-regressione">12.1 Che cos’è una regressione<a class="headerlink" href="#121-che-cose-una-regressione" title="Permanent link">&para;</a></h3>
+<p>Una regressione è l’esecuzione di un insieme di test già definiti, con lo scopo di verificare che nuove modifiche non abbiano rotto comportamenti già funzionanti.</p>
+<h3 id="122-perche-e-fondamentale">12.2 Perché è fondamentale<a class="headerlink" href="#122-perche-e-fondamentale" title="Permanent link">&para;</a></h3>
+<p>Molti bug vengono introdotti non nel punto appena modificato, ma come effetto collaterale su:
+- protocolli già stabili;
+- latenza di casi già verificati;
+- segnali di controllo condivisi;
+- configurazioni parametriche diverse;
+- casi limite già coperti in passato.</p>
+<h3 id="123-beneficio-progettuale">12.3 Beneficio progettuale<a class="headerlink" href="#123-beneficio-progettuale" title="Permanent link">&para;</a></h3>
+<p>La regressione aumenta la fiducia nel design e rende il flusso di sviluppo molto più solido.</p>
+<h2 id="13-organizzare-i-casi-di-simulazione">13. Organizzare i casi di simulazione<a class="headerlink" href="#13-organizzare-i-casi-di-simulazione" title="Permanent link">&para;</a></h2>
+<p>Un flusso di simulazione efficace beneficia di una struttura chiara dei casi di prova.</p>
+<h3 id="131-dai-casi-semplici-a-quelli-complessi">13.1 Dai casi semplici a quelli complessi<a class="headerlink" href="#131-dai-casi-semplici-a-quelli-complessi" title="Permanent link">&para;</a></h3>
+<p>Conviene distinguere:
+- smoke test iniziali;
+- casi nominali;
+- corner case;
+- casi di protocollo;
+- casi di stall / flush / backpressure;
+- casi di reset;
+- casi di latenza e throughput.</p>
+<h3 id="132-vantaggio-di-una-libreria-di-scenari">13.2 Vantaggio di una libreria di scenari<a class="headerlink" href="#132-vantaggio-di-una-libreria-di-scenari" title="Permanent link">&para;</a></h3>
+<p>Avere casi di prova riconoscibili permette di sapere:
+- che cosa è già coperto;
+- cosa va rilanciato dopo una modifica;
+- quali aspetti del DUT sono più fragili;
+- dove concentrare il debug.</p>
+<h3 id="133-collegamento-con-la-manutenzione">13.3 Collegamento con la manutenzione<a class="headerlink" href="#133-collegamento-con-la-manutenzione" title="Permanent link">&para;</a></h3>
+<p>Quando il DUT evolve, una buona organizzazione dei test rende più facile aggiornare la verifica senza perdere coerenza.</p>
+<h2 id="14-flusso-di-simulazione-e-verifica-incrementale">14. Flusso di simulazione e verifica incrementale<a class="headerlink" href="#14-flusso-di-simulazione-e-verifica-incrementale" title="Permanent link">&para;</a></h2>
+<p>Una buona verifica cresce in modo incrementale, non da un ambiente enorme costruito tutto in una volta.</p>
+<h3 id="141-primo-livello">14.1 Primo livello<a class="headerlink" href="#141-primo-livello" title="Permanent link">&para;</a></h3>
+<p>Si parte spesso da:
+- compilazione pulita;
+- reset corretto;
+- un caso base;
+- checking elementare;
+- una o due assertion importanti.</p>
+<h3 id="142-secondo-livello">14.2 Secondo livello<a class="headerlink" href="#142-secondo-livello" title="Permanent link">&para;</a></h3>
+<p>Poi si aggiungono:
+- sequenze multiple;
+- casi di backpressure;
+- pipeline più piena;
+- corner case;
+- coverage più significativa;
+- regressione.</p>
+<h3 id="143-perche-questo-approccio-funziona">14.3 Perché questo approccio funziona<a class="headerlink" href="#143-perche-questo-approccio-funziona" title="Permanent link">&para;</a></h3>
+<p>Crescere per passi controllati permette di:
+- mantenere leggibilità;
+- localizzare più facilmente gli errori;
+- evitare che testbench e DUT diventino opachi troppo presto.</p>
+<h2 id="15-ruolo-dello-stile-rtl-nel-flusso-di-simulazione">15. Ruolo dello stile RTL nel flusso di simulazione<a class="headerlink" href="#15-ruolo-dello-stile-rtl-nel-flusso-di-simulazione" title="Permanent link">&para;</a></h2>
+<p>La qualità del flusso dipende molto anche da come è scritta la RTL.</p>
+<h3 id="151-rtl-leggibile-debug-piu-rapido">15.1 RTL leggibile, debug più rapido<a class="headerlink" href="#151-rtl-leggibile-debug-piu-rapido" title="Permanent link">&para;</a></h3>
+<p>Se il DUT ha:
+- segnali con nomi chiari;
+- separazione tra combinatoria e sequenziale;
+- FSM ordinate;
+- interfacce ben modellate;
+- pipeline leggibili;</p>
+<p>allora anche la lettura delle waveform e dei log risulta molto più efficace.</p>
+<h3 id="152-rtl-confusa-debug-lento">15.2 RTL confusa, debug lento<a class="headerlink" href="#152-rtl-confusa-debug-lento" title="Permanent link">&para;</a></h3>
+<p>Quando il codice è troppo compatto o ambiguo:
+- le waveform sono più difficili da interpretare;
+- il primo punto di divergenza è più difficile da trovare;
+- i fallimenti delle assertion sono meno immediati da capire.</p>
+<h3 id="153-verificabilita-come-proprieta-del-design">15.3 Verificabilità come proprietà del design<a class="headerlink" href="#153-verificabilita-come-proprieta-del-design" title="Permanent link">&para;</a></h3>
+<p>Il flusso di simulazione funziona meglio quando la verificabilità è stata considerata già durante la scrittura della RTL.</p>
+<h2 id="16-ruolo-delle-configurazioni-e-dei-parametri">16. Ruolo delle configurazioni e dei parametri<a class="headerlink" href="#16-ruolo-delle-configurazioni-e-dei-parametri" title="Permanent link">&para;</a></h2>
+<p>Nei progetti parametrizzati, il flusso di simulazione deve tenere conto anche delle diverse configurazioni.</p>
+<h3 id="161-configurazione-simulata">16.1 Configurazione simulata<a class="headerlink" href="#161-configurazione-simulata" title="Permanent link">&para;</a></h3>
+<p>È importante sapere sempre:
+- con quali parametri il DUT è stato istanziato;
+- se la latenza o il numero di canali dipendono dalla configurazione;
+- se il protocollo cambia in base alle opzioni abilitate.</p>
+<h3 id="162-perche-e-importante">16.2 Perché è importante<a class="headerlink" href="#162-perche-e-importante" title="Permanent link">&para;</a></h3>
+<p>Una proprietà verificata in una configurazione potrebbe non valere automaticamente in un’altra.</p>
+<h3 id="163-strategia-realistica">16.3 Strategia realistica<a class="headerlink" href="#163-strategia-realistica" title="Permanent link">&para;</a></h3>
+<p>Conviene identificare:
+- configurazioni principali;
+- configurazioni supportate;
+- configurazioni più critiche da regredire.</p>
+<h2 id="17-collegamento-con-fpga-e-asic">17. Collegamento con FPGA e ASIC<a class="headerlink" href="#17-collegamento-con-fpga-e-asic" title="Permanent link">&para;</a></h2>
+<p>Anche se il flusso di simulazione RTL è concettualmente indipendente dal target, il suo ruolo pratico cambia in funzione del contesto.</p>
+<h3 id="171-su-fpga">17.1 Su FPGA<a class="headerlink" href="#171-su-fpga" title="Permanent link">&para;</a></h3>
+<p>Nel flusso FPGA, la simulazione RTL è spesso il passaggio che precede:
+- sintesi;
+- implementazione;
+- prototipazione;
+- debug sul dispositivo.</p>
+<p>Questo significa che una buona simulazione riduce molto il costo del debug successivo.</p>
+<h3 id="172-su-asic">17.2 Su ASIC<a class="headerlink" href="#172-su-asic" title="Permanent link">&para;</a></h3>
+<p>Nel flusso ASIC, la simulazione RTL ha un peso ancora maggiore, perché:
+- intercettare bug tardi è molto più costoso;
+- sintesi, DFT, floorplanning, PnR e signoff dipendono da una forte fiducia nella correttezza del design;
+- la regressione RTL è una base essenziale prima delle fasi più avanzate.</p>
+<h3 id="173-visione-comune">17.3 Visione comune<a class="headerlink" href="#173-visione-comune" title="Permanent link">&para;</a></h3>
+<p>In entrambi i casi, la simulazione RTL ben organizzata è il fondamento della fiducia nel blocco.</p>
+<h2 id="18-errori-comuni-nel-flusso-di-simulazione">18. Errori comuni nel flusso di simulazione<a class="headerlink" href="#18-errori-comuni-nel-flusso-di-simulazione" title="Permanent link">&para;</a></h2>
+<p>Alcuni errori ricorrono spesso e compromettono l’efficacia della verifica.</p>
+<h3 id="181-simulare-senza-obiettivi-chiari">18.1 Simulare senza obiettivi chiari<a class="headerlink" href="#181-simulare-senza-obiettivi-chiari" title="Permanent link">&para;</a></h3>
+<p>Lanciare test senza sapere che cosa si vuole verificare produce poco valore.</p>
+<h3 id="182-non-distinguere-sintomo-e-causa">18.2 Non distinguere sintomo e causa<a class="headerlink" href="#182-non-distinguere-sintomo-e-causa" title="Permanent link">&para;</a></h3>
+<p>Correggere il primo segnale sbagliato senza capire l’origine dell’errore può peggiorare il progetto.</p>
+<h3 id="183-fare-debug-solo-sulle-waveform">18.3 Fare debug solo sulle waveform<a class="headerlink" href="#183-fare-debug-solo-sulle-waveform" title="Permanent link">&para;</a></h3>
+<p>Le waveform sono essenziali, ma senza log e checking adeguati il debug diventa più lento e meno sistematico.</p>
+<h3 id="184-non-regredire">18.4 Non regredire<a class="headerlink" href="#184-non-regredire" title="Permanent link">&para;</a></h3>
+<p>Correggere un bug e non rilanciare gli scenari principali espone il progetto a regressioni silenziose.</p>
+<h3 id="185-testbench-poco-chiaro">18.5 Testbench poco chiaro<a class="headerlink" href="#185-testbench-poco-chiaro" title="Permanent link">&para;</a></h3>
+<p>Un banco di prova confuso può rendere il flusso di simulazione meno affidabile del dovuto.</p>
+<h2 id="19-buone-pratiche-operative">19. Buone pratiche operative<a class="headerlink" href="#19-buone-pratiche-operative" title="Permanent link">&para;</a></h2>
+<p>Per impostare un buon flusso di simulazione RTL, alcune pratiche risultano particolarmente efficaci.</p>
+<h3 id="191-partire-da-test-piccoli-e-ripetibili">19.1 Partire da test piccoli e ripetibili<a class="headerlink" href="#191-partire-da-test-piccoli-e-ripetibili" title="Permanent link">&para;</a></h3>
+<p>Meglio casi chiari e controllabili che scenari enormi e poco leggibili.</p>
+<h3 id="192-rendere-i-fallimenti-informativi">19.2 Rendere i fallimenti informativi<a class="headerlink" href="#192-rendere-i-fallimenti-informativi" title="Permanent link">&para;</a></h3>
+<p>Log, checker e assertion dovrebbero indicare subito il contesto del problema.</p>
+<h3 id="193-usare-le-waveform-come-strumento-di-ricostruzione">19.3 Usare le waveform come strumento di ricostruzione<a class="headerlink" href="#193-usare-le-waveform-come-strumento-di-ricostruzione" title="Permanent link">&para;</a></h3>
+<p>La waveform deve aiutare a spiegare il comportamento, non solo a constatare che qualcosa è diverso dal previsto.</p>
+<h3 id="194-iterare-in-modo-disciplinato">19.4 Iterare in modo disciplinato<a class="headerlink" href="#194-iterare-in-modo-disciplinato" title="Permanent link">&para;</a></h3>
+<p>Ogni correzione dovrebbe essere seguita da:
+- rerun del caso fallito;
+- regressione dei casi principali;
+- consolidamento della fiducia nel design.</p>
+<h3 id="195-mantenere-allineati-dut-testbench-e-proprieta">19.5 Mantenere allineati DUT, testbench e proprietà<a class="headerlink" href="#195-mantenere-allineati-dut-testbench-e-proprieta" title="Permanent link">&para;</a></h3>
+<p>Il flusso funziona bene quando design, scenari di prova e assertion evolvono insieme in modo coerente.</p>
+<h2 id="20-collegamento-con-il-resto-della-sezione">20. Collegamento con il resto della sezione<a class="headerlink" href="#20-collegamento-con-il-resto-della-sezione" title="Permanent link">&para;</a></h2>
+<p>Questa pagina chiude in modo naturale il primo blocco della verifica e si collega direttamente ai temi già introdotti:
+- <strong><code>verification-basics.md</code></strong> ha definito che cosa significa verificare un DUT;
+- <strong><code>testbench-structure.md</code></strong> ha mostrato come organizzare il banco di prova;
+- <strong><code>assertions-basics.md</code></strong> ha introdotto il checking dichiarativo di proprietà e protocolli;
+- <strong><code>interfaces-and-handshake.md</code></strong>, <strong><code>pipelining.md</code></strong> e <strong><code>latency-and-throughput.md</code></strong> hanno mostrato che gran parte della correttezza del blocco è temporale e protocollare;
+- <strong><code>coding-style-rtl.md</code></strong> ha evidenziato che una RTL ben scritta rende anche il flusso di simulazione più leggibile ed efficace.</p>
+<p>Il flusso di simulazione è quindi il punto in cui tutti questi elementi diventano pratica quotidiana di progettazione e verifica.</p>
+<h2 id="21-in-sintesi">21. In sintesi<a class="headerlink" href="#21-in-sintesi" title="Permanent link">&para;</a></h2>
+<p>Il flusso di simulazione RTL è il processo iterativo con cui il progetto viene compilato, eseguito, osservato, corretto e consolidato. Non riguarda solo lanciare una simulazione, ma organizzare in modo disciplinato:
+- il contesto di verifica;
+- l’osservazione del comportamento;
+- la diagnosi dei problemi;
+- la correzione;
+- la regressione.</p>
+<p>Un buon flusso rende la verifica più ripetibile, il debug più rapido e il progetto più affidabile. Per questo motivo, è una parte essenziale della maturità progettuale in SystemVerilog, sia in percorsi orientati a FPGA sia in flussi ASIC più rigorosi.</p>
+<h2 id="prossimo-passo">Prossimo passo<a class="headerlink" href="#prossimo-passo" title="Permanent link">&para;</a></h2>
+<p>Il passo più naturale ora è <strong><code>coverage-basics.md</code></strong>, perché dopo aver costruito il flusso di simulazione conviene affrontare una domanda fondamentale della verifica:
+- quanto abbiamo davvero verificato?</p>
+<p>Questa pagina potrebbe introdurre in modo ordinato:
+- significato della coverage
+- coverage funzionale e strutturale
+- stati e transizioni visitate
+- casi esercitati e casi mancanti
+- rapporto tra coverage, qualità del testbench e fiducia nel design</p>
+<p>In alternativa, un altro passo molto naturale è <strong><code>reset-strategies.md</code></strong>, se vuoi tornare su un tema RTL/verification trasversale molto importante per robustezza, integrazione e debug.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

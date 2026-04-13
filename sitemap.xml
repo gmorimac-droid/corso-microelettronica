@@ -33,10 +33,6 @@
          <lastmod>2026-04-13</lastmod>
     </url>
     <url>
-         <loc>https://gmorimac-droid.github.io/corso-microelettronica/04_systemverilog_design/</loc>
-         <lastmod>2026-04-13</lastmod>
-    </url>
-    <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/05_verification_base/</loc>
          <lastmod>2026-04-13</lastmod>
     </url>
@@ -338,6 +334,102 @@
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/soc/verifica/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/arrays-and-generate/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/assertions-basics/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/case-study-systemverilog/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/clock-domain-crossing/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/coding-style-rtl/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/combinational-vs-sequential/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/coverage-basics/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/datapath-and-control/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/fsm/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/interfaces-and-handshake/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/language-basics/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/latency-and-throughput/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/packages-and-typedefs/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/parameters-and-configuration/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/pipelining/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/procedural-blocks/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/reset-strategies/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/rtl-constructs/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/simulation-workflow/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/state-encoding/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/systemverilog-interfaces/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/testbench-structure/</loc>
+         <lastmod>2026-04-13</lastmod>
+    </url>
+    <url>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/verification-basics/</loc>
          <lastmod>2026-04-13</lastmod>
     </url>
 </urlset>

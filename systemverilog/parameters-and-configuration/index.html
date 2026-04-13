@@ -1,0 +1,7630 @@
+
+<!doctype html>
+<html lang="it" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corso completo su HDL, verification e tool FPGA/ASIC">
+      
+      
+      
+        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/parameters-and-configuration/">
+      
+      
+        <link rel="prev" href="../arrays-and-generate/">
+      
+      
+        <link rel="next" href="../latency-and-throughput/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Parametri e configurazione - Corso di Microelettronica Digitale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#parametri-e-configurazione-in-systemverilog" class="md-skip">
+          Vai al contenuto
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Intestazione">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-header__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corso di Microelettronica Digitale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Parametri e configurazione
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green"  aria-label="Passa a dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passa a dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="lime"  aria-label="Passa a light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passa a light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Cancella" aria-label="Cancella" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../00_introduzione/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Intro
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../01_fondamenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Fondamenti
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../02_vhdl/" class="md-tabs__link">
+          
+  
+  
+  VHDL
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../03_verilog/" class="md-tabs__link">
+          
+  
+  
+  Verilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  SystemVerilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../05_verification_base/" class="md-tabs__link">
+          
+  
+  
+  Verification
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../06_uvm/" class="md-tabs__link">
+          
+  
+  
+  UVM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../fpga/" class="md-tabs__link">
+          
+  
+  
+  FPGA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../asic/" class="md-tabs__link">
+          
+  
+  
+  ASIC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../soc/" class="md-tabs__link">
+          
+  
+  
+  SoC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../09_progetti/" class="md-tabs__link">
+          
+  
+  
+  Progetti
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../10_tool_e_tcl/" class="md-tabs__link">
+          
+  
+  
+  Tool e Tcl/Tk
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../11_appendici/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Appendici
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../12_riferimenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Riferimenti
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigazione" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-nav__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Corso di Microelettronica Digitale
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00_introduzione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01_fondamenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VHDL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    VHDL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl_progettazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foglio di lavoro
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foglio di lavoro
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Tool Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/in_out/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    In and Out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/utilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/clocks_registers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocks and Registers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/state_machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/modular_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modular Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/memories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/managing_clocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Managing Clocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/io_flavors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O Flavors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A Taste of Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Rest for Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SystemVerilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../language-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti del linguaggio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rtl-constructs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Costrutti RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../procedural-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocchi procedurali
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../combinational-vs-sequential/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logica combinatoria e sequenziale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fsm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Macchine a stati finiti (FSM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../state-encoding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codifica degli stati
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datapath-and-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datapath e controllo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pipelining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline e pipelining
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interfaces-and-handshake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfacce e handshake
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../systemverilog-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Le interface in SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../packages-and-typedefs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Package e typedef
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arrays-and-generate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Array e generate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parametri e configurazione
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parametri e configurazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-perche-servono-i-parametri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Perché servono i parametri
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Perché servono i parametri">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-problemi-di-una-rtl-rigida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Problemi di una RTL rigida
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-obiettivo-della-configurazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Obiettivo della configurazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-vantaggio-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Vantaggio progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-che-cose-un-parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Che cos’è un parameter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Che cos’è un parameter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-significato-fondamentale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Significato fondamentale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-che-cosa-puo-controllare" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Che cosa può controllare
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-parametro-come-leva-architetturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Parametro come leva architetturale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-che-cose-un-localparam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Che cos’è un localparam
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Che cos’è un localparam">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-ruolo-di-localparam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Ruolo di localparam
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-differenza-concettuale-rispetto-a-parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Differenza concettuale rispetto a parameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-valore-metodologico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Valore metodologico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-parametri-come-parte-dellinterfaccia-del-modulo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Parametri come parte dell’interfaccia del modulo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Parametri come parte dell’interfaccia del modulo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-oltre-le-porte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Oltre le porte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-significato-di-progetto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Significato di progetto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-buona-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Buona pratica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-parametri-per-larghezze-e-dimensionamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Parametri per larghezze e dimensionamento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Parametri per larghezze e dimensionamento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-larghezza-dei-dati" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Larghezza dei dati
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-larghezza-di-indirizzi-o-contatori" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Larghezza di indirizzi o contatori
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-beneficio-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Beneficio progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-attenzione-metodologica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Attenzione metodologica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-parametri-per-numero-di-istanze-e-parallelismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Parametri per numero di istanze e parallelismo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Parametri per numero di istanze e parallelismo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-canali-paralleli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Canali paralleli
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-unita-replicate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Unità replicate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-legame-con-array-e-generate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Legame con array e generate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-impatto-architetturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Impatto architetturale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-parametri-per-funzioni-opzionali-e-varianti-architetturali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Parametri per funzioni opzionali e varianti architetturali
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Parametri per funzioni opzionali e varianti architetturali">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-funzionalita-opzionali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Funzionalità opzionali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-varianti-architetturali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Varianti architetturali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-uso-consapevole" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Uso consapevole
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-parametri-localparam-e-relazioni-derivate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Parametri, localparam e relazioni derivate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Parametri, localparam e relazioni derivate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-valori-derivati" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Valori derivati
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-perche-usare-localparam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Perché usare localparam
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-struttura-progettuale-piu-pulita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Struttura progettuale più pulita
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-parametri-e-leggibilita-della-rtl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Parametri e leggibilità della RTL
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Parametri e leggibilità della RTL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-riduzione-delle-costanti-sparse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Riduzione delle costanti sparse
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-chiarezza-dellintento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Chiarezza dell’intento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-coerenza-tra-moduli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Coerenza tra moduli
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-equilibrio-necessario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 Equilibrio necessario
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-parametri-e-riuso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Parametri e riuso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Parametri e riuso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-riuso-del-modulo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Riuso del modulo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-riuso-dellarchitettura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Riuso dell’architettura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-beneficio-di-manutenzione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Beneficio di manutenzione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-limite-da-ricordare" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 Limite da ricordare
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-parametri-generate-e-costruzione-strutturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Parametri, generate e costruzione strutturale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Parametri, generate e costruzione strutturale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-ruolo-combinato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Ruolo combinato
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-esempi-concettuali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Esempi concettuali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-beneficio-architetturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Beneficio architetturale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-parametri-e-verifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Parametri e verifica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Parametri e verifica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-verifica-di-piu-configurazioni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Verifica di più configurazioni
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-rischio-di-esplosione-combinatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Rischio di esplosione combinatoria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-strategia-realistica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Strategia realistica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-beneficio-della-progettazione-disciplinata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4 Beneficio della progettazione disciplinata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-parametri-e-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Parametri e timing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Parametri e timing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-aumento-delle-larghezze" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Aumento delle larghezze
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-aumento-del-parallelismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Aumento del parallelismo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-funzioni-opzionali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 Funzioni opzionali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#134-conclusione-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4 Conclusione progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-parametri-e-implementazione-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Parametri e implementazione FPGA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Parametri e implementazione FPGA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-vantaggi-pratici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Vantaggi pratici
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-impatto-reale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Impatto reale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-disciplina-necessaria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 Disciplina necessaria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-parametri-e-implementazione-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Parametri e implementazione ASIC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Parametri e implementazione ASIC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-area-e-potenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Area e potenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-timing-e-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 Timing e backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-ruolo-nel-progetto-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Ruolo nel progetto ASIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-errori-comuni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Errori comuni
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. Errori comuni">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-parametrizzare-troppo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 Parametrizzare troppo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-parametrizzare-troppo-poco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.2 Parametrizzare troppo poco
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163-parametri-con-significato-poco-chiaro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.3 Parametri con significato poco chiaro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#164-esporre-parametri-che-dovrebbero-essere-interni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.4 Esporre parametri che dovrebbero essere interni
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#165-non-valutare-le-configurazioni-reali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.5 Non valutare le configurazioni reali
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-buone-pratiche-di-modellazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Buone pratiche di modellazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17. Buone pratiche di modellazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171-parametrizzare-solo-gli-aspetti-architetturalmente-significativi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1 Parametrizzare solo gli aspetti architetturalmente significativi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172-usare-localparam-per-i-valori-derivati" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.2 Usare localparam per i valori derivati
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#173-dare-nomi-espliciti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3 Dare nomi espliciti
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#174-pensare-alla-verifica-fin-dallinizio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4 Pensare alla verifica fin dall’inizio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#175-misurare-sulle-configurazioni-reali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5 Misurare sulle configurazioni reali
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-collegamento-con-il-resto-della-sezione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Collegamento con il resto della sezione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../latency-and-throughput/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Latenza e throughput
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coding-style-rtl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stile di codifica RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../verification-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di verifica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testbench-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Struttura di un testbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assertions-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di assertion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simulation-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di simulazione RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../coverage-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di coverage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reset-strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strategie di reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clock-domain-crossing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clock Domain Crossing (CDC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case-study-systemverilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_SV_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05_verification_base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.chipverify.com/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChipVerify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verificationguide.com" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VerificationGuide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.doulos.com/knowhow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doulos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_3" id="__nav_8_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetto mini CPU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetto mini CPU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU_waveform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Waveform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione alle FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di una FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/rtl-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTL design per FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/constraints-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/synthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse dedicate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocking e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/place-route/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Placement, routing e timing closure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica e test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/debug/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debug su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/prototyping-soc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prototipazione di sistemi e SoC su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/fpga-vs-asic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA vs ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_fpga_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_ps_axi_led/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq LED
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_17" id="__nav_9_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq FIR
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zynq FIR
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_8tap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_axi_stream_theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AXI Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_dma_interrupt_perf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DMA Interrupt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_xparameters_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    X Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Digilent/Zybo-Z7" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zybo-Z7-20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASIC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ASIC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione agli ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/spec-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specifiche e architettura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/rtl-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTL design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/constraints-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/synthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DFT e testabilità
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/floorplanning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Floorplanning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/place-route/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Place and Route
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/cts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clock Tree Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/signoff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Signoff fisico e temporale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power analysis e low-power design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica funzionale e equivalenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/libraries-pdk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Librerie standard cell e PDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/tapeout-fabrication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tape-out e fabbricazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_asic_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_openasic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAsic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_19" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_19" id="__nav_10_19_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_19">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openlane2.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenLAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/kunalg123/vsdflow" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CMOS VLSI Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SoC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SoC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione ai SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/architettura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di un SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/bus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interconnessioni e bus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/memorie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memorie e gerarchia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/periferiche/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Periferiche e I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/ip-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrazione IP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/verifica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica di sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/hw-sw-codesign/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HW/SW co-design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/power-clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consumi, clock e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/safety-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Safety e Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/physical-design-awareness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physical awareness nel SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_codice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorgenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool e Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tool e Tcl/Tk
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_e_tcl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3" id="__nav_13_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.tutorialspoint.com/tcl-tk/index.htm" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.amd.com/r/en-US/ug894-vivado-tcl-scripting/Tcl-Scripting-in-Vivado" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Script Tcl in Vivado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://yosyshq.readthedocs.io/projects/yosys/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yosis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openroad.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenROAD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://gtkwave.github.io/gtkwave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GTKWave Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verilator.org/guide/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilator Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_13_3_7" id="__nav_13_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vivado
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_13_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vivado
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug910-vivado-getting-started" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug901-vivado-synthesis" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug904-vivado-implementation" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug835-vivado-tcl-commands" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcl Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/swdocs/modelsim/modelsim_user_2024_2.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ModelSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11_appendici/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendici
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12_riferimenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Riferimenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-perche-servono-i-parametri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Perché servono i parametri
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Perché servono i parametri">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-problemi-di-una-rtl-rigida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Problemi di una RTL rigida
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-obiettivo-della-configurazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Obiettivo della configurazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-vantaggio-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Vantaggio progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-che-cose-un-parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Che cos’è un parameter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Che cos’è un parameter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-significato-fondamentale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Significato fondamentale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-che-cosa-puo-controllare" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Che cosa può controllare
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-parametro-come-leva-architetturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Parametro come leva architetturale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-che-cose-un-localparam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Che cos’è un localparam
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Che cos’è un localparam">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-ruolo-di-localparam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Ruolo di localparam
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-differenza-concettuale-rispetto-a-parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Differenza concettuale rispetto a parameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-valore-metodologico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Valore metodologico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-parametri-come-parte-dellinterfaccia-del-modulo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Parametri come parte dell’interfaccia del modulo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Parametri come parte dell’interfaccia del modulo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-oltre-le-porte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Oltre le porte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-significato-di-progetto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Significato di progetto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-buona-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Buona pratica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-parametri-per-larghezze-e-dimensionamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Parametri per larghezze e dimensionamento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Parametri per larghezze e dimensionamento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-larghezza-dei-dati" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Larghezza dei dati
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-larghezza-di-indirizzi-o-contatori" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Larghezza di indirizzi o contatori
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-beneficio-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Beneficio progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-attenzione-metodologica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Attenzione metodologica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-parametri-per-numero-di-istanze-e-parallelismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Parametri per numero di istanze e parallelismo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Parametri per numero di istanze e parallelismo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-canali-paralleli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Canali paralleli
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-unita-replicate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Unità replicate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-legame-con-array-e-generate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Legame con array e generate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-impatto-architetturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Impatto architetturale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-parametri-per-funzioni-opzionali-e-varianti-architetturali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Parametri per funzioni opzionali e varianti architetturali
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Parametri per funzioni opzionali e varianti architetturali">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-funzionalita-opzionali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Funzionalità opzionali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-varianti-architetturali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Varianti architetturali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-uso-consapevole" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Uso consapevole
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-parametri-localparam-e-relazioni-derivate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Parametri, localparam e relazioni derivate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Parametri, localparam e relazioni derivate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-valori-derivati" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Valori derivati
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-perche-usare-localparam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Perché usare localparam
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-struttura-progettuale-piu-pulita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Struttura progettuale più pulita
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-parametri-e-leggibilita-della-rtl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Parametri e leggibilità della RTL
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Parametri e leggibilità della RTL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-riduzione-delle-costanti-sparse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Riduzione delle costanti sparse
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-chiarezza-dellintento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Chiarezza dell’intento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-coerenza-tra-moduli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Coerenza tra moduli
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-equilibrio-necessario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 Equilibrio necessario
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-parametri-e-riuso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Parametri e riuso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Parametri e riuso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-riuso-del-modulo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Riuso del modulo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-riuso-dellarchitettura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Riuso dell’architettura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-beneficio-di-manutenzione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Beneficio di manutenzione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-limite-da-ricordare" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 Limite da ricordare
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-parametri-generate-e-costruzione-strutturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Parametri, generate e costruzione strutturale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Parametri, generate e costruzione strutturale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-ruolo-combinato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Ruolo combinato
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-esempi-concettuali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Esempi concettuali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-beneficio-architetturale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Beneficio architetturale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-parametri-e-verifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Parametri e verifica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Parametri e verifica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-verifica-di-piu-configurazioni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Verifica di più configurazioni
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-rischio-di-esplosione-combinatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Rischio di esplosione combinatoria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-strategia-realistica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Strategia realistica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124-beneficio-della-progettazione-disciplinata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4 Beneficio della progettazione disciplinata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-parametri-e-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Parametri e timing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Parametri e timing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-aumento-delle-larghezze" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Aumento delle larghezze
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-aumento-del-parallelismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Aumento del parallelismo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-funzioni-opzionali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 Funzioni opzionali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#134-conclusione-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4 Conclusione progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-parametri-e-implementazione-fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Parametri e implementazione FPGA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Parametri e implementazione FPGA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-vantaggi-pratici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Vantaggi pratici
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-impatto-reale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Impatto reale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-disciplina-necessaria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 Disciplina necessaria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-parametri-e-implementazione-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Parametri e implementazione ASIC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Parametri e implementazione ASIC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-area-e-potenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Area e potenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-timing-e-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 Timing e backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-ruolo-nel-progetto-asic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Ruolo nel progetto ASIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-errori-comuni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Errori comuni
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. Errori comuni">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-parametrizzare-troppo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 Parametrizzare troppo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-parametrizzare-troppo-poco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.2 Parametrizzare troppo poco
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163-parametri-con-significato-poco-chiaro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.3 Parametri con significato poco chiaro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#164-esporre-parametri-che-dovrebbero-essere-interni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.4 Esporre parametri che dovrebbero essere interni
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#165-non-valutare-le-configurazioni-reali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.5 Non valutare le configurazioni reali
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-buone-pratiche-di-modellazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Buone pratiche di modellazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17. Buone pratiche di modellazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171-parametrizzare-solo-gli-aspetti-architetturalmente-significativi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1 Parametrizzare solo gli aspetti architetturalmente significativi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172-usare-localparam-per-i-valori-derivati" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.2 Usare localparam per i valori derivati
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#173-dare-nomi-espliciti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3 Dare nomi espliciti
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#174-pensare-alla-verifica-fin-dallinizio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4 Pensare alla verifica fin dall’inizio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#175-misurare-sulle-configurazioni-reali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5 Misurare sulle configurazioni reali
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-collegamento-con-il-resto-della-sezione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Collegamento con il resto della sezione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="parametri-e-configurazione-in-systemverilog">Parametri e configurazione in SystemVerilog<a class="headerlink" href="#parametri-e-configurazione-in-systemverilog" title="Permanent link">&para;</a></h1>
+<p>Dopo aver introdotto <strong>array</strong> e <strong><code>generate</code></strong>, il passo successivo naturale è approfondire il meccanismo che rende possibile la vera <strong>configurabilità</strong> di una descrizione RTL: l’uso dei <strong>parametri</strong>. In SystemVerilog, infatti, molti moduli non sono pensati per esistere in una sola forma fissa, ma per adattarsi a esigenze diverse in termini di:
+- larghezza dei dati;
+- numero di canali;
+- profondità di strutture;
+- numero di stadi;
+- caratteristiche opzionali;
+- varianti architetturali.</p>
+<p>Questa capacità di adattamento è fondamentale sia in ambito <strong>FPGA</strong> sia in ambito <strong>ASIC</strong>, perché permette di costruire blocchi riusabili, di esplorare compromessi architetturali e di mantenere una sola base RTL capace di coprire più configurazioni significative.</p>
+<p>Dal punto di vista metodologico, i parametri non sono solo una comodità per evitare costanti hard-coded. Sono uno strumento centrale per collegare:
+- architettura;
+- organizzazione della RTL;
+- scalabilità strutturale;
+- verifica;
+- sintesi;
+- implementazione fisica.</p>
+<p>Questa pagina introduce <code>parameter</code>, <code>localparam</code> e i principali temi legati alla configurazione del progetto, con attenzione non solo alla sintassi, ma soprattutto al loro ruolo nella costruzione di una base codice ordinata, leggibile e progettualmente robusta.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Scelte architetturali] --&gt; B[Parametri]
+    B --&gt; C[Larghezze]
+    B --&gt; D[Numero di istanze]
+    B --&gt; E[Funzioni opzionali]
+    B --&gt; F[Profondità e stadi]
+    C --&gt; G[RTL configurabile]
+    D --&gt; G
+    E --&gt; G
+    F --&gt; G
+    G --&gt; H[Verifica]
+    G --&gt; I[Sintesi e implementazione]
+
+    style B fill:#eef6ff,stroke:#1f6feb
+    style G fill:#eefbf0,stroke:#22863a</code></pre>
+<h2 id="1-perche-servono-i-parametri">1. Perché servono i parametri<a class="headerlink" href="#1-perche-servono-i-parametri" title="Permanent link">&para;</a></h2>
+<p>Quando un modulo viene scritto in modo completamente fisso, ogni modifica architetturale richiede una riscrittura o una duplicazione del codice. Questo approccio diventa rapidamente inefficiente.</p>
+<h3 id="11-problemi-di-una-rtl-rigida">1.1 Problemi di una RTL rigida<a class="headerlink" href="#11-problemi-di-una-rtl-rigida" title="Permanent link">&para;</a></h3>
+<p>Una descrizione troppo rigida può causare:
+- duplicazione di moduli quasi identici;
+- difficoltà nel riuso;
+- maggiore rischio di errori tra versioni simili;
+- scarsa capacità di esplorare alternative architetturali;
+- minore coerenza tra varianti del progetto.</p>
+<h3 id="12-obiettivo-della-configurazione">1.2 Obiettivo della configurazione<a class="headerlink" href="#12-obiettivo-della-configurazione" title="Permanent link">&para;</a></h3>
+<p>I parametri permettono di scrivere una descrizione più generale, in cui alcuni aspetti sono lasciati configurabili. Questo è utile quando:
+- la stessa struttura deve esistere con larghezze diverse;
+- il numero di canali cambia tra versioni;
+- una funzione può essere attivata o esclusa;
+- la profondità della pipeline dipende dagli obiettivi di prestazione;
+- il blocco viene riusato in contesti diversi.</p>
+<h3 id="13-vantaggio-progettuale">1.3 Vantaggio progettuale<a class="headerlink" href="#13-vantaggio-progettuale" title="Permanent link">&para;</a></h3>
+<p>La parametrizzazione rende il progetto più vicino alla sua natura architetturale reale: non un blocco isolato e immutabile, ma una famiglia controllata di implementazioni correlate.</p>
+<h2 id="2-che-cose-un-parameter">2. Che cos’è un <code>parameter</code><a class="headerlink" href="#2-che-cose-un-parameter" title="Permanent link">&para;</a></h2>
+<p>In SystemVerilog, un <code>parameter</code> è una costante configurabile associata a un modulo, un’interfaccia o altre entità del linguaggio, e può essere usata per controllarne struttura e comportamento statico.</p>
+<h3 id="21-significato-fondamentale">2.1 Significato fondamentale<a class="headerlink" href="#21-significato-fondamentale" title="Permanent link">&para;</a></h3>
+<p>Un parametro rappresenta una scelta definita <strong>prima</strong> della realizzazione dell’hardware. Non cambia dinamicamente durante il funzionamento del circuito, ma contribuisce a determinarne la forma finale.</p>
+<h3 id="22-che-cosa-puo-controllare">2.2 Che cosa può controllare<a class="headerlink" href="#22-che-cosa-puo-controllare" title="Permanent link">&para;</a></h3>
+<p>Un parametro può essere usato per definire:
+- larghezza di bus;
+- numero di elementi in un array;
+- numero di istanze generate;
+- profondità di code o storage;
+- presenza o assenza di funzioni opzionali;
+- costanti di progetto;
+- limiti, soglie e dimensionamenti.</p>
+<h3 id="23-parametro-come-leva-architetturale">2.3 Parametro come leva architetturale<a class="headerlink" href="#23-parametro-come-leva-architetturale" title="Permanent link">&para;</a></h3>
+<p>Un parametro non è solo un valore numerico: è spesso l’espressione RTL di una scelta architetturale.</p>
+<h2 id="3-che-cose-un-localparam">3. Che cos’è un <code>localparam</code><a class="headerlink" href="#3-che-cose-un-localparam" title="Permanent link">&para;</a></h2>
+<p>Accanto a <code>parameter</code>, SystemVerilog mette a disposizione <code>localparam</code>, che rappresenta una costante locale non pensata per essere ridefinita dall’esterno.</p>
+<h3 id="31-ruolo-di-localparam">3.1 Ruolo di <code>localparam</code><a class="headerlink" href="#31-ruolo-di-localparam" title="Permanent link">&para;</a></h3>
+<p><code>localparam</code> è utile quando si vuole definire:
+- un valore derivato da altri parametri;
+- una costante interna al modulo;
+- una grandezza ausiliaria che non deve essere modificata da fuori;
+- una convenzione locale della struttura RTL.</p>
+<h3 id="32-differenza-concettuale-rispetto-a-parameter">3.2 Differenza concettuale rispetto a <code>parameter</code><a class="headerlink" href="#32-differenza-concettuale-rispetto-a-parameter" title="Permanent link">&para;</a></h3>
+<p>In modo semplice:
+- <code>parameter</code> esprime qualcosa che il progettista dell’istanza può configurare;
+- <code>localparam</code> esprime qualcosa che il modulo usa internamente come valore fisso o derivato.</p>
+<h3 id="33-valore-metodologico">3.3 Valore metodologico<a class="headerlink" href="#33-valore-metodologico" title="Permanent link">&para;</a></h3>
+<p>Questa distinzione aiuta a capire quali aspetti fanno parte dell’interfaccia configurabile del modulo e quali invece appartengono alla sua implementazione interna.</p>
+<h2 id="4-parametri-come-parte-dellinterfaccia-del-modulo">4. Parametri come parte dell’interfaccia del modulo<a class="headerlink" href="#4-parametri-come-parte-dellinterfaccia-del-modulo" title="Permanent link">&para;</a></h2>
+<p>Uno dei punti più importanti da fissare è che i parametri fanno parte, in un certo senso, dell’<strong>interfaccia progettuale</strong> del modulo.</p>
+<h3 id="41-oltre-le-porte">4.1 Oltre le porte<a class="headerlink" href="#41-oltre-le-porte" title="Permanent link">&para;</a></h3>
+<p>Le porte descrivono i segnali con cui il modulo comunica durante il funzionamento. I parametri descrivono invece:
+- la forma del modulo;
+- le sue dimensioni;
+- alcune sue varianti strutturali;
+- i limiti entro cui il modulo è pensato per essere usato.</p>
+<h3 id="42-significato-di-progetto">4.2 Significato di progetto<a class="headerlink" href="#42-significato-di-progetto" title="Permanent link">&para;</a></h3>
+<p>Per questo motivo, la scelta dei parametri di un modulo dovrebbe essere progettata con attenzione, non improvvisata.</p>
+<h3 id="43-buona-pratica">4.3 Buona pratica<a class="headerlink" href="#43-buona-pratica" title="Permanent link">&para;</a></h3>
+<p>Un modulo ben costruito tende ad avere:
+- pochi parametri davvero utili;
+- parametri con nomi chiari;
+- significato architetturale ben definito;
+- relazioni interne ben controllate tramite <code>localparam</code>.</p>
+<h2 id="5-parametri-per-larghezze-e-dimensionamento">5. Parametri per larghezze e dimensionamento<a class="headerlink" href="#5-parametri-per-larghezze-e-dimensionamento" title="Permanent link">&para;</a></h2>
+<p>Uno degli usi più comuni e naturali dei parametri è il controllo delle larghezze.</p>
+<h3 id="51-larghezza-dei-dati">5.1 Larghezza dei dati<a class="headerlink" href="#51-larghezza-dei-dati" title="Permanent link">&para;</a></h3>
+<p>Molti moduli devono poter lavorare su:
+- 8 bit;
+- 16 bit;
+- 32 bit;
+- 64 bit;
+- o altre larghezze dipendenti dal contesto.</p>
+<h3 id="52-larghezza-di-indirizzi-o-contatori">5.2 Larghezza di indirizzi o contatori<a class="headerlink" href="#52-larghezza-di-indirizzi-o-contatori" title="Permanent link">&para;</a></h3>
+<p>Anche:
+- indirizzi;
+- indici;
+- contatori;
+- campi di tag;
+- identificatori</p>
+<p>possono dipendere da parametri architetturali.</p>
+<h3 id="53-beneficio-progettuale">5.3 Beneficio progettuale<a class="headerlink" href="#53-beneficio-progettuale" title="Permanent link">&para;</a></h3>
+<p>Parametrizzare le larghezze aiuta a:
+- riusare la stessa struttura in più contesti;
+- mantenere coerenza tra varianti;
+- esplorare costi e prestazioni;
+- evitare modifiche manuali invasive.</p>
+<h3 id="54-attenzione-metodologica">5.4 Attenzione metodologica<a class="headerlink" href="#54-attenzione-metodologica" title="Permanent link">&para;</a></h3>
+<p>La larghezza non è solo un dettaglio numerico: può influenzare area, timing, profondità della logica, numero di bit di controllo e comportamento di interfacce e pipeline.</p>
+<h2 id="6-parametri-per-numero-di-istanze-e-parallelismo">6. Parametri per numero di istanze e parallelismo<a class="headerlink" href="#6-parametri-per-numero-di-istanze-e-parallelismo" title="Permanent link">&para;</a></h2>
+<p>Un altro uso molto importante dei parametri è il controllo del <strong>numero di copie strutturali</strong> di una certa risorsa.</p>
+<h3 id="61-canali-paralleli">6.1 Canali paralleli<a class="headerlink" href="#61-canali-paralleli" title="Permanent link">&para;</a></h3>
+<p>Un blocco può avere:
+- 1 canale;
+- 2 canali;
+- 4 canali;
+- 8 canali;</p>
+<p>a seconda degli obiettivi di throughput o integrazione.</p>
+<h3 id="62-unita-replicate">6.2 Unità replicate<a class="headerlink" href="#62-unita-replicate" title="Permanent link">&para;</a></h3>
+<p>Si possono parametrizzare:
+- numero di lane;
+- numero di istanze di un sottoblocco;
+- numero di porte;
+- numero di stage identici;
+- numero di entry in una struttura regolare.</p>
+<h3 id="63-legame-con-array-e-generate">6.3 Legame con array e <code>generate</code><a class="headerlink" href="#63-legame-con-array-e-generate" title="Permanent link">&para;</a></h3>
+<p>Questo tipo di configurazione si combina naturalmente con:
+- array, per rappresentare gli insiemi di segnali;
+- <code>generate</code>, per costruire l’hardware ripetuto.</p>
+<h3 id="64-impatto-architetturale">6.4 Impatto architetturale<a class="headerlink" href="#64-impatto-architetturale" title="Permanent link">&para;</a></h3>
+<p>Il parametro che controlla il parallelismo è spesso una delle scelte più importanti del progetto, perché influisce su:
+- throughput;
+- area;
+- potenza;
+- fanout;
+- complessità del controllo.</p>
+<h2 id="7-parametri-per-funzioni-opzionali-e-varianti-architetturali">7. Parametri per funzioni opzionali e varianti architetturali<a class="headerlink" href="#7-parametri-per-funzioni-opzionali-e-varianti-architetturali" title="Permanent link">&para;</a></h2>
+<p>I parametri non servono solo a cambiare dimensioni: possono anche selezionare diverse forme della struttura.</p>
+<h3 id="71-funzionalita-opzionali">7.1 Funzionalità opzionali<a class="headerlink" href="#71-funzionalita-opzionali" title="Permanent link">&para;</a></h3>
+<p>Un modulo può prevedere opzioni come:
+- pipeline attivata o no;
+- canale di errore presente o no;
+- supporto a una modalità estesa;
+- inclusione di logica di buffering;
+- abilitazione di monitoraggio o statistiche interne.</p>
+<h3 id="72-varianti-architetturali">7.2 Varianti architetturali<a class="headerlink" href="#72-varianti-architetturali" title="Permanent link">&para;</a></h3>
+<p>Alcuni parametri possono determinare vere scelte strutturali, come:
+- presenza di uno stadio aggiuntivo;
+- tipo di organizzazione del datapath;
+- inclusione di logiche alternative;
+- modalità compatta o prestazionale del blocco.</p>
+<h3 id="73-uso-consapevole">7.3 Uso consapevole<a class="headerlink" href="#73-uso-consapevole" title="Permanent link">&para;</a></h3>
+<p>Questa flessibilità è potente, ma deve essere usata con disciplina, perché troppe varianti possono rendere la verifica e la manutenzione molto più difficili.</p>
+<h2 id="8-parametri-localparam-e-relazioni-derivate">8. Parametri, <code>localparam</code> e relazioni derivate<a class="headerlink" href="#8-parametri-localparam-e-relazioni-derivate" title="Permanent link">&para;</a></h2>
+<p>In un progetto ben organizzato, molti valori interni non dovrebbero essere parametrizzati direttamente, ma derivati da un insieme più piccolo di parametri principali.</p>
+<h3 id="81-valori-derivati">8.1 Valori derivati<a class="headerlink" href="#81-valori-derivati" title="Permanent link">&para;</a></h3>
+<p>Per esempio, può essere naturale derivare:
+- larghezza di un indice;
+- profondità di un contatore;
+- numero di bit necessari a codificare un insieme di elementi;
+- costanti di supporto;
+- limiti interni usati dalla struttura.</p>
+<h3 id="82-perche-usare-localparam">8.2 Perché usare <code>localparam</code><a class="headerlink" href="#82-perche-usare-localparam" title="Permanent link">&para;</a></h3>
+<p>Usare <code>localparam</code> per questi valori:
+- evita configurazioni incoerenti;
+- rende più chiaro cosa è davvero esterno e cosa è interno;
+- semplifica la manutenzione;
+- riduce il rischio di errori di override.</p>
+<h3 id="83-struttura-progettuale-piu-pulita">8.3 Struttura progettuale più pulita<a class="headerlink" href="#83-struttura-progettuale-piu-pulita" title="Permanent link">&para;</a></h3>
+<p>Il risultato è un modulo con:
+- interfaccia configurabile compatta;
+- implementazione interna coerente;
+- relazioni tra dimensioni più facili da seguire.</p>
+<h2 id="9-parametri-e-leggibilita-della-rtl">9. Parametri e leggibilità della RTL<a class="headerlink" href="#9-parametri-e-leggibilita-della-rtl" title="Permanent link">&para;</a></h2>
+<p>Uno dei vantaggi principali della parametrizzazione ben fatta è che migliora la qualità generale del codice.</p>
+<h3 id="91-riduzione-delle-costanti-sparse">9.1 Riduzione delle costanti sparse<a class="headerlink" href="#91-riduzione-delle-costanti-sparse" title="Permanent link">&para;</a></h3>
+<p>Un modulo con molte costanti numeriche “magiche” è più difficile da capire, mantenere e adattare.</p>
+<h3 id="92-chiarezza-dellintento">9.2 Chiarezza dell’intento<a class="headerlink" href="#92-chiarezza-dellintento" title="Permanent link">&para;</a></h3>
+<p>Un parametro ben nominato rende esplicito:
+- che cosa è variabile;
+- quale aspetto del blocco controlla;
+- quale dimensione architetturale rappresenta.</p>
+<h3 id="93-coerenza-tra-moduli">9.3 Coerenza tra moduli<a class="headerlink" href="#93-coerenza-tra-moduli" title="Permanent link">&para;</a></h3>
+<p>Quando più moduli usano parametri e tipi coerenti, il progetto risulta molto più uniforme e comprensibile.</p>
+<h3 id="94-equilibrio-necessario">9.4 Equilibrio necessario<a class="headerlink" href="#94-equilibrio-necessario" title="Permanent link">&para;</a></h3>
+<p>Parametrizzare tutto indiscriminatamente non migliora la leggibilità. Serve invece una scelta attenta di ciò che ha davvero senso rendere configurabile.</p>
+<h2 id="10-parametri-e-riuso">10. Parametri e riuso<a class="headerlink" href="#10-parametri-e-riuso" title="Permanent link">&para;</a></h2>
+<p>La parametrizzazione è uno degli strumenti più forti per ottenere riuso reale.</p>
+<h3 id="101-riuso-del-modulo">10.1 Riuso del modulo<a class="headerlink" href="#101-riuso-del-modulo" title="Permanent link">&para;</a></h3>
+<p>Un modulo configurabile può essere usato:
+- in versioni leggere;
+- in versioni più larghe;
+- in versioni a più canali;
+- in versioni con diverse opzioni strutturali.</p>
+<h3 id="102-riuso-dellarchitettura">10.2 Riuso dell’architettura<a class="headerlink" href="#102-riuso-dellarchitettura" title="Permanent link">&para;</a></h3>
+<p>La stessa architettura può essere adattata a prodotti o contesti diversi senza dover riscrivere da zero la RTL.</p>
+<h3 id="103-beneficio-di-manutenzione">10.3 Beneficio di manutenzione<a class="headerlink" href="#103-beneficio-di-manutenzione" title="Permanent link">&para;</a></h3>
+<p>Avere una sola base codice parametrica è spesso preferibile rispetto ad avere molte varianti copiate e modificate manualmente.</p>
+<h3 id="104-limite-da-ricordare">10.4 Limite da ricordare<a class="headerlink" href="#104-limite-da-ricordare" title="Permanent link">&para;</a></h3>
+<p>Il riuso utile non coincide con la massima genericità possibile. Un modulo troppo generalizzato può diventare meno leggibile e più difficile da verificare.</p>
+<h2 id="11-parametri-generate-e-costruzione-strutturale">11. Parametri, <code>generate</code> e costruzione strutturale<a class="headerlink" href="#11-parametri-generate-e-costruzione-strutturale" title="Permanent link">&para;</a></h2>
+<p>I parametri esprimono il “che cosa varia”, mentre <code>generate</code> costruisce l’hardware corrispondente.</p>
+<h3 id="111-ruolo-combinato">11.1 Ruolo combinato<a class="headerlink" href="#111-ruolo-combinato" title="Permanent link">&para;</a></h3>
+<p>Molte configurazioni strutturali si realizzano con la coppia:
+- parametro che controlla la variante;
+- <code>generate</code> che seleziona o replica la struttura.</p>
+<h3 id="112-esempi-concettuali">11.2 Esempi concettuali<a class="headerlink" href="#112-esempi-concettuali" title="Permanent link">&para;</a></h3>
+<p>Questo vale per:
+- numero di canali;
+- numero di istanze;
+- presenza di blocchi opzionali;
+- configurazione di pipeline;
+- strutture a profondità variabile.</p>
+<h3 id="113-beneficio-architetturale">11.3 Beneficio architetturale<a class="headerlink" href="#113-beneficio-architetturale" title="Permanent link">&para;</a></h3>
+<p>L’uso combinato di parametri e <code>generate</code> consente di trasformare una famiglia di scelte progettuali in una sola descrizione RTL coerente.</p>
+<pre class="mermaid"><code>flowchart TD
+    A[Parametri] --&gt; B{Scelta strutturale}
+    B --&gt; C[Replicazione con generate]
+    B --&gt; D[Inclusione condizionale]
+    C --&gt; E[Hardware risultante]
+    D --&gt; E</code></pre>
+<h2 id="12-parametri-e-verifica">12. Parametri e verifica<a class="headerlink" href="#12-parametri-e-verifica" title="Permanent link">&para;</a></h2>
+<p>La configurabilità del modulo ha un impatto diretto sulla verifica.</p>
+<h3 id="121-verifica-di-piu-configurazioni">12.1 Verifica di più configurazioni<a class="headerlink" href="#121-verifica-di-piu-configurazioni" title="Permanent link">&para;</a></h3>
+<p>Se un modulo è parametrico, bisogna decidere:
+- quali configurazioni sono supportate;
+- quali configurazioni sono effettivamente usate;
+- quali configurazioni devono essere verificate in regressione.</p>
+<h3 id="122-rischio-di-esplosione-combinatoria">12.2 Rischio di esplosione combinatoria<a class="headerlink" href="#122-rischio-di-esplosione-combinatoria" title="Permanent link">&para;</a></h3>
+<p>Se il numero di parametri e combinazioni cresce troppo, la verifica può diventare molto più complessa.</p>
+<h3 id="123-strategia-realistica">12.3 Strategia realistica<a class="headerlink" href="#123-strategia-realistica" title="Permanent link">&para;</a></h3>
+<p>In pratica, conviene distinguere tra:
+- configurazioni teoricamente possibili;
+- configurazioni ufficialmente supportate;
+- configurazioni realmente usate nel prodotto.</p>
+<h3 id="124-beneficio-della-progettazione-disciplinata">12.4 Beneficio della progettazione disciplinata<a class="headerlink" href="#124-beneficio-della-progettazione-disciplinata" title="Permanent link">&para;</a></h3>
+<p>Una parametrizzazione ben pensata aiuta la verifica perché mantiene:
+- significato chiaro dei parametri;
+- relazioni interne controllate;
+- minore spazio di configurazioni inutilmente ambiguo.</p>
+<h2 id="13-parametri-e-timing">13. Parametri e timing<a class="headerlink" href="#13-parametri-e-timing" title="Permanent link">&para;</a></h2>
+<p>Le scelte configurabili hanno quasi sempre conseguenze temporali.</p>
+<h3 id="131-aumento-delle-larghezze">13.1 Aumento delle larghezze<a class="headerlink" href="#131-aumento-delle-larghezze" title="Permanent link">&para;</a></h3>
+<p>Un dato più largo può:
+- aumentare la logica combinatoria;
+- modificare il fanout;
+- cambiare la profondità di certi operatori;
+- influire sulla frequenza raggiungibile.</p>
+<h3 id="132-aumento-del-parallelismo">13.2 Aumento del parallelismo<a class="headerlink" href="#132-aumento-del-parallelismo" title="Permanent link">&para;</a></h3>
+<p>Più istanze o più canali possono:
+- aumentare area e routing;
+- alzare il fanout di segnali di controllo;
+- complicare la distribuzione del clock;
+- richiedere floorplanning più attento.</p>
+<h3 id="133-funzioni-opzionali">13.3 Funzioni opzionali<a class="headerlink" href="#133-funzioni-opzionali" title="Permanent link">&para;</a></h3>
+<p>L’introduzione di pipeline, buffering o logiche alternative può migliorare o peggiorare il timing a seconda del caso.</p>
+<h3 id="134-conclusione-progettuale">13.4 Conclusione progettuale<a class="headerlink" href="#134-conclusione-progettuale" title="Permanent link">&para;</a></h3>
+<p>Per questo motivo, i parametri devono essere letti non solo come numeri astratti, ma come scelte che modificano il comportamento fisico del blocco.</p>
+<h2 id="14-parametri-e-implementazione-fpga">14. Parametri e implementazione FPGA<a class="headerlink" href="#14-parametri-e-implementazione-fpga" title="Permanent link">&para;</a></h2>
+<p>Su FPGA, la parametrizzazione è molto utile perché consente di adattare il design alle risorse disponibili e agli obiettivi di frequenza.</p>
+<h3 id="141-vantaggi-pratici">14.1 Vantaggi pratici<a class="headerlink" href="#141-vantaggi-pratici" title="Permanent link">&para;</a></h3>
+<p>È utile per:
+- scalare larghezze di datapath;
+- adattare il numero di lane o canali;
+- selezionare profondità di pipeline;
+- attivare o disattivare funzionalità.</p>
+<h3 id="142-impatto-reale">14.2 Impatto reale<a class="headerlink" href="#142-impatto-reale" title="Permanent link">&para;</a></h3>
+<p>Ogni configurazione può cambiare:
+- utilizzo di LUT;
+- utilizzo di flip-flop;
+- uso di DSP o BRAM;
+- complessità del routing;
+- timing closure.</p>
+<h3 id="143-disciplina-necessaria">14.3 Disciplina necessaria<a class="headerlink" href="#143-disciplina-necessaria" title="Permanent link">&para;</a></h3>
+<p>Per questo, le configurazioni usate su FPGA vanno sempre valutate con:
+- report di sintesi;
+- report di timing;
+- verifica delle risorse;
+- prove di integrazione reali.</p>
+<h2 id="15-parametri-e-implementazione-asic">15. Parametri e implementazione ASIC<a class="headerlink" href="#15-parametri-e-implementazione-asic" title="Permanent link">&para;</a></h2>
+<p>Anche su ASIC i parametri sono molto importanti, ma le conseguenze strutturali devono essere valutate con ancora maggiore attenzione.</p>
+<h3 id="151-area-e-potenza">15.1 Area e potenza<a class="headerlink" href="#151-area-e-potenza" title="Permanent link">&para;</a></h3>
+<p>Configurazioni diverse possono modificare in modo sensibile:
+- numero di celle;
+- area;
+- carico del clock tree;
+- potenza dinamica e statica.</p>
+<h3 id="152-timing-e-backend">15.2 Timing e backend<a class="headerlink" href="#152-timing-e-backend" title="Permanent link">&para;</a></h3>
+<p>Varianti di larghezza, parallelismo o pipeline influenzano:
+- sintesi;
+- fanout;
+- floorplanning;
+- PnR;
+- CTS;
+- signoff.</p>
+<h3 id="153-ruolo-nel-progetto-asic">15.3 Ruolo nel progetto ASIC<a class="headerlink" href="#153-ruolo-nel-progetto-asic" title="Permanent link">&para;</a></h3>
+<p>Nel flusso ASIC, la parametrizzazione è molto utile nelle fasi di esplorazione architetturale e definizione del blocco, ma le configurazioni finali devono essere chiaramente fissate e verificate con attenzione lungo tutto il backend.</p>
+<h2 id="16-errori-comuni">16. Errori comuni<a class="headerlink" href="#16-errori-comuni" title="Permanent link">&para;</a></h2>
+<p>Alcuni errori ricorrono spesso nell’uso dei parametri.</p>
+<h3 id="161-parametrizzare-troppo">16.1 Parametrizzare troppo<a class="headerlink" href="#161-parametrizzare-troppo" title="Permanent link">&para;</a></h3>
+<p>Rendere configurabile ogni dettaglio può produrre:
+- moduli difficili da leggere;
+- troppe combinazioni da verificare;
+- maggiore rischio di inconsistenze.</p>
+<h3 id="162-parametrizzare-troppo-poco">16.2 Parametrizzare troppo poco<a class="headerlink" href="#162-parametrizzare-troppo-poco" title="Permanent link">&para;</a></h3>
+<p>Al contrario, una parametrizzazione insufficiente può impedire il riuso e costringere a duplicazioni inutili.</p>
+<h3 id="163-parametri-con-significato-poco-chiaro">16.3 Parametri con significato poco chiaro<a class="headerlink" href="#163-parametri-con-significato-poco-chiaro" title="Permanent link">&para;</a></h3>
+<p>Se il nome o il ruolo di un parametro non sono evidenti, il modulo diventa più difficile da usare correttamente.</p>
+<h3 id="164-esporre-parametri-che-dovrebbero-essere-interni">16.4 Esporre parametri che dovrebbero essere interni<a class="headerlink" href="#164-esporre-parametri-che-dovrebbero-essere-interni" title="Permanent link">&para;</a></h3>
+<p>Valori derivati o dettagli implementativi dovrebbero spesso essere <code>localparam</code>, non <code>parameter</code>.</p>
+<h3 id="165-non-valutare-le-configurazioni-reali">16.5 Non valutare le configurazioni reali<a class="headerlink" href="#165-non-valutare-le-configurazioni-reali" title="Permanent link">&para;</a></h3>
+<p>Una configurazione teoricamente possibile ma mai verificata può diventare una fonte di problemi nascosti.</p>
+<h2 id="17-buone-pratiche-di-modellazione">17. Buone pratiche di modellazione<a class="headerlink" href="#17-buone-pratiche-di-modellazione" title="Permanent link">&para;</a></h2>
+<p>Per usare bene <code>parameter</code> e <code>localparam</code> in SystemVerilog, alcune pratiche sono particolarmente efficaci.</p>
+<h3 id="171-parametrizzare-solo-gli-aspetti-architetturalmente-significativi">17.1 Parametrizzare solo gli aspetti architetturalmente significativi<a class="headerlink" href="#171-parametrizzare-solo-gli-aspetti-architetturalmente-significativi" title="Permanent link">&para;</a></h3>
+<p>Conviene rendere configurabili gli aspetti che rappresentano vere decisioni progettuali.</p>
+<h3 id="172-usare-localparam-per-i-valori-derivati">17.2 Usare <code>localparam</code> per i valori derivati<a class="headerlink" href="#172-usare-localparam-per-i-valori-derivati" title="Permanent link">&para;</a></h3>
+<p>Questo mantiene l’interfaccia del modulo più pulita e riduce il rischio di configurazioni incoerenti.</p>
+<h3 id="173-dare-nomi-espliciti">17.3 Dare nomi espliciti<a class="headerlink" href="#173-dare-nomi-espliciti" title="Permanent link">&para;</a></h3>
+<p>I parametri dovrebbero essere leggibili come parte della documentazione del modulo.</p>
+<h3 id="174-pensare-alla-verifica-fin-dallinizio">17.4 Pensare alla verifica fin dall’inizio<a class="headerlink" href="#174-pensare-alla-verifica-fin-dallinizio" title="Permanent link">&para;</a></h3>
+<p>Ogni parametro aggiunge spazio di configurazione, e quindi potenziale complessità di verifica.</p>
+<h3 id="175-misurare-sulle-configurazioni-reali">17.5 Misurare sulle configurazioni reali<a class="headerlink" href="#175-misurare-sulle-configurazioni-reali" title="Permanent link">&para;</a></h3>
+<p>Timing, area e utilizzo risorse devono essere valutati sulle configurazioni effettivamente impiegate, non solo su quelle teoricamente possibili.</p>
+<h2 id="18-collegamento-con-il-resto-della-sezione">18. Collegamento con il resto della sezione<a class="headerlink" href="#18-collegamento-con-il-resto-della-sezione" title="Permanent link">&para;</a></h2>
+<p>Questa pagina si collega direttamente ai temi introdotti nelle pagine precedenti:
+- <strong><code>arrays-and-generate.md</code></strong> ha mostrato come costruire strutture scalabili e replicate;
+- <strong><code>packages-and-typedefs.md</code></strong> ha organizzato tipi e definizioni condivise;
+- <strong><code>systemverilog-interfaces.md</code></strong> ha strutturato i collegamenti tra moduli;
+- <strong><code>datapath-and-control.md</code></strong> e <strong><code>pipelining.md</code></strong> hanno evidenziato come larghezze, stadi e parallelismo siano scelte architetturali reali.</p>
+<p>I parametri sono il punto in cui tutte queste dimensioni diventano configurabili in modo controllato.</p>
+<h2 id="19-in-sintesi">19. In sintesi<a class="headerlink" href="#19-in-sintesi" title="Permanent link">&para;</a></h2>
+<p>I parametri sono uno degli strumenti più importanti di SystemVerilog per costruire una RTL scalabile, riusabile e coerente con l’architettura del progetto. Permettono di controllare:
+- dimensioni;
+- numero di elementi;
+- varianti strutturali;
+- opzioni funzionali;
+- compromessi tra area, timing e prestazioni.</p>
+<p>La distinzione tra <code>parameter</code> e <code>localparam</code> aiuta a mantenere chiara la separazione tra:
+- ciò che è configurabile dall’esterno;
+- ciò che appartiene all’implementazione interna del modulo.</p>
+<p>Usati con disciplina, i parametri rendono possibile una progettazione più matura e professionale, adatta sia all’esplorazione architetturale sia alla costruzione di blocchi robusti per FPGA e ASIC.</p>
+<h2 id="prossimo-passo">Prossimo passo<a class="headerlink" href="#prossimo-passo" title="Permanent link">&para;</a></h2>
+<p>Il passo più naturale ora è <strong><code>latency-and-throughput.md</code></strong>, perché dopo aver consolidato parametrizzazione, pipeline e handshake conviene fissare in modo sistematico il rapporto tra:
+- latenza;
+- throughput;
+- parallelismo;
+- buffering;
+- prestazioni di sistema;
+- implicazioni su timing e architettura.</p>
+<p>In alternativa, un altro passo molto naturale è <strong><code>coding-style-rtl.md</code></strong>, se vuoi aprire il ramo più metodologico dedicato a convenzioni di scrittura, leggibilità e qualità della RTL SystemVerilog.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
