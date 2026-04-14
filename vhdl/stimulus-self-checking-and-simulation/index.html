@@ -1,0 +1,10270 @@
+
+<!doctype html>
+<html lang="it" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corso completo su HDL, verification e tool FPGA/ASIC">
+      
+      
+      
+        <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/vhdl/stimulus-self-checking-and-simulation/">
+      
+      
+        <link rel="prev" href="../verification-and-testbench/">
+      
+      
+        <link rel="next" href="../debug-and-waveforms/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Stimoli, self-checking e simulazione - Corso di Microelettronica Digitale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#stimoli-self-checking-e-simulazione" class="md-skip">
+          Vai al contenuto
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Intestazione">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-header__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corso di Microelettronica Digitale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Stimoli, self-checking e simulazione
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="green"  aria-label="Passa a dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passa a dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="lime"  aria-label="Passa a light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passa a light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cerca" placeholder="Cerca" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cerca">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Cancella" aria-label="Cancella" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../digital-design-foundations/" class="md-tabs__link">
+          
+  
+  
+  Fondamenti di progettazione
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  VHDL
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../03_verilog/" class="md-tabs__link">
+          
+  
+  
+  Verilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../systemverilog/" class="md-tabs__link">
+          
+  
+  
+  SystemVerilog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../uvm/" class="md-tabs__link">
+          
+  
+  
+  UVM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../fpga/" class="md-tabs__link">
+          
+  
+  
+  FPGA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../asic/" class="md-tabs__link">
+          
+  
+  
+  ASIC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../soc/" class="md-tabs__link">
+          
+  
+  
+  SoC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../09_progetti/" class="md-tabs__link">
+          
+  
+  
+  Progetti
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../10_tool_e_tcl/" class="md-tabs__link">
+          
+  
+  
+  Tool e Tcl/Tk
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../12_riferimenti/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Riferimenti
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigazione" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Corso di Microelettronica Digitale" class="md-nav__button md-logo" aria-label="Corso di Microelettronica Digitale" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Corso di Microelettronica Digitale
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di progettazione
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fondamenti di progettazione
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-design-foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-design-foundations/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Panoramica della progettazione digitale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concetti fondamentali
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Concetti fondamentali
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-design-foundations/signals-and-information/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segnali, bit e rappresentazione dell’informazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-design-foundations/combinational-logic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logica combinatoria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-design-foundations/sequential-logic-and-memory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logica sequenziale e memoria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-design-foundations/clock-reset-and-time/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clock, reset e tempo nei circuiti digitali
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocchi architetturali di base
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blocchi architetturali di base
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-design-foundations/registers-mux-and-basic-datapaths/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registri, multiplexer e datapath elementari
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-design-foundations/fsm-and-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FSM e logica di controllo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-design-foundations/pipelining-latency-and-throughput/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline, latenza e throughput
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-design-foundations/interfaces-and-handshake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfacce e handshake
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progettazione RTL e qualità del progetto
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progettazione RTL e qualità del progetto
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-design-foundations/from-behavior-to-rtl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dal comportamento all’RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-design-foundations/synthesis-area-and-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi, area e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-design-foundations/common-design-pitfalls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Errori comuni di modellazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-design-foundations/basic-verification-and-debug/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica di base e debug
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrazione nel flusso reale
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Integrazione nel flusso reale
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-design-foundations/from-block-to-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dal blocco al sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-design-foundations/fpga-asic-soc-contexts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Differenze tra contesto FPGA, ASIC e SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Caso di studio
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-design-foundations/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio introduttivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VHDL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    VHDL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vhdl-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Panoramica di VHDL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fondamenti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../language-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basi del linguaggio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entity-architecture-and-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entity, architecture e tipi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../signals-variables-and-semantics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segnali, variabili e semantica del linguaggio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../process-and-concurrent-statements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Process e assegnamenti concorrenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modellazione RTL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modellazione RTL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../combinational-vs-sequential/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logica combinatoria e sequenziale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../registers-mux-enables-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registri, mux, enable e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fsm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FSM in VHDL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datapath-control-and-pipelining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datapath, control unit e pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generics-and-generate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generics, generate e progettazione parametrica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi e timing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sintesi e timing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../synthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi RTL in VHDL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../timing-and-clocking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Timing, clock e cammino critico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../common-pitfalls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Errori comuni di sintesi e codifica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verifica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../verification-and-testbench/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica di base e testbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stimoli, self-checking e simulazione
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stimoli, self-checking e simulazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-perche-questa-pagina-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Perché questa pagina è importante
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Perché questa pagina è importante">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-perche-osservare-non-basta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Perché osservare non basta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-perche-il-self-checking-migliora-la-qualita-della-verifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Perché il self-checking migliora la qualità della verifica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-perche-la-simulazione-va-letta-come-strumento-di-verifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Perché la simulazione va letta come strumento di verifica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-che-cosa-sono-gli-stimoli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Che cosa sono gli stimoli
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Che cosa sono gli stimoli">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-significato-essenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Significato essenziale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-perche-sono-importanti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Perché sono importanti
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-perche-non-sono-solo-dati" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Perché non sono solo “dati”
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-stimoli-poveri-e-stimoli-significativi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Stimoli poveri e stimoli significativi
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Stimoli poveri e stimoli significativi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-stimoli-poveri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Stimoli poveri
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-stimoli-significativi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Stimoli significativi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-stimoli-per-logica-combinatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Stimoli per logica combinatoria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Stimoli per logica combinatoria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-che-cosa-serve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Che cosa serve
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-esempio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Esempio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-perche-e-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Perché è utile
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-stimoli-per-logica-sequenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Stimoli per logica sequenziale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Stimoli per logica sequenziale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-che-cosa-serve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Che cosa serve
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-esempio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Esempio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-che-cose-il-self-checking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Che cos’è il self-checking
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Che cos’è il self-checking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-significato-essenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Significato essenziale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-benefici-pratici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Benefici pratici
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-il-ruolo-di-assert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Il ruolo di assert
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Il ruolo di assert">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-che-cose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Che cos’è
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-esempio-semplice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Esempio semplice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-perche-e-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Perché è utile
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-esempio-self-checking-per-logica-combinatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Esempio self-checking per logica combinatoria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Esempio self-checking per logica combinatoria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-che-cosa-mostra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Che cosa mostra
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-perche-e-un-passo-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Perché è un passo importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-self-checking-e-atteso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Self-checking e atteso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Self-checking e atteso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-che-cosa-significa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Che cosa significa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-come-si-ottiene-latteso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Come si ottiene l’atteso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-stimoli-nominali-e-casi-limite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Stimoli nominali e casi limite
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Stimoli nominali e casi limite">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-casi-nominali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Casi nominali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-casi-limite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Casi limite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-stimoli-ordinati-e-leggibilita-del-testbench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Stimoli ordinati e leggibilità del testbench
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Stimoli ordinati e leggibilità del testbench">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-buona-struttura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Buona struttura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-esempio-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Esempio pratico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-simulazione-come-verifica-temporale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Simulazione come verifica temporale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Simulazione come verifica temporale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-cosa-permette-di-vedere" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Cosa permette di vedere
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-collegamento-con-il-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Collegamento con il timing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-simulazione-e-waveform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Simulazione e waveform
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Simulazione e waveform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-perche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Perché
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-perche-non-bisogna-contrapporli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Perché non bisogna contrapporli
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-buona-visione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 Buona visione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-stimoli-per-fsm-e-moduli-di-controllo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Stimoli per FSM e moduli di controllo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Stimoli per FSM e moduli di controllo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-che-cosa-significa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Che cosa significa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-collegamento-con-il-testbench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 Collegamento con il testbench
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-stimoli-per-datapath-e-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Stimoli per datapath e pipeline
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Stimoli per datapath e pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-datapath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Datapath
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-errori-comuni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Errori comuni
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. Errori comuni">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-stimoli-casuali-ma-poco-significativi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 Stimoli casuali ma poco significativi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-assert-poco-chiari" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.2 Assert poco chiari
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163-nessuna-distinzione-tra-caso-nominale-e-casi-limite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.3 Nessuna distinzione tra caso nominale e casi limite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#164-controlli-fatti-troppo-presto-o-troppo-tardi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.4 Controlli fatti troppo presto o troppo tardi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#165-dipendere-solo-dalle-waveform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.5 Dipendere solo dalle waveform
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-buone-pratiche-di-modellazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Buone pratiche di modellazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17. Buone pratiche di modellazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171-costruire-stimoli-con-significato-funzionale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1 Costruire stimoli con significato funzionale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172-usare-assert-in-modo-leggibile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.2 Usare assert in modo leggibile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#173-distinguere-i-test-combinatori-dai-test-sequenziali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3 Distinguere i test combinatori dai test sequenziali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#174-preparare-il-testbench-al-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4 Preparare il testbench al debug
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#175-pensare-gia-in-ottica-di-evoluzione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5 Pensare già in ottica di evoluzione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-collegamento-con-il-resto-della-sezione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Collegamento con il resto della sezione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../debug-and-waveforms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debug e waveform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrazione progettuale
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Integrazione progettuale
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vhdl-for-fpga-and-asic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VHDL per FPGA e ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interfaces-handshake-and-cdc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfacce, handshake e CDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vhdl-vs-verilog-systemverilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VHDL vs Verilog vs SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Caso di studio
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case-study-vhdl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio VHDL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02_vhdl_progettazione/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Verilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03_verilog_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foglio di lavoro
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foglio di lavoro
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Tool Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/in_out/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    In and Out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/utilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/clocks_registers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocks and Registers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/state_machines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Machines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/modular_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modular Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/memories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/managing_clocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Managing Clocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/io_flavors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O Flavors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A Taste of Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Libro_Verilog/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Rest for Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SystemVerilog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/language-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti del linguaggio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/rtl-constructs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Costrutti RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/procedural-blocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blocchi procedurali
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/combinational-vs-sequential/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logica combinatoria e sequenziale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/fsm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Macchine a stati finiti (FSM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/state-encoding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codifica degli stati
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/datapath-and-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datapath e controllo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/pipelining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline e pipelining
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/interfaces-and-handshake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfacce e handshake
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/systemverilog-interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Le interface in SystemVerilog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/packages-and-typedefs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Package e typedef
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/arrays-and-generate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Array e generate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/parameters-and-configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parametri e configurazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/latency-and-throughput/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Latenza e throughput
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/coding-style-rtl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stile di codifica RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/verification-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di verifica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/testbench-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Struttura di un testbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/assertions-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di assertion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/simulation-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di simulazione RTL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/coverage-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti di coverage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/reset-strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strategie di reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/clock-domain-crossing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clock Domain Crossing (CDC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systemverilog/case-study-systemverilog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04_SV_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/uvm-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Panoramica di UVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondamenti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fondamenti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/uvm-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura del testbench UVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/uvm-components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Componenti principali
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/uvm-phasing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phasing UVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/uvm-factory-config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Factory e configurazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stimolo e transazioni
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Stimolo e transazioni
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/sequence-item/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequence item
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/sequencer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequencer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/sequences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/virtual-sequences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtual sequence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Connessione al DUT
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Connessione al DUT
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/driver/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Driver
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/virtual-interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtual interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/tlm-connections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TLM e comunicazione tra componenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_6" id="__nav_6_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment e checking
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Environment e checking
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/scoreboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scoreboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/reference-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/subscriber/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Subscriber e raccolta dati
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_7" id="__nav_6_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test e controllo della verifica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Test e controllo della verifica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test UVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/test-configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurazione dei test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/objections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Objections e controllo della run
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/reporting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Messaging e report
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_8" id="__nav_6_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coverage e debug
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Coverage e debug
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/coverage-uvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coverage in UVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/debug-uvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debug del testbench UVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/regression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regressione e gestione dei test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_9" id="__nav_6_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrazione con il DUT reale
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Integrazione con il DUT reale
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/uvm-handshake-protocols/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM per protocolli a handshake
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/uvm-pipelines-latency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM per pipeline e latenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/uvm-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/uvm-ral-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM e registri / RAL overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_10" id="__nav_6_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Caso di studio
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../uvm/case-study-uvm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio UVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_uvm_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_12" id="__nav_6_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetto mini CPU
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetto mini CPU
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06_mini_CPU_waveform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Waveform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione alle FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di una FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/rtl-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTL design per FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/constraints-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/synthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse dedicate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clocking e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/place-route/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Placement, routing e timing closure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica e test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/debug/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debug su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/prototyping-soc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prototipazione di sistemi e SoC su FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/fpga-vs-asic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA vs ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fpga/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_fpga_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_ps_axi_led/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq LED
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_17" id="__nav_7_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zynq FIR
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zynq FIR
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_8tap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrizione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_fir_dma_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_axi_stream_theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AXI Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_dma_interrupt_perf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DMA Interrupt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07_zynq_xparameters_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    X Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Digilent/Zybo-Z7" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zybo-Z7-20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASIC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ASIC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione agli ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flusso di progettazione ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/spec-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specifiche e architettura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/rtl-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTL design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/constraints-timing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vincoli e timing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/synthesis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sintesi logica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DFT e testabilità
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/floorplanning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Floorplanning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/place-route/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Place and Route
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/cts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clock Tree Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/signoff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Signoff fisico e temporale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power analysis e low-power design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica funzionale e equivalenza
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/libraries-pdk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Librerie standard cell e PDK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/tapeout-fabrication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tape-out e fabbricazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../asic/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio ASIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_asic_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08_openasic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenAsic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_19" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_19" id="__nav_8_19_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_19">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openlane2.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenLAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/kunalg123/vsdflow" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CMOS VLSI Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SoC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SoC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduzione ai SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/architettura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura di un SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/bus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interconnessioni e bus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/memorie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memorie e gerarchia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/periferiche/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Periferiche e I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/ip-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrazione IP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/verifica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verifica di sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/hw-sw-codesign/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HW/SW co-design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/power-clock-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consumi, clock e reset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/safety-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Safety e Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/physical-design-awareness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physical awareness nel SoC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../soc/case-study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caso di studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Progetti
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09_codice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorgenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool e Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tool e Tcl/Tk
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_e_tcl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_progetti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progetti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_11_3" id="__nav_11_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Risorse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 Risorse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.tutorialspoint.com/tcl-tk/index.htm" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial Tcl/Tk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.amd.com/r/en-US/ug894-vivado-tcl-scripting/Tcl-Scripting-in-Vivado" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Script Tcl in Vivado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://yosyshq.readthedocs.io/projects/yosys/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yosis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://openroad.readthedocs.io/en/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenROAD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://gtkwave.github.io/gtkwave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GTKWave Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://verilator.org/guide/latest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilator Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_11_3_7" id="__nav_11_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vivado
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_11_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Vivado
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug910-vivado-getting-started" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug901-vivado-synthesis" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Synthesis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug904-vivado-implementation" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://docs.xilinx.com/r/en-US/ug835-vivado-tcl-commands" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcl Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/swdocs/modelsim/modelsim_user_2024_2.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ModelSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tcl_flow_chart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flowchart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10_tool_flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12_riferimenti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Riferimenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-perche-questa-pagina-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Perché questa pagina è importante
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Perché questa pagina è importante">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-perche-osservare-non-basta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Perché osservare non basta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-perche-il-self-checking-migliora-la-qualita-della-verifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Perché il self-checking migliora la qualità della verifica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-perche-la-simulazione-va-letta-come-strumento-di-verifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Perché la simulazione va letta come strumento di verifica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-che-cosa-sono-gli-stimoli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Che cosa sono gli stimoli
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Che cosa sono gli stimoli">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-significato-essenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Significato essenziale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-perche-sono-importanti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Perché sono importanti
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-perche-non-sono-solo-dati" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Perché non sono solo “dati”
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-stimoli-poveri-e-stimoli-significativi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Stimoli poveri e stimoli significativi
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Stimoli poveri e stimoli significativi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-stimoli-poveri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Stimoli poveri
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-stimoli-significativi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Stimoli significativi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-stimoli-per-logica-combinatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Stimoli per logica combinatoria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Stimoli per logica combinatoria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-che-cosa-serve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Che cosa serve
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-esempio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Esempio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-perche-e-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Perché è utile
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-stimoli-per-logica-sequenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Stimoli per logica sequenziale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Stimoli per logica sequenziale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-che-cosa-serve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Che cosa serve
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-esempio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Esempio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-che-cose-il-self-checking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Che cos’è il self-checking
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Che cos’è il self-checking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-significato-essenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Significato essenziale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-benefici-pratici" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Benefici pratici
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-il-ruolo-di-assert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Il ruolo di assert
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Il ruolo di assert">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-che-cose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Che cos’è
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-esempio-semplice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Esempio semplice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-perche-e-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Perché è utile
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-esempio-self-checking-per-logica-combinatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Esempio self-checking per logica combinatoria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Esempio self-checking per logica combinatoria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-che-cosa-mostra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Che cosa mostra
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-perche-e-un-passo-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Perché è un passo importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-self-checking-e-atteso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Self-checking e atteso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Self-checking e atteso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-che-cosa-significa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Che cosa significa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-come-si-ottiene-latteso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Come si ottiene l’atteso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-stimoli-nominali-e-casi-limite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Stimoli nominali e casi limite
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Stimoli nominali e casi limite">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-casi-nominali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Casi nominali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-casi-limite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Casi limite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-stimoli-ordinati-e-leggibilita-del-testbench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Stimoli ordinati e leggibilità del testbench
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Stimoli ordinati e leggibilità del testbench">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-buona-struttura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Buona struttura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-esempio-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Esempio pratico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-simulazione-come-verifica-temporale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Simulazione come verifica temporale
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Simulazione come verifica temporale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-cosa-permette-di-vedere" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Cosa permette di vedere
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-collegamento-con-il-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Collegamento con il timing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-simulazione-e-waveform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Simulazione e waveform
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Simulazione e waveform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-perche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Perché
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-perche-non-bisogna-contrapporli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Perché non bisogna contrapporli
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-buona-visione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 Buona visione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-stimoli-per-fsm-e-moduli-di-controllo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Stimoli per FSM e moduli di controllo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Stimoli per FSM e moduli di controllo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-che-cosa-significa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Che cosa significa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-collegamento-con-il-testbench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 Collegamento con il testbench
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-stimoli-per-datapath-e-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Stimoli per datapath e pipeline
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Stimoli per datapath e pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-datapath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Datapath
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-errori-comuni" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Errori comuni
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. Errori comuni">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-stimoli-casuali-ma-poco-significativi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 Stimoli casuali ma poco significativi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-assert-poco-chiari" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.2 Assert poco chiari
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163-nessuna-distinzione-tra-caso-nominale-e-casi-limite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.3 Nessuna distinzione tra caso nominale e casi limite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#164-controlli-fatti-troppo-presto-o-troppo-tardi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.4 Controlli fatti troppo presto o troppo tardi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#165-dipendere-solo-dalle-waveform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.5 Dipendere solo dalle waveform
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-buone-pratiche-di-modellazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Buone pratiche di modellazione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17. Buone pratiche di modellazione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171-costruire-stimoli-con-significato-funzionale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1 Costruire stimoli con significato funzionale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172-usare-assert-in-modo-leggibile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.2 Usare assert in modo leggibile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#173-distinguere-i-test-combinatori-dai-test-sequenziali" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3 Distinguere i test combinatori dai test sequenziali
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#174-preparare-il-testbench-al-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.4 Preparare il testbench al debug
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#175-pensare-gia-in-ottica-di-evoluzione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.5 Pensare già in ottica di evoluzione
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-collegamento-con-il-resto-della-sezione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Collegamento con il resto della sezione
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="stimoli-self-checking-e-simulazione">Stimoli, self-checking e simulazione<a class="headerlink" href="#stimoli-self-checking-e-simulazione" title="Permanent link">&para;</a></h1>
+<p>Dopo aver introdotto la struttura di base del <strong>testbench VHDL</strong>, il passo successivo naturale è renderlo più utile e più maturo dal punto di vista della verifica. In questa pagina il focus è su tre aspetti strettamente collegati:
+- la costruzione degli <strong>stimoli</strong>
+- l’introduzione del <strong>self-checking</strong>
+- il ruolo della <strong>simulazione</strong> come strumento reale di validazione del DUT</p>
+<p>Questa lezione è molto importante perché un testbench che si limita a generare qualche valore sugli ingressi e a produrre waveform può essere utile solo fino a un certo punto. Quando i moduli crescono, serve una struttura di verifica che sappia:
+- applicare casi di prova significativi;
+- confrontare il comportamento osservato con quello atteso;
+- segnalare automaticamente errori;
+- rendere più rapido il debug;
+- preparare il terreno a regressione, manutenzione e riuso.</p>
+<p>Dal punto di vista progettuale, questa è la pagina in cui il testbench smette di essere solo un “generatore di segnali” e inizia a diventare un ambiente di verifica di base.</p>
+<p>Questa lezione mantiene il taglio della sezione:
+- didattico ma tecnico;
+- orientato alla verifica funzionale;
+- attento al legame tra DUT, testbench e simulazione;
+- accompagnato da esempi di codice e schemi quando utili.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Testbench] --&gt; B[Stimoli]
+    B --&gt; C[DUT]
+    C --&gt; D[Uscite osservate]
+    D --&gt; E[Confronto con atteso]
+    E --&gt; F[Assert / esito della simulazione]
+
+    style A fill:#eef6ff,stroke:#1f6feb
+    style E fill:#eefbf0,stroke:#22863a</code></pre>
+<h2 id="1-perche-questa-pagina-e-importante">1. Perché questa pagina è importante<a class="headerlink" href="#1-perche-questa-pagina-e-importante" title="Permanent link">&para;</a></h2>
+<p>La prima domanda utile è: perché non basta un testbench con pochi stimoli manuali?</p>
+<h3 id="11-perche-osservare-non-basta">1.1 Perché osservare non basta<a class="headerlink" href="#11-perche-osservare-non-basta" title="Permanent link">&para;</a></h3>
+<p>Guardare una waveform può essere utile, ma non sempre è sufficiente per stabilire in modo chiaro:
+- se il DUT ha davvero funzionato;
+- se tutti i casi attesi sono stati verificati;
+- se un errore è stato riconosciuto automaticamente;
+- se il test è ripetibile e manutenibile.</p>
+<h3 id="12-perche-il-self-checking-migliora-la-qualita-della-verifica">1.2 Perché il self-checking migliora la qualità della verifica<a class="headerlink" href="#12-perche-il-self-checking-migliora-la-qualita-della-verifica" title="Permanent link">&para;</a></h3>
+<p>Un testbench con controlli automatici:
+- riduce l’ambiguità;
+- accelera il debug;
+- rende la simulazione più utile;
+- prepara il codice a una verifica più sistematica.</p>
+<h3 id="13-perche-la-simulazione-va-letta-come-strumento-di-verifica">1.3 Perché la simulazione va letta come strumento di verifica<a class="headerlink" href="#13-perche-la-simulazione-va-letta-come-strumento-di-verifica" title="Permanent link">&para;</a></h3>
+<p>La simulazione non è solo “muovere i segnali”. È il contesto in cui il comportamento del DUT viene osservato e validato rispetto a un’attesa progettuale.</p>
+<hr />
+<h2 id="2-che-cosa-sono-gli-stimoli">2. Che cosa sono gli stimoli<a class="headerlink" href="#2-che-cosa-sono-gli-stimoli" title="Permanent link">&para;</a></h2>
+<p>Gli <strong>stimoli</strong> sono i valori e le sequenze temporali che il testbench applica agli ingressi del DUT.</p>
+<h3 id="21-significato-essenziale">2.1 Significato essenziale<a class="headerlink" href="#21-significato-essenziale" title="Permanent link">&para;</a></h3>
+<p>Gli stimoli rappresentano:
+- ingressi di prova;
+- scenari funzionali;
+- casi nominali;
+- casi limite;
+- condizioni di reset, clock, handshake o controllo.</p>
+<h3 id="22-perche-sono-importanti">2.2 Perché sono importanti<a class="headerlink" href="#22-perche-sono-importanti" title="Permanent link">&para;</a></h3>
+<p>Il valore della verifica dipende molto da:
+- quali ingressi si applicano;
+- in quale ordine;
+- in quale momento;
+- con quale relazione rispetto al clock.</p>
+<h3 id="23-perche-non-sono-solo-dati">2.3 Perché non sono solo “dati”<a class="headerlink" href="#23-perche-non-sono-solo-dati" title="Permanent link">&para;</a></h3>
+<p>Uno stimolo ben progettato è una piccola ipotesi di comportamento del sistema.</p>
+<hr />
+<h2 id="3-stimoli-poveri-e-stimoli-significativi">3. Stimoli poveri e stimoli significativi<a class="headerlink" href="#3-stimoli-poveri-e-stimoli-significativi" title="Permanent link">&para;</a></h2>
+<p>Uno dei primi punti da capire è che non tutti gli stimoli hanno lo stesso valore.</p>
+<h3 id="31-stimoli-poveri">3.1 Stimoli poveri<a class="headerlink" href="#31-stimoli-poveri" title="Permanent link">&para;</a></h3>
+<p>Sono sequenze che:
+- coprono pochi casi;
+- non toccano le condizioni interessanti;
+- verificano solo il percorso più ovvio.</p>
+<h3 id="32-stimoli-significativi">3.2 Stimoli significativi<a class="headerlink" href="#32-stimoli-significativi" title="Permanent link">&para;</a></h3>
+<p>Sono stimoli che cercano di coprire:
+- casi nominali;
+- casi limite;
+- cambi di stato;
+- reset;
+- combinazioni funzionalmente importanti;
+- pattern che possono rivelare errori strutturali.</p>
+<h3 id="33-perche-e-importante">3.3 Perché è importante<a class="headerlink" href="#33-perche-e-importante" title="Permanent link">&para;</a></h3>
+<p>Il testbench non va valutato solo dalla sua presenza, ma dalla qualità degli scenari che applica.</p>
+<hr />
+<h2 id="4-stimoli-per-logica-combinatoria">4. Stimoli per logica combinatoria<a class="headerlink" href="#4-stimoli-per-logica-combinatoria" title="Permanent link">&para;</a></h2>
+<p>Nel caso della logica combinatoria, gli stimoli sono spesso più semplici.</p>
+<h3 id="41-che-cosa-serve">4.1 Che cosa serve<a class="headerlink" href="#41-che-cosa-serve" title="Permanent link">&para;</a></h3>
+<p>Tipicamente:
+- si applicano combinazioni di ingressi;
+- si attende un tempo sufficiente di stabilizzazione;
+- si osserva l’uscita.</p>
+<h3 id="42-esempio">4.2 Esempio<a class="headerlink" href="#42-esempio" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">stim_proc</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">process</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">wait</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">ns</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">wait</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">ns</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">wait</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">ns</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">wait</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">ns</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">wait</span><span class="p">;</span>
+<span class="k">end</span><span class="w"> </span><span class="k">process</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="43-perche-e-utile">4.3 Perché è utile<a class="headerlink" href="#43-perche-e-utile" title="Permanent link">&para;</a></h3>
+<p>Questo è il livello minimo di stimolazione per una rete combinatoria semplice.</p>
+<hr />
+<h2 id="5-stimoli-per-logica-sequenziale">5. Stimoli per logica sequenziale<a class="headerlink" href="#5-stimoli-per-logica-sequenziale" title="Permanent link">&para;</a></h2>
+<p>Per un DUT sequenziale, gli stimoli devono rispettare il tempo del sistema.</p>
+<h3 id="51-che-cosa-serve">5.1 Che cosa serve<a class="headerlink" href="#51-che-cosa-serve" title="Permanent link">&para;</a></h3>
+<p>Tipicamente:
+- clock;
+- reset;
+- applicazione degli ingressi in istanti coerenti;
+- osservazione delle uscite rispetto ai fronti di clock.</p>
+<h3 id="52-esempio">5.2 Esempio<a class="headerlink" href="#52-esempio" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">stim_proc</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">process</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="k">wait</span><span class="w"> </span><span class="k">until</span><span class="w"> </span><span class="n">reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">wait</span><span class="w"> </span><span class="k">until</span><span class="w"> </span><span class="n">rising_edge</span><span class="p">(</span><span class="n">clk</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="s">&quot;0001&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">wait</span><span class="w"> </span><span class="k">until</span><span class="w"> </span><span class="n">rising_edge</span><span class="p">(</span><span class="n">clk</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="s">&quot;0010&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">wait</span><span class="w"> </span><span class="k">until</span><span class="w"> </span><span class="n">rising_edge</span><span class="p">(</span><span class="n">clk</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="s">&quot;0011&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">wait</span><span class="p">;</span>
+<span class="k">end</span><span class="w"> </span><span class="k">process</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="53-perche-e-importante">5.3 Perché è importante<a class="headerlink" href="#53-perche-e-importante" title="Permanent link">&para;</a></h3>
+<p>Uno stimolo sincronizzato rende la verifica più coerente con il comportamento reale di un sistema sincrono.</p>
+<hr />
+<h2 id="6-che-cose-il-self-checking">6. Che cos’è il self-checking<a class="headerlink" href="#6-che-cose-il-self-checking" title="Permanent link">&para;</a></h2>
+<p>Il <strong>self-checking</strong> è la capacità del testbench di verificare automaticamente se il comportamento osservato coincide con quello atteso.</p>
+<h3 id="61-significato-essenziale">6.1 Significato essenziale<a class="headerlink" href="#61-significato-essenziale" title="Permanent link">&para;</a></h3>
+<p>Invece di limitarsi a mostrare i segnali, il testbench:
+- calcola o conosce il risultato atteso;
+- confronta l’uscita del DUT con quel risultato;
+- segnala un errore se i valori divergono.</p>
+<h3 id="62-perche-e-importante">6.2 Perché è importante<a class="headerlink" href="#62-perche-e-importante" title="Permanent link">&para;</a></h3>
+<p>Il self-checking trasforma il testbench da strumento di osservazione a strumento di validazione.</p>
+<h3 id="63-benefici-pratici">6.3 Benefici pratici<a class="headerlink" href="#63-benefici-pratici" title="Permanent link">&para;</a></h3>
+<ul>
+<li>riduce dipendenza dall’analisi manuale delle waveform;</li>
+<li>rende il test più ripetibile;</li>
+<li>facilita regressione e manutenzione;</li>
+<li>accelera il debug.</li>
+</ul>
+<hr />
+<h2 id="7-il-ruolo-di-assert">7. Il ruolo di <code>assert</code><a class="headerlink" href="#7-il-ruolo-di-assert" title="Permanent link">&para;</a></h2>
+<p>In VHDL, uno degli strumenti più semplici e potenti per il self-checking è <code>assert</code>.</p>
+<h3 id="71-che-cose">7.1 Che cos’è<a class="headerlink" href="#71-che-cose" title="Permanent link">&para;</a></h3>
+<p><code>assert</code> permette di verificare una condizione e segnalare un errore se la condizione non è soddisfatta.</p>
+<h3 id="72-esempio-semplice">7.2 Esempio semplice<a class="headerlink" href="#72-esempio-semplice" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">assert</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;1&#39;</span>
+<span class="w">  </span><span class="n">report</span><span class="w"> </span><span class="s">&quot;Errore: uscita non corretta&quot;</span>
+<span class="w">  </span><span class="k">severity</span><span class="w"> </span><span class="n">error</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="73-perche-e-utile">7.3 Perché è utile<a class="headerlink" href="#73-perche-e-utile" title="Permanent link">&para;</a></h3>
+<p>Rende il testbench capace di dire in modo esplicito:
+- che cosa si aspettava;
+- quando il DUT ha fallito;
+- in quale punto della sequenza di test è emerso il problema.</p>
+<hr />
+<h2 id="8-esempio-self-checking-per-logica-combinatoria">8. Esempio self-checking per logica combinatoria<a class="headerlink" href="#8-esempio-self-checking-per-logica-combinatoria" title="Permanent link">&para;</a></h2>
+<p>Vediamo un testbench semplice per una porta AND con controllo automatico.</p>
+<div class="highlight"><pre><span></span><code><span class="k">library</span><span class="w"> </span><span class="nn">ieee</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="nn">ieee.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
+
+<span class="k">entity</span><span class="w"> </span><span class="nc">tb_and_gate</span><span class="w"> </span><span class="k">is</span>
+<span class="k">end</span><span class="w"> </span><span class="k">entity</span><span class="w"> </span><span class="nc">tb_and_gate</span><span class="p">;</span>
+
+<span class="k">architecture</span><span class="w"> </span><span class="nc">sim</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nc">tb_and_gate</span><span class="w"> </span><span class="k">is</span>
+<span class="w">  </span><span class="k">signal</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">std_logic</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">signal</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">std_logic</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">signal</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">std_logic</span><span class="p">;</span>
+<span class="k">begin</span>
+
+<span class="w">  </span><span class="n">dut</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">entity</span><span class="w"> </span><span class="nc">work</span><span class="p">.</span><span class="n">and_gate</span>
+<span class="w">    </span><span class="k">port</span><span class="w"> </span><span class="k">map</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="n">a</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span>
+<span class="w">      </span><span class="n">b</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">,</span>
+<span class="w">      </span><span class="n">y</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">y</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">stim_proc</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">process</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">wait</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">ns</span><span class="p">;</span>
+<span class="w">    </span><span class="k">assert</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span>
+<span class="w">      </span><span class="n">report</span><span class="w"> </span><span class="s">&quot;Errore per a=0, b=0&quot;</span>
+<span class="w">      </span><span class="k">severity</span><span class="w"> </span><span class="n">error</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">wait</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">ns</span><span class="p">;</span>
+<span class="w">    </span><span class="k">assert</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span>
+<span class="w">      </span><span class="n">report</span><span class="w"> </span><span class="s">&quot;Errore per a=0, b=1&quot;</span>
+<span class="w">      </span><span class="k">severity</span><span class="w"> </span><span class="n">error</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">wait</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">ns</span><span class="p">;</span>
+<span class="w">    </span><span class="k">assert</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span>
+<span class="w">      </span><span class="n">report</span><span class="w"> </span><span class="s">&quot;Errore per a=1, b=0&quot;</span>
+<span class="w">      </span><span class="k">severity</span><span class="w"> </span><span class="n">error</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">wait</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">ns</span><span class="p">;</span>
+<span class="w">    </span><span class="k">assert</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;1&#39;</span>
+<span class="w">      </span><span class="n">report</span><span class="w"> </span><span class="s">&quot;Errore per a=1, b=1&quot;</span>
+<span class="w">      </span><span class="k">severity</span><span class="w"> </span><span class="n">error</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">wait</span><span class="p">;</span>
+<span class="w">  </span><span class="k">end</span><span class="w"> </span><span class="k">process</span><span class="p">;</span>
+
+<span class="k">end</span><span class="w"> </span><span class="k">architecture</span><span class="w"> </span><span class="nc">sim</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="81-che-cosa-mostra">8.1 Che cosa mostra<a class="headerlink" href="#81-che-cosa-mostra" title="Permanent link">&para;</a></h3>
+<ul>
+<li>stimoli;</li>
+<li>osservazione dell’uscita;</li>
+<li>controllo automatico con <code>assert</code>.</li>
+</ul>
+<h3 id="82-perche-e-un-passo-importante">8.2 Perché è un passo importante<a class="headerlink" href="#82-perche-e-un-passo-importante" title="Permanent link">&para;</a></h3>
+<p>Questo testbench non richiede più un’interpretazione completamente manuale delle waveform per capire se la funzione è corretta.</p>
+<hr />
+<h2 id="9-self-checking-e-atteso">9. Self-checking e atteso<a class="headerlink" href="#9-self-checking-e-atteso" title="Permanent link">&para;</a></h2>
+<p>Il cuore del self-checking è il concetto di <strong>atteso</strong>.</p>
+<h3 id="91-che-cosa-significa">9.1 Che cosa significa<a class="headerlink" href="#91-che-cosa-significa" title="Permanent link">&para;</a></h3>
+<p>Per ogni stimolo rilevante, il testbench deve poter stabilire quale uscita o comportamento sia corretto.</p>
+<h3 id="92-come-si-ottiene-latteso">9.2 Come si ottiene l’atteso<a class="headerlink" href="#92-come-si-ottiene-latteso" title="Permanent link">&para;</a></h3>
+<p>A seconda del caso, l’atteso può derivare da:
+- una formula semplice;
+- un valore noto nel caso di prova;
+- una tabella di riferimento;
+- una logica di confronto nel testbench.</p>
+<h3 id="93-perche-e-importante">9.3 Perché è importante<a class="headerlink" href="#93-perche-e-importante" title="Permanent link">&para;</a></h3>
+<p>Un testbench diventa veramente utile quando rende esplicito il legame tra:
+- ingresso applicato;
+- uscita attesa;
+- esito del controllo.</p>
+<hr />
+<h2 id="10-stimoli-nominali-e-casi-limite">10. Stimoli nominali e casi limite<a class="headerlink" href="#10-stimoli-nominali-e-casi-limite" title="Permanent link">&para;</a></h2>
+<p>Una buona verifica non si ferma al caso “che probabilmente funziona”.</p>
+<h3 id="101-casi-nominali">10.1 Casi nominali<a class="headerlink" href="#101-casi-nominali" title="Permanent link">&para;</a></h3>
+<p>Sono quelli che rappresentano il comportamento atteso nella situazione standard.</p>
+<h3 id="102-casi-limite">10.2 Casi limite<a class="headerlink" href="#102-casi-limite" title="Permanent link">&para;</a></h3>
+<p>Sono quelli che mettono in difficoltà il DUT o rivelano errori nascosti:
+- valori estremi;
+- combinazioni poco frequenti;
+- reset vicino a eventi significativi;
+- passaggi di stato;
+- enable e select nelle transizioni critiche.</p>
+<h3 id="103-perche-e-importante">10.3 Perché è importante<a class="headerlink" href="#103-perche-e-importante" title="Permanent link">&para;</a></h3>
+<p>Molti bug reali emergono non nel caso più ovvio, ma nei casi di bordo.</p>
+<hr />
+<h2 id="11-stimoli-ordinati-e-leggibilita-del-testbench">11. Stimoli ordinati e leggibilità del testbench<a class="headerlink" href="#11-stimoli-ordinati-e-leggibilita-del-testbench" title="Permanent link">&para;</a></h2>
+<p>Uno stimolo ben progettato non deve solo “coprire casi”, ma essere leggibile.</p>
+<h3 id="111-buona-struttura">11.1 Buona struttura<a class="headerlink" href="#111-buona-struttura" title="Permanent link">&para;</a></h3>
+<p>Conviene organizzare il testbench in modo che sia chiaro:
+- quale caso si sta applicando;
+- che cosa ci si aspetta;
+- quando avviene il controllo.</p>
+<h3 id="112-esempio-pratico">11.2 Esempio pratico<a class="headerlink" href="#112-esempio-pratico" title="Permanent link">&para;</a></h3>
+<p>Si possono raggruppare i casi per:
+- funzionalità;
+- modalità operative;
+- scenari di reset;
+- transizioni di stato;
+- condizioni di protocollo.</p>
+<h3 id="113-perche-e-importante">11.3 Perché è importante<a class="headerlink" href="#113-perche-e-importante" title="Permanent link">&para;</a></h3>
+<p>Un testbench leggibile si estende e si corregge molto più facilmente.</p>
+<hr />
+<h2 id="12-simulazione-come-verifica-temporale">12. Simulazione come verifica temporale<a class="headerlink" href="#12-simulazione-come-verifica-temporale" title="Permanent link">&para;</a></h2>
+<p>La simulazione non serve solo a verificare valori logici, ma anche il comportamento nel tempo.</p>
+<h3 id="121-cosa-permette-di-vedere">12.1 Cosa permette di vedere<a class="headerlink" href="#121-cosa-permette-di-vedere" title="Permanent link">&para;</a></h3>
+<ul>
+<li>fronti di clock;</li>
+<li>propagazione degli stimoli;</li>
+<li>risposta del DUT;</li>
+<li>reset;</li>
+<li>latenza;</li>
+<li>sequenza degli eventi.</li>
+</ul>
+<h3 id="122-perche-e-importante">12.2 Perché è importante<a class="headerlink" href="#122-perche-e-importante" title="Permanent link">&para;</a></h3>
+<p>Molti errori non riguardano solo “il valore finale”, ma:
+- quando arriva;
+- in quale ciclo;
+- in che relazione con gli ingressi o col reset.</p>
+<h3 id="123-collegamento-con-il-timing">12.3 Collegamento con il timing<a class="headerlink" href="#123-collegamento-con-il-timing" title="Permanent link">&para;</a></h3>
+<p>La simulazione non sostituisce l’analisi temporale fisica, ma è essenziale per capire la coerenza funzionale nel tempo.</p>
+<hr />
+<h2 id="13-simulazione-e-waveform">13. Simulazione e waveform<a class="headerlink" href="#13-simulazione-e-waveform" title="Permanent link">&para;</a></h2>
+<p>Le waveform restano uno strumento molto importante anche in presenza di self-checking.</p>
+<h3 id="131-perche">13.1 Perché<a class="headerlink" href="#131-perche" title="Permanent link">&para;</a></h3>
+<p>Le <code>assert</code> dicono <strong>che qualcosa è andato storto</strong>, ma le waveform aiutano a capire:
+- quando;
+- con quali segnali;
+- in quale sequenza di eventi;
+- in quale rapporto tra input, stato e uscita.</p>
+<h3 id="132-perche-non-bisogna-contrapporli">13.2 Perché non bisogna contrapporli<a class="headerlink" href="#132-perche-non-bisogna-contrapporli" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>assert</code> → segnala</li>
+<li>waveform → spiega e aiuta il debug</li>
+</ul>
+<h3 id="133-buona-visione">13.3 Buona visione<a class="headerlink" href="#133-buona-visione" title="Permanent link">&para;</a></h3>
+<p>Un buon testbench usa entrambe:
+- controlli automatici;
+- osservazione ordinata nel tempo.</p>
+<hr />
+<h2 id="14-stimoli-per-fsm-e-moduli-di-controllo">14. Stimoli per FSM e moduli di controllo<a class="headerlink" href="#14-stimoli-per-fsm-e-moduli-di-controllo" title="Permanent link">&para;</a></h2>
+<p>Quando il DUT contiene una FSM o una control unit, gli stimoli devono essere pensati come <strong>scenari</strong>, non solo come valori isolati.</p>
+<h3 id="141-che-cosa-significa">14.1 Che cosa significa<a class="headerlink" href="#141-che-cosa-significa" title="Permanent link">&para;</a></h3>
+<p>Bisogna verificare:
+- sequenze di ingresso;
+- transizioni di stato;
+- comportamento con reset;
+- permanenza in certi stati;
+- condizioni di uscita o di completamento.</p>
+<h3 id="142-perche-e-importante">14.2 Perché è importante<a class="headerlink" href="#142-perche-e-importante" title="Permanent link">&para;</a></h3>
+<p>Una FSM non si verifica bene con input “casuali” o non ordinati nel tempo.</p>
+<h3 id="143-collegamento-con-il-testbench">14.3 Collegamento con il testbench<a class="headerlink" href="#143-collegamento-con-il-testbench" title="Permanent link">&para;</a></h3>
+<p>Il banco di prova deve accompagnare il DUT lungo traiettorie di comportamento, non solo attraverso singole combinazioni logiche.</p>
+<hr />
+<h2 id="15-stimoli-per-datapath-e-pipeline">15. Stimoli per datapath e pipeline<a class="headerlink" href="#15-stimoli-per-datapath-e-pipeline" title="Permanent link">&para;</a></h2>
+<p>Anche per datapath e pipeline la verifica richiede attenzione specifica.</p>
+<h3 id="151-datapath">15.1 Datapath<a class="headerlink" href="#151-datapath" title="Permanent link">&para;</a></h3>
+<p>Conviene testare:
+- valori nominali;
+- casi limite;
+- selezioni dei mux;
+- enable;
+- comportamento con reset.</p>
+<h3 id="152-pipeline">15.2 Pipeline<a class="headerlink" href="#152-pipeline" title="Permanent link">&para;</a></h3>
+<p>Conviene testare:
+- progressione del dato tra stadi;
+- latenza attesa;
+- dati consecutivi;
+- eventuale allineamento tra dato e controllo.</p>
+<h3 id="153-perche-e-importante">15.3 Perché è importante<a class="headerlink" href="#153-perche-e-importante" title="Permanent link">&para;</a></h3>
+<p>Nei moduli pipelined, il caso giusto non è solo “il dato è corretto”, ma anche:
+- “compare nel ciclo giusto?”</p>
+<hr />
+<h2 id="16-errori-comuni">16. Errori comuni<a class="headerlink" href="#16-errori-comuni" title="Permanent link">&para;</a></h2>
+<p>Alcuni errori ricorrono molto spesso nei primi testbench con stimoli e self-checking.</p>
+<h3 id="161-stimoli-casuali-ma-poco-significativi">16.1 Stimoli casuali ma poco significativi<a class="headerlink" href="#161-stimoli-casuali-ma-poco-significativi" title="Permanent link">&para;</a></h3>
+<p>Muovono i segnali, ma non costruiscono veri casi di verifica.</p>
+<h3 id="162-assert-poco-chiari">16.2 Assert poco chiari<a class="headerlink" href="#162-assert-poco-chiari" title="Permanent link">&para;</a></h3>
+<p>Messaggi troppo generici rendono il debug più difficile.</p>
+<h3 id="163-nessuna-distinzione-tra-caso-nominale-e-casi-limite">16.3 Nessuna distinzione tra caso nominale e casi limite<a class="headerlink" href="#163-nessuna-distinzione-tra-caso-nominale-e-casi-limite" title="Permanent link">&para;</a></h3>
+<p>Il testbench resta superficiale.</p>
+<h3 id="164-controlli-fatti-troppo-presto-o-troppo-tardi">16.4 Controlli fatti troppo presto o troppo tardi<a class="headerlink" href="#164-controlli-fatti-troppo-presto-o-troppo-tardi" title="Permanent link">&para;</a></h3>
+<p>Nei DUT sequenziali o pipelined questo è un errore importante.</p>
+<h3 id="165-dipendere-solo-dalle-waveform">16.5 Dipendere solo dalle waveform<a class="headerlink" href="#165-dipendere-solo-dalle-waveform" title="Permanent link">&para;</a></h3>
+<p>Senza controllo automatico, il test resta più fragile e meno scalabile.</p>
+<hr />
+<h2 id="17-buone-pratiche-di-modellazione">17. Buone pratiche di modellazione<a class="headerlink" href="#17-buone-pratiche-di-modellazione" title="Permanent link">&para;</a></h2>
+<p>Per costruire bene questa prima forma di verifica in VHDL, alcune linee guida sono particolarmente utili.</p>
+<h3 id="171-costruire-stimoli-con-significato-funzionale">17.1 Costruire stimoli con significato funzionale<a class="headerlink" href="#171-costruire-stimoli-con-significato-funzionale" title="Permanent link">&para;</a></h3>
+<p>Ogni sequenza dovrebbe rappresentare un caso preciso.</p>
+<h3 id="172-usare-assert-in-modo-leggibile">17.2 Usare <code>assert</code> in modo leggibile<a class="headerlink" href="#172-usare-assert-in-modo-leggibile" title="Permanent link">&para;</a></h3>
+<p>Il messaggio di errore dovrebbe aiutare a capire:
+- quale caso è fallito;
+- che cosa ci si aspettava;
+- che cosa si sta controllando.</p>
+<h3 id="173-distinguere-i-test-combinatori-dai-test-sequenziali">17.3 Distinguere i test combinatori dai test sequenziali<a class="headerlink" href="#173-distinguere-i-test-combinatori-dai-test-sequenziali" title="Permanent link">&para;</a></h3>
+<p>Nel caso sequenziale, il clock deve guidare davvero il ragionamento del testbench.</p>
+<h3 id="174-preparare-il-testbench-al-debug">17.4 Preparare il testbench al debug<a class="headerlink" href="#174-preparare-il-testbench-al-debug" title="Permanent link">&para;</a></h3>
+<p>Un buon banco di prova aiuta a localizzare rapidamente l’errore.</p>
+<h3 id="175-pensare-gia-in-ottica-di-evoluzione">17.5 Pensare già in ottica di evoluzione<a class="headerlink" href="#175-pensare-gia-in-ottica-di-evoluzione" title="Permanent link">&para;</a></h3>
+<p>Anche un testbench semplice può essere scritto in modo da diventare:
+- più strutturato;
+- più automatico;
+- più riusabile.</p>
+<hr />
+<h2 id="18-collegamento-con-il-resto-della-sezione">18. Collegamento con il resto della sezione<a class="headerlink" href="#18-collegamento-con-il-resto-della-sezione" title="Permanent link">&para;</a></h2>
+<p>Questa pagina si collega direttamente a:
+- <strong><code>verification-and-testbench.md</code></strong>, che ha introdotto la struttura di base del banco di prova;
+- <strong><code>fsm.md</code></strong>, <strong><code>datapath-control-and-pipelining.md</code></strong> e <strong><code>timing-and-clocking.md</code></strong>, perché gli stimoli devono riflettere la natura del DUT;
+- la prossima pagina <strong><code>debug-and-waveforms.md</code></strong>, che mostrerà come leggere in modo più sistematico la simulazione e le waveform per localizzare gli errori;
+- il resto del ramo di integrazione progettuale, dove il testbench diventa sempre più importante per confrontare moduli e casi reali.</p>
+<hr />
+<h2 id="19-in-sintesi">19. In sintesi<a class="headerlink" href="#19-in-sintesi" title="Permanent link">&para;</a></h2>
+<p>Stimoli, self-checking e simulazione sono il passo che trasforma il testbench da semplice generatore di segnali a vero strumento di verifica.</p>
+<ul>
+<li>Gli <strong>stimoli</strong> definiscono i casi di prova.</li>
+<li>Il <strong>self-checking</strong> confronta il comportamento osservato con quello atteso.</li>
+<li>La <strong>simulazione</strong> permette di osservare il DUT nel tempo e di localizzare gli errori.</li>
+</ul>
+<p>Capire bene questi tre elementi significa costruire una base molto più solida per la verifica dei moduli VHDL, sia combinatori sia sequenziali.</p>
+<h2 id="prossimo-passo">Prossimo passo<a class="headerlink" href="#prossimo-passo" title="Permanent link">&para;</a></h2>
+<p>Il passo successivo naturale è <strong><code>debug-and-waveforms.md</code></strong>, perché adesso conviene chiarire come leggere la simulazione in modo davvero utile al progetto:
+- come interpretare le waveform
+- come localizzare errori nel DUT o nel testbench
+- come usare clock, reset, stato e segnali interni per fare debug in modo ordinato</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
