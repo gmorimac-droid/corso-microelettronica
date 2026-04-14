@@ -82,7 +82,7 @@ nav:
       - Caso di studio:
           - Caso di studio introduttivo: digital-design-foundations/case-study.md
           
-    - VHDL:
+  - VHDL:
       - Introduzione: vhdl/index.md
       - Panoramica di VHDL: vhdl/vhdl-overview.md
 
@@ -134,31 +134,31 @@ nav:
           - A Taste of Simulation: Libro_Verilog/simulation.md
           - The Rest for Reference: Libro_Verilog/reference.md
   - SystemVerilog:
-    - Introduzione: systemverilog/index.md
-    - Fondamenti del linguaggio: systemverilog/language-basics.md
-    - Costrutti RTL: systemverilog/rtl-constructs.md
-    - Blocchi procedurali: systemverilog/procedural-blocks.md
-    - Logica combinatoria e sequenziale: systemverilog/combinational-vs-sequential.md
-    - Macchine a stati finiti (FSM): systemverilog/fsm.md
-    - Codifica degli stati: systemverilog/state-encoding.md
-    - Datapath e controllo: systemverilog/datapath-and-control.md
-    - Pipeline e pipelining: systemverilog/pipelining.md
-    - Interfacce e handshake: systemverilog/interfaces-and-handshake.md
-    - Le interface in SystemVerilog: systemverilog/systemverilog-interfaces.md
-    - Package e typedef: systemverilog/packages-and-typedefs.md
-    - Array e generate: systemverilog/arrays-and-generate.md
-    - Parametri e configurazione: systemverilog/parameters-and-configuration.md
-    - Latenza e throughput: systemverilog/latency-and-throughput.md
-    - Stile di codifica RTL: systemverilog/coding-style-rtl.md
-    - Fondamenti di verifica: systemverilog/verification-basics.md
-    - Struttura di un testbench: systemverilog/testbench-structure.md
-    - Fondamenti di assertion: systemverilog/assertions-basics.md
-    - Flusso di simulazione RTL: systemverilog/simulation-workflow.md
-    - Fondamenti di coverage: systemverilog/coverage-basics.md
-    - Strategie di reset: systemverilog/reset-strategies.md
-    - Clock Domain Crossing (CDC): systemverilog/clock-domain-crossing.md
-    - Caso di studio: systemverilog/case-study-systemverilog.md
-    - Flowchart: 04_SV_flow_chart.md
+      - Introduzione: systemverilog/index.md
+      - Fondamenti del linguaggio: systemverilog/language-basics.md
+      - Costrutti RTL: systemverilog/rtl-constructs.md
+      - Blocchi procedurali: systemverilog/procedural-blocks.md
+      - Logica combinatoria e sequenziale: systemverilog/combinational-vs-sequential.md
+      - Macchine a stati finiti (FSM): systemverilog/fsm.md
+      - Codifica degli stati: systemverilog/state-encoding.md
+      - Datapath e controllo: systemverilog/datapath-and-control.md
+      - Pipeline e pipelining: systemverilog/pipelining.md
+      - Interfacce e handshake: systemverilog/interfaces-and-handshake.md
+      - Le interface in SystemVerilog: systemverilog/systemverilog-interfaces.md
+      - Package e typedef: systemverilog/packages-and-typedefs.md
+      - Array e generate: systemverilog/arrays-and-generate.md
+      - Parametri e configurazione: systemverilog/parameters-and-configuration.md
+      - Latenza e throughput: systemverilog/latency-and-throughput.md
+      - Stile di codifica RTL: systemverilog/coding-style-rtl.md
+      - Fondamenti di verifica: systemverilog/verification-basics.md
+      - Struttura di un testbench: systemverilog/testbench-structure.md
+      - Fondamenti di assertion: systemverilog/assertions-basics.md
+      - Flusso di simulazione RTL: systemverilog/simulation-workflow.md
+      - Fondamenti di coverage: systemverilog/coverage-basics.md
+      - Strategie di reset: systemverilog/reset-strategies.md
+      - Clock Domain Crossing (CDC): systemverilog/clock-domain-crossing.md
+      - Caso di studio: systemverilog/case-study-systemverilog.md
+      - Flowchart: 04_SV_flow_chart.md
   - UVM:
       - Introduzione: uvm/index.md
       - Panoramica di UVM: uvm/uvm-overview.md
@@ -207,58 +207,58 @@ nav:
 
       - Caso di studio:
           - Caso di studio UVM: uvm/case-study-uvm.md
-    - Flowchart: 06_uvm_flow_chart.md
-    - Progetto mini CPU: 
-            - Descrizione: 06_mini_CPU.md
-            - Waveform: 06_mini_CPU_waveform.md
+      - Flowchart: 06_uvm_flow_chart.md
+      - Progetto mini CPU: 
+          - Descrizione: 06_mini_CPU.md
+          - Waveform: 06_mini_CPU_waveform.md
   - FPGA: 
-    - Introduzione alle FPGA: fpga/index.md
-    - Architettura di una FPGA: fpga/architecture.md
-    - Flusso di progettazione FPGA: fpga/flow.md
-    - RTL design per FPGA: fpga/rtl-design.md
-    - Vincoli e timing: fpga/constraints-timing.md
-    - Sintesi logica: fpga/synthesis.md
-    - Risorse dedicate: fpga/resources.md
-    - Clocking e reset: fpga/clock-reset.md
-    - Placement, routing e timing closure: fpga/place-route.md
-    - Verifica e test: fpga/verification.md
-    - Debug su FPGA: fpga/debug.md
-    - Prototipazione di sistemi e SoC su FPGA: fpga/prototyping-soc.md
-    - FPGA vs ASIC: fpga/fpga-vs-asic.md
-    - Caso di studio FPGA: fpga/case-study.md
-    - Flowchart: 07_fpga_flow_chart.md
-    - Zynq LED: 07_zynq_ps_axi_led.md
-    - Zynq FIR: 
-        - Descrizione: 07_zynq_fir_dma_8tap.md
-        - Codice: 07_zynq_fir_dma_files.md
-        - AXI Theory: 07_zynq_axi_stream_theory.md
-        - DMA Interrupt: 07_zynq_dma_interrupt_perf.md
-        - X Parameters: 07_zynq_xparameters_guide.md
-    - Risorse: https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf
-    - Zybo-Z7-20: https://github.com/Digilent/Zybo-Z7
+      - Introduzione alle FPGA: fpga/index.md
+      - Architettura di una FPGA: fpga/architecture.md
+      - Flusso di progettazione FPGA: fpga/flow.md
+      - RTL design per FPGA: fpga/rtl-design.md
+      - Vincoli e timing: fpga/constraints-timing.md
+      - Sintesi logica: fpga/synthesis.md
+      - Risorse dedicate: fpga/resources.md
+      - Clocking e reset: fpga/clock-reset.md
+      - Placement, routing e timing closure: fpga/place-route.md
+      - Verifica e test: fpga/verification.md
+      - Debug su FPGA: fpga/debug.md
+      - Prototipazione di sistemi e SoC su FPGA: fpga/prototyping-soc.md
+      - FPGA vs ASIC: fpga/fpga-vs-asic.md
+      - Caso di studio FPGA: fpga/case-study.md
+      - Flowchart: 07_fpga_flow_chart.md
+      - Zynq LED: 07_zynq_ps_axi_led.md
+      - Zynq FIR: 
+          - Descrizione: 07_zynq_fir_dma_8tap.md
+          - Codice: 07_zynq_fir_dma_files.md
+          - AXI Theory: 07_zynq_axi_stream_theory.md
+          - DMA Interrupt: 07_zynq_dma_interrupt_perf.md
+          - X Parameters: 07_zynq_xparameters_guide.md
+      - Risorse: https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf
+      - Zybo-Z7-20: https://github.com/Digilent/Zybo-Z7
   - ASIC: 
-    - Introduzione agli ASIC: asic/index.md
-    - Flusso di progettazione ASIC: asic/flow.md
-    - Specifiche e architettura: asic/spec-architecture.md
-    - RTL design: asic/rtl-design.md
-    - Vincoli e timing: asic/constraints-timing.md
-    - Sintesi logica: asic/synthesis.md
-    - DFT e testabilità: asic/dft.md
-    - Floorplanning: asic/floorplanning.md
-    - Place and Route: asic/place-route.md
-    - Clock Tree Synthesis: asic/cts.md
-    - Signoff fisico e temporale: asic/signoff.md
-    - Power analysis e low-power design: asic/power.md
-    - Verifica funzionale e equivalenza: asic/verification.md
-    - Librerie standard cell e PDK: asic/libraries-pdk.md
-    - Tape-out e fabbricazione: asic/tapeout-fabrication.md
-    - Caso di studio ASIC: asic/case-study.md
-    - Flowchart: 08_asic_flow_chart.md
-    - OpenAsic: 08_openasic.md
-    - Risorse: 
-        - OpenLAN: https://openlane2.readthedocs.io/en/latest/
-        - Tutorial: https://github.com/kunalg123/vsdflow
-        - CMOS VLSI Design: https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908
+      - Introduzione agli ASIC: asic/index.md
+      - Flusso di progettazione ASIC: asic/flow.md
+      - Specifiche e architettura: asic/spec-architecture.md
+      - RTL design: asic/rtl-design.md
+      - Vincoli e timing: asic/constraints-timing.md
+      - Sintesi logica: asic/synthesis.md
+      - DFT e testabilità: asic/dft.md
+      - Floorplanning: asic/floorplanning.md
+      - Place and Route: asic/place-route.md
+      - Clock Tree Synthesis: asic/cts.md
+      - Signoff fisico e temporale: asic/signoff.md
+      - Power analysis e low-power design: asic/power.md
+      - Verifica funzionale e equivalenza: asic/verification.md
+      - Librerie standard cell e PDK: asic/libraries-pdk.md
+      - Tape-out e fabbricazione: asic/tapeout-fabrication.md
+      - Caso di studio ASIC: asic/case-study.md
+      - Flowchart: 08_asic_flow_chart.md
+      - OpenAsic: 08_openasic.md
+      - Risorse: 
+          - OpenLAN: https://openlane2.readthedocs.io/en/latest/
+          - Tutorial: https://github.com/kunalg123/vsdflow
+          - CMOS VLSI Design: https://archive.org/details/cmosvlsidesignacircuitsandsystemsperspective_201908
   - SoC:
       - Introduzione ai SoC: soc/index.md
       - Architettura di un SoC: soc/architettura.md
@@ -273,12 +273,12 @@ nav:
       - Physical awareness nel SoC: soc/physical-design-awareness.md
       - Caso di studio: soc/case-study.md        
   - Progetti: 
-    - Overview: 09_progetti.md
-    - Sorgenti: 09_codice.md
+      - Overview: 09_progetti.md
+      - Sorgenti: 09_codice.md
   - Tool e Tcl/Tk: 
-    - Overview: 10_tool_e_tcl.md
-    - Progetti: 10_tcl_progetti.md
-    - 📚 Risorse:
+      - Overview: 10_tool_e_tcl.md
+      - Progetti: 10_tcl_progetti.md
+      - 📚 Risorse:
           - Tutorial Tcl/Tk: https://www.tutorialspoint.com/tcl-tk/index.htm
           - Script Tcl in Vivado: https://docs.amd.com/r/en-US/ug894-vivado-tcl-scripting/Tcl-Scripting-in-Vivado
           - Yosis: https://yosyshq.readthedocs.io/projects/yosys/en/latest/
@@ -291,7 +291,6 @@ nav:
             - Implementation: https://docs.xilinx.com/r/en-US/ug904-vivado-implementation
             - Tcl Commands: https://docs.xilinx.com/r/en-US/ug835-vivado-tcl-commands
           - ModelSim: https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/swdocs/modelsim/modelsim_user_2024_2.pdf
-    - Flowchart: 10_tcl_flow_chart.md
-    - Tool flow: 10_tool_flow.md
-  - Appendici: 11_appendici.md
+      - Flowchart: 10_tcl_flow_chart.md
+      - Tool flow: 10_tool_flow.md
   - Riferimenti: 12_riferimenti.md
