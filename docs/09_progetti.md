@@ -1,4 +1,4 @@
-# 09 — Progetti
+# Progetti
 
 ## 🎯 Objectives
 

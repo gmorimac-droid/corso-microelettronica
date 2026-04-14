@@ -14,7 +14,7 @@ Questa sezione raccoglie i riferimenti essenziali per imparare e lavorare con FP
 ## 🎓 Corsi online
 - MIT OpenCourseWare – Digital Systems  
 - [Nand2Tetris](https://www.nand2tetris.org)
-
+- [Doulos](https://www.doulos.com/knowhow/)
 ---
 
 # 💻 2. Linguaggi HDL
@@ -25,7 +25,6 @@ Questa sezione raccoglie i riferimenti essenziali per imparare e lavorare con FP
 
 ## 🔹 VHDL
 - [VHDL Guide](https://www.vhdlwhiz.com/)
-- [Doulos](https://www.doulos.com/knowhow/vhdl/)
 
 ---
 

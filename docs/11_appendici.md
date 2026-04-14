@@ -1,4 +1,4 @@
-# 11 — Appendici
+# Appendici
 
 ## 🎯 Objectives
 

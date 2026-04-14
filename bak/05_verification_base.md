@@ -1,4 +1,4 @@
-# 05 — Verification Base
+# Verification Base
 
 ## 🎯 Objectives
 

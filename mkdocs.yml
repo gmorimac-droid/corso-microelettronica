@@ -53,11 +53,70 @@ markdown_extensions:
       
 nav:
   - Home: index.md
-  - Intro: 00_introduzione.md
-  - Fondamenti: 01_fondamenti.md
-  - VHDL: 
-    - Overview: 02_vhdl.md
-    - Flusso di progettazione: 02_vhdl_progettazione.md
+  - Fondamenti di progettazione:
+      - Introduzione: digital-design-foundations/index.md
+      - Panoramica della progettazione digitale: digital-design-foundations/overview.md
+
+      - Concetti fondamentali:
+          - Segnali, bit e rappresentazione dell’informazione: digital-design-foundations/signals-and-information.md
+          - Logica combinatoria: digital-design-foundations/combinational-logic.md
+          - Logica sequenziale e memoria: digital-design-foundations/sequential-logic-and-memory.md
+          - Clock, reset e tempo nei circuiti digitali: digital-design-foundations/clock-reset-and-time.md
+
+      - Blocchi architetturali di base:
+          - Registri, multiplexer e datapath elementari: digital-design-foundations/registers-mux-and-basic-datapaths.md
+          - FSM e logica di controllo: digital-design-foundations/fsm-and-control.md
+          - Pipeline, latenza e throughput: digital-design-foundations/pipelining-latency-and-throughput.md
+          - Interfacce e handshake: digital-design-foundations/interfaces-and-handshake.md
+
+      - Progettazione RTL e qualità del progetto:
+          - Dal comportamento all’RTL: digital-design-foundations/from-behavior-to-rtl.md
+          - Sintesi, area e timing: digital-design-foundations/synthesis-area-and-timing.md
+          - Errori comuni di modellazione: digital-design-foundations/common-design-pitfalls.md
+          - Verifica di base e debug: digital-design-foundations/basic-verification-and-debug.md
+
+      - Integrazione nel flusso reale:
+          - Dal blocco al sistema: digital-design-foundations/from-block-to-system.md
+          - Differenze tra contesto FPGA, ASIC e SoC: digital-design-foundations/fpga-asic-soc-contexts.md
+
+      - Caso di studio:
+          - Caso di studio introduttivo: digital-design-foundations/case-study.md
+          
+    - VHDL:
+      - Introduzione: vhdl/index.md
+      - Panoramica di VHDL: vhdl/vhdl-overview.md
+
+      - Fondamenti:
+          - Basi del linguaggio: vhdl/language-basics.md
+          - Entity, architecture e tipi: vhdl/entity-architecture-and-types.md
+          - Segnali, variabili e semantica del linguaggio: vhdl/signals-variables-and-semantics.md
+          - Process e assegnamenti concorrenti: vhdl/process-and-concurrent-statements.md
+
+      - Modellazione RTL:
+          - Logica combinatoria e sequenziale: vhdl/combinational-vs-sequential.md
+          - Registri, mux, enable e reset: vhdl/registers-mux-enables-reset.md
+          - FSM in VHDL: vhdl/fsm.md
+          - Datapath, control unit e pipeline: vhdl/datapath-control-and-pipelining.md
+          - Generics, generate e progettazione parametrica: vhdl/generics-and-generate.md
+
+      - Sintesi e timing:
+          - Sintesi RTL in VHDL: vhdl/synthesis.md
+          - Timing, clock e cammino critico: vhdl/timing-and-clocking.md
+          - Errori comuni di sintesi e codifica: vhdl/common-pitfalls.md
+
+      - Verifica:
+          - Verifica di base e testbench: vhdl/verification-and-testbench.md
+          - Stimoli, self-checking e simulazione: vhdl/stimulus-self-checking-and-simulation.md
+          - Debug e waveform: vhdl/debug-and-waveforms.md
+
+      - Integrazione progettuale:
+          - VHDL per FPGA e ASIC: vhdl/vhdl-for-fpga-and-asic.md
+          - Interfacce, handshake e CDC: vhdl/interfaces-handshake-and-cdc.md
+          - VHDL vs Verilog vs SystemVerilog: vhdl/vhdl-vs-verilog-systemverilog.md
+
+      - Caso di studio:
+          - Caso di studio VHDL: vhdl/case-study-vhdl.md
+      - Flusso di progettazione: 02_vhdl_progettazione.md
   - Verilog:
       - Overview: 03_verilog.md
       - Flowchart: 03_verilog_flow_chart.md
@@ -100,14 +159,54 @@ nav:
     - Clock Domain Crossing (CDC): systemverilog/clock-domain-crossing.md
     - Caso di studio: systemverilog/case-study-systemverilog.md
     - Flowchart: 04_SV_flow_chart.md
-  - Verification: 
-    - Overview: 05_verification_base.md
-    - Risorse: 
-        - ChipVerify: https://www.chipverify.com/
-        - VerificationGuide: https://verificationguide.com
-        - Doulos: https://www.doulos.com/knowhow/
-  - UVM: 
-    - Overview: 06_uvm.md
+  - UVM:
+      - Introduzione: uvm/index.md
+      - Panoramica di UVM: uvm/uvm-overview.md
+
+      - Fondamenti:
+          - Architettura del testbench UVM: uvm/uvm-architecture.md
+          - Componenti principali: uvm/uvm-components.md
+          - Phasing UVM: uvm/uvm-phasing.md
+          - Factory e configurazione: uvm/uvm-factory-config.md
+
+      - Stimolo e transazioni:
+          - Sequence item: uvm/sequence-item.md
+          - Sequencer: uvm/sequencer.md
+          - Sequence: uvm/sequences.md
+          - Virtual sequence: uvm/virtual-sequences.md
+
+      - Connessione al DUT:
+          - Driver: uvm/driver.md
+          - Monitor: uvm/monitor.md
+          - Agent: uvm/agent.md
+          - Virtual interface: uvm/virtual-interface.md
+          - TLM e comunicazione tra componenti: uvm/tlm-connections.md
+
+      - Environment e checking:
+          - Environment: uvm/environment.md
+          - Scoreboard: uvm/scoreboard.md
+          - Reference model: uvm/reference-model.md
+          - Subscriber e raccolta dati: uvm/subscriber.md
+
+      - Test e controllo della verifica:
+          - Test UVM: uvm/test.md
+          - Configurazione dei test: uvm/test-configuration.md
+          - Objections e controllo della run: uvm/objections.md
+          - Messaging e report: uvm/reporting.md
+
+      - Coverage e debug:
+          - Coverage in UVM: uvm/coverage-uvm.md
+          - Debug del testbench UVM: uvm/debug-uvm.md
+          - Regressione e gestione dei test: uvm/regression.md
+
+      - Integrazione con il DUT reale:
+          - UVM per protocolli a handshake: uvm/uvm-handshake-protocols.md
+          - UVM per pipeline e latenza: uvm/uvm-pipelines-latency.md
+          - UVM e reset: uvm/uvm-reset.md
+          - UVM e registri / RAL overview: uvm/uvm-ral-overview.md
+
+      - Caso di studio:
+          - Caso di studio UVM: uvm/case-study-uvm.md
     - Flowchart: 06_uvm_flow_chart.md
     - Progetto mini CPU: 
             - Descrizione: 06_mini_CPU.md

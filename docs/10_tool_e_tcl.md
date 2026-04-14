@@ -1,4 +1,4 @@
-# 10 — Tool e TCL
+# Tool e TCL
 
 ## 🎯 Objectives
 

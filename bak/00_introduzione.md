@@ -1,4 +1,4 @@
-# 00 — Introduzione
+# Introduzione
 
 ## 🎯 Obiettivo del corso
 

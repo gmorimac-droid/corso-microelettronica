@@ -1,46 +1,48 @@
 # 03 — Verilog
 
-## 🎯 Objectives
+## Obiettivi
 
-This module introduces Verilog from an **FPGA/ASIC design perspective**, focusing on synthesizable RTL and hardware implications.
+Questo modulo introduce Verilog da una **prospettiva di progettazione FPGA/ASIC**, con attenzione al **RTL sintetizzabile** e alle sue implicazioni hardware.
 
-By the end, you will:
-- Understand **RTL modeling in Verilog**
-- Correctly describe **combinational and sequential logic**
-- Distinguish between **wire and reg semantics**
-- Apply **timing-aware design practices**
-
----
-
-## 🧠 1. Verilog in Hardware Design
-
-Verilog is a **hardware description language (HDL)** widely used in industry.
-
-### 🔄 Typical Design Flow
-
-RTL → Synthesis → Netlist → Place & Route → Bitstream
-
-👉 Each construct maps directly to **hardware structures**
+Al termine del modulo sarai in grado di:
+- comprendere la **modellazione RTL in Verilog**
+- descrivere correttamente **logica combinatoria e logica sequenziale**
+- distinguere tra **semantica di `wire` e `reg`**
+- applicare pratiche di progetto consapevoli rispetto al **timing**
 
 ---
 
-## 🔧 2. Combinational Logic
+## 1. Verilog nella progettazione hardware
+
+Verilog è un **linguaggio di descrizione hardware (HDL)** ampiamente utilizzato in ambito industriale.
+
+### Flusso di progetto tipico
+
+RTL → Sintesi → Netlist → Place & Route → Bitstream
+
+Ogni costrutto del linguaggio viene ricondotto a **strutture hardware concrete**.
+
+---
+
+## 2. Logica combinatoria
 
 ```verilog
 assign Y = A & B;
 ```
 
 Hardware:
+
 A ----\
        AND ----> Y
 B ----/
 
-- No clock
-- Impacts **critical path**
+Caratteristiche principali:
+- non usa clock
+- contribuisce al **cammino critico**
 
 ---
 
-## 🔁 3. Sequential Logic
+## 3. Logica sequenziale
 
 ```verilog
 always @(posedge clk) begin
@@ -48,32 +50,33 @@ always @(posedge clk) begin
 end
 ```
 
-- Generates flip-flops
-- Defines pipeline stages
+Caratteristiche principali:
+- genera flip-flop
+- definisce stadi di pipeline
 
 ---
 
-## 🔄 4. wire vs reg
+## 4. `wire` vs `reg`
 
-| Type | Meaning |
-|------|--------|
-| wire | connection |
-| reg  | procedural assignment |
+| Tipo | Significato |
+|------|-------------|
+| wire | connessione |
+| reg  | assegnazione procedurale |
 
-👉 `reg` ≠ always register
-
----
-
-## ⚖️ 5. Blocking vs Non-blocking
-
-- `=` → combinational  
-- `<=` → sequential  
-
-Wrong usage → simulation mismatch
+`reg` **non** significa automaticamente registro hardware.
 
 ---
 
-## 🔢 6. Counter Example
+## 5. Blocking vs non-blocking
+
+- `=` → tipicamente usato per logica combinatoria  
+- `<=` → tipicamente usato per logica sequenziale  
+
+Un uso scorretto può portare a **mismatch tra simulazione e hardware atteso**.
+
+---
+
+## 6. Esempio: contatore
 
 ```verilog
 module counter (
@@ -94,25 +97,26 @@ endmodule
 
 ---
 
-## 📊 7. Timing Perspective
+## 7. Prospettiva di timing
 
-Critical path:
-FF → Logic → FF
+Cammino critico:
 
-Optimization:
-- pipeline
-- reduce logic depth
+FF → Logica → FF
 
----
-
-## ⚠️ 8. Pitfalls
-
-- wrong assignment operator
-- latch inference
-- sensitivity errors
+Possibili direzioni di ottimizzazione:
+- inserire pipeline
+- ridurre la profondità logica
 
 ---
 
-## 🚀 Next Module
+## 8. Errori comuni
+
+- uso scorretto dell’operatore di assegnazione
+- inferenza involontaria di latch
+- errori nella sensitivity list
+
+---
+
+## Modulo successivo
 
 SystemVerilog
