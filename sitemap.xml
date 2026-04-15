@@ -2,686 +2,686 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/02_vhdl_progettazione/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/03_verilog/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/03_verilog_flow_chart/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/04_SV_flow_chart/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/06_mini_CPU/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/06_mini_CPU_waveform/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/06_uvm_flow_chart/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/07_fpga_flow_chart/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/07_zynq_axi_stream_theory/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/07_zynq_dma_interrupt_perf/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/07_zynq_fir_dma_8tap/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/07_zynq_fir_dma_files/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/07_zynq_ps_axi_led/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/07_zynq_xparameters_guide/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/08_asic_flow_chart/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/08_openasic/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/09_codice/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
-         <loc>https://gmorimac-droid.github.io/corso-microelettronica/09_progetti/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/09_progetti_it/</loc>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/10_tcl_flow_chart/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/10_tcl_progetti/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
-         <loc>https://gmorimac-droid.github.io/corso-microelettronica/10_tool_e_tcl/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <loc>https://gmorimac-droid.github.io/corso-microelettronica/10_tool_e_tcl_it/</loc>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/10_tool_flow/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/12_riferimenti/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/Libro_Verilog/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/Libro_Verilog/clocks_registers/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/Libro_Verilog/in_out/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/Libro_Verilog/io_flavors/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/Libro_Verilog/managing_clocks/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/Libro_Verilog/memories/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/Libro_Verilog/modular_design/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/Libro_Verilog/reference/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/Libro_Verilog/simulation/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/Libro_Verilog/state_machines/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/Libro_Verilog/tool_flow/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/Libro_Verilog/utilities/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/asic/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/asic/case-study/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/asic/constraints-timing/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/asic/cts/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/asic/dft/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/asic/floorplanning/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/asic/flow/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/asic/libraries-pdk/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/asic/place-route/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/asic/power/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/asic/rtl-design/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/asic/signoff/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/asic/spec-architecture/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/asic/synthesis/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/asic/tapeout-fabrication/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/asic/verification/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/digital-design-foundations/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/digital-design-foundations/basic-verification-and-debug/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/digital-design-foundations/case-study/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/digital-design-foundations/clock-reset-and-time/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/digital-design-foundations/combinational-logic/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/digital-design-foundations/common-design-pitfalls/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/digital-design-foundations/fpga-asic-soc-contexts/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/digital-design-foundations/from-behavior-to-rtl/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/digital-design-foundations/from-block-to-system/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/digital-design-foundations/fsm-and-control/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/digital-design-foundations/interfaces-and-handshake/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/digital-design-foundations/overview/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/digital-design-foundations/pipelining-latency-and-throughput/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/digital-design-foundations/registers-mux-and-basic-datapaths/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/digital-design-foundations/sequential-logic-and-memory/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/digital-design-foundations/signals-and-information/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/digital-design-foundations/synthesis-area-and-timing/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/fpga/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/fpga/architecture/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/fpga/case-study/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/fpga/clock-reset/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/fpga/constraints-timing/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/fpga/debug/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/fpga/flow/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/fpga/fpga-vs-asic/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/fpga/place-route/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/fpga/prototyping-soc/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/fpga/resources/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/fpga/rtl-design/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/fpga/synthesis/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/fpga/verification/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/soc/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/soc/architettura/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/soc/bus/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/soc/case-study/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/soc/hw-sw-codesign/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/soc/ip-integration/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/soc/memorie/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/soc/periferiche/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/soc/physical-design-awareness/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/soc/power-clock-reset/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/soc/safety-security/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/soc/verifica/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/arrays-and-generate/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/assertions-basics/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/case-study-systemverilog/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/clock-domain-crossing/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/coding-style-rtl/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/combinational-vs-sequential/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/coverage-basics/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/datapath-and-control/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/fsm/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/interfaces-and-handshake/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/language-basics/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/latency-and-throughput/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/packages-and-typedefs/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/parameters-and-configuration/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/pipelining/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/procedural-blocks/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/reset-strategies/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/rtl-constructs/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/simulation-workflow/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/state-encoding/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/systemverilog-interfaces/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/testbench-structure/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/systemverilog/verification-basics/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/agent/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/case-study-uvm/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/coverage-uvm/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/debug-uvm/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/driver/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/environment/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/monitor/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/objections/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/reference-model/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/regression/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/reporting/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/scoreboard/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/sequence-item/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/sequencer/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/sequences/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/subscriber/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/test-configuration/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/test/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/tlm-connections/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/uvm-architecture/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/uvm-components/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/uvm-factory-config/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/uvm-handshake-protocols/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/uvm-overview/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/uvm-phasing/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/uvm-pipelines-latency/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/uvm-ral-overview/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/uvm-reset/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/virtual-interface/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/uvm/virtual-sequences/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/case-study-vhdl/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/combinational-vs-sequential/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/common-pitfalls/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/datapath-control-and-pipelining/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/debug-and-waveforms/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/entity-architecture-and-types/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/fsm/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/generics-and-generate/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/interfaces-handshake-and-cdc/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/language-basics/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/process-and-concurrent-statements/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/registers-mux-enables-reset/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/signals-variables-and-semantics/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/stimulus-self-checking-and-simulation/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/synthesis/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/timing-and-clocking/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/verification-and-testbench/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/vhdl-for-fpga-and-asic/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/vhdl-overview/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
     <url>
          <loc>https://gmorimac-droid.github.io/corso-microelettronica/vhdl/vhdl-vs-verilog-systemverilog/</loc>
-         <lastmod>2026-04-14</lastmod>
+         <lastmod>2026-04-15</lastmod>
     </url>
 </urlset>
