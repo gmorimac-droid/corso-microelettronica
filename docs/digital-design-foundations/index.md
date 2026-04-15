@@ -18,6 +18,7 @@ Questa sezione non è pensata come un corso di linguaggio, né come un tutorial 
 - vengono poi descritti, sintetizzati e verificati.
 
 L’idea di fondo è semplice: prima di scrivere bene RTL, bisogna capire bene **che cosa si sta progettando**.
+RTL (Register Transfer Level)= descrivere come i dati passano tra registri e come vengono elaborati tra un ciclo e il successivo.
 
 Questa sezione è pensata per un uso:
 - universitario;

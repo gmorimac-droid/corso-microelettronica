@@ -273,10 +273,10 @@ nav:
       - Physical awareness nel SoC: soc/physical-design-awareness.md
       - Caso di studio: soc/case-study.md        
   - Progetti: 
-      - Overview: 09_progetti.md
+      - Overview: 09_progetti_it.md
       - Sorgenti: 09_codice.md
   - Tool e Tcl/Tk: 
-      - Overview: 10_tool_e_tcl.md
+      - Overview: 10_tool_e_tcl_it.md
       - Progetti: 10_tcl_progetti.md
       - 📚 Risorse:
           - Tutorial Tcl/Tk: https://www.tutorialspoint.com/tcl-tk/index.htm
