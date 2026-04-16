@@ -13,6 +13,10 @@
         <link rel="canonical" href="https://gmorimac-droid.github.io/corso-microelettronica/soc/axi-soc-lesson/">
       
       
+        <link rel="prev" href="../ip-integration/">
+      
+      
+        <link rel="next" href="../verifica/">
       
       
         
@@ -23,7 +27,7 @@
     
     
       
-        <title>Interfaccia AXI nei SoC - Corso di Microelettronica Digitale</title>
+        <title>AXI - Corso di Microelettronica Digitale</title>
       
     
     
@@ -107,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Interfaccia AXI nei SoC
+              AXI
             
           </span>
         </div>
@@ -365,10 +369,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../" class="md-tabs__link">
           
   
@@ -6724,28 +6730,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
-        
-          
-          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
             
   
   
@@ -6763,7 +6772,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             
@@ -6946,10 +6955,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../axi-soc-lesson.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AXI
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -6965,6 +7001,1147 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Indice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Indice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-perche-parlare-di-axi-in-un-corso-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Perché parlare di AXI in un corso SoC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Perché parlare di AXI in un corso SoC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-perche-axi-e-un-protocollo-di-interconnessione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Perché AXI è un protocollo di interconnessione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-perche-il-soc-e-un-problema-di-integrazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Perché il SoC è un problema di integrazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-che-cose-axi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Che cos’è AXI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Che cos’è AXI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-significato-essenziale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Significato essenziale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-che-tipo-di-traffico-gestisce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Che tipo di traffico gestisce
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-axi-come-protocollo-memory-mapped" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. AXI come protocollo memory-mapped
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. AXI come protocollo memory-mapped">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-che-cosa-significa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Che cosa significa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-esempio-intuitivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Esempio intuitivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-master-e-slave-in-axi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Master e slave in AXI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Master e slave in AXI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-master" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Master
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-slave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Slave
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-lidea-fondamentale-di-axi-canali-separati" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. L’idea fondamentale di AXI: canali separati
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. L’idea fondamentale di AXI: canali separati">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-perche-e-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Perché è utile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-messaggio-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Messaggio progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-i-cinque-canali-principali-di-axi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. I cinque canali principali di AXI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. I cinque canali principali di AXI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-canale-di-indirizzo-di-lettura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Canale di indirizzo di lettura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-canale-dati-di-lettura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Canale dati di lettura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-canale-di-indirizzo-di-scrittura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Canale di indirizzo di scrittura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-canale-dati-di-scrittura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Canale dati di scrittura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-canale-di-risposta-di-scrittura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 Canale di risposta di scrittura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#66-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-handshake-in-axi-valid-e-ready" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Handshake in AXI: valid e ready
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Handshake in AXI: valid e ready">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-significato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Significato
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-messaggio-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Messaggio progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-perche-lhandshake-e-fondamentale-nei-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Perché l’handshake è fondamentale nei SoC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Perché l’handshake è fondamentale nei SoC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-esempi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Esempi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-conseguenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Conseguenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-letture-e-scritture-in-axi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Letture e scritture in AXI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Letture e scritture in AXI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-lettura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Lettura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-scrittura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Scrittura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-transazione-axi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Transazione AXI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Transazione AXI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-esempio-di-transazione-di-lettura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Esempio di transazione di lettura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-esempio-di-transazione-di-scrittura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Esempio di transazione di scrittura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-burst-in-axi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Burst in AXI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Burst in AXI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-che-cose-un-burst" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Che cos’è un burst
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-perche-e-utile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Perché è utile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-dove-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Dove è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.4 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-perche-axi-e-adatto-alla-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Perché AXI è adatto alla memoria
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Perché AXI è adatto alla memoria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-perche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 Perché
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-perche-i-burst-aiutano" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 Perché i burst aiutano
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-conseguenza-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 Conseguenza progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-interconnect-axi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Interconnect AXI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Interconnect AXI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-che-cose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 Che cos’è
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-messaggio-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 Messaggio progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-decodifica-degli-indirizzi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Decodifica degli indirizzi
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Decodifica degli indirizzi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-che-cosa-significa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 Che cosa significa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-conseguenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 Conseguenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-axi-e-periferiche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. AXI e periferiche
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. AXI e periferiche">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-esempi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 Esempi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-messaggio-progettuale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 Messaggio progettuale
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-axi-e-acceleratori-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. AXI e acceleratori hardware
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. AXI e acceleratori hardware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-dove" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.1 Dove
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.2 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163-conseguenza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16.3 Conseguenza
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-axi-lite-e-axi-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. AXI-lite e AXI-stream
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17. AXI-lite e AXI-stream">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171-axi-lite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.1 AXI-lite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172-axi-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.2 AXI-stream
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#173-perche-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17.3 Perché è importante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-perche-axi-sembra-complesso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Perché AXI sembra complesso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. Perché AXI sembra complesso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#181-perche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.1 Perché
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#182-perche-non-bisogna-scoraggiarsi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.2 Perché non bisogna scoraggiarsi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#183-messaggio-didattico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.3 Messaggio didattico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-errori-comuni-di-comprensione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19. Errori comuni di comprensione
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="19. Errori comuni di comprensione">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#191-pensare-che-sia-solo-un-bus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.1 Pensare che sia solo “un bus”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#192-confondere-dato-e-transazione" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.2 Confondere dato e transazione
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#193-ignorare-lhandshake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.3 Ignorare l’handshake
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#194-non-distinguere-bene-master-e-slave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.4 Non distinguere bene master e slave
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#195-cercare-di-memorizzare-tutti-i-segnali-prima-del-modello" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19.5 Cercare di memorizzare tutti i segnali prima del modello
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-buone-pratiche-di-studio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20. Buone pratiche di studio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="20. Buone pratiche di studio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#201-parti-dalla-vista-di-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.1 Parti dalla vista di sistema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#202-poi-separa-letture-e-scritture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.2 Poi separa letture e scritture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#203-studia-i-canali-come-responsabilita-separate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.3 Studia i canali come responsabilità separate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#204-collega-sempre-axi-al-memory-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.4 Collega sempre AXI al memory map
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#205-solo-dopo-passa-allrtl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.5 Solo dopo passa all’RTL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-collegamento-con-il-resto-del-capitolo-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21. Collegamento con il resto del capitolo SoC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-in-sintesi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. In sintesi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prossimo-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prossimo passo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
