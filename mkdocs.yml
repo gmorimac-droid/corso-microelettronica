@@ -266,7 +266,7 @@ nav:
       - Memorie e gerarchia: soc/memorie.md
       - Periferiche e I/O: soc/periferiche.md
       - Integrazione IP: soc/ip-integration.md
-      - AXI: axi-soc-lesson.md
+      - AXI: soc/axi-soc-lesson.md
       - Verifica di sistema: soc/verifica.md
       - HW/SW co-design: soc/hw-sw-codesign.md
       - Consumi, clock e reset: soc/power-clock-reset.md
