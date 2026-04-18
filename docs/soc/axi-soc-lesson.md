@@ -8,6 +8,9 @@ Questa lezione è molto importante perché, in un SoC reale, i blocchi non vivon
 - leggere e scrivere memoria;
 - coordinarsi tramite bus e interconnessioni;
 - convivere con latenze, backpressure e parallelismo del traffico.
+Per esempio: 
+Il backpressure nei sistemi è un meccanismo utilizzato per controllare il flusso di dati e impedire che parti del sistema si sovraccarichino.
+
 
 Dal punto di vista progettuale, questa pagina serve a chiarire:
 - che cos’è AXI;

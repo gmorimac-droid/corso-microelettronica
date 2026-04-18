@@ -47,6 +47,12 @@ Questa sezione raccoglie i riferimenti essenziali per imparare e lavorare con FP
 - Vivado (AMD/Xilinx)  
 - Quartus (Intel)  
 
+# 🧠 5. Tutorial
+- [VHDLwhiz](https://vhdlwhiz.com/)
+- [Nandland](https://nandland.com/)
+- [SystemVerilog.io](https://www.systemverilog.io/)
+- [Project F](https://projectf.io)
+
 ## 📚 Documentazione
 - [The Zynq Book](https://is.muni.cz/el/1433/jaro2015/PV191/um/The_Zynq_Book_ebook.pdf)
 - [Vivado Docs](https://docs.amd.com)
